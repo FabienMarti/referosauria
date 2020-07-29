@@ -1,0 +1,35 @@
+#diploHead, #diploBubble, #diploSpeech{
+    display:none;
+    float: left;
+}
+#changeText{
+    font-size: 20px;
+}
+#diploSpeech{
+    width: 175px;
+    height:150px;
+    margin-top: 270px;
+    margin-left: 700px;
+    position: absolute;
+}
+#diploBubble{
+    height: 250px; 
+    margin-top:200px;
+}
+
+#recentPostList li{
+    list-style: none;
+}
+#recentPostList li:nth-child(odd){
+    text-align: left;
+}
+#recentPostList li:nth-child(even){
+    text-align: right;
+}
+#filterArrow{
+    background-color: #4F5165;
+}
+#filterArrow a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="FR">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link href="assets/css/tyrannosaurus.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/header.css" rel="stylesheet" type="text/css" />
+        <title>Tyrannosaurus</title>
+    </head>
+
+    <body>
+        <header>
+            <header>
+                <!--BG + Titre + Vignette profil-->
+                <div id="headerBG" class="row">
+                    <div class="col-md-4 offset-md-4 text-center my-auto text-white">
+                        <h1>REFEROSAURIA</h1>
+                    </div>
+                    <div class="col-md-2 offset-md-2 border border-dark rounded bg-white text-center">
+                        <div class="row">
+                            <div class="col">
+                                <img class="border border-dark rounded my-2" alt="Image de Ben le diplo" src="assets/img/dipHead.jpg" />
+                            </div>
+                            <div class="col m-auto">
+                                <div class="border border-dark rounded mr-4">
+                                    <p>Nom : Ben</p>
+                                    <p>Rang : Diplo</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-outline-dark bg-info my-2">Connexion</button>
+                    </div>
+
+                </div>
+                <!--NavBar-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand d-md-none" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="dinoList.html">Liste des dinosaures</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Découvrir
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <a class="dropdown-item" href="#">Paléonthologie</a>
+                                    <a class="dropdown-item" href="#">Herbivores</a>
+                                    <a class="dropdown-item" href="#">Carnivores</a>
+                                    <a class="dropdown-item" href="#">Animaux Volants</a>
+                                    <a class="dropdown-item" href="#">Animaux Marins</a>
+                                    <a class="dropdown-item" href="#">Insectes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Contribuer
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                    <a class="dropdown-item" href="#">Déposer un article</a>
+                                    <a class="dropdown-item" href="#">Faire un don</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Jeux
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                    <a class="dropdown-item" href="#">Quizz</a>
+                                    <a class="dropdown-item" href="#">Générateur de Dinom</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Quizz</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Forum</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+                        </form>
+                    </div>
+                </nav>
+                <!--Fil d'arianne-->
+                <nav class="bg-light row pl-3" aria-label="breadcrumb" id="arianaRope">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active">Accueil</li>
+                        <li class="breadcrumb-item active">Liste des dinosaures</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tyrannosaurus</li>
+                    </ol>
+                </nav>
+                <!--Fresque Géologique-->
+                <div id="GTS" class="row text-center text-white border border-dark mt-2">
+                    <!--Trias-->
+                    <div id="triasGTS" class="col-md-4 border">
+                        <ol>
+                            <li>Trias</li>
+                            <li>-252Ma à -201Ma</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col border">
+                                <ol>
+                                    <li>Inférieur</li>
+                                    <li>-252Ma à -247Ma</li>
+                                </ol>
+                            </div>
+                            <div class="col border">
+                                <ol>
+                                    <li>Moyen</li>
+                                    <li>-247Ma à -237Ma</li>
+                                </ol>
+                            </div>
+                            <div class="col border">
+                                <ol>
+                                    <li>Supérieur</li>
+                                    <li>-237Ma à -201Ma</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Jurassique-->
+                    <div id="jurassicGTS" class="col-md-4 border">
+                        <ol>
+                            <li>Jurassique</li>
+                            <li>-201Ma à -145Ma</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col border">
+                                <ol>
+                                    <li>Inférieur</li>
+                                    <li>-201Ma à -174Ma</li>
+                                </ol>
+                            </div>
+                            <div class="col border">
+                                <ol>
+                                    <li>Moyen</li>
+                                    <li>-174Ma à -163Ma</li>
+                                </ol>
+                            </div>
+                            <div class="col border">
+                                <ol>
+                                    <li>Supérieur</li>
+                                    <li>-163Ma à -145Ma</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Crétacé-->
+                    <div id="cretaGTS" class="col-md-4 border">
+                        <ol>
+                            <li>Crétacé</li>
+                            <li>-145Ma à -66Ma</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col border">
+                                <ol>
+                                    <li>Inférieur</li>
+                                    <li>-145Ma à -100Ma</li>
+                                </ol>
+                            </div>
+                            <div class="col border">
+                                <ol>
+                                    <li>Supérieur</li>
+                                    <li>-100Ma à -66Ma</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </header>
+
+        <section class="my-2">
+            <div class="container-fluid">
+                <h1 class="text-center my-5">Tyrannosaurus Rex (Roi des lézards tyrans)</h1>
+                <div class="row">
+                    <div class="col-md-2 text-center border">
+                        <p class="h6 text-center">Où a-t-on trouvé Tyrannosaure ?</p>
+                        <img src="assets/img/localTyrannosaurus.png" class="img-fluid" />
+                        <p class="h5 mt-5">Derniers sujets en rapport :</p>
+                        <ul class="border" id="recentPostList">
+                            <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
+                            <li>12/05/2020</li>
+                            <li><a href="#">Les films avec un ou des tyrannosaures</a></li>
+                            <li>05/02/2020</li>
+                            <li><a href="#">Sa mangé quoi un tyronasaure ??</a></li>
+                            <li>28/01/2020</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 border border-danger m-auto">
+                        <img class="img-fluid" src="assets/img/tyrannosaurus.png" />
+                    </div>
+                    <div class="col-md-5 m-auto">
+                        <p class="h5 text-center">Description</p>
+                        <p>Tyrannosaurus rex est l'un des plus grands carnivores ayant vécu sur Terre. Le plus grand spécimen complet (mais pas le plus grand spécimen) découvert à ce jour,
+                            répertorié
+                            sous le code FMNH PR2081 et
+                            surnommé Sue, du nom de la paléontologue Sue Hendrickson, mesure 12,8 mètres de long et 4 mètres de haut au niveau des hanches.</br></br>
+                            Si Tyrannosaurus rex était plus grand qu'Allosaurus, un autre théropode bien connu du Jurassique, il était peut-être légèrement moins imposant que Spinosaurus et
+                            Giganotosaurus, deux carnivores du Crétacé.</br></br>
+                            Il se tenait sur ses deux pattes arrière. Ses membres postérieurs, terminés par un pied à trois orteils griffus, étaient particulièrement puissants. Sa vision frontale
+                            lui
+                            permettait d'évaluer
+                            efficacement les distances. Afin de pouvoir soutenir son immense tête, ses membres antérieurs étaient atrophiés (miniaturisés). Ses bras avaient néanmoins des muscles
+                            développés et ils disposaient de
+                            deux doigts avec des griffes acérées. Ils servaient sans doute à maintenir la nourriture, mais étaient trop courts (comparables à ceux d'un homme) pour pouvoir la
+                            ramasser
+                            au sol. Le tyrannosaure
+                            était donc obligé de se pencher pour ronger les carcasses de ses proies. Certaines de ses dents, particulièrement impressionnantes (atteignant 18 cm de long), étaient
+                            crénelées comme des couteaux à
+                            viande. On suppose qu'il pouvait déplacer l'un de ses maxillaires vers l'arrière.</p>
+                        <p class="text-right">Source : WIKIPEDIA</p>
+                    </div>
+                    <div class="col-md-1 text-center border">
+                        <p class="h5 text-center">Ils ont vécus dans la même période :</p>
+                        <div><img src="assets/img/rexHead.png" style="width:100px; height:100px;" class="m-3 border border-danger" /></div>
+                        <div><img src="assets/img/parasaurolophusHead.jpg" style="width:100px; height:100px;" class="m-3 border border-success" /></div>
+                        <div><img src="assets/img/rexHead.png" style="width:100px; height:100px;" class="m-3 border border-danger" /></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="mx-1">
+            <h1 class="text-center my-5">Plus de détails</h1>
+            <div class="row">
+                <div class="col-md-2">
+                    <table class="table table-sm">
+                        <thead>
+                            <th colspan="2" class="text-center">Classification</th>
+                        </thead>
+                        <tr>
+                            <th>Super-ordre</th>
+                            <td>Dinosauria</td>
+                        </tr>
+                        <tr>
+                            <th>Ordre</th>
+                            <td>Saurischia</td>
+                        </tr>
+                        <tr>
+                            <th>Sous-ordre</th>
+                            <td>Theropoda</td>
+                        </tr>
+                        <tr>
+                            <th>Infra-Ordre</th>
+                            <td>Tetunurae</td>
+                        </tr>
+                        <tr>
+                            <th>Micro-ordre</th>
+                            <td>Coelurosauria</td>
+                        </tr>
+                        <tr>
+                            <th>Super-famille</th>
+                            <td>Tyrannosauroidea</td>
+                        </tr>
+                        <tr>
+                            <th>Famille</th>
+                            <td>Tyrannosauridae</td>
+                        </tr>
+                        <tr>
+                            <th>Sous-ordre</th>
+                            <td>Tyrannosaurinae</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <table class="table table-sm">
+                        <thead>
+                            <th colspan="2" class="text-center">Fiche signalétique</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Habitat</th>
+                                <td>Amérique du nord (États-Unis)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Période</th>
+                                <td>crétacé supérieur</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Longueur</th>
+                                <td>12 à 13m</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Hauteur</th>
+                                <td>4 à 4.3m</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Poids</th>
+                                <td>6 à 7 tonnes</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prédateurs</th>
+                                <td>aucun</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alimentation</th>
+                                <td>dinosaures hadrosauridés et cératopsiens</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <figure>
+                        <img class="img-fluid" alt="squelette de Tyrannosaure" src="assets/img/tyrannosaurusSkeleton.jpg" />
+                        <figcaption class="text-center">Tyrannosaure "Sue" au Field Museum, Chicago, USA, 2010</figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="text-center">Découverte</h2>
+                    <p class="text-justify">En 1874, A. Lakes découvre près de Golden, dans le Colorado des dents ayant appartenu à Tyrannosaurus. Dans les années 1890, J. B. Hatcher rassemble des
+                        éléments post-crâniens à
+                        l'est du Wyoming. À
+                        l'époque, les paléontologues pensaient avoir trouvé des fossiles d'une espèce de grand Ornithomimus (O. grandis), mais ils appartenaient en réalité à Tyrannosaurus rex. Les
+                        fragments de vertèbres
+                        découverts dans le Dakota du Sud par E. D. Cope en 1892 et nommés Manospondylus gigas ont également été reclassés en Tyrannosaurus rex.
+                        Les premiers restes significatifs furent découverts en 1902 et l'animal fut décrit et baptisé par Henry Fairfield Osborn en 1905. Des découvertes de squelettes entiers, en 1988
+                        (au Montana) et 1990
+                        (Dakota du Sud), ont fait considérablement évoluer la connaissance du tyrannosaure.</p>
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-center">Etymologie</h2>
+                    <p class="text-justify">Le genre Tyrannosaurus fut créé en 1905 par Henry Fairfield Osborn, alors conservateur du tout nouveau département de paléontologie des vertébrés à
+                        l’American Museum of Natural
+                        History de New York. Le
+                        nom de genre dérive, par l'intermédiaire du latin, des racines grecques τύραννος / túrannos (maître, tyran) et σαῦρος / saûros (lézard). Quant à l'épithète spécifique rex, elle
+                        signifie roi en latin.
+                        Osborn lui attribua cette appellation car ce fut un prédateur impressionnant, avec des griffes et des dents particulièrement développées. Le nom binominal complet Tyrannosaurus
+                        rex peut être ainsi
+                        traduit par roi des lézards tyrans, soulignant la domination imaginée de l'animal sur les autres espèces de son temps11.
+
+                        On l'appelle souvent T. rex, qui est l'initiale du nom de genre suivie de l'épithète spécifique. Cependant, le diminutif T-Rex est fréquemment utilisé et abusif puisque
+                        l'espèce Tyrannosaurus rex ne
+                        possède pas de trait d'union, et les termes spécifiques ne portent jamais de majuscule. Dans le cas présent le nom scientifique de l'espèce est Tyrannosaurus rex, nom binominal
+                        où Tyrannosaurus est le
+                        terme générique, le genre, et où rex est le terme spécifique, ce dernier étant toujours écrit entièrement en minuscules. De même, la prononciation Ti-rex, popularisée après la
+                        sortie du film Jurassic
+                        Park en 1993, n'a aucune raison d'être dans le monde francophone puisque les noms binomiaux des espèces ne sont pas en anglais, mais en latin.
+
+                        Originellement nommé Dynamosaurus imperiosus (Saurien dynamique impérial) par Barnum Brown lors de sa découverte, ces noms de genre et d'espèce ne perdureront cependant pas
+                        dans la littérature.</p>
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center">Paléo-biologie</h2>
+                    <p></p>
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>
+            </div>
+        </section>
+        <section id="comment" class="container">
+            <h1 class="text-center">Commentaires</h1>
+            <form id="newComm" class="row form-inline">
+                <textarea class="form-control col-md-11" maxlength="256" placeholder="Laissez un commentaire !" rows="3"></textarea>
+                <button class="btn btn-primary col-md-1" type="submit">Envoyer !</button>
+            </form>
+            <!--Commentaires passés-->
+            <div class="row text-center border border-dark my-2">
+                <div class="col-12 col-md-2 border border-dark">Jean</div>
+                <div class="col-md-10">Trop bien le T rex ! Jean veux un ! LOL</div>
+            </div>
+            <div class="row text-center border border-dark my-2">
+                <div class="col-12 col-md-2 border border-dark">Manu</div>
+                <div class="col-md-10">C'est bien tout ça, mais pourquoi il était pas végétarien ? C'est un choix, une manière de vivre.</div>
+            </div>
+            <div class="row text-center border border-dark my-2">
+                <div class="col-12 col-md-2 border border-dark">An0nym6Z</div>
+                <div class="col-md-10">TRO Bi1 T sit g vé t acké, don moi 500 eurox ou g te ack ........</div>
+            </div>
+        </section>
+        <footer>
+            <div class="row border border-dark mx-1">
+                <div class="col-md-1 m-auto"><img class="img-fluid noImg" src="assets/img/leftArrow.png" /></div>
+                <div class="col-md-2 m-auto"><img class="imageAutoSize" src="assets/img/tyrannosaurus/trex1.jpg" /></div>
+                <div class="col-md-2 m-auto"><img class="imageAutoSize" src="assets/img/tyrannosaurus/trex2.png" /></div>
+                <div class="col-md-2 m-auto"><img class="imageAutoSize" src="assets/img/tyrannosaurus/trex3.jpg" /></div>
+                <div class="col-md-2 m-auto"><img class="imageAutoSize" src="assets/img/tyrannosaurus/trex4.jpg" /></div>
+                <div class="col-md-2 m-auto"><img class="imageAutoSize" src="assets/img/tyrannosaurus/trex5.jpg" /></div>
+                <div class="col-md-1 m-auto"><img class="img-fluid noImg" src="assets/img/rightArrow.png" /></div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#mainTitle{
+    height: 195px;
+}
+nav{
+    background-color: #697A21 !important;
+}
+
+#headerBG{
+    background-image: url('../img/dinosaurBannerBG.png');
+    height: 150px;
+}
+.breadcrumb {
+    margin-bottom: 0px !important;
+    background-color: #547AA5;
+}
+.buttonBG{
+    background-color: rgba(0, 255, 0, 0.1);;
+}
+ol{
+    list-style: none;
+}
+/* #GTS{
+    margin-bottom: 0rem;
+} */
+#triasGTS{
+background-color: #812B92;
+}
+#jurassicGTS{
+background-color: #34B2C9;
+}
+#cretaGTS{
+background-color: #7FC64E;
+}
+@media (max-width: 768px){
+    #headerBG{
+    background-image: url('../img/dinosaurBannerBGxs.png');
+    }
+}
+
