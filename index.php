@@ -12,7 +12,7 @@
         <title><?= isset($pageTitle) ? $pageTitle : 'Non-Défini' ?></title>
     </head>
 <body>
-    <header class="container-fluid p-0">
+<header class="container-fluid p-0">
         <!--BG + Titre + Vignette profil-->
         <div id="headerBG" class="row">
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
@@ -23,7 +23,7 @@
             </div>
         </div>
 <!--NavBar-->
-            <nav class="navbar navbar-expand-md navbar-light">
+            <nav class="navbar navbar-expand-md">
                 <a class="navbar-brand d-md-none" href="#">Menu</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
                             <a class="nav-link" href="index.php?content=dinoList">Liste des dinosaures</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="discover.php">Découvrir</a>
+                            <a class="nav-link" href="index.php?content=discover">Découvrir</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,10 +69,8 @@
                 </div>
             </nav>
         </header>
-<main>
-    <?php
-    include $content;
-    ?>
+<main class="">
+    <?php include $content ?>
 </main>
 <!-- Modale footer -->
     <div class="modal fade" id="footerModal" tabindex="-1" role="dialog" aria-labelledby="footerModalLabel" aria-hidden="true">
@@ -109,7 +107,7 @@
         </div>
     </div>   
 <!-- Footer -->
-    <footer class="container-fluid bg bg-secondary mt-5 text-white">
+    <footer class="container-fluid mt-5 text-white">
         <div class="row text-white">
             <p class="col-md-2">© <?= date('Y') ?> Referosauria</p>
             <div class="offset-md-2 col-md-8 text-right">

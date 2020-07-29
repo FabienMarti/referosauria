@@ -1,27 +1,20 @@
 <?php
 
-$contentArray = array('home', 'dinoList');
+$contentArray = array('Accueil' => 'home', 'Liste des dinosaures' => 'dinoList', 'Découvrir' => 'discover', 'Forum' => 'forum');
 
-if(!empty($_GET['content'])){
-    if(in_array($_GET['content'], $contentArray)){
-        $content = 'views/' . $_GET['content'] . '.php';
-        
-    }else{
-        header('Location: index.php');
+if(isset($_GET['content']) && in_array($_GET['content'], $contentArray))  {
+    foreach ($contentArray as $title => $value) {
+        if($_GET['content'] == $value){
+            $content = 'views/' . $_GET['content'] . '.php';
+            $pageTitle = $title;
+        }
     }
-
-
-
-
-    
 }else{
     $content = 'views/home.php';
 }
 
-
-
-
-/* if(!empty($_GET['content'])){
+/*Switch
+if(!empty($_GET['content'])){
     switch ($_GET['content']) {
         case 'home':
            $content = 'views/home.php';
@@ -30,13 +23,8 @@ if(!empty($_GET['content'])){
         case 'dinoList':
             $content = 'views/dinoList.php';
             $pageTitle = 'Liste des créatures';
-        default:
-            
+        default:    
     }
-
-
-
-
 }else{
     $content = 'views/home.php';
 } */

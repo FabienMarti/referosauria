@@ -1,11 +1,9 @@
 <?php 
-    $pageTitle = 'Découvrir';
-    include 'views/parts/header.php';
-    include 'views/parts/functions.php';
+    include 'view/parts/functions.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <main class="container-fluid">
-  <!-- Menu Nav local -->
+<!-- Menu Nav local -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand d-md-none" href="#">Découvrir</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,33 +36,33 @@
     </div>
   </nav>
 <!-- La Paléonthologie -->
-<section id="paleonthology">
-  <div style="height: 100vh" class="bg bg-danger"></div>
-</section>
+  <section id="paleonthology">
+    <div style="height: 100vh" class="bg bg-danger"></div>
+  </section>
 <!-- Les Dinosaures -->
-<section id="dinosaurs">
-<div style="height: 100vh" class="bg bg-success"></div>
-</section>
+  <section id="dinosaurs">
+  <div style="height: 100vh" class="bg bg-success"></div>
+  </section>
 <!-- Créatures Océaniques -->
-<section id="oceanCreatures">
-<div style="height: 100vh" class="bg bg-primary"></div>
-</section>
+  <section id="oceanCreatures">
+  <div style="height: 100vh" class="bg bg-primary"></div>
+  </section>
 <!-- Réptiles Volants -->
-<section id="flyingReptiles">
-<div style="height: 100vh" class="bg bg-secondary"></div>
-</section>
+  <section id="flyingReptiles">
+  <div style="height: 100vh" class="bg bg-secondary"></div>
+  </section>
 <!-- Les Insectes -->
-<section id="bugs">
-<div style="height: 100vh" class="bg bg-warning"></div>
-</section>
+  <section id="bugs">
+  <div style="height: 100vh" class="bg bg-warning"></div>
+  </section>
 <!-- Les Grandes Extinctions -->
-<section id="extinctions">
-<div style="height: 100vh" class="bg bg-info"></div>
-</section>
+  <section id="extinctions">
+  <div style="height: 100vh" class="bg bg-info"></div>
+  </section>
 <!-- La Terre d'une autre époque -->
-<section id="anotherWorld">
-<div style="height: 100vh" class="bg bg-danger"></div>
-</section>
+  <section id="anotherWorld">
+  <div style="height: 100vh" class="bg bg-danger"></div>
+  </section>
 </main>
 <script>
   //stockage de toutes les sections dans un array
@@ -105,4 +103,3 @@
     }
   }
 </script>
-<?php include 'views/parts/footer.php'; ?>
