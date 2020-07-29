@@ -1,6 +1,6 @@
 <?php
 
-$contentArray = array('Accueil' => 'home', 'Liste des dinosaures' => 'dinoList', 'Découvrir' => 'discover', 'Forum' => 'forum');
+$contentArray = array('Accueil' => 'home', 'Liste des dinosaures' => 'dinoList', 'Découvrir' => 'discover', 'Déposer un article' => 'addDino','S\'inscrire' => 'registration', 'Faire un don' => 'contribute', 'Quiz' => 'quiz', 'Forum' => 'forum');
 
 if(isset($_GET['content']) && in_array($_GET['content'], $contentArray))  {
     foreach ($contentArray as $title => $value) {

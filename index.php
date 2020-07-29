@@ -12,14 +12,14 @@
         <title><?= isset($pageTitle) ? $pageTitle : 'Non-Défini' ?></title>
     </head>
 <body>
-<header class="container-fluid p-0">
+<header class="container-fluid p-0 m-0">
         <!--BG + Titre + Vignette profil-->
         <div id="headerBG" class="row">
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
                 <h1>REFEROSAURIA</h1>
             </div>
             <div class="col-md-2 offset-md-2 my-auto text-center">
-                <a href="registration.php" class="text-white"><button class="btn btn-primary">S'inscrire</button></a>
+                <a href="index.php?content=registration" class="text-white"><button class="btn btn-primary">S'inscrire</button></a>
             </div>
         </div>
 <!--NavBar-->
@@ -45,8 +45,8 @@
                                 Contribuer
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                <a class="dropdown-item" href="addDino.php">Déposer un article</a>
-                                <a class="dropdown-item" href="contribute.php">Faire un don</a>
+                                <a class="dropdown-item" href="index.php?content=addDino">Déposer un article</a>
+                                <a class="dropdown-item" href="index.php?content=contribute">Faire un don</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -54,12 +54,12 @@
                                 Jeux
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                <a class="dropdown-item" href="quiz.php">Quiz</a>
+                                <a class="dropdown-item" href="index.php?content=quiz">Quiz</a>
                                 <a class="dropdown-item" href="#">Générateur de Dinom</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="forum.php">Forum</a>
+                            <a class="nav-link" href="index.php?content=forum">Forum</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">

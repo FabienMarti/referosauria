@@ -2,7 +2,6 @@
     include 'view/parts/functions.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
-<main class="container-fluid">
 <!-- Menu Nav local -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand d-md-none" href="#">Découvrir</a>
@@ -36,8 +35,8 @@
     </div>
   </nav>
 <!-- La Paléonthologie -->
-  <section id="paleonthology">
-    <div style="height: 100vh" class="bg bg-danger"></div>
+  <section id="paleonthology" class="container-fluid mx-2">
+    <?php include 'views/paleonthology.php' ?>
   </section>
 <!-- Les Dinosaures -->
   <section id="dinosaurs">
@@ -63,7 +62,6 @@
   <section id="anotherWorld">
   <div style="height: 100vh" class="bg bg-danger"></div>
   </section>
-</main>
 <script>
   //stockage de toutes les sections dans un array
   var allSections = document.getElementsByTagName("section");

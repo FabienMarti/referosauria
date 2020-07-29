@@ -1,8 +1,6 @@
-<?php 
-    $pageTitle = 'Inscription';
-    include 'views/parts/header.php';
-    include 'views/parts/functions.php';
-    include 'controller/registrationController.php';
+<?php
+    include 'view/parts/functions.php';
+    include 'controllers/registrationController.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
 <h2 class="text-center"><u>Inscription</u></h2>
@@ -98,6 +96,4 @@ function mailCheck(mail){
     }
     
 }
-
 </script>
-<?php include 'views/parts/footer.php' ?>
