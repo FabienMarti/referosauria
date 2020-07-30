@@ -1,4 +1,7 @@
-<?php include 'controllers/indexController.php' ?>
+<?php 
+    include 'controllers/indexController.php';
+    include 'views/logPart.php';
+?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
     <head>
@@ -70,7 +73,7 @@
             </nav>
         </header>
 <!-- Si 'content' contient une valeur et qu'elle est égale à 'home', alors on applique un padding en Y de 5 (BS) sinon rien. -->
-<main class="<?= (isset($_GET['content']) && ($_GET['content']) == 'home') ? 'py-5' : '' ?>">
+<main class="<?= (isset($_GET['content']) && ($_GET['content']) == 'home') ? 'py-5' : 'pb-5' ?>">
     <?php include $content ?>
 </main>
 <!-- Modale footer -->

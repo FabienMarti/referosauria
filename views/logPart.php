@@ -1,16 +1,17 @@
 <?php
     session_start();
-    switch ($_SESSION['status']) {
-    case 'On':
-        ?><a class="btn btn-primary" href="views/parts/logout.php">Déconnexion</a><?php
+    switch ($_SESSION['isConnected']) {
+    case true:
+        ?><a class="btn btn-primary" href="views/logout.php">Déconnexion</a><?php
     break;
     default:
-        ?><a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
+        ?><a class="btn btn-primary text-white" href="#">S'inscrire</a>
+        <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
 }
 ?>
 <!-- ouvre connexion si non connecté(à faire) -->
 <button class="btn btn-primary">Mon profil</button><?php
-echo var_dump($_SESSION['status']);
+echo var_dump($_SESSION['isConnected']);
 ?>
 
 
@@ -28,7 +29,7 @@ echo var_dump($_SESSION['status']);
                     FORMULAIRE
                 </div>
                 <div class="modal-footer">
-                    <a href="views/parts/login.php" type="button" class="btn btn-primary">Connexion</a>
+                    <a href="views/login.php" type="button" class="btn btn-primary">Connexion</a>
                 </div>
                 </div>
             </div>

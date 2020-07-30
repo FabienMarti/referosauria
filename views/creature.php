@@ -9,7 +9,6 @@
     $data = $response->fetch();
     //request pour le titre avec la BDD
     $pageTitle = $data['titre'];
-    include 'views/parts/header.php';
     include 'views/parts/functions.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $pageTitle)); 
 ?>
@@ -45,4 +44,3 @@
             </div>
         </div>
 </section>
-<?php include 'views/parts/footer.php' ?>
