@@ -1,7 +1,4 @@
-<?php 
-$pageTitle = 'Accueil';
-?>
-    <main class="container-fluid mt-5">
+
         <div class="row">
             <!--Les derniers posts-->
             <div id="recentPostList" class="col-md-2 offset-md-1 border">
@@ -53,7 +50,6 @@ $pageTitle = 'Accueil';
                 </div>
             </div>
         </div>
-    </main>
     <section class="container mt-5">
         <h2 class="text-center">Dernières créatures</h2>
         <div class="row border border-danger my-3">

@@ -69,52 +69,22 @@
                 </div>
             </nav>
         </header>
-<main class="">
+<!-- Si 'content' contient une valeur et qu'elle est égale à 'home', alors on applique un padding en Y de 5 (BS) sinon rien. -->
+<main class="<?= (isset($_GET['content']) && ($_GET['content']) == 'home') ? 'py-5' : '' ?>">
     <?php include $content ?>
 </main>
 <!-- Modale footer -->
-    <div class="modal fade" id="footerModal" tabindex="-1" role="dialog" aria-labelledby="footerModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="footerModalLabel">Titre</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Politique de confidentialité -->
-                <div class="modalContent" id="privacyPolicy">
-                    <p>1</p>
-                </div>
-                <!-- Conditions Générales -->
-                <div class="modalContent" id="conditions">
-                    <p>2</p>
-                </div>
-                <!-- Accessibilité -->
-                <div class="modalContent" id="accessibility">
-                    <p>3</p>
-                </div>
-                <!-- À propos de referosauria -->
-                <div class="modalContent" id="about">
-                    <p>4</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
-    </div>   
+    <?php include 'views/footerModal.php' ?>
 <!-- Footer -->
-    <footer class="container-fluid mt-5 text-white">
+    <footer class="container-fluid text-white">
         <div class="row text-white">
-            <p class="col-md-2">© <?= date('Y') ?> Referosauria</p>
-            <div class="offset-md-2 col-md-8 text-right">
+            <p class="col-md-2 my-auto">© <?= date('Y') ?> Referosauria</p>
+            <div class="offset-md-1 col-md-8">
                 <div class="row">
-                    <p class="col-md-3"><a onclick="changeFooterModalContent(0)">Politique de confidentialité</a></p>
-                    <p class="col-md-3"><a onclick="changeFooterModalContent(1)">Conditions générales</a></p>
-                    <p class="col-md-3"><a onclick="changeFooterModalContent(2)">Accessibilité</a></p>
+                    <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(0)">Politique de confidentialité</a></p>
+                    <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(1)">Conditions générales</a></p>
+                    <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(2)">Accessibilité</a></p>
+                    <!-- my-auto en dessous annule les autres -->
                     <p class="col-md-3"><a onclick="changeFooterModalContent(3)">À propos de referosauria</a></p>
                 </div>
             </div>

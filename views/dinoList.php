@@ -1,7 +1,5 @@
 <?php 
-    $dinoPeriod = array('Trias', 'Jurassique', 'Crétacé');
-    $dinoType = array('Carnivore', 'Herbivore');
-    $discoverers = array();
+    include 'controllers/dinoListController.php';
     include 'view/parts/functions.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
