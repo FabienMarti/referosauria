@@ -4,7 +4,16 @@
 ?>
 <main class="container mt-2">
     <h2 class="text-center">Ajouter une Créature</h2>
+    <div class="row">
+      <div class="col text-right"><a href="index.php?content=addDino&addingType=simple" class="btn btn-primary">Ajout simple</a></div>
+      <div class="col"><a href="index.php?content=addDino&addingType=advanced" class="btn btn-primary">Ajout avancé</a></div>
+      
+    </div>
     <form>
+    <label for="dinosaur">Dinosaure : </label>
+    <input type="radio" name="typeSelect" id="dinosaur" value="Dinosaure" />
+    <label for="other">Autre : </label>
+    <input type="radio" name="typeSelect" id="other" value="Autre" />
         <div class="form-group">
           <label for="InputTitle">Nom de la créature</label>
           <input type="email" class="form-control col-md-4" id="InputTitle" aria-describedby="emailHelp" placeholder="Nom de la Créature">
