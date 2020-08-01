@@ -1,6 +1,6 @@
 <?php 
+    session_start();
     include 'controllers/indexController.php';
-    include 'views/logPart.php';
 ?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
@@ -21,8 +21,15 @@
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
                 <h1>REFEROSAURIA</h1>
             </div>
-            <div class="col-md-2 offset-md-2 my-auto text-center">
-                <a href="index.php?content=registration" class="text-white"><button class="btn btn-primary">S'inscrire</button></a>
+            <div class="col-md-2 offset-md-2 my-auto text-center"><?php
+                switch ($_SESSION['isConnected']) {
+                case true:
+                    ?><a class="btn btn-primary" href="views/logout.php">Déconnexion</a><?php
+                break;
+                default:
+                    ?><a class="btn btn-primary text-white" href="#">S'inscrire</a>
+                    <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
+                }?>
             </div>
         </div>
 <!--NavBar-->
@@ -73,25 +80,41 @@
             </nav>
         </header>
 <!-- Si 'content' contient une valeur et qu'elle est égale à 'home', alors on applique un padding en Y de 5 (BS) sinon rien. -->
-<main class="<?= (isset($_GET['content']) && ($_GET['content']) == 'home') ? 'py-5' : 'pb-5' ?>">
+<main class="<?= isset($_GET['content']) ? ($_GET['content'] == 'home' ? 'py-5' : 'pb-5') : 'py-5' ?>">
     <?php include $content ?>
 </main>
+<!-- Modale Connexion -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    FORMULAIRE
+                    <a href="views/login.php" type="button" class="btn btn-primary text-right">Connexion</a>
+                </div>
+                <div class="modal-footer">
+                    <a class="" href="#">Mot de passe oublié</a>
+                    
+                </div>
+                </div>
+            </div>
+        </div>
 <!-- Modale footer -->
     <?php include 'views/footerModal.php' ?>
 <!-- Footer -->
     <footer class="container-fluid text-white">
-        <div class="row text-white">
-            <p class="col-md-2 my-auto">© <?= date('Y') ?> Referosauria</p>
-            <div class="offset-md-1 col-md-8">
-                <div class="row">
-                    <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(0)">Politique de confidentialité</a></p>
-                    <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(1)">Conditions générales</a></p>
-                    <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(2)">Accessibilité</a></p>
-                    <!-- my-auto en dessous annule les autres -->
-                    <p class="col-md-3"><a onclick="changeFooterModalContent(3)">À propos de referosauria</a></p>
-                </div>
-            </div>
+        <div class="row text-white text-center">
+            <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(0)">Politique de confidentialité</a></p>
+            <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(1)">Conditions générales</a></p>
+            <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(2)">Accessibilité</a></p>
+            <p class="col-md-3 my-auto"><a onclick="changeFooterModalContent(3)">À propos de referosauria</a></p>
         </div>
+        <p class="text-center">© <?= date('Y') ?> Referosauria</p>
     </footer>
 <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
