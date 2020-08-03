@@ -1,19 +1,11 @@
 <?php
-    //récupération de la BDD dans une variable
-    $bdd = new PDO('mysql:host=localhost;dbname=referosauria', 'root', '');
-    //selection de la créature via l'id
-    $id = 1;
-    //requete (query)
-    $response = $bdd->query('SELECT * FROM creatures WHERE id=' . $id);
-    //fetch = rapporter, on demande a la fonction d'aller chercher les données
-    $data = $response->fetch();
-    //request pour le titre avec la BDD
-    $pageTitle = $data['titre'];
-    include 'views/parts/functions.php';
-    generateBreadcrumb(array('index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $pageTitle)); 
+    include 'models/creatureModel.php';
+    include 'controllers/creatureController.php';
+  /*   include 'view/functions.php';
+    generateBreadcrumb(array('index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $pageTitle));  */
 ?>
 <section class="container-fluid my-2">
-        <h1 class="text-center my-5"><u><?= $data['titre'] ?></u></h1>
+        <h1 class="text-center my-5"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>
         <div class="row">
             <div class="col-md-2 text-center border">
                 <p class="h6 text-center">Où a-t-on trouvé Tyrannosaure ?</p>
@@ -28,12 +20,13 @@
                     <li>28/01/2020</li>
                 </ul>
             </div>
-            <div class="col-md-4 border border-danger m-auto">
-                <img class="img-fluid" src="data:image/jpg;charset=utf8;base64,<?= base64_encode($data['image_principale']) ?>" />
+            <div class="col-md-4 border border-dark m-auto">
+                <img class="img-fluid" src="<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
             </div>
             <div class="col-md-5 m-auto">
                 <p class="h5 text-center">Description</p>
-                <p><?= $data['description'] ?></p>
+                <p><?= $showCreatureInfo->description ?></p>
+<!-- Probleme BDD pour les sources -->
                 <p class="text-right">Source : WIKIPEDIA</p>
             </div>
             <div class="col-md-1 text-center border">
@@ -44,3 +37,107 @@
             </div>
         </div>
 </section>
+<section class="mx-1">
+            <h1 class="text-center my-5">Plus de détails</h1>
+            <div class="row">
+                <!-- <div class="col-md-2">
+                    <table class="table table-sm">
+                        <thead>
+                            <th colspan="2" class="text-center">Classification</th>
+                        </thead>
+                        <tr>
+                            <th>Super-ordre</th>
+                            <td>Dinosauria</td>
+                        </tr>
+                        <tr>
+                            <th>Ordre</th>
+                            <td>Saurischia</td>
+                        </tr>
+                        <tr>
+                            <th>Sous-ordre</th>
+                            <td>Theropoda</td>
+                        </tr>
+                        <tr>
+                            <th>Infra-Ordre</th>
+                            <td>Tetunurae</td>
+                        </tr>
+                        <tr>
+                            <th>Micro-ordre</th>
+                            <td>Coelurosauria</td>
+                        </tr>
+                        <tr>
+                            <th>Super-famille</th>
+                            <td>Tyrannosauroidea</td>
+                        </tr>
+                        <tr>
+                            <th>Famille</th>
+                            <td>Tyrannosauridae</td>
+                        </tr>
+                        <tr>
+                            <th>Sous-ordre</th>
+                            <td>Tyrannosaurinae</td>
+                        </tr>
+                    </table>
+                </div> -->
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <thead>
+                            <th colspan="2" class="text-center">Fiche signalétique</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Habitat</th>
+                                <td><?= isset($showCreatureInfo->environment) ? $showCreatureInfo->environment : '' ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Période</th>
+                                <td><?= isset($showCreatureInfo->period) ? $showCreatureInfo->period : '' ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Longueur</th>
+                                <td><?= isset($showCreatureInfo->width) ? $showCreatureInfo->width : '' ?> mètres</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Hauteur</th>
+                                <td><?= isset($showCreatureInfo->height) ? $showCreatureInfo->height : '' ?> mètres</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Poids</th>
+                                <td><?= isset($showCreatureInfo->weight) ? $showCreatureInfo->weight : '' ?> tonnes</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prédateurs</th>
+                                <td><?= isset($showCreatureInfo->predatory) ? $showCreatureInfo->predatory : '' ?></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alimentation</th>
+                                <td><?= isset($showCreatureInfo->diet) ? $showCreatureInfo->diet : '' ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <figure>
+                        <img class="img-fluid" alt="squelette de Tyrannosaure" src="<?= isset($showCreatureInfo->detailImage) ? $showCreatureInfo->detailImage : '' ?>" />
+                        <figcaption class="text-center">Tyrannosaure "Sue" au Field Museum, Chicago, USA, 2010</figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="text-center">Découverte</h2>
+                    <p class="text-justify"><?= isset($showCreatureInfo->discovery) ? $showCreatureInfo->discovery : '' ?></p>
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-center">Etymologie</h2>
+                    <p class="text-justify"><?= isset($showCreatureInfo->etymology) ? $showCreatureInfo->etymology : '' ?></p>
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center">Paléo-biologie</h2>
+                    <p><?= isset($showCreatureInfo->paleobiology) ? $showCreatureInfo->paleobiology : '' ?></p>
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>
+            </div>
+        </section>

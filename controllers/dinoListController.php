@@ -1,5 +1,4 @@
 <?php
-
 $dinoPeriod = array('Trias', 'Jurassique', 'Crétacé');
 $dinoType = array('Carnivore', 'Herbivore');
 $discoverers = array();

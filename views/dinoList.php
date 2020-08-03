@@ -58,7 +58,7 @@
                 for ($dino = 1; $dino <= 20; $dino++) { 
                     if($dino %5 == 0){
                         ?><td>
-                            <a href="#">
+                            <a href="index.php?content=creature">
                                 <figure>
                                     <img class="border border-dark" src="assets/img/rexHead.png" style="height: 150px" />
                                     <figcaption>Créature</figcaption>
@@ -68,7 +68,7 @@
                         </tr><tr><?php
                     }else{
                         ?><td>
-                            <a href="#">
+                            <a href="index.php?content=creature">
                                 <figure>
                                     <img class="border border-dark" src="assets/img/rexHead.png" style="height: 150px" />
                                     <figcaption>Créature</figcaption>

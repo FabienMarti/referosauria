@@ -1,5 +1,5 @@
 <?php
-$contentArray = array('home' => 'Accueil','dinoList' => 'Liste des dinosaures','discover' => 'Découvrir','addDino' => 'Déposer un article','registration' => 'S\inscrire','contribute' => 'Faire un don','quiz' => 'Quiz','forum' => 'Forum');
+$contentArray = array('home' => 'Accueil', 'dinoList' => 'Liste des dinosaures', 'discover' => 'Découvrir', 'addDino' => 'Déposer un article', 'registration' => 'S\inscrire', 'contribute' => 'Faire un don', 'quiz' => 'Quiz', 'forum' => 'Forum', 'creature' => 'Créature');
 if(isset($_GET['content'])){
     if(isset($contentArray[$_GET['content']])){
     //si la valeur 'content' existe et que sa valeur est égale à une des clés associatives et du tableau $contentArray
