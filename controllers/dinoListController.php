@@ -1,4 +1,9 @@
 <?php
+//je créé une nouvelle instance de l'objet 'creature'
+$creature = new creature();
+//je récupère le contenu ma methode getDinoInfos() dans une variable
+$showCreaturesInfo = $creature->getDinosInfo();
+
 $dinoPeriod = array('Trias', 'Jurassique', 'Crétacé');
 $dinoType = array('Carnivore', 'Herbivore');
 $discoverers = array();

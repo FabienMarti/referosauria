@@ -1,8 +1,7 @@
 <?php
     include 'models/creatureModel.php';
     include 'controllers/creatureController.php';
-  /*   include 'view/functions.php';
-    generateBreadcrumb(array('index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $pageTitle));  */
+    generateBreadcrumb(array('index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
 ?>
 <section class="container-fluid my-2">
         <h1 class="text-center my-5"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>

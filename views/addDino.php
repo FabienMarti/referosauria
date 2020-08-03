@@ -1,6 +1,5 @@
 <?php
 include 'controllers/addDinoController.php';
-include 'view/parts/functions.php';
 generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <section class="container mt-2">

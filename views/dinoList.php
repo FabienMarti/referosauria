@@ -1,6 +1,6 @@
 <?php 
+    include 'models/creatureModel.php';
     include 'controllers/dinoListController.php';
-    include 'view/parts/functions.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <section class="container-fluid p-0">
@@ -53,31 +53,18 @@
         </form>
     </div>
 <!-- Affichage resultat recherche -->
-        <table class="table text-center container">
-            <tr><?php
-                for ($dino = 1; $dino <= 20; $dino++) { 
-                    if($dino %5 == 0){
-                        ?><td>
-                            <a href="index.php?content=creature">
-                                <figure>
-                                    <img class="border border-dark" src="assets/img/rexHead.png" style="height: 150px" />
-                                    <figcaption>Créature</figcaption>
-                                </figure>
-                            </a>
-                        </td>
-                        </tr><tr><?php
-                    }else{
-                        ?><td>
-                            <a href="index.php?content=creature">
-                                <figure>
-                                    <img class="border border-dark" src="assets/img/rexHead.png" style="height: 150px" />
-                                    <figcaption>Créature</figcaption>
-                                </figure>
-                            </a>
-                        </td><?php
-                    }
-                }
-            ?></tr>  
-        </table>
+<div class="container mt-5">
+    <div class="row text-center border justify-content-around">
+            <?php
+                foreach ($showCreaturesInfo as $creature) {
+                ?><div class="col-4">
+                        <a href="index.php?content=creature&id=<?= $creature->id?>">
+                            <img class="img-fluid border border-dark" style="height: 150px" src="<?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
+                            <p><?= isset($creature->name) ? $creature->name : '' ?></p>
+                        </a>
+                </div><?php
+                }?>
+    </div>
+</div>
 <!-- Fin affichage resultat recherche -->    
 </section>

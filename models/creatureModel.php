@@ -4,6 +4,9 @@ class creature
 {
     public $id = 0;
     public $name = '';
+    public $miniImage = '';
+    public $mainImage = '';
+    public $detailImage = '';
     public $description = '';
     public $discovery = '';
     public $etymology = '';
@@ -27,7 +30,7 @@ class creature
         }
     }
 
-    public function getDinoInfos(){
+    public function getSingleDinoInfo($id){
         //Je récupère dans ma BDD avec un query les informations dont j'ai besoin
         //Je recupère tout avec * dans ma table 'creatures' (car j'ai besoin de tout)
         $creatureQuery = $this->db->query(
@@ -36,10 +39,25 @@ class creature
             FROM
                 `r3f3r0_creatures`
             WHERE 
-                `id` = 2
+                `id` = '.$id .'
             ');
             $data = $creatureQuery->fetch(PDO::FETCH_OBJ);
             return $data;
     }
+
+    //recupere les infos de toutes les creatures
+    public function getDinosInfo(){
+
+        $creatureQuery = $this->db->query(
+            'SELECT 
+                *
+            FROM
+                `r3f3r0_creatures`
+            ');
+            $data = $creatureQuery->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+    }
+
+
 }
 

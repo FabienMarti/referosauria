@@ -1,5 +1,4 @@
 <?php 
-    include 'views/parts/functions.php';
     generateBreadcrumb(array('index.php' => 'Referosauria','registration.php' => 'Inscription' , 'final' => $pageTitle));
 ?>
     <section>
