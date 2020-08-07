@@ -1,10 +1,9 @@
 <?php
-    include 'view/parts/functions.php';
     include 'controllers/registrationController.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
 <h2 class="text-center"><u>Inscription</u></h2>
-<form class="container border border-dark p-3 rounded" action="registration.php" method="POST">
+<form class="container border border-dark p-3 rounded" action="" method="POST">
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
     </div>

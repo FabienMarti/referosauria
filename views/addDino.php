@@ -3,20 +3,23 @@ include 'controllers/addDinoController.php';
 generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <section class="container mt-2">
-<!-- section Droite --> 
+<!-- Choix type d'ajout -->
   <h2 class="text-center">Ajouter une Créature</h2>
   <div class="row">
     <div class="col text-right"><a href="index.php?content=addDino&addingType=simple" class="btn btn-primary">Ajout simple</a></div>
     <div class="col"><a href="index.php?content=addDino&addingType=advanced" class="btn btn-primary">Ajout avancé</a></div>
   </div>
+
   <form action="" method="POST" enctype="multipart/form-data" class="row">
-    <div class="col-6" id="dinoData">
+    <div class="col-6 border border-dark p-3 mt-3" id="dinoData">  
+<!-- Selection type de creature -->
       <div class="form-group">
         <label for="dinosaur">Dinosaure : </label>
         <input class="col-2" type="radio" name="typeSelect" id="dinosaur" value="Dinosaure" />
         <label for="other">Autre : </label>
         <input class="col-2" type="radio" name="typeSelect" id="other" value="Autre" />
       </div>
+<!-- section Droite --> 
       <div class="form-group">
         <label for="InputTitle">Nom : </label>
         <input type="email" class="form-control col" id="InputTitle" aria-describedby="emailHelp" placeholder="Nom de la Créature">
@@ -35,7 +38,7 @@ generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
       </div>
     </div>
 <!-- section Gauche --> 
-    <div class="col-6" id="dinoPrecision">
+    <div class="col-6 mt-3 p-3" id="dinoPrecision">
       <label for="period">Choisissez une période</label>
       <select class="form-control col" name="period">
         <option value="" disabled selected>Selectionnez</option>

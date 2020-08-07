@@ -5,18 +5,15 @@
 ?>
 <section class="container-fluid p-0">
 <!-- Filtrage recherche -->
-    <div id="filterArrow" class="text-center h-25">
-        <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-arrow-down"></i></a>   
-    </div>
-    <div class="collapse p-5" id="collapseExample">
+    <div class="collapse p-5 filter" id="collapseExample">
         <form method="GET" action="dinoList.php">
             <div class="row my-1">
                 <!-- Filtrage période -->
                 <select class="form-control col" name="period">
                     <option value="" disabled selected>Choisissez une période</option> 
                     <?php
-                        foreach ($dinoPeriod as $period) {
-                            ?><option value="<?= $period ?>"><?= $period ?></option><?php
+                        foreach ($showCreaturesInfo as $period) {
+                            ?><option value="<?= $period->id_period ?>"><?= $period->periodName ?></option><?php
                         }
                 ?></select>
                 <!-- Alimentation -->
@@ -52,6 +49,9 @@
             </div>
         </form>
     </div>
+    <div class="text-center h-25 filter">
+        <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="returnArrow(JSarrow)"><i id="JSarrow" class="fas fa-arrow-down"></i></a>   
+    </div>
 <!-- Affichage resultat recherche -->
 <div class="container mt-5">
     <div class="row text-center border justify-content-around">
@@ -59,7 +59,7 @@
                 foreach ($showCreaturesInfo as $creature) {
                 ?><div class="col-4">
                         <a href="index.php?content=creature&id=<?= $creature->id?>">
-                            <img class="img-fluid border border-dark" style="height: 150px" src="<?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
+                            <img class="img-fluid border <?= $creature->id_r3f3r0_diet == 1 ? 'border-danger' : ($creature->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?>" style="height: 150px" src="<?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
                             <p><?= isset($creature->name) ? $creature->name : '' ?></p>
                         </a>
                 </div><?php
@@ -68,3 +68,12 @@
 </div>
 <!-- Fin affichage resultat recherche -->    
 </section>
+<script>
+    function returnArrow(i){
+        if(i.classList.contains('fa-arrow-down')){
+        i.setAttribute('class', 'fa-arrow-up');
+        }else{
+            i.setAttribute('class', 'fa-arrow-down');
+        }
+    }
+</script>
