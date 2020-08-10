@@ -1,5 +1,5 @@
 <?php
-    //je créé une nouvelle instance de l'objet 'creature'
+    //je créé une nouvelle instance de la classe 'creature'
     $creature = new creature();
     //je récupère le contenu ma methode getDinoInfos() dans une variable
-    $showCreatureInfo = $creature->getSingleDinoInfo($_GET['id']);
+    $showCreatureInfo = $creature->getSingleDinoInfo(htmlspecialchars($_GET['id']));

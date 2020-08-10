@@ -16,7 +16,7 @@
     </head>
 <body>
 <header class="container-fluid p-0 m-0">
-        <!--BG + Titre + Vignette profil-->
+        <!-- BG + Titre -->
         <div id="headerBG" class="row">
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
                 <h1>REFEROSAURIA</h1>
@@ -24,16 +24,17 @@
             <div class="col-md-2 offset-md-2 my-auto text-center"><?php
                 switch ($_SESSION['isConnected']) {
                 case true:
-                    ?><a class="btn btn-primary" href="views/logout.php">Déconnexion</a><?php
+                    ?><a class="btn btn-primary" href="index.php?content=profil">Profil</a>
+                    <a class="btn btn-primary" href="views/logout.php">Déconnexion</a><?php
                 break;
                 default:
-                    ?><a class="btn btn-primary text-white" href="#">S'inscrire</a>
+                    ?><a class="btn btn-primary text-white" href="index.php?content=registration">S'inscrire</a>
                     <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
                 }?>
             </div>
         </div>
 <!--NavBar-->
-            <nav class="navbar navbar-expand-md">
+            <nav id="mainNav" class="navbar navbar-expand-md">
                 <a class="navbar-brand d-md-none" href="#">Menu</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -79,7 +80,7 @@
                 </div>
             </nav>
         </header>
-<!-- Si 'content' contient une valeur et qu'elle est égale à 'home', alors on applique un padding en Y de 5 (BS) sinon rien. -->
+<!-- Si 'content' contient une valeur et qu'elle est égale à 'home', alors on applique un padding en Y de 5 (Bootstrap). -->
 <main class="<?= isset($_GET['content']) ? ($_GET['content'] == 'home' ? 'py-5' : 'pb-5') : 'py-5' ?>">
     <?php include $content ?>
 </main>
@@ -98,7 +99,7 @@
                     <a href="views/login.php" type="button" class="btn btn-primary text-right">Connexion</a>
                 </div>
                 <div class="modal-footer">
-                    <a class="" href="#">Mot de passe oublié</a>
+                    <a class="" href="index.php?content=passwordRecovery">Mot de passe oublié</a>
                     
                 </div>
                 </div>

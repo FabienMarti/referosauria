@@ -1,7 +1,7 @@
-nav, footer{
+#mainNav, footer{
     background-color: #697A21 !important;
 }
-nav a {
+#mainNav a {
     color: white;
 }
 #changeText{
@@ -16,10 +16,10 @@ nav a {
 #recentPostList li:nth-child(even){
     text-align: right;
 }
-#filterArrow{
+.filter{
     background-color: #4F5165;
 }
-#filterArrow a {
+.filter a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
 }
@@ -27,3 +27,65 @@ nav a {
 .breadcrumb-item + .breadcrumb-item::before {
       color: white;
 }
+*{
+    margin: 0;
+    padding: 0;
+}
+#mainTitle{
+    height: 195px;
+}
+
+
+#headerBG{
+    background-image: url('../img/dinosaurBannerBG.png');
+    height: 150px;
+}
+.breadcrumb {
+    margin-bottom: 0px !important;
+    background-color: #547AA5;
+}
+.buttonBG{
+    background-color: rgba(0, 255, 0, 0.1);;
+}
+ol{
+    list-style: none;
+}
+#triasGTS{
+background-color: #812B92;
+}
+#jurassicGTS{
+background-color: #34B2C9;
+}
+#cretaGTS{
+background-color: #7FC64E;
+}
+/****** PAGE CREATURE ******/
+
+#recentPostList li{
+    list-style: none;
+}
+#recentPostList li:nth-child(odd){
+    text-align: left;
+}
+#recentPostList li:nth-child(even){
+    text-align: right;
+}
+
+/****** FIN PAGE CREATURE ******/
+
+/****** PAGE PROFIL ******/
+
+#profilNav li{
+    list-style: none;
+    margin: 10px 0;
+}
+
+/****** FIN PAGE PROFIL ******/
+
+/** MEDIA QUERIES **/
+@media (max-width: 768px){
+    #headerBG{
+    background-image: url('../img/dinosaurBannerBGxs.png');
+    }
+}
+

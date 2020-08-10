@@ -3,8 +3,8 @@ $regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.
 $formErrors = array();
 
 if(isset($_POST['validateForm'])){
+    
     if(count($_POST) > 0){
-
         if(!empty($_POST['email'])){
             if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
                 $email = htmlspecialchars($_POST['email']);
@@ -27,6 +27,7 @@ if(isset($_POST['validateForm'])){
 
         if(!empty($_POST['username'])){
             if(preg_match($regexList['username'], $_POST['username'])){
+                var_dump($_POST);
                 $username = htmlspecialchars($_POST['username']);
             }else{
                 $formErrors['username'] = 'Merci de respecter le format lettres, numéros sans caractères spéciaux.';
