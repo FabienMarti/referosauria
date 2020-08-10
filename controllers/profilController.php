@@ -1,6 +1,6 @@
 <?php
 // gestion du contenu
-$profilContentArray = array('infos' => 'Mon compte', 'editPW' => 'Modifier mot de passe');
+$profilContentArray = array('infos' => 'Mon compte', 'editPW' => 'Modifier mot de passe', 'deleteProfil' => 'Suppression de compte');
 if(isset($_GET['profilContent'])){
     
     $getProfilContent = htmlspecialchars($_GET['profilContent']);

@@ -2,33 +2,34 @@
 $regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$%');
 $formErrors = array();
 
+$user = new user();
+
 if(isset($_POST['validateForm'])){
     
     if(count($_POST) > 0){
-        if(!empty($_POST['email'])){
-            if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                $email = htmlspecialchars($_POST['email']);
+        if(!empty($_POST['mail'])){
+            if(filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
+                $user->mail = htmlspecialchars($_POST['mail']);
             }else{
-                $formErrors['email'] = 'Merci de respecter le format d\'e-mail valide.';
+                $formErrors['mail'] = 'Merci de respecter le format d\'e-mail valide.';
             }
         }else{
-            $formErrors['email'] = 'Veuillez renseigner votre e-mail.'; 
+            $formErrors['mail'] = 'Veuillez renseigner votre e-mail.'; 
         }
 
-        if(!empty($_POST['confirmEmail'])){
-            if(filter_var($_POST['confirmEmail'], FILTER_VALIDATE_EMAIL)){
-                $confirmEmail = htmlspecialchars($_POST['confirmEmail']);
+        if(!empty($_POST['confirmMail'])){
+            if(filter_var($_POST['confirmMail'], FILTER_VALIDATE_EMAIL)){
+                $confirmMail = htmlspecialchars($_POST['confirmMail']);
             }else{
-                $formErrors['confirmEmail'] = 'Merci de respecter le format d\'e-mail valide.';
+                $formErrors['confirmMail'] = 'Merci de respecter le format d\'e-mail valide.';
             }
         }else{
-            $formErrors['confirmEmail'] = 'Veuillez renseigner votre e-mail.'; 
+            $formErrors['confirmMail'] = 'Veuillez renseigner votre e-mail.'; 
         }
 
         if(!empty($_POST['username'])){
             if(preg_match($regexList['username'], $_POST['username'])){
-                var_dump($_POST);
-                $username = htmlspecialchars($_POST['username']);
+                $user->username = htmlspecialchars($_POST['username']);
             }else{
                 $formErrors['username'] = 'Merci de respecter le format lettres, numéros sans caractères spéciaux.';
             }
@@ -38,7 +39,7 @@ if(isset($_POST['validateForm'])){
 
         if(!empty($_POST['password'])){
             if(preg_match($regexList['password'], $_POST['password'])){
-                $password = htmlspecialchars($_POST['password']);
+                $user->pass = htmlspecialchars($_POST['password']);
             }else{
                 $formErrors['password'] = 'Utilisez 8 caractères, minimum 1 lettre et 1 chiffre.';
             }
@@ -48,6 +49,10 @@ if(isset($_POST['validateForm'])){
 
         if(!isset($_POST['validate'])){
             $formErrors['validate'] = 'Pour finaliser votre inscription, veuillez accepter les CGU';
+        }
+
+        if(empty($formErrors)){
+            $user->addNewUser();
         }
     }
 }

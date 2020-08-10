@@ -1,4 +1,5 @@
 <?php
+    include 'models/userModel.php';
     include 'controllers/registrationController.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
@@ -30,17 +31,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['email']) ? 'has-danger' : 'has-success') : '' ?>">
-            <label for="email">Adresse e-mail<span class="text-danger">*</span> : </label>
-            <input oninput="mailCheck(this)" type="mail" name="email" id="email" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['email']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['email']) ? 'value="' . $_POST['email'] . '"' : '' ?> />
-                <?php if (isset($formErrors['email'])) { ?>
-                    <p class="text-danger text-center"><?= $formErrors['email'] ?></p>
+        <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'has-danger' : 'has-success') : '' ?>">
+            <label for="mail">Adresse e-mail<span class="text-danger">*</span> : </label>
+            <input oninput="mailCheck(this)" type="mail" name="mail" id="mail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['mail']) ? 'value="' . $_POST['mail'] . '"' : '' ?> />
+                <?php if (isset($formErrors['mail'])) { ?>
+                    <p class="text-danger text-center"><?= $formErrors['mail'] ?></p>
                 <?php } ?>
         </div>
         <div class="form-group col">
-            <label for="confirmEmail">Confirmez l'adresse e-mail<span class="text-danger">*</span> : </label>
-            <input oninput="mailCheck(this)" type="mail" name="confirmEmail" id="confirmEmail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
-            <p class="text-danger text-center"><?= (isset($_POST['confirmEmail']) && $_POST['confirmEmail'] != $_POST['email']) ? 'Les adresses e-mail ne correspondent pas' : '' ?></p>
+            <label for="confirmMail">Confirmez l'adresse e-mail<span class="text-danger">*</span> : </label>
+            <input oninput="mailCheck(this)" type="mail" name="confirmMail" id="confirmMail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
+            <p class="text-danger text-center"><?= (isset($_POST['confirmMail']) && $_POST['confirmMail'] != $_POST['mail']) ? 'Les adresses e-mail ne correspondent pas' : '' ?></p>
 
         </div>
     </div>

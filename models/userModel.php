@@ -6,6 +6,7 @@ class user
     public $role = '';
     public $mail = '';
     public $pass = '';
+    public $inscriptionDate = '0000-00-00';
 
     private $db = NULL;
     
@@ -46,7 +47,6 @@ class user
         return $userEditInfos->execute();
     }
 
-    //NON FONCTIONNEL PK ?
     public function editUserPW(){
         $userEditPW = $this->db->prepare(
             'UPDATE
@@ -70,18 +70,26 @@ class user
         return $data;
     }
 
-    
+    public function deleteSelectedUser(){
+        $userToRemove = $this->db->query(
+            'DELETE FROM 
+                `r3f3r0_users`
+            WHERE
+                `id` = 1
+            ');
+            return $userToRemove->execute();
+    }
 
-
-    //pour plus tard
-    public function addUserInfos(){
+    public function addNewUser(){
         $addUser = $this->db->prepare(
             'INSERT INTO 
-                `r3f3r0_user` (`username`, `mail`)
-            VALUES (:username, :mail)
+                `r3f3r0_users` (`username`, `mail`, `password`, `inscriptionDate`)
+            VALUES (:username, :mail, :pass, :inscriptionDate)
             ');
         $addUser->bindvalue(':username', $this->username, PDO::PARAM_STR);
         $addUser->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
+        $addUser->bindvalue(':pass', $this->pass, PDO::PARAM_STR);
+        $addUser->bindvalue(':inscriptionDate', $this->inscriptionDate, PDO::PARAM_STR);
         return $addUser->execute();
     }
 }
