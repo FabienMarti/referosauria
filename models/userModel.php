@@ -1,9 +1,8 @@
 <?php
-
 class user
 {
     public $username = '';
-    public $role = '';
+    public $role = 3;
     public $mail = '';
     public $pass = '';
     public $inscriptionDate = '0000-00-00';
@@ -20,21 +19,41 @@ class user
         }
     }
 
+    //recupère les information des utilisateurs
+    public function getAllUsersInfos(){
+        $userInfosQuery = $this->db->query(
+            'SELECT
+                `usr`.`id` AS `usrId`
+                ,`username`
+                ,`mail`
+                ,DATE_FORMAT(`inscriptionDate`, \'%d/%m/%Y\') AS `inscDate`
+                ,`rol`.`name` AS `role`
+                , `rol`.`id` AS `rolId`
+            FROM
+                `r3f3r0_users` AS `usr`
+            INNER JOIN `r3f3r0_roles` AS `rol` ON `id_r3f3r0_roles` = `rol`.`id`
+            ORDER BY `usr`.`id` ASC
+        ');
+        return $userInfosQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    //recupère les infos d'un utilisateur en particulier
     public function getUserInfos(){
         $userInfosQuery = $this->db->query(
             'SELECT
-                `username`
+                `id`
+                ,`username`
                 ,`mail`
-                ,DATE_FORMAT(`inscriptionDate`, \'%d-%m-%Y\') AS `inscDate`
+                ,DATE_FORMAT(`inscriptionDate`, \'%d/%m/%Y\') AS `inscDate`
             FROM
                 `r3f3r0_users`
             WHERE
-                `id`= 1
+                `id`= 2
         ');
-        $data = $userInfosQuery->fetch(PDO::FETCH_OBJ);
-        return $data;
+        return $userInfosQuery->fetch(PDO::FETCH_OBJ);
     }
 
+    //permet d'editer le nom d'utilisateur et le mail
     public function editUserInfo(){
         $userEditInfos = $this->db->prepare(
             'UPDATE
@@ -47,6 +66,7 @@ class user
         return $userEditInfos->execute();
     }
 
+    //permet d'éditer le mot de passe
     public function editUserPW(){
         $userEditPW = $this->db->prepare(
             'UPDATE
@@ -58,6 +78,7 @@ class user
         return $userEditPW->execute();
     }
 
+
     public function getCurrentPassword(){
         $userPassword = $this->db->query(
             'SELECT
@@ -66,8 +87,7 @@ class user
                 `r3f3r0_users`
             WHERE `id` = 1
             ');
-        $data = $userPassword->fetch(PDO::FETCH_OBJ);
-        return $data;
+        return $userPassword->fetch(PDO::FETCH_OBJ);
     }
 
     public function deleteSelectedUser(){
@@ -89,8 +109,21 @@ class user
         $addUser->bindvalue(':username', $this->username, PDO::PARAM_STR);
         $addUser->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
         $addUser->bindvalue(':pass', $this->pass, PDO::PARAM_STR);
-        $addUser->bindvalue(':inscriptionDate', $this->inscriptionDate, PDO::PARAM_STR);
+        $addUser->bindvalue(':inscriptionDate', date('Y-m-d'), PDO::PARAM_STR);
         return $addUser->execute();
     }
+    public function checkUserExist()
+    {
+        $addUserSameQuery = $this->db->prepare(
+            'SELECT COUNT(`id`) AS `isUserExist`
+            FROM `r3f3r0_users` 
+            WHERE `username` = :username AND `mail` = :mail'
+        );
+        $addUserSameQuery->bindvalue(':username', $this->username, PDO::PARAM_STR);
+        $addUserSameQuery->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
+        $addUserSameQuery->execute();
+        $data = $addUserSameQuery->fetch(PDO::FETCH_OBJ);
+        return $data->isUserExist; 
+    } 
 }
 

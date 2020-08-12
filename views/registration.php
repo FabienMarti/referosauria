@@ -5,6 +5,7 @@
 ?>
 <h2 class="text-center"><u>Inscription</u></h2>
 <form class="container border border-dark p-3 rounded" action="" method="POST">
+<p><?= isset($addUserMessage) ? $addUserMessage : '' ?></p>
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
     </div>

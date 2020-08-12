@@ -26,7 +26,7 @@ if(isset($_POST['validateEdit'])){
 
         if(empty($profilErrors)){
             $user->editUserPW();
-            $pwEditSuccess = 'Le mot de pass à bien été changé.';
+            $pwEditSuccess = 'Le mot de passe à bien été modifié.';
         }else{
             $pwEditSuccess = 'Une erreur est survenue, veuillez contacter un résponsable technique.';
         }

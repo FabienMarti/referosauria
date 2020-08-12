@@ -25,7 +25,8 @@
                 switch ($_SESSION['isConnected']) {
                 case true:
                     ?><a class="btn btn-primary" href="index.php?content=profil">Profil</a>
-                    <a class="btn btn-primary" href="views/logout.php">Déconnexion</a><?php
+                    <a class="btn btn-primary" href="views/logout.php">Déconnexion</a>
+                    <a class="btn btn-danger" href="index.php?content=adminPanel">Panel d'administration</a><?php
                 break;
                 default:
                     ?><a class="btn btn-primary text-white" href="index.php?content=registration">S'inscrire</a>

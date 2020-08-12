@@ -4,6 +4,7 @@
 #mainNav a {
     color: white;
 }
+
 #changeText{
     font-size: 20px;
 }
@@ -19,7 +20,7 @@
 .filter{
     background-color: #4F5165;
 }
-.filter a {
+.filter a, .mailEnvelope a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
 }

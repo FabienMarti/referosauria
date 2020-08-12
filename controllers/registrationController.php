@@ -51,8 +51,16 @@ if(isset($_POST['validateForm'])){
             $formErrors['validate'] = 'Pour finaliser votre inscription, veuillez accepter les CGU';
         }
 
-        if(empty($formErrors)){
-            $user->addNewUser();
+        if (empty($formErrors)) {
+            if (!$user->checkUserExist()){
+                if($user->addNewUser()){
+                   $addUserMessage = 'Votre compte a bien été créé.'; 
+                } else {
+                    $addUserMessage = 'Une erreur est survenue.';
+                }
+            } else {
+                $addUserMessage = 'Le nom d\'utilisateur ou le mot de passe sont déjà utilisés.';
+            }
         }
     }
 }

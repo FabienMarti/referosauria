@@ -54,12 +54,12 @@
     </div>
 <!-- Affichage resultat recherche -->
 <div class="container mt-5">
-    <div class="row text-center border justify-content-around">
+    <div class="row text-center justify-content-around">
             <?php
                 foreach ($showCreaturesInfo as $creature) {
                 ?><div class="col-4">
-                        <a href="index.php?content=creature&id=<?= $creature->id?>">
-                            <img class="img-fluid border <?= $creature->id_r3f3r0_diet == 1 ? 'border-danger' : ($creature->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?>" style="height: 150px" src="<?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
+                        <a href="index.php?content=creature&id=<?= $creature->id ?>">
+                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border <?= $creature->id_r3f3r0_diet == 1 ? 'border-danger' : ($creature->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?>" style="height: 150px" src="<?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
                             <p><?= isset($creature->name) ? $creature->name : '' ?></p>
                         </a>
                 </div><?php
