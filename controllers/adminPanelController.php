@@ -1,4 +1,4 @@
 <?php
 $user = new user();
 $showUserInfo = $user->getAllUsersInfos();
-$showSingleUser = $user->getUserInfos();
+$showSingleUser = $user->getUserInfosAsAdmin(2);

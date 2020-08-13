@@ -83,6 +83,19 @@ background-color: #7FC64E;
 
 /****** FIN PAGE PROFIL ******/
 
+/****** PAGE ADMINISTRATION ******/
+
+/* fait que les modales prennent la taille du contenu en largeur */
+body .modal-dialog {
+    max-width: 100%;
+    width: auto !important;
+    display: inline-block;
+}
+/* place la modale au centre de la vue */
+.modal {
+    text-align: center;
+}
+
 /** MEDIA QUERIES **/
 @media (max-width: 768px){
     #headerBG{

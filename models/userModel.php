@@ -1,6 +1,7 @@
 <?php
 class user
 {
+    public $id = 0;
     public $username = '';
     public $role = 3;
     public $mail = '';
@@ -52,6 +53,25 @@ class user
         ');
         return $userInfosQuery->fetch(PDO::FETCH_OBJ);
     }
+
+    ##### Méthodes admin #####
+
+    public function getUserInfosAsAdmin($id){
+        $userInfosQuery = $this->db->query(
+            'SELECT
+                `id`
+                ,`username`
+                ,`mail`
+                ,DATE_FORMAT(`inscriptionDate`, \'%d/%m/%Y\') AS `inscDate`
+            FROM
+                `r3f3r0_users`
+            WHERE
+                `id`=' . $id . '
+        ');
+        return $userInfosQuery->fetch(PDO::FETCH_OBJ);
+    }
+
+    ##########################
 
     //permet d'editer le nom d'utilisateur et le mail
     public function editUserInfo(){
