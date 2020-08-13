@@ -49,7 +49,7 @@ class user
             FROM
                 `r3f3r0_users`
             WHERE
-                `id`= 2
+                `id`= 3
         ');
         return $userInfosQuery->fetch(PDO::FETCH_OBJ);
     }
@@ -79,7 +79,7 @@ class user
             'UPDATE
                 `r3f3r0_users`
             SET `username` = :username, `mail` = :mail
-            WHERE `id` = 1
+            WHERE `id` = 3
             ');
         $userEditInfos->bindvalue(':username', $this->username, PDO::PARAM_STR);
         $userEditInfos->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
@@ -92,7 +92,7 @@ class user
             'UPDATE
                 `r3f3r0_users`
             SET `password` = :pass
-            WHERE `id` = 1
+            WHERE `id` = 3
             ');
         $userEditPW->bindvalue(':pass', $this->password, PDO::PARAM_STR);
         return $userEditPW->execute();
@@ -105,7 +105,7 @@ class user
                 `password`
             FROM
                 `r3f3r0_users`
-            WHERE `id` = 1
+            WHERE `id` = 3
             ');
         return $userPassword->fetch(PDO::FETCH_OBJ);
     }
@@ -115,7 +115,7 @@ class user
             'DELETE FROM 
                 `r3f3r0_users`
             WHERE
-                `id` = 1
+                `id` = 3
             ');
             return $userToRemove->execute();
     }

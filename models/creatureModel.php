@@ -18,6 +18,7 @@ class creature
     public $weight = 0;
     public $predatory = '';
     public $diet = '';
+
     private $db = NULL;
 
     //créé une fonction magique pour me connecter a ma BDD facilement entre chaque methodes
@@ -42,8 +43,7 @@ class creature
             WHERE 
                 `id` = '. $id .'
             ');
-            $data = $creatureQuery->fetch(PDO::FETCH_OBJ);
-            return $data;
+            return $creatureQuery->fetch(PDO::FETCH_OBJ);
     }
 
     //récupère les infos de toutes les creatures pour afficher la liste
@@ -61,8 +61,7 @@ class creature
                 `r3f3r0_creatures` AS `crea`
             INNER JOIN `r3f3r0_period` AS `per` ON `id_r3f3r0_period` = `id_period`
             ');
-            $data = $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
-            return $data;
+            return $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
     //récupère uniquement les infos dont j'ai besoin pour mon filtrage
@@ -73,8 +72,25 @@ class creature
             FROM
                  `r3f3r0_period`
             ');
-            $data = $creatureQuery->fetchAll(PDO::FETCH_OBJ);
-            return $data;
+        return $creatureQuery->fetchAll(PDO::FETCH_OBJ);
+            
+    }
+
+    public function getLatestCreatures(){
+        $latestCreatureQuery = $this->db->query(
+            'SELECT
+                `crea`.`id`
+                ,`id_r3f3r0_diet`
+                ,`crea`.`name`
+                ,`miniImage`
+                ,`addDate`
+                ,`description`
+            FROM 
+                `r3f3r0_creatures` AS `crea`
+            ORDER BY `addDate` ASC
+            LIMIT 2
+            ');
+            return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
 }
 

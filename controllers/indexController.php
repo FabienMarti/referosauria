@@ -29,7 +29,7 @@ function generateBreadcrumb($crumbsArray){?>
                         break;
                     }else{
                     //créé une 'li' pour chaque entrée du tableau avec noms et urls
-                    ?><li class="breadcrumb-item active"><a href="<?= $url ?>"><?= $name ?></a></li><?php
+                    ?><li class="breadcrumb-item active"><a class="breadcrumbLink" href="<?= $url ?>"><?= $name ?></a></li><?php
                     }   
                 } 
             ?>

@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include 'controllers/indexController.php';
+    include_once 'controllers/indexController.php';
 ?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
@@ -17,7 +17,7 @@
 <body>
 <header class="container-fluid p-0 m-0">
         <!-- BG + Titre -->
-        <div id="headerBG" class="row">
+        <div id="headerBG" class="row m-0">
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
                 <h1>REFEROSAURIA</h1>
             </div>
@@ -44,16 +44,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?content=home"><i class="fas fa-home"></i></a>
+                            <a class="nav-link text-white" href="index.php?content=home"><i class="fas fa-home"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?content=dinoList">Liste des dinosaures</a>
+                            <a class="nav-link text-white" href="index.php?content=dinoList">Liste des dinosaures</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="index.php?content=discover">Découvrir</a>
+                            <a class="nav-link text-white" href="index.php?content=discover">Découvrir</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Contribuer
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
@@ -62,7 +62,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Jeux
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
@@ -71,7 +71,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?content=forum">Forum</a>
+                            <a class="nav-link  text-white" href="index.php?content=forum">Forum</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -89,20 +89,28 @@
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    FORMULAIRE
-                    <a href="views/login.php" type="button" class="btn btn-primary text-right">Connexion</a>
-                </div>
-                <div class="modal-footer">
-                    <a class="" href="index.php?content=passwordRecovery">Mot de passe oublié</a>
-                    
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"><u>Se connecter</u></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <label for="username">Nom d'utilisateur : </label>
+                                <input class="form-control" type="text" id="username" name="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="pass">Mot de passe : </label>
+                                <input class="form-control" type="password" id="pass" name="pass" />
+                                <a href="index.php?content=passwordRecovery">Mot de passe oublié ?</a>
+                            </div>
+                            <div class="text-center">
+                                <a href="views/login.php" type="submit" class="btn btn-primary">Connexion</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

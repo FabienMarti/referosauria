@@ -1,7 +1,10 @@
-
-        <div class="row">
+<?php 
+include 'models/creatureModel.php';
+include 'controllers/homeController.php';
+?>  <div class="container-fluid">
+        <div class="row justify-content-around">
             <!--Les derniers posts-->
-            <div id="recentPostList" class="col-md-2 offset-md-1 border">
+            <div id="recentPostList" class="col-md-2 border">
                 <p class="h4">Les derniers posts</p>
                 <ul>
                     <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
@@ -50,32 +53,20 @@
                 </div>
             </div>
         </div>
+    </div>
     <section class="container mt-5">
         <h2 class="text-center">Dernières créatures</h2>
-        <div class="row border border-danger my-3">
-            <div class="col-md-4 text-center my-auto"><img style="width: 50%" src="assets/img/rexHead.png" alt="tête de Trex" title="Tyrannosaurus" /></div>
-            <div class="col-md-8 my-aut text-justify">
-                <p class="h4 text-center"><a href="pageTyrannosaurus.html">Tyrannosaurus</a></p>
-                <p>
-                    Tyrannosaurus rex est l'un des plus grands carnivores ayant vécu sur Terre. Le plus grand spécimen complet (mais pas le plus grand spécimen) découvert à ce jour, répertorié
-                    sous le code FMNH PR2081 et surnommé Sue, du nom de la paléontologue Sue Hendrickson, mesure 12,8 mètres de long et 4 mètres de haut au niveau des hanches.<br><br>Si
-                    Tyrannosaurus rex était plus grand qu'Allosaurus, un autre théropode bien connu du Jurassique, il était peut-être légèrement moins imposant que Spinosaurus et Giganotosaurus,
-                    deux carnivores du Crétacé.
-                </p>
-            </div>
-        </div>
-        <div class="row border border-success my-3">
-            <div class="col-md-4 text-center my-auto"><img style="width: 50%" src="assets/img/parasaurolophusHead.jpg" alt="tête de Parasaurolophus" title="Parasaurolophus" /></div>
-            <div class="col-md-8 my-aut text-justify">
-                <p class="h4 text-center"><a href="pageParasaurolophus.html">Parasaurolophus</a></p>
-                <p>
-                    Comme pour de nombreux dinosaures, le squelette de Parasaurolophus n'est pas connu dans sa totalité. Sa morphologie n'est donc pas exactement connue. La longueur du spécimen
-                    type de P. walkeri est estimée à 9,50 m pour un crâne mesurant environ 1,60 m de long (crête incluse), alors que celui de P. tubicen est estimé à plus de 2 m ce qui indique un
-                    animal plus grand. Sa masse est estimée à 2,5 tonnes. Le seul membre antérieur connu du spécimen type est relativement court pour un hadrosaure, avec une petite mais large
-                    omoplate. Ceci tend à montrer que les hadrosaures descendent d'animaux bipèdes. Le fémur de P. walkeri mesure 103 cm, et est très robuste par rapport à sa longueur, comparé aux
-                    autres hadrosaures. L'humérus et le bassin sont aussi très robustes. Parasaurolophus a la crête la plus longue de tous les hadrosauridés, puisqu'elle mesure environ 1,80 mètre
-                    de long.
-                </p>
-            </div>
-        </div>
+       
+            <?php 
+                foreach ($showLatestCreatureInfos as $crea) { ?>
+                 <div class="mt-1 row border <?= $crea->id_r3f3r0_diet == 1 ? 'border-danger' : ($crea->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?>">
+                        <div class="col-md-4 text-center my-auto">
+                            <img class="img-fluid" style="width: 50%" src="<?= $crea->miniImage ?>" alt="tête de <?= $crea->name ?>" title="<?= $crea->name ?>" />
+                        </div>
+                        <div class="col-md-8 text-justify">
+                            <p class="h4 text-center"><a href="index.php?content=creature&id=<?= $crea->id ?>"><?= $crea->name ?></a></p>
+                            <p><?= $crea->description ?></p>
+                        </div>
+                    </div>
+            <?php } ?>
     </section>
