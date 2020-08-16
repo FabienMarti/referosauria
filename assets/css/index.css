@@ -1,9 +1,6 @@
 #mainNav, footer{
     background-color: #697A21 !important;
 }
-#mainNav a {
-    color: white;
-}
 
 #changeText{
     font-size: 20px;
@@ -20,6 +17,10 @@
 .filter{
     background-color: #4F5165;
 }
+.breadcrumbLink{
+    color: white; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
 .filter a, .mailEnvelope a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
@@ -35,7 +36,6 @@
 #mainTitle{
     height: 195px;
 }
-
 
 #headerBG{
     background-image: url('../img/dinosaurBannerBG.png');
@@ -86,15 +86,15 @@ background-color: #7FC64E;
 /****** PAGE ADMINISTRATION ******/
 
 /* fait que les modales prennent la taille du contenu en largeur */
-body .modal-dialog {
+/* body .modal-dialog {
     max-width: 100%;
     width: auto !important;
     display: inline-block;
-}
+} */
 /* place la modale au centre de la vue */
-.modal {
+/* .modal {
     text-align: center;
-}
+} */
 
 /** MEDIA QUERIES **/
 @media (max-width: 768px){

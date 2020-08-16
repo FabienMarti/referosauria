@@ -7,12 +7,24 @@ include 'controllers/profilController.php' ?>
         <nav id="profilNav" class="col-3 border border-dark">
             <p class="text-center h4">Bonjour <?= $showLightUserInfo->username ?></p>
             <p>Vous êtes inscrits depuis le : </br><?= $showLightUserInfo->inscDate ?></p>
-            <ul class="p-2">
-                <li><a href="index.php?content=profil&profilContent=infos">Mes informations</a></li>
-                <li><a href="index.php?content=profil&profilContent=editPW">Changer le mot de passe</a></li>
-                <li><a href="#">Mes derniers posts</a></li>
-                <li><a href="index.php?content=profil&profilContent=deleteProfil" class="text-danger">Supprimer le compte</a></li>
-                <li><a href="views/logout.php" class="btn btn-danger">Déconnexion</a></li>
+            <ul class="p-2">   
+                <?php 
+                    if(in_array($_SESSION['role'],$roles)){
+                        foreach ($profilOptions as $link => $title) {
+                            switch ($title) {
+                                case 'Déconnexion':
+                                    ?><li><a href="<?= $link ?>" class="btn btn-danger"><?= $title ?></a></li><?php
+                                break;
+                                case 'Supprimer le compte':
+                                    ?><li><a href="<?= $link ?>" class="text-danger"><?= $title ?></a></li><?php
+                                break;
+                                default:
+                                ?><li><a href="<?= $link ?>"><?= $title ?></a></li><?php }   
+                            }
+                    }else{
+                        ?><p class="text-danger">Votre rôle est inexistant !</p><?php
+                    }
+                ?>
             </ul>
         </nav>
         <!-- Contenu changeant en fonction du menu selectionné -->

@@ -45,4 +45,3 @@ include_once 'controllers/profilControllers/deleteProfilController.php'
     </div>
 </form>
     <?php } ?>
-

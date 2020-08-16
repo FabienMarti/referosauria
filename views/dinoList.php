@@ -6,7 +6,7 @@
 <section class="container-fluid p-0">
 <!-- Filtrage recherche -->
     <div class="collapse p-5 filter" id="collapseExample">
-        <form method="GET" action="dinoList.php">
+        <form method="POST" action="">
             <div class="row my-1">
                 <!-- Filtrage période -->
                 <select class="form-control col" name="period">
@@ -20,11 +20,12 @@
                 <select class="form-control offset-1 col" name="diet">
                     <option value="" disabled selected>Choisissez l'alimentation</option> 
                     <?php
-                        foreach ($dinoType as $type) {
-                            ?><option value="<?= $type ?>"><?= $type ?></option><?php
+                        foreach ($dinoType as $id => $type) {
+                            ?><option value="<?= $id ?>"><?= $type ?></option><?php
                         }
                 ?></select> 
             </div>
+            <?php var_dump($_POST['diet']) ?>
             <div class="row">
                 <select class="form-control col" name="discoverer">
                     <option value="" disabled selected>Paléonthologue</option> 

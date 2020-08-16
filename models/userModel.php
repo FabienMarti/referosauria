@@ -10,6 +10,7 @@ class user
 
     private $db = NULL;
     
+    
     //créé une fonction magique pour me connecter a ma BDD facilement entre chaque methodes
     public function __construct()
     {
@@ -49,7 +50,7 @@ class user
             FROM
                 `r3f3r0_users`
             WHERE
-                `id`= 2
+                `id`= 3
         ');
         return $userInfosQuery->fetch(PDO::FETCH_OBJ);
     }
@@ -79,7 +80,7 @@ class user
             'UPDATE
                 `r3f3r0_users`
             SET `username` = :username, `mail` = :mail
-            WHERE `id` = 1
+            WHERE `id` = 3
             ');
         $userEditInfos->bindvalue(':username', $this->username, PDO::PARAM_STR);
         $userEditInfos->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
@@ -92,20 +93,20 @@ class user
             'UPDATE
                 `r3f3r0_users`
             SET `password` = :pass
-            WHERE `id` = 1
+            WHERE `id` = 3
             ');
         $userEditPW->bindvalue(':pass', $this->password, PDO::PARAM_STR);
         return $userEditPW->execute();
     }
 
-
+    //recupere le mdp utilisateur
     public function getCurrentPassword(){
         $userPassword = $this->db->query(
             'SELECT
                 `password`
             FROM
                 `r3f3r0_users`
-            WHERE `id` = 1
+            WHERE `id` = 3
             ');
         return $userPassword->fetch(PDO::FETCH_OBJ);
     }
@@ -115,7 +116,7 @@ class user
             'DELETE FROM 
                 `r3f3r0_users`
             WHERE
-                `id` = 1
+                `id` = 3
             ');
             return $userToRemove->execute();
     }
@@ -145,5 +146,20 @@ class user
         $data = $addUserSameQuery->fetch(PDO::FETCH_OBJ);
         return $data->isUserExist; 
     } 
+
+    public function connectUser($username){
+        $userDataQuery = $this->db->query(
+            'SELECT
+                `usr`.`id`
+                ,`username`
+                ,`password`
+                ,`rol`.`name`
+            FROM 
+                `r3f3r0_users` AS `usr`
+            INNER JOIN `r3f3r0_roles` AS `rol` ON `id_r3f3r0_roles` = `rol`.`id`
+            WHERE `username` =' . $username
+        );
+        return $userDataQuery->fetch(PDO::FETCH_OBJ);
+    }
 }
 
