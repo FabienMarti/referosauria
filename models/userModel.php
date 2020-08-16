@@ -10,6 +10,7 @@ class user
 
     private $db = NULL;
     
+    
     //créé une fonction magique pour me connecter a ma BDD facilement entre chaque methodes
     public function __construct()
     {
@@ -98,7 +99,7 @@ class user
         return $userEditPW->execute();
     }
 
-
+    //recupere le mdp utilisateur
     public function getCurrentPassword(){
         $userPassword = $this->db->query(
             'SELECT
@@ -145,5 +146,20 @@ class user
         $data = $addUserSameQuery->fetch(PDO::FETCH_OBJ);
         return $data->isUserExist; 
     } 
+
+    public function connectUser($username){
+        $userDataQuery = $this->db->query(
+            'SELECT
+                `usr`.`id`
+                ,`username`
+                ,`password`
+                ,`rol`.`name`
+            FROM 
+                `r3f3r0_users` AS `usr`
+            INNER JOIN `r3f3r0_roles` AS `rol` ON `id_r3f3r0_roles` = `rol`.`id`
+            WHERE `username` =' . $username
+        );
+        return $userDataQuery->fetch(PDO::FETCH_OBJ);
+    }
 }
 

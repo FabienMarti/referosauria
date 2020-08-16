@@ -92,5 +92,31 @@ class creature
             ');
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function filterCreaByDiet(){
+        $dietQuery = $this->db->query(
+            'SELECT 
+                `crea`.`name`
+                ,`miniImage`
+                ,`diet`.`name`
+            FROM
+              `r3f3r0_creatures` AS `crea`
+            INNER JOIN `r3f3r0_diet` AS `diet` ON `id_r3f3r0_diet` = `diet`.`id`
+            WHERE `diet`.`name` = \'Herbivore\'
+            ');
+    }
+
+    public function filterDino($diet){
+        $latestCreatureQuery = $this->db->query(
+            'SELECT
+                *
+            FROM 
+                `r3f3r0_creatures`
+            WHERE 
+                 `id_r3f3r0_diet` =' . $diet
+            );
+            return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
 }
 

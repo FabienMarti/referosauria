@@ -33,8 +33,3 @@ include 'controllers/profilController.php' ?>
         </section>
     </div>
 </div>
-<!-- <li><a href="index.php?content=profil&profilContent=infos">Mes informations</a></li>
-                <li><a href="index.php?content=profil&profilContent=editPW">Changer le mot de passe</a></li>
-                <li><a href="#">Mes derniers posts</a></li>
-                <li><a href="index.php?content=profil&profilContent=deleteProfil" class="text-danger">Supprimer le compte</a></li>
-                <li><a href="views/logout.php" class="btn btn-danger">Déconnexion</a></li> -->

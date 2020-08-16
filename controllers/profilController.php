@@ -2,7 +2,7 @@
 //gestion de l'affichage
 $user = new user();
 //roles = Membre, Administrateur, Modérateur
-$_SESSION['role'] = 'Administrateur';
+$_SESSION['role'] = 'Membre';
 $roles = array('Administrateur', 'Membre', 'Modérateur');
 
 switch (htmlspecialchars($_SESSION['role'])) {
@@ -38,9 +38,6 @@ switch (htmlspecialchars($_SESSION['role'])) {
         $showLightUserInfo = $user->getUserInfos();
     break;
     default:
-        
-
-
 }
 
 

@@ -25,8 +25,7 @@
                 switch ($_SESSION['isConnected']) {
                 case true:
                     ?><a class="btn btn-primary" href="index.php?content=profil">Profil</a>
-                    <a class="btn btn-primary" href="views/logout.php">Déconnexion</a>
-                    <a class="btn btn-danger" href="index.php?content=adminPanel">Panel d'administration</a><?php
+                    <a class="btn btn-primary" href="views/logout.php">Déconnexion</a><?php
                 break;
                 default:
                     ?><a class="btn btn-primary text-white" href="index.php?content=registration">S'inscrire</a>
@@ -86,34 +85,7 @@
     <?php include $content ?>
 </main>
 <!-- Modale Connexion -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"><u>Se connecter</u></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="POST">
-                            <div class="form-group">
-                                <label for="username">Nom d'utilisateur : </label>
-                                <input class="form-control" type="text" id="username" name="username" />
-                            </div>
-                            <div class="form-group">
-                                <label for="pass">Mot de passe : </label>
-                                <input class="form-control" type="password" id="pass" name="pass" />
-                                <a href="index.php?content=passwordRecovery">Mot de passe oublié ?</a>
-                            </div>
-                            <div class="text-center">
-                                <a href="views/login.php" type="submit" class="btn btn-primary">Connexion</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php include 'views/connectionModal.php' ?>
 <!-- Modale footer -->
     <?php include 'views/footerModal.php' ?>
 <!-- Footer -->

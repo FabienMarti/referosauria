@@ -1,4 +1,4 @@
-<?php
+<?php  
 include 'controllers/addDinoController.php';
 generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
@@ -43,28 +43,22 @@ generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
       <select class="form-control col" name="period">
         <option value="" disabled selected>Selectionnez</option>
         <?php
-        foreach ($dinoPeriod as $period) {
-        ?><option value="<?= $period ?>"><?= $period ?></option><?php
-                                                                      }
-                                                                        ?>
+            foreach ($dinoPeriod as $period) {
+        ?><option value="<?= $period ?>"><?= $period ?></option><?php } ?>
       </select>
       <label for="period">Habitat</label>
       <select class="form-control col" name="period">
         <option value="" disabled selected>Selectionnez</option>
         <?php
         foreach ($environmentArray as $area) {
-        ?><option value="<?= $area ?>"><?= $area ?></option><?php
-                                                                      }
-                                                                        ?>
+        ?><option value="<?= $area ?>"><?= $area ?></option><?php } ?>
       </select>
       <label for="diet">Choisissez l'alimentation : </label>
       <select class="form-control col" name="diet">
         <option value="" disabled selected>Selectionnez</option>
         <?php
         foreach ($dinoType as $type) {
-        ?><option value="<?= $type ?>"><?= $type ?></option><?php
-                                                                    }
-                                                                      ?>
+        ?><option value="<?= $type ?>"><?= $type ?></option><?php } ?>
       </select>
       <div class="form-group">
         <label for="discoverer">Paléonthologue à l'origine de la découverte : </label>
