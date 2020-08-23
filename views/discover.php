@@ -1,4 +1,7 @@
 <?php 
+    $pageTitle = 'Découvrir';
+    include 'parts/header.php';
+    include '../controllers/breadcrumb.php';
     generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <!-- Menu Nav local -->
@@ -35,7 +38,7 @@
   </nav>
 <!-- La Paléonthologie -->
   <section id="paleonthology" class="container-fluid mx-2">
-    <?php include 'views/paleonthology.php' ?>
+    <?php include 'parts/paleonthology.php' ?>
   </section>
 <!-- Les Dinosaures -->
   <section id="dinosaurs">

@@ -10,9 +10,6 @@ include_once 'controllers/profilControllers/deleteProfilController.php'
         <h1 class="text-danger text-center">Votre compte à bien été supprimé</h1>
         <a href="index.php">Retour à l'accueil</a>
         
-
-
-
     <?php }else{ ?>
 <form action="" method="POST">
     <h2 class="text-center">Suppression de compte</h2>

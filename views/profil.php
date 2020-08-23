@@ -1,6 +1,8 @@
 <?php 
-include 'models/userModel.php';
-include 'controllers/profilController.php' ?>
+$pageTitle = 'Profil';
+include 'parts/header.php';
+include '../models/userModel.php';
+include '../controllers/profilController.php' ?>
 <div class="container">
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
@@ -33,3 +35,4 @@ include 'controllers/profilController.php' ?>
         </section>
     </div>
 </div>
+<?php include 'parts/footer.php' ?>

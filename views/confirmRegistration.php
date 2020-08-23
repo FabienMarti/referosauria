@@ -1,4 +1,6 @@
 <?php 
+$pageTitle = 'Confirmation d\'enregistrement';
+include 'parts/header.php';
     generateBreadcrumb(array('index.php' => 'Referosauria','registration.php' => 'Inscription' , 'final' => $pageTitle));
 ?>
     <section>

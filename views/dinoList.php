@@ -1,7 +1,10 @@
 <?php 
-    include 'models/creatureModel.php';
-    include 'controllers/dinoListController.php';
-    generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
+    $pageTitle = 'Liste des créatures';
+    include 'parts/header.php';
+    include '../models/creatureModel.php';
+    include '../controllers/dinoListController.php';
+    include '../controllers/breadcrumb.php';
+    generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <section class="container-fluid p-0">
 <!-- Filtrage recherche -->
@@ -59,8 +62,8 @@
             <?php
                 foreach ($showCreaturesInfo as $creature) {
                 ?><div class="col-4">
-                        <a href="index.php?content=creature&id=<?= $creature->id ?>">
-                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border <?= $creature->id_r3f3r0_diet == 1 ? 'border-danger' : ($creature->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?>" style="height: 150px" src="<?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
+                        <a href="creature.php?id=<?= $creature->id ?>">
+                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border <?= $creature->id_r3f3r0_diet == 1 ? 'border-danger' : ($creature->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?>" style="height: 150px" src="<?= $linkModif ?><?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
                             <p><?= isset($creature->name) ? $creature->name : '' ?></p>
                         </a>
                 </div><?php
@@ -78,3 +81,4 @@
         }
     }
 </script>
+<?php include 'parts/footer.php' ?>

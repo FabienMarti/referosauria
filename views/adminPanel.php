@@ -1,4 +1,6 @@
-<?php
+<?php 
+$pageTitle = 'Panel D\'administration';
+include 'parts/header.php';
 include 'models/userModel.php';
 include 'controllers/adminPanelController.php';
 $rolesArray = array('1' => 'Administrateur', '2' => 'Modérateur', '3' => 'Membre');

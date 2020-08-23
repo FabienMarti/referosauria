@@ -8,17 +8,4 @@ if(isset($_POST['sendConnect'])){
         
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
