@@ -40,11 +40,6 @@ switch (htmlspecialchars($_SESSION['role'])) {
     default:
 }
 
-
-
-
-
-
 // gestion du contenu
 $profilContentArray = array('infos' => 'Mon compte', 'editPW' => 'Modifier mot de passe', 'deleteProfil' => 'Suppression de compte');
 if(isset($_GET['profilContent'])){
@@ -53,7 +48,7 @@ if(isset($_GET['profilContent'])){
 
     if(isset($profilContentArray[$getProfilContent])){
         $pageTitle = $profilContentArray[$getProfilContent];
-        $profilContent = 'views/profil/' . $getProfilContent . '.php';  
+        $profilContent = 'views/profil/' . $getProfilContent . '.php';
     }else{
             $pageTitle = 'Mon compte';
             $profilContent = 'views/profil/infos.php';

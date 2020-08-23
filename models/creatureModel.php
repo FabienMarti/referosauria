@@ -32,17 +32,19 @@ class creature
     }
 
     //récupère les info de la creature en question (par rapport à l'ID)
-    public function getSingleDinoInfo($id){
+    public function getSingleDinoInfo(){
         //récupère dans ma BDD avec un query les informations dont j'ai besoin
         //récupère tout avec * dans ma table 'creatures' (car j'ai besoin de tout)
-        $creatureQuery = $this->db->query(
+        $creatureQuery = $this->db->prepare(
             'SELECT 
                 *
             FROM
                 `r3f3r0_creatures`
             WHERE 
-                `id` = '. $id .'
+                `id` = :id
             ');
+            $creatureQuery->bindvalue(':id', $this->id, PDO::PARAM_INT);
+            $creatureQuery->execute();  
             return $creatureQuery->fetch(PDO::FETCH_OBJ);
     }
 
@@ -106,6 +108,7 @@ class creature
             ');
     }
 
+    /* temporaire */
     public function filterDino($diet){
         $latestCreatureQuery = $this->db->query(
             'SELECT

@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    $_SESSION['isConnected'] = false;
     include_once 'controllers/indexController.php';
 ?>
 <!DOCTYPE html>
