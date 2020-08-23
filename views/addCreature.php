@@ -1,8 +1,13 @@
-<?php
+<?php 
+$pageTitle = 'Ajout créature';
+include 'parts/header.php';
+include '../controllers/addCreatureController.php';
 $dinoPeriod = array('1' => 'Trias inférieur','2' => 'Trias moyen', '3' => 'Trias supérieur', '4' => 'Jurassique inférieur', '5' => 'Jurassique moyen', '6' => 'Jurassique supérieur', '7' => 'Crétacé inférieur', '8' => 'Crétacé supérieur');
 $dinoType = array('Carnivore', 'Herbivore');
 $environmentArray = array('USA', 'europe');
 $categories = array('Dinosaure', 'Mammifère', 'Réptile marin', 'Réptile Volant', 'Autre');
+include '../controllers/breadcrumb.php';
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <div class="container border border-dark rounded p-5 mt-5">
     <form action="" method="post">
@@ -23,8 +28,8 @@ $categories = array('Dinosaure', 'Mammifère', 'Réptile marin', 'Réptile Volan
                 </div>
                 <!-- Image principale de la créature -->
                 <div class="form-group col-md-4">
-                    <label for="sectionImage">Image de la créature : </label>
-                    <input type="file" class="form-control-file" name="sectionImage" id="sectionImage" />
+                    <label for="imageUpload">Image de la créature : </label>
+                    <input type="file" class="form-control-file" name="imageUpload" id="imageUpload" />
                 </div> 
             </div>
         <div class="row justify-content-between">
@@ -80,3 +85,4 @@ $categories = array('Dinosaure', 'Mammifère', 'Réptile marin', 'Réptile Volan
         </div>
     </form>
 </div>
+<?php include 'parts/footer.php' ?>

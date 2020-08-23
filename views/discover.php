@@ -2,7 +2,7 @@
     $pageTitle = 'Découvrir';
     include 'parts/header.php';
     include '../controllers/breadcrumb.php';
-    generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
+    generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <!-- Menu Nav local -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -103,3 +103,4 @@
     }
   }
 </script>
+<?php include 'parts/footer.php' ?>

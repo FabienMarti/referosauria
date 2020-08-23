@@ -1,5 +1,7 @@
 <?php 
 $pageTitle = 'Contribuer';
 include 'parts/header.php';
-    generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => $pageTitle));
+include '../controllers/breadcrumb.php';
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
+<?php include 'parts/footer.php' ?>

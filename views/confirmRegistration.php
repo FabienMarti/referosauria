@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = 'Confirmation d\'enregistrement';
 include 'parts/header.php';
-    generateBreadcrumb(array('index.php' => 'Referosauria','registration.php' => 'Inscription' , 'final' => $pageTitle));
+    generateBreadcrumb(array('../index.php' => 'Referosauria','registration.php' => 'Inscription' , 'final' => $pageTitle));
 ?>
     <section>
         <h2 class="text-center"><u>Confirmation d'inscription</u></h2>
@@ -21,3 +21,4 @@ include 'parts/header.php';
         </div>
         <p>Recevoir à nouveau l'email de confirmation</p>
     </section>
+    <?php include 'parts/footer.php' ?>

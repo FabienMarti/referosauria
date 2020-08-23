@@ -23,7 +23,7 @@ include $linkModif . 'controllers/connectionController.php';
                                 <a href="index.php?content=passwordRecovery">Mot de passe oublié ?</a>
                             </div>
                             <div class="text-center">
-                                <a href="views/login.php" type="submit" name="sendConnect" class="btn btn-primary">Connexion</a>
+                                <a href="<?= $linkModif ?>views/login.php" type="submit" name="sendConnect" class="btn btn-primary">Connexion</a>
                             </div>
                         </form>
                     </div>

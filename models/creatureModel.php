@@ -25,7 +25,7 @@ class creature
     public function __construct()
     {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'fmarti', 'nekrose12');
+            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'root', '');
         } catch (Exception $error) {
             die($error->getMessage());
         }

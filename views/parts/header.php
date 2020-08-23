@@ -23,10 +23,10 @@
             </div>
             <div class="col-md-2 offset-md-2 my-auto text-center"><?php
                 if($_SESSION['isConnected'] == true){
-                    ?><a class="btn btn-primary" href="<?= $linkModif ?>profil.php">Profil</a>
+                    ?><a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php">Profil</a>
                     <a class="btn btn-primary" href="<?= $linkModif ?>views/logout.php">Déconnexion</a><?php
                 }else{
-                    ?><a class="btn btn-primary text-white" href="<?= $linkModif ?>registration.php">S'inscrire</a>
+                    ?><a class="btn btn-primary text-white" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
                     <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
                 }?>
             </div>
@@ -54,7 +54,7 @@
                                 Contribuer
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                <a class="dropdown-item" href="<?= $linkModif ?>views/addDino.php">Déposer un article</a>
+                                <a class="dropdown-item" href="<?= $linkModif ?>views/addCreature.php">Déposer un article</a>
                                 <a class="dropdown-item" href="<?= $linkModif ?>views/contribute">Faire un don</a>
                             </div>
                         </li>

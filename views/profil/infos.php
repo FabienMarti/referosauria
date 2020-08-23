@@ -1,6 +1,6 @@
 <?php 
-include_once 'models/userModel.php';
-include_once 'controllers/profilControllers/infosController.php' 
+include_once '../models/userModel.php';
+include_once '../controllers/profilControllers/infosController.php' 
 ?>
 <p class="text-center text-success"><?= isset($succesEdit) ? $succesEdit : '' ?></p>
 <form action="" method="POST">

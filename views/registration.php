@@ -1,9 +1,10 @@
 <?php 
 $pageTitle = 'Enregistrement';
 include 'parts/header.php';
-include 'models/userModel.php';
-include 'controllers/registrationController.php';
-generateBreadcrumb(array('index.php' => 'Referosauria', 'final' => 'Inscription'));
+include '../models/userModel.php';
+include '../controllers/registrationController.php';
+include '../controllers/breadcrumb.php';
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
 <h2 class="text-center"><u>Inscription</u></h2>
 <form class="container border border-dark p-3 rounded" action="" method="POST">
@@ -100,3 +101,4 @@ function mailCheck(mail){
     
 }
 </script>
+<?php include 'parts/footer.php' ?>

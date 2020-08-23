@@ -143,3 +143,4 @@
         </div>
     </div>
 </section>
+<?php include 'parts/footer.php' ?>
