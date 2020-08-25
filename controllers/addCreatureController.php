@@ -10,6 +10,9 @@ $showCreatureInfo = $creatureModel->getSingleDinoInfo();
 //Tableau d'erreurs
 $formErrors = array();
 
+
+
+
 //Tableaux menu déroulants
 $dinoPeriod = array('1' => 'Trias inférieur', '2' => 'Trias moyen', '3' => 'Trias supérieur', '4' => 'Jurassique inférieur', '5' => 'Jurassique moyen', '6' => 'Jurassique supérieur', '7' => 'Crétacé inférieur', '8' => 'Crétacé supérieur');
 $dinoType = array('1' => 'Carnivore', '2' => 'Herbivore', '3' => 'Piscivore');
@@ -46,6 +49,7 @@ if(isset($_POST['sendNewCrea'])){
         //test si l'élement extention upload se trouve dans le tableau extention autorisées
         if(in_array(strtolower($extensionUpload), $extensionsWhiteList)){
             $imageUpload =  'Vous avez envoyé ' . $_FILES['imageUpload']['name'] . ' Il s\'agit d\'un fichier .' . $extensionUpload;
+            $creatureModel->mainImage = '../assets/TEST';
         }else{
             $formErrors['imageUpload'] = 'Les formats acceptés sont : ' . implode(', ', $extensionsWhiteList);
         }
@@ -69,7 +73,7 @@ if(isset($_POST['sendNewCrea'])){
     //Contrôle de l'habitat
     if(!empty($_POST['habitat'])) {
         if(in_array($_POST['habitat'], $environmentArray)) {
-            $environment = htmlspecialchars($_POST['habitat']);
+            $creatureModel->environment = htmlspecialchars($_POST['habitat']);
         }else{
             $formErrors['habitat'] = 'Une erreur est survenue';
         }
@@ -97,7 +101,7 @@ if(isset($_POST['sendNewCrea'])){
             //Met la chaine de caracteres en minuscules
             $lowerCaseName = strtolower(htmlspecialchars($_POST['discoverer']));
             //Passe la 1ere lettre de chaque mot en Majuscule
-            $creatureModel->discoverer = ucwords($lowerCaseName, ' ');
+            $creatureModel->discovery = ucwords($lowerCaseName, ' ');
         }else{
             $formErrors['discoverer'] = 'Format Incorrect, 2 lettres minimum, aucun chiffre';
         }
