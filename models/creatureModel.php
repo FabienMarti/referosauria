@@ -25,7 +25,7 @@ class creature
     public function __construct()
     {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'root', '');
+            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'fmarti', 'nekrose12');
         } catch (Exception $error) {
             die($error->getMessage());
         }
@@ -121,5 +121,24 @@ class creature
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function addCreatureSimple(){
+        $addCreatureQuery = $this->db->prepare(
+            'INSERT INTO 
+                `r3f3r0_creatures` 
+                (`name`, `addDate`, `mainImage`, `description`, `environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `id_r3f3r0_discoverer`)
+            VALUES 
+                (`:name`, :addDate, :mainImage, `:description`, `environment`, :id_r3r3f0_diet, :id_r3f3r0_categories, :id_r3f3r0_period, :id_r3f3r0_discoverer);
+            ');
+            $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':addDate', date('Y-m-d', time()), PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':description', $this->description, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':id_r3r3f0_diet', $this->diet, PDO::PARAM_INT);
+            $addCreatureQuery->bindValue(':id_r3f3r0_categories', $this->type, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':id_r3f3r0_period', $this->period, PDO::PARAM_INT);
+            $addCreatureQuery->bindValue(':id_r3f3r0_discoverer', $this->discoverer, PDO::PARAM_INT);
+            return $addCreatureQuery->execute();
+    }
 }
 
