@@ -72,7 +72,7 @@ class creature
             'SELECT 
                `name`, `id_period`
             FROM
-                 `r3f3r0_period`
+                `r3f3r0_period`
             ');
         return $creatureQuery->fetchAll(PDO::FETCH_OBJ);
             
