@@ -83,48 +83,48 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="discoverer">Paléonthologue  : </label>
                 <input type="text" placeholder="Ex: Allan Grant" name="discoverer" id="discoverer" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['discoverer']) ? 'value="' . $_POST['discoverer'] . '"' : '' ?> />
-            <?php if (isset($formErrors['discoverer'])) { ?>
-                <p class="text-danger text-center"><?= $formErrors['discoverer'] ?></p>
-            <?php } ?>
-            </div>
-        </div>
-        <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
-            <label for="description">Description : </label>
-            <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
-            <?php if (isset($formErrors['description'])) { ?>
-                <p class="text-danger text-center"><?= $formErrors['description'] ?></p>
-            <?php } ?>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="source">Source : </label>
-                    <input type="text" class="form-control col" maxlength="50" placeholder="Ex: wikipedia "name="source" id="source" />
-                </div>
-                <div class="col-md-8">
-                    <label for="sourceLink">Lien de la source : </label>
-                    <input type="text" class="form-control col" maxlength="255" placeholder="Ex: https://wikipedia/tarteaucitron" name="sourceLink" id="sourceLink" />
+                <?php if (isset($formErrors['discoverer'])) { ?>
+                    <p class="text-danger text-center"><?= $formErrors['discoverer'] ?></p>
+                <?php } ?>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Prévisualiser" name="preview" />
-            <input type="submit" class="btn btn-primary" value="Envoyer" name="sendNewCrea" />
-        </div>
-    </form>
-</div>
-<!-- Prévisualisation -->
-<div class="container-fluid d-none">
-<h1 class="text-center my-5"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>
-
-    <div class="row">
-    <div class="col-md-4 border border-dark m-auto">
-            <img class="img-fluid" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
-        </div>
-        <div class="col-md-5 m-auto">
-            <p class="h5 text-center">Description</p>
-            <p><?= $showCreatureInfo->description ?></p>
-<!-- Probleme BDD pour les sources -->
-            <p class="text-right">Source : WIKIPEDIA</p>
-        </div>  
+            <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
+                <label for="description">Description : </label>
+                <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
+                <?php if (isset($formErrors['description'])) { ?>
+                    <p class="text-danger text-center"><?= $formErrors['description'] ?></p>
+                <?php } ?>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="source">Source : </label>
+                        <input type="text" class="form-control col" maxlength="50" placeholder="Ex: wikipedia "name="source" id="source" />
+                    </div>
+                    <div class="col-md-8">
+                        <label for="sourceLink">Lien de la source : </label>
+                        <input type="text" class="form-control col" maxlength="255" placeholder="Ex: https://wikipedia/tarteaucitron" name="sourceLink" id="sourceLink" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Prévisualiser" name="preview" />
+                <input type="submit" class="btn btn-primary" value="Envoyer" name="sendNewCrea" />
+            </div>
+        </form>
     </div>
-</div>
+<!-- Prévisualisation -->
+    <div class="container-fluid d-none">
+        <h1 class="text-center my-5"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>
+
+            <div class="row">
+            <div class="col-md-4 border border-dark m-auto">
+                    <img class="img-fluid" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
+                </div>
+                <div class="col-md-5 m-auto">
+                    <p class="h5 text-center">Description</p>
+                    <p><?= $showCreatureInfo->description ?></p>
+        <!-- Probleme BDD pour les sources -->
+                    <p class="text-right">Source : WIKIPEDIA</p>
+                </div>  
+            </div>
+    </div>
 <?php include 'parts/footer.php' ?>
