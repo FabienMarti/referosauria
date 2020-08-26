@@ -3,39 +3,42 @@
 $regexName = '%^[A-ÿ_\-\ ]{2,30}$%';
 
 //Tableau des extensions de fichier autorisées
-$extensionsWhiteList = array('jpg', 'png');
+$fileExtension = array('jpg', 'png');
 
-$creatureModel = new creature();
-$showCreatureInfo = $creatureModel->getSingleDinoInfo();
 //Tableau d'erreurs
 $formErrors = array();
 
+$creature = new creature();
+//appel des méthodes
+$showCreatureInfo = $creature->getSingleDinoInfo();
+$showDiets = $creature->getDiets();
+$showCategories = $creature->getCategories();
+$showPeriods = $creature->getPeriod();
+$showDiscoverers = $creature->getDiscoverer();
 
 
 
 //Tableaux menu déroulants
-$dinoPeriod = array('1' => 'Trias inférieur', '2' => 'Trias moyen', '3' => 'Trias supérieur', '4' => 'Jurassique inférieur', '5' => 'Jurassique moyen', '6' => 'Jurassique supérieur', '7' => 'Crétacé inférieur', '8' => 'Crétacé supérieur');
-$dinoType = array('1' => 'Carnivore', '2' => 'Herbivore', '3' => 'Piscivore');
 $environmentArray = array('Amérique du Nord', 'Amérique du Sud', 'Europe', 'Asie', 'Afrique', 'Océanie', 'Antartique' );
-$categories = array('Dinosaure', 'Mammifère', 'Réptile marin', 'Réptile Volant', 'Autre');
 
 if(isset($_POST['sendNewCrea'])){
  
-    //Contrôle de la radio typeSelect
-    if(!empty($_POST['typeSelect'])) {
-        if(in_array($_POST['typeSelect'], $categories)) {
-            $creatureModel->type = htmlspecialchars($_POST['typeSelect']);               
-        }else {
-            $formErrors['typeSelect'] = 'Merci de sélectionner un type de créature';
-        }
+
+#########################################################################################
+
+    //Contrôle de la radio category
+    if(!empty($_POST['category'])) {
+
+        $creature->type = intval(htmlspecialchars($_POST['category']));     
+
     }else {
-        $formErrors['typeSelect'] = 'Veuillez sélectionner un type de créature';
+        $formErrors['category'] = 'Veuillez sélectionner un type de créature';
     }
 
     //Contrôle du Nom de la creature
     if(isset($_POST['creaName'])){
         if(preg_match($regexName, $_POST['creaName'])){
-            $creatureModel->name = htmlspecialchars($_POST['creaName']);
+            $creature->name = htmlspecialchars($_POST['creaName']);
         }else{
             $formErrors['creaName'] = 'Format Incorrect, 2 lettres minimum, aucun chiffre';
         }
@@ -44,28 +47,42 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     //Contrôle de l'ajout de fichier
-    if(isset($_FILES['imageUpload'])) {
-        $extensionUpload = pathinfo($_FILES['imageUpload']['name'], PATHINFO_EXTENSION); // recupere le nom du fichier
-        //test si l'élement extention upload se trouve dans le tableau extention autorisées
-        if(in_array(strtolower($extensionUpload), $extensionsWhiteList)){
-            $imageUpload =  'Vous avez envoyé ' . $_FILES['imageUpload']['name'] . ' Il s\'agit d\'un fichier .' . $extensionUpload;
-            $creatureModel->mainImage = '../assets/TEST';
-        }else{
-            $formErrors['imageUpload'] = 'Les formats acceptés sont : ' . implode(', ', $extensionsWhiteList);
+    if (!empty($_FILES['imageUpload']) && $_FILES['imageUpload']['error'] == 0) {
+        // On stock dans $fileInfos les informations concernant le chemin du fichier.
+        $fileInfos = pathinfo($_FILES['imageUpload']['name']);
+        // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
+        if (in_array($fileInfos['extension'], $fileExtension)) {
+          //On définit le chemin vers lequel uploader le fichier
+          $path = '../uploads/';
+          //On crée une date pour différencier les fichiers
+          $date = date('Y-m-d_H-i-s');
+          //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
+          $fileNewName = htmlspecialchars($_POST['creaName']) . '_' . $date;
+          //On stocke dans une variable le chemin complet du fichier (chemin + nouveau nom + extension une fois uploadé) Attention : ne pas oublier le point
+          $fileFullPath = $path . $fileNewName . '.' . $fileInfos['extension'];
+          //move_uploaded_files : déplace le fichier depuis son emplacement temporaire ($_FILES['file']['tmp_name']) vers son emplacement définitif ($fileFullPath)
+          if (move_uploaded_file($_FILES['imageUpload']['tmp_name'], $fileFullPath)) {
+            //On définit les droits du fichiers uploadé (Ici : écriture et lecture pour l'utilisateur apache, lecture uniquement pour le groupe et tout le monde)
+            chmod($fileFullPath, 0644);
+            $creature->mainImage = $fileFullPath;
+          } else {
+            $formErrors['file'] = 'Votre fichier ne s\'est pas téléversé correctement';
+          }
+        } else {
+          $formErrors['file'] = 'Votre fichier n\'est pas du format attendu';
         }
-    }else{
-        $formErrors['imageUpload'] = 'Veuillez sélectionner un fichier';
-    }
+      } else {
+        $formErrors['file'] = 'Veuillez selectionner un fichier';
+      }
+
 
     ##### Contrôle des menus déroulants #####
-
+    #########################################################################################
     //Contrôle de la période
     if(!empty($_POST['period'])) {
-        if(in_array($dinoPeriod[$_POST['period']], $dinoPeriod)) {
-            $creatureModel->period = htmlspecialchars($_POST['period']);
-        }else{
-            $formErrors['period'] = 'Une erreur est survenue';
-        }
+     
+                $creature->period = intval(htmlspecialchars($_POST['period']));            
+          
     }else{
         $formErrors['period'] = 'Veuillez sélectionner une période';
     }
@@ -73,7 +90,7 @@ if(isset($_POST['sendNewCrea'])){
     //Contrôle de l'habitat
     if(!empty($_POST['habitat'])) {
         if(in_array($_POST['habitat'], $environmentArray)) {
-            $creatureModel->environment = htmlspecialchars($_POST['habitat']);
+            $creature->environment = htmlspecialchars($_POST['habitat']);
         }else{
             $formErrors['habitat'] = 'Une erreur est survenue';
         }
@@ -83,12 +100,13 @@ if(isset($_POST['sendNewCrea'])){
 
     //rechercher à l'index #######################################
     //Contrôle alimentation
+    #########################################################################################
     if(!empty($_POST['diet'])) {
-        if(in_array($dinoType[$_POST['diet']], $dinoType)) {
-            $creatureModel->diet = htmlspecialchars($_POST['diet']);
-        }else{
-            $formErrors['diet'] = 'Une erreur est survenue';
-        }
+       
+                $creature->diet = intval(htmlspecialchars($_POST['diet']));    
+      
+            
+        
     }else{
         $formErrors['diet'] = 'Veuillez sélectionner une alimentation';
     }
@@ -101,7 +119,7 @@ if(isset($_POST['sendNewCrea'])){
             //Met la chaine de caracteres en minuscules
             $lowerCaseName = strtolower(htmlspecialchars($_POST['discoverer']));
             //Passe la 1ere lettre de chaque mot en Majuscule
-            $creatureModel->discovery = ucwords($lowerCaseName, ' ');
+            $creature->discovery = ucwords($lowerCaseName, ' ');
         }else{
             $formErrors['discoverer'] = 'Format Incorrect, 2 lettres minimum, aucun chiffre';
         }
@@ -114,14 +132,17 @@ if(isset($_POST['sendNewCrea'])){
         if(strlen($_POST['description']) <= 5){
             $formErrors['description'] = 'Description trop courte, 500 caractères minimum (espaces inclus)';
         }else{
-            $creatureModel->description = htmlspecialchars($_POST['description']);
+            $creature->description = htmlspecialchars($_POST['description']);
         }
     }else{
         $formErrors['description'] = 'Veuillez renseigner une description';
     }
 
     if(empty($formErrors)){
-        var_dump($creatureModel);
-        $creatureModel->addCreatureSimple();
+        
+        $creature->date = date('Y-m-d');
+        $creature->addCreatureSimple();
+        var_dump($creature->addCreatureSimple());
+        var_dump($creature);
     }
 }

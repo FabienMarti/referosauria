@@ -4,6 +4,7 @@ class creature
 {
     public $id = 0;
     public $name = '';
+    public $date = '0000-00-00';
     public $miniImage = '';
     public $mainImage = '';
     public $detailImage = '';
@@ -12,12 +13,13 @@ class creature
     public $etymology = '';
     public $paleobiology = '';
     public $environment = '';
-    public $period = '';
+    public $period = 0;
+    public $type = '';
     public $width = 0;
     public $height = 0;
     public $weight = 0;
     public $predatory = '';
-    public $diet = '';
+    public $diet = 0;
 
     private $db = NULL;
 
@@ -25,7 +27,7 @@ class creature
     public function __construct()
     {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'fmarti', 'nekrose12');
+            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'root', '');
         } catch (Exception $error) {
             die($error->getMessage());
         }
@@ -120,6 +122,7 @@ class creature
             );
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
+    ##############################
 
     public function addCreatureSimple(){
         $addCreatureQuery = $this->db->prepare(
@@ -127,18 +130,68 @@ class creature
                 `r3f3r0_creatures` 
                 (`name`, `addDate`, `mainImage`, `description`, `environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `id_r3f3r0_discoverer`)
             VALUES 
-                (`:name`, :addDate, :mainImage, `:description`, `environment`, :id_r3r3f0_diet, :id_r3f3r0_categories, :id_r3f3r0_period, :id_r3f3r0_discoverer);
+                (:name, :addDate, :mainImage, :description, :environment, :diet, :categories, :period, :discovery)
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
-            $addCreatureQuery->bindValue(':addDate', date('Y-m-d', time()), PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':addDate', $this->date, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':description', $this->description, PDO::PARAM_STR);
-            $addCreatureQuery->bindValue(':id_r3r3f0_diet', $this->diet, PDO::PARAM_INT);
-            $addCreatureQuery->bindValue(':id_r3f3r0_categories', $this->type, PDO::PARAM_STR);
-            $addCreatureQuery->bindValue(':id_r3f3r0_period', $this->period, PDO::PARAM_INT);
-            $addCreatureQuery->bindValue(':id_r3f3r0_discoverer', $this->discoverer, PDO::PARAM_INT);
+            $addCreatureQuery->bindValue(':diet', $this->diet, PDO::PARAM_INT);
+            $addCreatureQuery->bindValue(':categories', $this->type, PDO::PARAM_INT);
+            $addCreatureQuery->bindValue(':period', $this->period, PDO::PARAM_INT);
+            $addCreatureQuery->bindValue(':discovery', $this->discovery, PDO::PARAM_STR);
             return $addCreatureQuery->execute();
     }
+
+    //Alimentation
+    public function getDiets(){
+        $dietQuery = $this->db->query(
+            'SELECT
+                `id`
+                ,`name`
+            FROM
+                `r3f3r0_diet`
+        ');
+        return $dietQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function checkDietExistsById(){
+
+    }
+
+    public function getCategories(){
+        $catQuery = $this->db->query(
+            'SELECT
+                `id`
+                ,`name`
+            FROM
+                `r3f3r0_categories`
+        ');
+        return $catQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getPeriod(){
+        $periodQuery = $this->db->query(
+            'SELECT
+                `id`
+                ,`name`
+            FROM
+                `r3f3r0_period`
+        ');
+        return $periodQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getDiscoverer(){
+        $discovererQuery = $this->db->query(
+            'SELECT
+                `id`
+                ,`name`
+            FROM
+                `r3f3r0_period`
+        ');
+        return $discovererQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
 }
 

@@ -12,12 +12,12 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             <p>Sélectionnez un type de créature : </p>
             <div class="form-group d-flex justify-content-between">
                 <?php 
-                    foreach ($categories as $category) { ?>
-                        <label class="my-auto" for="<? $category ?>"><?= $category ?> : </label>
-                        <input type="radio" name="typeSelect" id="<?= $category ?>" value="<?= $category ?>" <?= isset($_POST['typeSelect']) && $_POST['typeSelect'] == $category ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['typeSelect']) ? 'is-invalid' : (isset($typeSelect) ? 'is-valid' : '') ?>" />
+                    foreach ($showCategories as $category) { ?>
+                        <label class="my-auto" for="<? $category->name ?>"><?= $category->name ?> : </label>
+                        <input type="radio" name="category" id="<?= $category->id ?>" value="<?= $category->id ?>" <?= isset($_POST['category']) && $_POST['category'] == $category->id ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['category']) ? 'is-invalid' : (isset($category) ? 'is-valid' : '') ?>" />
                    <?php } 
-                   if (isset($formErrors['typeSelect'])) { ?>
-                        <div class="text-danger d-block"><?= $formErrors['typeSelect'] ?></div>
+                   if (isset($formErrors['category'])) { ?>
+                        <div class="text-danger d-block"><?= $formErrors['category'] ?></div>
                     <?php } ?>
             </div>
 <!-- Nom de la créature -->
@@ -46,8 +46,8 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <select name="period" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
-                        foreach ($dinoPeriod as $id => $period) {
-                    ?><option value="<?= $id ?>" <?= isset($_POST['period']) ? ($_POST['period'] == $id ? 'selected' : '') : '' ?>><?= $period ?></option><?php } ?>
+                        foreach ($showPeriods as $period) {
+                    ?><option value="<?= $period->id ?>" <?= isset($_POST['period']) ? ($_POST['period'] == $period->id ? 'selected' : '') : '' ?>><?= $period->name ?></option><?php } ?>
                 </select>
                 <?php if (isset($formErrors['period'])) { ?>
                         <p class="text-danger text-center"><?= $formErrors['period'] ?></p>
@@ -66,14 +66,14 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                         <p class="text-danger text-center"><?= $formErrors['habitat'] ?></p>
                 <?php } ?>
             </div>
-<!-- Menu Alimentation (TYPE)-->
+<!-- Menu Alimentation #diet -->
             <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="diet">Choisissez l'alimentation : </label>
                 <select name="diet"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
-                        foreach ($dinoType as $id => $type) {
-                    ?><option value="<?= $id ?>" <?= isset($_POST['diet']) ? ($_POST['diet'] == $id ? 'selected' : '') : '' ?>><?= $type ?></option><?php } ?>
+                        foreach ($showDiets as $diet) {
+                    ?><option value="<?= $diet->id ?>" <?= isset($_POST['diet']) ? ($_POST['diet'] == $diet->id ? 'selected' : '') : '' ?>><?= $diet->name ?></option><?php } ?>
                 </select>
                 <?php if (isset($formErrors['diet'])) { ?>
                         <p class="text-danger text-center"><?= $formErrors['diet'] ?></p>
