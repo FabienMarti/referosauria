@@ -1,4 +1,5 @@
 <?php
+include '../models/database.php';
     include '../models/creatureModel.php';   
     include '../controllers/creatureController.php';
     $pageTitle = (isset($showCreatureInfo->name) ? $showCreatureInfo->name : ''); 

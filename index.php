@@ -1,6 +1,7 @@
 <?php 
 $pageTitle = 'Accueil';
 include 'views/parts/header.php';
+include 'models/database.php';
 include 'models/creatureModel.php';
 include 'controllers/homeController.php';
 ?>

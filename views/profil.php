@@ -1,6 +1,7 @@
 <?php 
 $pageTitle = 'Profil';
 include 'parts/header.php';
+include '../models/database.php';
 include '../models/userModel.php';
 include '../controllers/profilController.php' ?>
 <div class="container">

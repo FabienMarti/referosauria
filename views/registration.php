@@ -1,6 +1,7 @@
 <?php 
 $pageTitle = 'Enregistrement';
 include 'parts/header.php';
+include '../models/database.php';
 include '../models/userModel.php';
 include '../controllers/registrationController.php';
 include '../controllers/breadcrumb.php';

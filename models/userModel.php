@@ -11,13 +11,9 @@ class user
     private $db = NULL;
     
     //créé une fonction magique pour me connecter a ma BDD facilement entre chaque methodes
-    public function __construct()
-    {
-        try {
-            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'root', '');
-        } catch (Exception $error) {
-            die($error->getMessage());
-        }
+    public function __construct() {
+        $this->db = database::getInstance();
+        $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
 
     //recupère les information des utilisateurs

@@ -1,11 +1,23 @@
 <?php 
 $pageTitle = 'Ajout créature';
 include 'parts/header.php';
+include '../models/database.php';
 include '../models/creatureModel.php';
 include '../controllers/addCreatureController.php';
 include '../controllers/breadcrumb.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
+ <?php if(isset($messageSuccess)){ ?>
+        <div class="alert alert-success" role="alert">
+          <?= $messageSuccess ?>
+        </div>
+    <?php }
+
+    if(isset($messageFail)){ ?>
+        <div class="alert alert-danger" role="alert">
+          <?= $messageFail ?>
+        </div>
+    <?php } ?>
 <div class="container border border-dark rounded pt-5 px-5 my-5">
     <form action="" method="POST" enctype="multipart/form-data">
 <!-- Selection catégorie -->
@@ -21,23 +33,31 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                     <?php } ?>
             </div>
 <!-- Nom de la créature -->
-            <div class="row">
-                <div class="form-group col-md-8 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
+        <div class="row">
+            <div class="form-group col-md-6 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="creaName">Nom : </label>
                     <input type="text" id="creaName" name="creaName" placeholder="Nom de la Créature" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['creaName']) ? 'value="' . $_POST['creaName'] . '"' : '' ?> />
             <?php if (isset($formErrors['creaName'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['creaName'] ?></p>
             <?php } ?>
-                </div>
-<!-- Image principale de la créature FILE -->
-                <div class="form-group col-md-4 <?= count($_POST) > 0 ? (isset($formErrors['imageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
-                    <label for="imageUpload">Image de la créature : </label>
-                    <input type="file" name="imageUpload" id="imageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['imageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-            <?php if (isset($formErrors['imageUpload'])) { ?>
-                <p class="text-danger text-center"><?= $formErrors['imageUpload'] ?></p>
-            <?php } ?>
-                </div> 
             </div>
+<!-- Image principale de la créature FILE -->
+            <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
+                    <label for="mainImageUpload">Image principale de la créature : </label>
+                    <input type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+            <?php if (isset($formErrors['mainImageUpload'])) { ?>
+                <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
+            <?php } ?>
+            </div>
+<!-- Mini image de la créature FILE -->
+            <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
+                    <label for="miniImageUpload">Image de tête de la créature : </label>
+                    <input type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+            <?php if (isset($formErrors['miniImageUpload'])) { ?>
+                <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
+            <?php } ?>
+            </div> 
+        </div>
 <!-- Menus déroulants #### Période #### Habitat #### Alimentation #### Découverte -->
         <div class="row justify-content-between">
 <!-- Menu Période -->
@@ -106,7 +126,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Prévisualiser" name="preview" />
+                <input type="button" class="btn btn-primary" value="Prévisualiser" name="preview" />
                 <input type="submit" class="btn btn-primary" value="Envoyer" name="sendNewCrea" />
             </div>
         </form>

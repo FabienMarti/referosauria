@@ -24,14 +24,10 @@ class creature
     private $db = NULL;
 
     //créé une fonction magique pour me connecter a ma BDD facilement entre chaque methodes
-    public function __construct()
-    {
-        try {
-            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'root', '');
-        } catch (Exception $error) {
-            die($error->getMessage());
-        }
-    }
+    public function __construct() {
+        $this->db = database::getInstance();
+        $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    } 
 
     //récupère les info de la creature en question (par rapport à l'ID)
     public function getSingleDinoInfo(){
@@ -56,14 +52,10 @@ class creature
         $creaturesQuery = $this->db->query(
             'SELECT
                 `id`
-                ,`id_r3f3r0_diet`
                 ,`miniImage`
-                ,`crea`.`name`
-                ,`per`.`id_period`
-                ,`per`.`name` AS `periodName`
+                ,`name`
             FROM
-                `r3f3r0_creatures` AS `crea`
-            INNER JOIN `r3f3r0_period` AS `per` ON `id_r3f3r0_period` = `id_period`
+                `r3f3r0_creatures`
             ');
             return $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
     }
@@ -128,14 +120,15 @@ class creature
         $addCreatureQuery = $this->db->prepare(
             'INSERT INTO 
                 `r3f3r0_creatures` 
-                (`name`, `addDate`, `mainImage`, `description`, `environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `id_r3f3r0_discoverer`)
+                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`)
             VALUES 
-                (:name, :addDate, :mainImage, :description, :environment, :diet, :categories, :period, :discovery)
+                (:name, :addDate, :mainImage, `:miniImage`, :description, :environment, :diet, :categories, :period, :discovery)
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':addDate', $this->date, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':description', $this->description, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':diet', $this->diet, PDO::PARAM_INT);
             $addCreatureQuery->bindValue(':categories', $this->type, PDO::PARAM_INT);

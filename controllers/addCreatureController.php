@@ -28,9 +28,7 @@ if(isset($_POST['sendNewCrea'])){
 
     //Contrôle de la radio category
     if(!empty($_POST['category'])) {
-
         $creature->type = intval(htmlspecialchars($_POST['category']));     
-
     }else {
         $formErrors['category'] = 'Veuillez sélectionner un type de créature';
     }
@@ -46,10 +44,10 @@ if(isset($_POST['sendNewCrea'])){
         $formErrors['creaName'] = 'Veuillez renseigner un nom pour la créature';
     }
 
-    //Contrôle de l'ajout de fichier
-    if (!empty($_FILES['imageUpload']) && $_FILES['imageUpload']['error'] == 0) {
+    //Contrôle de l'ajout de fichier Image principale
+    if (!empty($_FILES['mainImageUpload']) && $_FILES['mainImageUpload']['error'] == 0) {
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
-        $fileInfos = pathinfo($_FILES['imageUpload']['name']);
+        $fileInfos = pathinfo($_FILES['mainImageUpload']['name']);
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
         if (in_array($fileInfos['extension'], $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
@@ -57,11 +55,11 @@ if(isset($_POST['sendNewCrea'])){
           //On crée une date pour différencier les fichiers
           $date = date('Y-m-d_H-i-s');
           //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
-          $fileNewName = htmlspecialchars($_POST['creaName']) . '_' . $date;
+          $fileNewName = htmlspecialchars($_POST['creaName']) . 'ImagePrincipale' . '_' . $date;
           //On stocke dans une variable le chemin complet du fichier (chemin + nouveau nom + extension une fois uploadé) Attention : ne pas oublier le point
           $fileFullPath = $path . $fileNewName . '.' . $fileInfos['extension'];
           //move_uploaded_files : déplace le fichier depuis son emplacement temporaire ($_FILES['file']['tmp_name']) vers son emplacement définitif ($fileFullPath)
-          if (move_uploaded_file($_FILES['imageUpload']['tmp_name'], $fileFullPath)) {
+          if (move_uploaded_file($_FILES['mainImageUpload']['tmp_name'], $fileFullPath)) {
             //On définit les droits du fichiers uploadé (Ici : écriture et lecture pour l'utilisateur apache, lecture uniquement pour le groupe et tout le monde)
             chmod($fileFullPath, 0644);
             $creature->mainImage = $fileFullPath;
@@ -75,14 +73,40 @@ if(isset($_POST['sendNewCrea'])){
         $formErrors['file'] = 'Veuillez selectionner un fichier';
       }
 
+    //Contrôle de l'ajout de fichier la mini image
+    if (!empty($_FILES['miniImageUpload']) && $_FILES['miniImageUpload']['error'] == 0) {
+        // On stock dans $fileInfos les informations concernant le chemin du fichier.
+        $fileInfos = pathinfo($_FILES['miniImageUpload']['name']);
+        // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
+        if (in_array($fileInfos['extension'], $fileExtension)) {
+          //On définit le chemin vers lequel uploader le fichier
+          $path = '../uploads/';
+          //On crée une date pour différencier les fichiers
+          $date = date('Y-m-d_H-i-s');
+          //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
+          $fileNewName = htmlspecialchars($_POST['creaName']) . 'MiniImage' . '_' . $date;
+          //On stocke dans une variable le chemin complet du fichier (chemin + nouveau nom + extension une fois uploadé) Attention : ne pas oublier le point
+          $fileFullPath = $path . $fileNewName . '.' . $fileInfos['extension'];
+          //move_uploaded_files : déplace le fichier depuis son emplacement temporaire ($_FILES['file']['tmp_name']) vers son emplacement définitif ($fileFullPath)
+          if (move_uploaded_file($_FILES['miniImageUpload']['tmp_name'], $fileFullPath)) {
+            //On définit les droits du fichiers uploadé (Ici : écriture et lecture pour l'utilisateur apache, lecture uniquement pour le groupe et tout le monde)
+            chmod($fileFullPath, 0644);
+            $creature->miniImage = $fileFullPath;
+          } else {
+            $formErrors['file'] = 'Votre fichier ne s\'est pas téléversé correctement';
+          }
+        } else {
+          $formErrors['file'] = 'Votre fichier n\'est pas du format attendu';
+        }
+      } else {
+        $formErrors['file'] = 'Veuillez selectionner un fichier';
+      }
 
     ##### Contrôle des menus déroulants #####
-    #########################################################################################
+
     //Contrôle de la période
     if(!empty($_POST['period'])) {
-     
-                $creature->period = intval(htmlspecialchars($_POST['period']));            
-          
+        $creature->period = intval(htmlspecialchars($_POST['period']));            
     }else{
         $formErrors['period'] = 'Veuillez sélectionner une période';
     }
@@ -102,11 +126,7 @@ if(isset($_POST['sendNewCrea'])){
     //Contrôle alimentation
     #########################################################################################
     if(!empty($_POST['diet'])) {
-       
-                $creature->diet = intval(htmlspecialchars($_POST['diet']));    
-      
-            
-        
+        $creature->diet = intval(htmlspecialchars($_POST['diet']));
     }else{
         $formErrors['diet'] = 'Veuillez sélectionner une alimentation';
     }
@@ -139,10 +159,13 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     if(empty($formErrors)){
-        
         $creature->date = date('Y-m-d');
-        $creature->addCreatureSimple();
-        var_dump($creature->addCreatureSimple());
-        var_dump($creature);
+        if($creature->addCreatureSimple()){
+            $messageSuccess = 'La créature à été ajoutée avec succès';
+        }else{
+            $messageFail = 'Une erreur est survenue, contactez le service technique';
+        }
     }
+
 }
+var_dump($creature);
