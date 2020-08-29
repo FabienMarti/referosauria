@@ -34,11 +34,32 @@ class creature
         //récupère tout avec * dans ma table 'creatures' (car j'ai besoin de tout)
         $creatureQuery = $this->db->prepare(
             'SELECT 
-                *
+                `crea`.`id`
+                , `crea`.`name`
+                , `crea`.`mainImage`
+                , `crea`.`detailImage`
+                , `crea`.`description`
+                , `crea`.`discovery`
+                , `crea`.`etymology`
+                , `crea`.`paleobiology`
+                , `crea`.`environment`
+                , `crea`.`width`
+                , `crea`.`height`
+                , `crea`.`weight`
+                , `crea`.`predatory`
+                , `crea`.`id_r3f3r0_categories`
+                , `crea`.`id_r3f3r0_period` AS `period`
+                , `crea`.`id_r3f3r0_discoverer`
+                , `crea`.`id_r3f3r0_diet` AS `diet`
+                ,`perTab`.`name` AS `perName`
+                ,`dietTab`.`name` AS `dietName`
             FROM
-                `r3f3r0_creatures`
+                `r3f3r0_creatures` AS `crea`
+            INNER JOIN `r3f3r0_period` AS `perTab` ON `crea`.`id_r3f3r0_period` = `perTab`.`id`
+            INNER JOIN `r3f3r0_diet` AS `dietTab` ON `crea`.`id_r3f3r0_diet` = `dietTab`.`id`
+
             WHERE 
-                `id` = :id
+                `crea`.`id` = :id 
             ');
             $creatureQuery->bindvalue(':id', $this->id, PDO::PARAM_INT);
             $creatureQuery->execute();  
@@ -83,7 +104,7 @@ class creature
             FROM 
                 `r3f3r0_creatures` AS `crea`
             ORDER BY `addDate` DESC
-            LIMIT 4
+            LIMIT 3
             ');
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
@@ -185,5 +206,23 @@ class creature
                 `r3f3r0_period`
         ');
         return $discovererQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getCreaturesByPeriod(){
+        $creaturesByPeriodQuery = $this->db->prepare(
+            'SELECT
+                `id`
+                , `miniImage`
+            FROM
+                `r3f3r0_creatures`
+            WHERE
+                `id_r3f3r0_period` = :period
+            ORDER BY RAND ()  
+            LIMIT 3
+            
+        ');
+        $creaturesByPeriodQuery->bindValue(':period', $this->period, PDO::PARAM_STR);
+        $creaturesByPeriodQuery->execute();
+        return $creaturesByPeriodQuery->fetchAll(PDO::FETCH_OBJ);
     }
 }

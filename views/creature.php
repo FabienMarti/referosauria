@@ -23,7 +23,7 @@ include '../models/database.php';
                     <li>28/01/2020</li>
                 </ul>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div class="row">
                     <div class="col-md-12 m-auto">
                         <img class="img-fluid" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
@@ -36,31 +36,31 @@ include '../models/database.php';
                             <tbody>
                                 <tr>
                                     <th scope="row">Habitat</th>
-                                    <td><?= isset($showCreatureInfo->environment) ? $showCreatureInfo->environment : '' ?></td>
+                                    <td><?= $showCreatureInfo->environment ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Période</th>
-                                    <td><?= isset($showCreatureInfo->period) ? $showCreatureInfo->period : '' ?></td>
+                                    <td><?= $showCreatureInfo->perName ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Longueur</th>
-                                    <td><?= isset($showCreatureInfo->width) ? $showCreatureInfo->width : '' ?> mètres</td>
+                                    <td><?= $showCreatureInfo->width ?> mètres</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Hauteur</th>
-                                    <td><?= isset($showCreatureInfo->height) ? $showCreatureInfo->height : '' ?> mètres</td>
+                                    <td><?= $showCreatureInfo->height ?> mètres</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Poids</th>
-                                    <td><?= isset($showCreatureInfo->weight) ? $showCreatureInfo->weight : '' ?> tonnes</td>
+                                    <td><?= $showCreatureInfo->weight ?> tonnes</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Prédateurs</th>
-                                    <td><?= isset($showCreatureInfo->predatory) ? $showCreatureInfo->predatory : '' ?></td>
+                                    <td><?= $showCreatureInfo->predatory ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Alimentation</th>
-                                    <td><?= isset($showCreatureInfo->diet) ? $showCreatureInfo->diet : '' ?></td>
+                                    <td><?= $showCreatureInfo->dietName ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -75,9 +75,9 @@ include '../models/database.php';
             </div>
             <div class="col-md-1 text-center divBackColor">
                 <p class="h5 text-center">Ils ont vécus dans la même période :</p>
-                <div><img src="../assets/img/rexHead.png" style="width:100px; height:100px;" class="m-3 border border-danger" /></div>
-                <div><img src="../assets/img/parasaurolophusHead.jpg" style="width:100px; height:100px;" class="m-3 border border-success" /></div>
-                <div><img src="../assets/img/rexHead.png" style="width:100px; height:100px;" class="m-3 border border-danger" /></div>
+                <?php foreach($showCreaturesByPeriod as $crea){ ?>
+                    <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" style="width:100px; height:100px;" class="m-3" /></a></div>
+                <?php } ?>
             </div>
         </div>
 </section>
