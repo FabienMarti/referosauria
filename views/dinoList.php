@@ -29,7 +29,6 @@
                         }
                 ?></select> 
             </div>
-            <?php var_dump($_POST['diet']) ?>
             <div class="row">
                 <select class="form-control col" name="discoverer">
                     <option value="" disabled selected>Paléonthologue</option> 
@@ -64,8 +63,8 @@
                 foreach ($showCreaturesInfo as $creature) {
                 ?><div class="col-4">
                         <a href="creature.php?id=<?= $creature->id ?>">
-                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border" style="height: 150px" src="<?= $linkModif ?><?= isset($creature->miniImage) ? $creature->miniImage : '' ?>" />
-                            <p><?= isset($creature->name) ? $creature->name : '' ?></p>
+                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border" style="height: 150px" src="<?= $linkModif . $creature->miniImage ?>" />
+                            <p class="creaName"><?= $creature->name ?></p>
                         </a>
                 </div><?php
             }?>

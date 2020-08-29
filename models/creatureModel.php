@@ -1,5 +1,4 @@
 <?php
-
 class creature
 {
     public $id = 0;
@@ -83,8 +82,8 @@ class creature
                 ,`description`
             FROM 
                 `r3f3r0_creatures` AS `crea`
-            ORDER BY `addDate` ASC
-            LIMIT 2
+            ORDER BY `addDate` DESC
+            LIMIT 4
             ');
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
@@ -102,27 +101,30 @@ class creature
             ');
     }
 
-    /* temporaire */
+    /* TEMPORAIRE */
     public function filterDino($diet){
-        $latestCreatureQuery = $this->db->query(
+        $latestCreatureQuery = $this->db->prepare(
             'SELECT
                 *
             FROM 
                 `r3f3r0_creatures`
             WHERE 
-                 `id_r3f3r0_diet` =' . $diet
-            );
+                 `id_r3f3r0_diet` = :diet
+            ');
+            $latestCreatureQuery->bindValue(':diet', $diet, PDO::PARAM_INT);
+            $latestCreatureQuery->execute();
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
     ##############################
 
+    // pas de magic quotes dans dans VALUES
     public function addCreatureSimple(){
         $addCreatureQuery = $this->db->prepare(
             'INSERT INTO 
                 `r3f3r0_creatures` 
                 (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`)
             VALUES 
-                (:name, :addDate, :mainImage, `:miniImage`, :description, :environment, :diet, :categories, :period, :discovery)
+                (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery)
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
@@ -184,7 +186,4 @@ class creature
         ');
         return $discovererQuery->fetchAll(PDO::FETCH_OBJ);
     }
-
-
 }
-

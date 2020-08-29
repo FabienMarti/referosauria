@@ -1,21 +1,45 @@
-var text1 = "Laisse moi t'aider pendant ta navigation, en te parlant des cookies"
-var text2 = "Ces délicieux cookies, tu peux les manger si tu veux"
-var text3 = "Ces délicieux cookies me servent à te traquer, j'arrive ne bouge pas"
-var text = [text1, text2, text3];
-var counter = 0;
-var inst = setInterval(change, 5000);
-window.addEventListener('load', benAppears);
-
-function change() {
-
-    document.getElementById("changeText").innerHTML = text[counter]; counter++;
-    if (counter >= text.length) {
-        counter = 0;
-        clearInterval(inst);
+//script modal footer
+var modalContentArray = document.getElementsByClassName('modalContent');
+var modalTitle = document.getElementById('footerModalLabel');
+function changeFooterModalContent(modal){
+    for (let i = 0; i < modalContentArray.length; i++) {
+        modalContentArray[i].style.display = 'none';
     }
-};
+    switch (modal) {
+        case 0:
+            modalTitle.innerHTML = 'Politique de confidentialité';
+            modalContentArray[0].style.display = 'block';
+        break;
+        case 1:
+            modalTitle.innerHTML = 'Conditions Générales';
+            modalContentArray[1].style.display = 'block';
+        break;
+        case 2:
+            modalTitle.innerHTML = 'Accessibilité';
+            modalContentArray[2].style.display = 'block';
+        break;
+        case 3:
+            modalTitle.innerHTML = 'À propos de referosauria';
+            modalContentArray[3].style.display = 'block';
+        break;
+    }
+    $('#footerModal').modal('toggle');
+}
 
-function benAppears() {
-    $("#diploHead").fadeIn(5000);
-    $("#diploBubble, #diploSpeech").fadeIn(7500);
-};
+//fonction parallax sur Body
+(function(){
+
+    var parallax = document.querySelectorAll("body"),
+        speed = 0.5;
+
+    window.onscroll = function(){
+        [].slice.call(parallax).forEach(function(el,i){
+
+        var windowYOffset = window.pageYOffset,
+            elBackgrounPos = "50% " + (windowYOffset * speed) + "px";
+
+        el.style.backgroundPosition = elBackgrounPos;
+
+        });
+    };
+})();

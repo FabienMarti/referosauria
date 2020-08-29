@@ -9,21 +9,21 @@ $showCreaturesInfo = $creature->getDinosInfo();
 }else{
 }*/
 
- //$showCreaturePeriod = $creature->getDinoFilters();
+//$showCreaturePeriod = $creature->getDinoFilters();
 
 
-    /*if(isset($_GET['sendFilter'])){
-        if(!empty($_GET['period'])){
-            $period = htmlspecialchars($_GET['period']);
-        }else{
-            $period = '';
-        }
+/*if(isset($_GET['sendFilter'])){
+    if(!empty($_GET['period'])){
+        $period = htmlspecialchars($_GET['period']);
+    }else{
+        $period = '';
+    }
 
-        /* if(!empty($_GET['diet'])){
-            $diet = htmlspecialchars($_GET['diet']);
-        }else{
+    /* if(!empty($_GET['diet'])){
+        $diet = htmlspecialchars($_GET['diet']);
+    }else{
 
-        }
-    } */
+    }
+} */
 
     

@@ -1,10 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url('../img/bg.jpg');
+    background-position: top center;
+    background-attachment:scroll;
+    background-size: cover;
+}
+
+
+/****** Couleurs élement pricipaux ******/
+#headerBG{
+    background-color : #4F3130;
+    height: 150px;
+}
+.creaName{
+    color : #DE541E;
+    font-family: 'Pacifico', cursive;
+}
 #mainNav, footer{
     background-color: #697A21 !important;
+}
+
+.divBackColor{
+    background-color: #EFF7CF;
+}
+
+.titleStyle{
+    color : #DE541E;
+    font-family: 'Pacifico', cursive;
+}
+
+.mainTitle{
+    color : #0086BE;
 }
 
 #changeText{
     font-size: 20px;
 }
+
+/****** Recent posts CSS ******/
 #recentPostList li{
     list-style: none;
 }
@@ -14,33 +51,31 @@
 #recentPostList li:nth-child(even){
     text-align: right;
 }
+
 .filter{
     background-color: #4F5165;
 }
+
 .breadcrumbLink{
     color: white; /* blue colors for links too */
-    text-decoration: inherit; /* no underline */
-}
-.filter a, .mailEnvelope a {
-    color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
 }
 /* change la couleur du séparateur du fil d'ariane boostrap */
 .breadcrumb-item + .breadcrumb-item::before {
       color: white;
 }
-*{
-    margin: 0;
-    padding: 0;
-}
-#mainTitle{
-    height: 195px;
+
+.filter a, .mailEnvelope a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
 }
 
-#headerBG{
-    background-image: url('../img/dinosaurBannerBG.png');
-    height: 150px;
-}
+.gertie {
+    float: right;
+    padding: 50px;
+    /* défini les contours de l'image qui est en transparence*/
+    shape-outside: polygon(60.65% 33px, 70.86% 22.66%, 73.45% 28.89%, 74.52% 51.97%, 82.27% 49.92%, 91.32% 55.56%, 77.05% 64.17%, 68.57% 72.11%, 70.52% 79.05%, 71.93% 84.03%, 60.94% 89.08%, 50% 88.22%, 50.41% 80.43%, 44.65% 79.55%, 44.36% 73.73%, 38.74% 70.34%, 35.04% 65.14%, 38.72% 58.44%, 36.06% 51.51%, 27.93% 52.55%, 20.26% 59.63%, 12.59% 63.63%, 31px 55.56%, 23.94% 40.04%, 39.65% 31.27%);   }
+
 .breadcrumb {
     margin-bottom: 0px !important;
     background-color: #547AA5;

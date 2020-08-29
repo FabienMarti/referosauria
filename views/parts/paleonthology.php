@@ -1,6 +1,6 @@
 <h1 class="text-center"><u>La Paléonthologie</u></h1>
 <div class="row justify-content-around">
-    <div class="col-md-5 border border-dark rounded">
+    <div class="col-md-5 border border-dark rounded divBackColor">
         <h2 class="m-2 text-center">Étymologie</h2>
         <p>Le mot paléontologie peut être découpé en trois termes grecs : </p>
         <ul>
@@ -12,7 +12,7 @@
         Ce terme a été créé en 1822 par le zoologiste Henri Ducrotay de Blainville et diffusé en Europe par le géologue britannique Charles Lyell.</p>
         <p class="text-right">Source : <a href="https://fr.wikipedia.org/wiki/Pal%C3%A9ontologie">Wikipédia</a></p>
     </div>
-    <div class="col-md-5 border border-dark rounded">
+    <div class="col-md-5 border border-dark rounded divBackColor">
         <h2 class="m-2 text-center">Spécialités de la paléontologie</h2>
         <p>Il existe de nombreuses spécialités en paléontologie. Par exemple, la paléobotanique et la paléozoologie se concentrent respectivement sur les végétaux et les animaux. La paléoanthropologie étudie quant à elle les fossiles humains et donc l'évolution de l'Homme.</p>
         <p>La paléontologie entretient des liens étroits avec la géologie et l'anatomie comparée. Les datations de fossiles sont en effet souvent réalisées à partir d'analyses stratigraphiques ou sédimentaires, et donc grâce à des informations d'ordre géologique. L'anatomie comparée permet bien souvent de déterminer l'identité des organismes découverts grâce à des comparaisons anatomiques avec des espèces connues. Elle est également utilisée pour étudier la phylogénie et les processus adaptatifs ayant régi le cours de l'évolution.</p>

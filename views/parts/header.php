@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <link href="<?= $linkModif ?>assets/css/style.css" rel="stylesheet" type="text/css" />
         <!-- On vérifie que la variable $pageTitle est définie sur la page en question, sinon on affiche 'Non-Défini' -->
         <title><?= isset($pageTitle) ? $pageTitle : 'Non-Défini' ?></title>
@@ -20,7 +21,7 @@
         <!-- BG + Titre -->
         <div id="headerBG" class="row m-0">
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
-                <h1>REFEROSAURIA</h1>
+                <h1 class="mainTitle titleStyle">REFEROSAURIA</h1>
             </div>
             <div class="col-md-2 offset-md-2 my-auto text-center"><?php
                 if($_SESSION['isConnected'] == true){
