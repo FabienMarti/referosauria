@@ -36,13 +36,13 @@ if(isset($_POST['sendNewCrea'])){
     if(isset($_POST['creaName'])){
         if(preg_match($regexName, $_POST['creaName'])){
             //vérifie si le dossier n'existe pas déjà
-            if(!file_exists('../assets/img/' . strtolower(htmlspecialchars($_POST['creaName'])))){
+            if(!file_exists('../assets/img/creatures/' . strtolower(htmlspecialchars($_POST['creaName'])))){
                 //passe le nouveau nom de dossier en minuscules pour éviter les doublons
                 $minusCreaName = strtolower(htmlspecialchars($_POST['creaName']));
                 //créé un nouveau dossier
-                mkdir('../assets/img/' . $minusCreaName);
+                mkdir('../assets/img/creatures/' . $minusCreaName);
             }
-            $creature->name = htmlspecialchars($_POST['creaName']);
+            $creature->name = ucwords(htmlspecialchars($_POST['creaName']));
         }else{
             $formErrors['creaName'] = 'Format Incorrect, 2 lettres minimum, aucun chiffre';
         }
@@ -57,7 +57,7 @@ if(isset($_POST['sendNewCrea'])){
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
         if (in_array($fileInfos['extension'], $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
-          $path = '../assets/img/' . strtolower(htmlspecialchars($_POST['creaName'])) . '/';
+          $path = '../assets/img/creatures/' . strtolower(htmlspecialchars($_POST['creaName'])) . '/';
           //On crée une date pour différencier les fichiers
           $date = date('Y-m-d_H-i-s');
           //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
@@ -86,7 +86,7 @@ if(isset($_POST['sendNewCrea'])){
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
         if (in_array($fileInfos['extension'], $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
-          $path = '../assets/img/' . strtolower(htmlspecialchars($_POST['creaName'] . '/'));
+          $path = '../assets/img/creatures/' . strtolower(htmlspecialchars($_POST['creaName'] . '/'));
           //On crée une date pour différencier les fichiers
           $date = date('Y-m-d_H-i-s');
           //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
@@ -165,12 +165,16 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     if(empty($formErrors)){
+        var_dump($creature);
         $creature->date = date('Y-m-d');
-        if($creature->addCreatureSimple()){
+        if($creature->checkCreatureExists() == 0){
             $messageSuccess = 'La créature à été ajoutée avec succès';
+            $creature->addCreatureSimple();
         }else{
-            $messageFail = 'Une erreur est survenue, contactez le service technique';
+            $messageFail = 'La créature existe déjà !';
         }
+    }else{
+        $messageFail = 'Une erreur est survenue, contactez le service technique';
     }
-
 }
+

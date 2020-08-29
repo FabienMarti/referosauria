@@ -218,4 +218,19 @@ class creature
         $data = $searchCreaByNameQuery->fetch(PDO::FETCH_OBJ); 
         return $data->searchResult; 
     }
+
+    public function checkCreatureExists(){
+        $creatureExistsQuery = $this->db->prepare(
+            'SELECT 
+                COUNT(`id`) AS isCreatureExists
+            FROM
+                `r3f3r0_creatures`
+            WHERE
+                `name` = :name
+        ');
+        $creatureExistsQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $creatureExistsQuery->execute();
+        $data = $creatureExistsQuery->fetch(PDO::FETCH_OBJ);
+        return $data->isCreatureExists;
+    }
 }
