@@ -1,6 +1,11 @@
 //script modal footer
 var modalContentArray = document.getElementsByClassName('modalContent');
 var modalTitle = document.getElementById('footerModalLabel');
+
+function backToTop(){
+    window.scrollTo(0, 0);
+}
+
 function changeFooterModalContent(modal){
     for (let i = 0; i < modalContentArray.length; i++) {
         modalContentArray[i].style.display = 'none';

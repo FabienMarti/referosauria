@@ -1,18 +1,18 @@
 <?php
 include '../models/database.php';
-    include '../models/creatureModel.php';   
-    include '../controllers/creatureController.php';
-    $pageTitle = (isset($showCreatureInfo->name) ? $showCreatureInfo->name : ''); 
-    include 'parts/header.php';
-    include '../controllers/breadcrumb.php';
-    generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
+include '../models/creatureModel.php';   
+include '../controllers/creatureController.php';
+$pageTitle =  $showCreatureInfo->name; 
+include 'parts/header.php';
+include '../controllers/breadcrumb.php';
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
 ?>
 <section class="container-fluid my-2">
-        <h1 class="text-center my-5 creaName"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>
+        <h1 class="text-center my-5 creaName"><u><?= $showCreatureInfo->name ?></u></h1>
         <div class="row">
             <div class="col-md-2 text-center border divBackColor">
                 <p class="h6 text-center">Où a-t-on trouvé Tyrannosaure ?</p>
-                <img src="../assets/img/localTyrannosaurus.png" class="img-fluid" />
+                <img src="<?= '../assets/img/local/' . $areaMap . '.jpg' ?>" class="img-fluid" />
                 <p class="h5 mt-5">Derniers sujets en rapport :</p>
                 <ul class="border" id="recentPostList">
                     <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
@@ -26,7 +26,7 @@ include '../models/database.php';
             <div class="col-3">
                 <div class="row">
                     <div class="col-md-12 m-auto">
-                        <img class="img-fluid" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
+                        <img class="img-fluid" src="../<?= $showCreatureInfo->mainImage ?>" /> 
                     </div>
                     <div class="col-md-12">
                         <table class="table table-sm divBackColor">
@@ -76,7 +76,7 @@ include '../models/database.php';
             <div class="col-md-1 text-center divBackColor">
                 <p class="h5 text-center">Ils ont vécus dans la même période :</p>
                 <?php foreach($showCreaturesByPeriod as $crea){ ?>
-                    <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" style="width:100px; height:100px;" class="m-3" /></a></div>
+                    <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" width="100px" height="100px"  class="m-3" /></a></div>
                 <?php } ?>
             </div>
         </div>
@@ -185,4 +185,5 @@ include '../models/database.php';
         </div>
     </div>
 </section>
+<img src='https://img.icons8.com/ios/500/circled-up-2.png' onclick="backToTop()" class="creaName" alt='flèche' width="50px" height="50px" />
 <?php include 'parts/footer.php' ?>

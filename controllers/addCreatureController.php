@@ -11,10 +11,10 @@ $formErrors = array();
 $creature = new creature();
 //appel des méthodes
 $showCreatureInfo = $creature->getSingleDinoInfo();
-$showDiets = $creature->getDiets();
-$showCategories = $creature->getCategories();
-$showPeriods = $creature->getPeriod();
-$showDiscoverers = $creature->getDiscoverer();
+$showDiets = $creature->getCreaDiets();
+$showCategories = $creature->getCreaCategories();
+$showPeriods = $creature->getCreaPeriods();
+$showDiscoverers = $creature->getCreaDiscoverers();
 
 
 
@@ -23,7 +23,6 @@ $environmentArray = array('Amérique du Nord', 'Amérique du Sud', 'Europe', 'As
 
 if(isset($_POST['sendNewCrea'])){
  
-
 #########################################################################################
 
     //Contrôle de la radio category
@@ -36,6 +35,13 @@ if(isset($_POST['sendNewCrea'])){
     //Contrôle du Nom de la creature
     if(isset($_POST['creaName'])){
         if(preg_match($regexName, $_POST['creaName'])){
+            //vérifie si le dossier n'existe pas déjà
+            if(!file_exists('../assets/img/' . strtolower(htmlspecialchars($_POST['creaName'])))){
+                //passe le nouveau nom de dossier en minuscules pour éviter les doublons
+                $minusCreaName = strtolower(htmlspecialchars($_POST['creaName']));
+                //créé un nouveau dossier
+                mkdir('../assets/img/' . $minusCreaName);
+            }
             $creature->name = htmlspecialchars($_POST['creaName']);
         }else{
             $formErrors['creaName'] = 'Format Incorrect, 2 lettres minimum, aucun chiffre';
@@ -51,7 +57,7 @@ if(isset($_POST['sendNewCrea'])){
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
         if (in_array($fileInfos['extension'], $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
-          $path = '../uploads/';
+          $path = '../assets/img/' . strtolower(htmlspecialchars($_POST['creaName'])) . '/';
           //On crée une date pour différencier les fichiers
           $date = date('Y-m-d_H-i-s');
           //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
@@ -80,7 +86,7 @@ if(isset($_POST['sendNewCrea'])){
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
         if (in_array($fileInfos['extension'], $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
-          $path = '../uploads/';
+          $path = '../assets/img/' . strtolower(htmlspecialchars($_POST['creaName'] . '/'));
           //On crée une date pour différencier les fichiers
           $date = date('Y-m-d_H-i-s');
           //On crée le nouveau nom du fichier (celui qu'il aura une fois uploadé)
@@ -168,4 +174,3 @@ if(isset($_POST['sendNewCrea'])){
     }
 
 }
-var_dump($creature);

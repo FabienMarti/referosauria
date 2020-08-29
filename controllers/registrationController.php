@@ -54,12 +54,12 @@ if(isset($_POST['validateForm'])){
         if (empty($formErrors)) {
             if (!$user->checkUserExist()){
                 if($user->addNewUser()){
-                   $addUserMessage = 'Votre compte a bien été créé.'; 
+                   $messageSuccess = 'Votre compte a bien été créé.'; 
                 } else {
                     $addUserMessage = 'Une erreur est survenue.';
                 }
             } else {
-                $addUserMessage = 'Le nom d\'utilisateur ou le mot de passe sont déjà utilisés.';
+                $addUserMessage = 'Le nom d\'utilisateur est déjà utilisé.';
             }
         }
     }

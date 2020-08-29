@@ -9,11 +9,21 @@ body{
     background-attachment:scroll;
     background-size: cover;
 }
+.btn{
+    background-color : #0086BE !important; 
+    color : white !important;
+}
+.cutPara{
 
+    overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 
+}
 /****** Couleurs élement pricipaux ******/
 #headerBG{
-    background-color : #4F3130;
+    background-color : #25283D;
     height: 150px;
 }
 .creaName{

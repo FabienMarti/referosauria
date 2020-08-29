@@ -18,7 +18,8 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
           <?= $messageFail ?>
         </div>
     <?php } ?>
-<div class="container border border-dark rounded pt-5 px-5 my-5">
+<div class="container border border-dark rounded pt-2 px-5 my-5 divBackColor">
+    <h2 class="titleStyle text-center">Ajouter une créature</h2>
     <form action="" method="POST" enctype="multipart/form-data">
 <!-- Selection catégorie -->
             <p>Sélectionnez un type de créature : </p>

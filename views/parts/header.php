@@ -23,13 +23,25 @@
             <div class="col-md-4 offset-md-4 text-center my-auto text-white">
                 <h1 class="mainTitle titleStyle">REFEROSAURIA</h1>
             </div>
-            <div class="col-md-2 offset-md-2 my-auto text-center"><?php
+            <div class="col-md-2 offset-md-2 my-auto text-center border border-danger h-100 "><?php
                 if($_SESSION['isConnected'] == true){
-                    ?><a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php">Profil</a>
-                    <a class="btn btn-primary" href="<?= $linkModif ?>views/logout.php">Déconnexion</a><?php
+                    ?>
+                    <div class="row">
+                    <img class="img-fluid col-4" src="<?= $linkModif ?>assets/img/profilPictures/member.png" width="100px" height="100px" />
+                    <div class="col-8 text-white"><p>Bonjour NOMDUTILISATEUR</p></div>
+                    
+
+
+                    <a class="btn col-6" href="<?= $linkModif ?>views/profil.php">Profil</a>
+                    <a class="btn col-6" href="<?= $linkModif ?>views/logout.php">Déconnexion</a>
+                    </div>
+                    
+                    
+                    
+                    <?php
                 }else{
-                    ?><a class="btn btn-primary text-white" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
-                    <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
+                    ?><a class="btn" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
+                    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
                 }?>
             </div>
         </div>
@@ -73,9 +85,9 @@
                             <a class="nav-link  text-white" href="<?= $linkModif ?>views/forum.php">Forum</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+                    <form class="form-inline my-2 my-lg-0" action="<?= $linkModif ?>views/dinoList.php" method="GET">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search" />
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="sendSearch">Rechercher</button>
                     </form>
                 </div>
             </nav>

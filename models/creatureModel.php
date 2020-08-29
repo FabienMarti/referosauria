@@ -31,7 +31,6 @@ class creature
     //récupère les info de la creature en question (par rapport à l'ID)
     public function getSingleDinoInfo(){
         //récupère dans ma BDD avec un query les informations dont j'ai besoin
-        //récupère tout avec * dans ma table 'creatures' (car j'ai besoin de tout)
         $creatureQuery = $this->db->prepare(
             'SELECT 
                 `crea`.`id`
@@ -57,7 +56,6 @@ class creature
                 `r3f3r0_creatures` AS `crea`
             INNER JOIN `r3f3r0_period` AS `perTab` ON `crea`.`id_r3f3r0_period` = `perTab`.`id`
             INNER JOIN `r3f3r0_diet` AS `dietTab` ON `crea`.`id_r3f3r0_diet` = `dietTab`.`id`
-
             WHERE 
                 `crea`.`id` = :id 
             ');
@@ -71,27 +69,17 @@ class creature
 
         $creaturesQuery = $this->db->query(
             'SELECT
-                `id`
-                ,`miniImage`
-                ,`name`
+                `crea`.`id`
+                , `crea`.`miniImage`
+                , `crea`.`name`
             FROM
-                `r3f3r0_creatures`
+                `r3f3r0_creatures` AS `crea`
+            ORDER BY `name` ASC
             ');
             return $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
-    //récupère uniquement les infos dont j'ai besoin pour mon filtrage
-    public function getDinoFilters(){
-        $creatureQuery = $this->db->query(
-            'SELECT 
-               `name`, `id_period`
-            FROM
-                `r3f3r0_period`
-            ');
-        return $creatureQuery->fetchAll(PDO::FETCH_OBJ);
-            
-    }
-
+    //récupère les 3 derniers dinosaures ajoutés par la Date d'ajout
     public function getLatestCreatures(){
         $latestCreatureQuery = $this->db->query(
             'SELECT
@@ -109,36 +97,7 @@ class creature
             return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function filterCreaByDiet(){
-        $dietQuery = $this->db->query(
-            'SELECT 
-                `crea`.`name`
-                ,`miniImage`
-                ,`diet`.`name`
-            FROM
-              `r3f3r0_creatures` AS `crea`
-            INNER JOIN `r3f3r0_diet` AS `diet` ON `id_r3f3r0_diet` = `diet`.`id`
-            WHERE `diet`.`name` = \'Herbivore\'
-            ');
-    }
-
-    /* TEMPORAIRE */
-    public function filterDino($diet){
-        $latestCreatureQuery = $this->db->prepare(
-            'SELECT
-                *
-            FROM 
-                `r3f3r0_creatures`
-            WHERE 
-                 `id_r3f3r0_diet` = :diet
-            ');
-            $latestCreatureQuery->bindValue(':diet', $diet, PDO::PARAM_INT);
-            $latestCreatureQuery->execute();
-            return $latestCreatureQuery->fetchAll(PDO::FETCH_OBJ);
-    }
-    ##############################
-
-    // pas de magic quotes dans dans VALUES
+    // ATTENTION : pas de `magic quotes` dans dans VALUES
     public function addCreatureSimple(){
         $addCreatureQuery = $this->db->prepare(
             'INSERT INTO 
@@ -160,8 +119,8 @@ class creature
             return $addCreatureQuery->execute();
     }
 
-    //Alimentation
-    public function getDiets(){
+    //récupère le nom des alimentations
+    public function getCreaDiets(){
         $dietQuery = $this->db->query(
             'SELECT
                 `id`
@@ -174,8 +133,8 @@ class creature
     public function checkDietExistsById(){
 
     }
-
-    public function getCategories(){
+    //récupère le nom des catégories
+    public function getCreaCategories(){
         $catQuery = $this->db->query(
             'SELECT
                 `id`
@@ -185,8 +144,8 @@ class creature
         ');
         return $catQuery->fetchAll(PDO::FETCH_OBJ);
     }
-
-    public function getPeriod(){
+    //récupère le nom des périodes
+    public function getCreaPeriods(){
         $periodQuery = $this->db->query(
             'SELECT
                 `id`
@@ -197,7 +156,8 @@ class creature
         return $periodQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getDiscoverer(){
+    //non fonctionnel
+    public function getCreaDiscoverers(){
         $discovererQuery = $this->db->query(
             'SELECT
                 `id`
@@ -208,6 +168,7 @@ class creature
         return $discovererQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
+    //récupère les creatures en fonction de la période (page créature)
     public function getCreaturesByPeriod(){
         $creaturesByPeriodQuery = $this->db->prepare(
             'SELECT
@@ -224,5 +185,37 @@ class creature
         $creaturesByPeriodQuery->bindValue(':period', $this->period, PDO::PARAM_STR);
         $creaturesByPeriodQuery->execute();
         return $creaturesByPeriodQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    //method pour recherche dans un champ de recherche avec le NOM
+    public function searchCreaByName($search) {
+        $searchCreaByNameQuery = $this->db->prepare(
+            'SELECT 
+                `crea`.`id`
+                , `crea`.`miniImage`
+                , `crea`.`name`
+            FROM 
+                `r3f3r0_creatures` AS `crea`
+            WHERE `name` LIKE :search
+            ORDER BY `name` 
+        ');
+        $searchCreaByNameQuery->bindValue(':search', $search . '%', PDO::PARAM_STR);
+        $searchCreaByNameQuery->execute();
+        return $searchCreaByNameQuery->fetchAll(PDO::FETCH_OBJ);  
+    }
+
+    //compte le nombre de resultats de notre recherche
+    public function countSearchResult($search) {
+        $searchCreaByNameQuery = $this->db->prepare(
+            'SELECT 
+                COUNT(`id`) AS searchResult
+            FROM 
+                `r3f3r0_creatures`
+            WHERE `name` LIKE :search 
+        ');
+        $searchCreaByNameQuery->bindValue(':search', $search . '%', PDO::PARAM_STR);
+        $searchCreaByNameQuery->execute();
+        $data = $searchCreaByNameQuery->fetch(PDO::FETCH_OBJ); 
+        return $data->searchResult; 
     }
 }

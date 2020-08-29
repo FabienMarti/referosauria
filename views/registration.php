@@ -7,9 +7,12 @@ include '../controllers/registrationController.php';
 include '../controllers/breadcrumb.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
-<h2 class="text-center"><u>Inscription</u></h2>
-<form class="container border border-dark p-3 rounded" action="" method="POST">
+<h2 class="text-center titleStyle"><u>Inscription</u></h2>
 <p><?= isset($addUserMessage) ? $addUserMessage : '' ?></p>
+<?php if(isset($messageSuccess)){ ?>
+    <h1 class="text-center titleStyle"><?= $messageSuccess ?></h1>
+<?php }else{ ?>
+<form class="container border border-dark p-3 rounded divBackColor mb-5" action="" method="POST">
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
     </div>
@@ -56,10 +59,11 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
             <p class="text-danger"> <?= isset($formErrors['validate']) ? $formErrors['validate'] : '' ?> </p>
         </div>
         <div class="col text-right">
-            <button class="btn btn-success" type="submit" name="validateForm">Valider</button>
+            <button class="btn" type="submit" name="validateForm">Valider</button>
         </div>
     </div>
 </form>
+<?php } ?>
 <script>
 function usernameCheck(){
     var usernameRegex = /^[A-ÿ0-9_\-]{2,30}$/;
