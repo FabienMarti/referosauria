@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 27 août 2020 à 18:20
+-- Généré le :  Dim 30 août 2020 à 19:03
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -82,32 +82,40 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_creatures` (
   `discovery` text DEFAULT NULL,
   `etymology` text DEFAULT NULL,
   `paleobiology` text DEFAULT NULL,
-  `environment` varchar(50) NOT NULL,
-  `width` float DEFAULT NULL,
-  `height` float DEFAULT NULL,
-  `weight` float DEFAULT NULL,
-  `predatory` varchar(50) DEFAULT NULL,
+  `minWidth` float DEFAULT NULL,
+  `maxWidth` float DEFAULT NULL,
+  `minHeight` float DEFAULT NULL,
+  `maxHeight` float DEFAULT NULL,
+  `minWeight` float DEFAULT NULL,
+  `maxWeight` float DEFAULT NULL,
+  `predatory` varchar(50) DEFAULT 'Aucun',
   `id_r3f3r0_categories` int(11) DEFAULT NULL,
   `id_r3f3r0_period` int(11) DEFAULT NULL,
   `id_r3f3r0_discoverer` int(11) DEFAULT NULL,
   `id_r3f3r0_diet` int(11) DEFAULT NULL,
+  `id_r3f3r0_environment` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `r3f3r0_creatures_r3f3r0_categories_FK` (`id_r3f3r0_categories`),
   KEY `r3f3r0_creatures_r3f3r0_period_FK` (`id_r3f3r0_period`) USING BTREE,
   KEY `	r3f3r0_creatures_r3f3r0_discoverer_FK` (`id_r3f3r0_discoverer`),
-  KEY `	r3f3r0_creatures_r3f3r0_diet_FK` (`id_r3f3r0_diet`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  KEY `	r3f3r0_creatures_r3f3r0_diet_FK` (`id_r3f3r0_diet`),
+  KEY `r3f3r0_creatures_r3f3r0_environment_FK` (`id_r3f3r0_environment`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `r3f3r0_creatures`
 --
 
-INSERT INTO `r3f3r0_creatures` (`id`, `name`, `addDate`, `miniImage`, `mainImage`, `detailImage`, `description`, `discovery`, `etymology`, `paleobiology`, `environment`, `width`, `height`, `weight`, `predatory`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `id_r3f3r0_discoverer`, `id_r3f3r0_diet`) VALUES
-(10, 'Tyrannosaurus Rex', NULL, 'assets/img/rexHead.png', 'assets/img/tyrannosaurus.png', 'assets/img/tyrannosaurusSkeleton.jpg', 'Tyrannosaurus rex est l\'un des plus grands carnivores ayant vécu sur Terre. Le plus grand spécimen complet (mais pas le plus grand spécimen) découvert à ce jour,\r\n                            répertorié\r\n                            sous le code FMNH PR2081 et\r\n                            surnommé Sue, du nom de la paléontologue Sue Hendrickson, mesure 12,8 mètres de long et 4 mètres de haut au niveau des hanches.</br></br>\r\n                            Si Tyrannosaurus rex était plus grand qu\'Allosaurus, un autre théropode bien connu du Jurassique, il était peut-être légèrement moins imposant que Spinosaurus et\r\n                            Giganotosaurus, deux carnivores du Crétacé.</br></br>\r\n                            Il se tenait sur ses deux pattes arrière. Ses membres postérieurs, terminés par un pied à trois orteils griffus, étaient particulièrement puissants. Sa vision frontale\r\n                            lui\r\n                            permettait d\'évaluer\r\n                            efficacement les distances. Afin de pouvoir soutenir son immense tête, ses membres antérieurs étaient atrophiés (miniaturisés). Ses bras avaient néanmoins des muscles\r\n                            développés et ils disposaient de\r\n                            deux doigts avec des griffes acérées. Ils servaient sans doute à maintenir la nourriture, mais étaient trop courts (comparables à ceux d\'un homme) pour pouvoir la\r\n                            ramasser\r\n                            au sol. Le tyrannosaure\r\n                            était donc obligé de se pencher pour ronger les carcasses de ses proies. Certaines de ses dents, particulièrement impressionnantes (atteignant 18 cm de long), étaient\r\n                            crénelées comme des couteaux à\r\n                            viande. On suppose qu\'il pouvait déplacer l\'un de ses maxillaires vers l\'arrière.', 'En 1874, A. Lakes découvre près de Golden, dans le Colorado des dents ayant appartenu à Tyrannosaurus. Dans les années 1890, J. B. Hatcher rassemble des\r\n                        éléments post-crâniens à\r\n                        l\'est du Wyoming. À\r\n                        l\'époque, les paléontologues pensaient avoir trouvé des fossiles d\'une espèce de grand Ornithomimus (O. grandis), mais ils appartenaient en réalité à Tyrannosaurus rex. Les\r\n                        fragments de vertèbres\r\n                        découverts dans le Dakota du Sud par E. D. Cope en 1892 et nommés Manospondylus gigas ont également été reclassés en Tyrannosaurus rex.\r\n                        Les premiers restes significatifs furent découverts en 1902 et l\'animal fut décrit et baptisé par Henry Fairfield Osborn en 1905. Des découvertes de squelettes entiers, en 1988\r\n                        (au Montana) et 1990\r\n                        (Dakota du Sud), ont fait considérablement évoluer la connaissance du tyrannosaure.', 'Le genre Tyrannosaurus fut créé en 1905 par Henry Fairfield Osborn, alors conservateur du tout nouveau département de paléontologie des vertébrés à\r\n                        l’American Museum of Natural\r\n                        History de New York. Le\r\n                        nom de genre dérive, par l\'intermédiaire du latin, des racines grecques τύραννος / túrannos (maître, tyran) et σαῦρος / saûros (lézard). Quant à l\'épithète spécifique rex, elle\r\n                        signifie roi en latin.\r\n                        Osborn lui attribua cette appellation car ce fut un prédateur impressionnant, avec des griffes et des dents particulièrement développées. Le nom binominal complet Tyrannosaurus\r\n                        rex peut être ainsi\r\n                        traduit par roi des lézards tyrans, soulignant la domination imaginée de l\'animal sur les autres espèces de son temps11.\r\n\r\n                        On l\'appelle souvent T. rex, qui est l\'initiale du nom de genre suivie de l\'épithète spécifique. Cependant, le diminutif T-Rex est fréquemment utilisé et abusif puisque\r\n                        l\'espèce Tyrannosaurus rex ne\r\n                        possède pas de trait d\'union, et les termes spécifiques ne portent jamais de majuscule. Dans le cas présent le nom scientifique de l\'espèce est Tyrannosaurus rex, nom binominal\r\n                        où Tyrannosaurus est le\r\n                        terme générique, le genre, et où rex est le terme spécifique, ce dernier étant toujours écrit entièrement en minuscules. De même, la prononciation Ti-rex, popularisée après la\r\n                        sortie du film Jurassic\r\n                        Park en 1993, n\'a aucune raison d\'être dans le monde francophone puisque les noms binomiaux des espèces ne sont pas en anglais, mais en latin.\r\n\r\n                        Originellement nommé Dynamosaurus imperiosus (Saurien dynamique impérial) par Barnum Brown lors de sa découverte, ces noms de genre et d\'espèce ne perdureront cependant pas\r\n                        dans la littérature.', '', 'Amérique du nord (Etats-Unis)', 12, 4, 7, NULL, 4, 8, 1, 1),
-(11, 'Parasaurolophus', NULL, 'assets/img/parasaurolophusHead.jpg', 'assets/img/parasaurolophus', '', '', '', '', '', 'Amérique du Nord (Canada, Etats-Unis)', 8, 3, 5, NULL, 4, 8, 4, 2),
-(12, 'Plateosaurus', NULL, 'assets/img/plateosaurusHead.jpg', 'assets/img/plateosaurus.jpg', 'assets/img/plateosaurusSkeleton.jpg', '', '', '', '', '', 8, 0, 4, NULL, 4, 3, NULL, 2),
-(13, 'Baryonyx', NULL, 'assets/img/baryonyxHead.jpg', 'assets/img/baryonyx.jpg', 'assets/img/baryonyxSkeleton.jpg', '', '', '', '', 'Angleterre, Espagne, Portugal', 10, 2, 4, NULL, 4, 7, 6, 3),
-(14, 'Tyran', '0000-00-00', NULL, 'dtc', NULL, 'fuckoff ', NULL, NULL, NULL, 'USA', NULL, NULL, NULL, NULL, 4, 1, 1, 1);
+INSERT INTO `r3f3r0_creatures` (`id`, `name`, `addDate`, `miniImage`, `mainImage`, `detailImage`, `description`, `discovery`, `etymology`, `paleobiology`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, `minWeight`, `maxWeight`, `predatory`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `id_r3f3r0_discoverer`, `id_r3f3r0_diet`, `id_r3f3r0_environment`) VALUES
+(11, 'Parasaurolophus', '2019-01-01', '../assets/img/parasaurolophusHead.jpg', 'assets/img/parasaurolophus', '', '', '', '', '', 8, NULL, 3, NULL, 5, NULL, NULL, 4, 8, 4, 2, 1),
+(12, 'Plateosaurus', '2019-01-01', '../assets/img/plateosaurusHead.jpg', 'assets/img/plateosaurus.jpg', 'assets/img/plateosaurusSkeleton.jpg', '', '', '', '', 8, NULL, 0, NULL, 4, NULL, NULL, 4, 3, NULL, 2, 3),
+(13, 'Baryonyx', '2019-01-01', '../assets/img/baryonyxHead.jpg', 'assets/img/baryonyx.jpg', 'assets/img/baryonyxSkeleton.jpg', 'Baryonyx est un genre éteint de dinosaures théropodes de la famille des Spinosauridae, il est pourvu d\'un museau long et étroit et d\'une large griffe au niveau du pouce.  Il ne comprend pour l\'instant que l\'espèce Baryonyx walkeri bien que certains paléontologues considèrent que les espèces Suchomimus tenerensis1 et Cristatusaurus lapparenti2 sont toutes deux des espèces de Baryonyx et que Suchosaurus cultridens3 pourrait peut-être en être une autre.  Ce dinosaure vivait dans ce qui est aujourd\'hui l\'Angleterre, l\'Espagne et le Portugal au Barrémien (Crétacé inférieur). Il est un des rares dinosaures dont on connait précisément le régime alimentaire et il est pour l\'instant le seul théropode non-avien dont on est sûr qu\'il était au moins partiellement piscivore.', '', '', '', 10, NULL, 2, NULL, 4, NULL, NULL, 4, 7, 6, 3, 3),
+(15, 'Triceratops', '2020-08-28', '../assets/img/triceratopsHead.jpg', '../uploads/TriceratopsImagePrincipale_2020-08-28_18-07-52.jpg', NULL, 'On estime que Triceratops mesurait de 7 à 10 mètres de long (avec une moyenne allant de 8 à 9 mètres), mesurait jusqu\'à 3,50 mètres voire 4 au garrot et pesait de 5 à 10 tonnes (avec une moyenne de 7 à 8 tonnes)14. La caractéristique la plus distinctive est leur large crâne, parmi les plus grands de tous les animaux terrestres ayant vécu sur terre. Le crâne le plus large retrouvé (sur le specimen BYU 12183) mesure 2,5 m en largeur15, et atteint presque le tiers de la longueur de l\'animal13. Il portait une corne sur le museau, au-dessus des narines, et une paire de cornes, d\'une longueur approximative d\'un mètre, réparties au-dessus de chaque œil. À l\'arrière du crâne se dresse une collerette osseuse ornée d\'os époccipitaux chez certaines espèces. La plupart des autres cératopsidés possédaient de larges ouvertures sur leur collerette, contrairement aux tricératops qui avaient de très solides collerettes.\r\n\r\nLa peau du Triceratops est très particulière pour un dinosaure. Des reproductions de la peau d\'un spécimen ont montré que certaines espèces pourraient avoir été couvertes de poils, comme chez le cératopsidé plus primitif Psittacosaurus16.', 'Marsh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 8, NULL, 2, 1),
+(16, 'Mosasauroidea', '2020-08-28', '../uploads/MosasauroideaMiniImage_2020-08-28_18-13-02.jpg', '../uploads/MosasauroideaImagePrincipale_2020-08-28_18-13-02.jpg', NULL, 'Les mosasaures (Mosasauroidea) forment une super-famille éteinte de reptiles marins, souvent de grande taille, appartennant à l\'ordre des squamates, donc très proches des lézards et des serpents mais nullement apparenté au dinosaures, pliosaures ou aux ichthyosaures.\r\n\r\nLa famille tire son nom de la première espèce décrite, le Mosasaurus, littéralement « lézard de la Meuse » (du latin Mosa et du grec σαῦρος / saûros), ainsi nommé du fait de sa découverte en 17662 à proximité de Maastricht, ville traversée par la Meuse.', 'Gervais', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, 7, NULL, 1, 3),
+(20, 'Kentrosaurus', '2020-08-29', '../assets/img/Kentrosaurus/KentrosaurusMiniImage_2020-08-29_13-34-48.png', '../assets/img/Kentrosaurus/KentrosaurusImagePrincipale_2020-08-29_13-34-48.png', NULL, 'Kentrosaurus est un genre éteint de dinosaures herbivores stégosauriens africains ayant vécu au Jurassique supérieur. Il est apparenté au Stegosaurus du continent américain, ce qui est un exemple d\'évolution séparée liée à la dérive des continents. Kentrosaurus était cependant plus petit et ne possédait pas le même type d\'armure osseuse.\r\n\r\nUne seule espèce est connue : Kentrosaurus aethiopicus, elle a été décrite en 1915 par le paléontologue allemand Hennig qui le place dans la famille des stégosauridés1.', 'Hennig', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 6, NULL, 2, 4),
+(21, 'Pteranodon', '2020-08-29', '../assets/img/Pteranodon/PteranodonMiniImage_2020-08-29_13-42-42.jpg', '../assets/img/Pteranodon/PteranodonImagePrincipale_2020-08-29_13-42-42.jpg', NULL, 'Pteranodon mesurait 6 mètres d\'envergure. Sa masse a été estimée entre 20 et 93 kilogrammes, deux extrêmes désormais considérées fausses par Mark Witton et Mike Habib. À la différence de plus anciens ptérosaures, comme Rhamphorhynchus ou Pterodactylus, le ptéranodon était dépourvu de dents, avait la queue atrophiée et des os creux, très légers et souples, mais renforcés par un réseau interne de longerons. Ces caractères le rapprochent des oiseaux. Toutefois, les ptéranodons n\'étaient pas des oiseaux, bien qu\'issus de la même branche d\'archosaures, avec les dinosaures: les ornithodiriens. Ils avaient la peau protégée de poils et étaient probablement capables de réguler au moins partiellement leur température interne.\r\n\r\nLe ptéranodon est facilement reconnaissable à la longue et fine crête au dessus de son crâne. On n\'en connait pas encore l\'utilité exacte, mais l\'on suppose qu\'elle pouvait servir de contre-poids au bec, ou d\'attribut de séduction pour l\'accouplement, ou encore de gouvernail de direction en vol. Il a également été avancé que les mâles étaient dotés de plus longues crêtes, mais cela reste à prouver car le sexe des animaux fossilisés est difficilement identifiable.\r\n\r\nPlusieurs espèces de ptéranodons ont été nommées, telles que Pteranodon ingens, P. longiceps, P. sternbergi (souvent classée dans son propre genre Geosternbergia), etc.', 'Marsh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 7, 8, NULL, 1, 1),
+(22, 'Tyrannosaure', '2020-08-29', '../assets/img/creatures/tyrannosaure/tyrannosaureMiniImage_2020-08-29_15-29-04.png', '../assets/img/creatures/tyrannosaure/tyrannosaureImagePrincipale_2020-08-29_15-29-04.png', NULL, 'Tyrannosaurus, communément appelé tyrannosaure, est un genre éteint de dinosaures théropodes appartenant à la famille des Tyrannosauridae et ayant vécu durant la partie supérieure du Maastrichtien, dernier étage du système Crétacé1, il y a environ 68 à 66 millions d\'années2, dans ce qui est actuellement l\'Amérique du Nord. Tyrannosaurus rex, dont l\'étymologie du nom signifie « roi des lézards tyrans », est l\'une des plus célèbres espèces de dinosaure et l\'unique espèce de Tyrannosaurus si le taxon Tarbosaurus bataar n\'est pas considéré comme faisant partie du même genre. Tyrannosaurus fut l\'un des derniers dinosaures non-aviens à avoir vécu jusqu\'à l\'extinction survenue à la limite Crétacé-Paléocène il y a 66 millions d\'années1.\r\n\r\nTout comme les autres membres du clade des Tyrannosauridae, Tyrannosaurus était un carnassier bipède doté d\'un crâne massif équilibré par une longue queue puissante. Comparés à ses larges membres postérieurs, les bras du Tyrannosaurus étaient petits et atrophiés et ne portaient que deux doigts griffus. Même si d\'autres théropodes rivalisaient voire dépassaient Tyrannosaurus en taille, il est le plus grand Tyrannosauridae connu et l\'un des plus grands carnivores terrestres ayant existé sur la planète, avec une longueur de plus de 13,2 mètres3,4, 4 mètres à hauteur de hanches5 et un poids pouvant atteindre 8 tonnes6(pour les spécimens les plus lourds). De loin le plus grand des carnivores de son temps, le T. rex a pu être un superprédateur au sommet de la chaîne alimentaire, chassant notamment des herbivores de grande taille tels que les Hadrosauridae et les Ceratopsidae, même si certains experts suggèrent qu\'il était avant tout charognard.', 'Osborn', NULL, NULL, 12, 13, 4, 4.3, 6, 7, 'Aucun', 4, 8, NULL, 1, 1),
+(24, 'Dilophosaure', '2020-08-30', '../assets/img/creatures/dilophosaure/DilophosaureMiniImage_2020-08-30_13-43-48.jpg', '../assets/img/creatures/dilophosaure/DilophosaureImagePrincipale_2020-08-30_13-43-48.jpg', NULL, 'Le dilophosaure ou Dilophosaurus (en grec : « lézard à deux crêtes ») est un genre éteint de grands dinosaures théropodes carnivores, découvert en Chine et en Arizona où il vivait au Jurassique inférieur, il y a environ entre 199 et 183 Ma (millions d\'années), au cours des étages Sinémurien et Pliensbachien.\r\n\r\nLes premiers spécimens furent décrits en 1954, mais ce n\'est que plus d\'une décennie plus tard que leur genre reçut leur nom actuel. Le dilophosaure est l\'un des plus anciens théropodes connus, mais également l\'un des moins bien compris. Le dilophosaure est apparu à plusieurs reprises dans la culture populaire, notamment dans le film Jurassic Park, de Steven Spielberg, en 1993.', 'Welles', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 4, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -154,6 +162,32 @@ INSERT INTO `r3f3r0_discoverer` (`id`, `name`) VALUES
 (4, 'Parks'),
 (5, 'Meyer'),
 (6, 'Charig & Milner');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `r3f3r0_environment`
+--
+
+DROP TABLE IF EXISTS `r3f3r0_environment`;
+CREATE TABLE IF NOT EXISTS `r3f3r0_environment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `r3f3r0_environment`
+--
+
+INSERT INTO `r3f3r0_environment` (`id`, `name`) VALUES
+(1, 'Amérique du Nord'),
+(2, 'Amérique du Sud'),
+(3, 'Europe'),
+(4, 'Asie'),
+(5, 'Afrique'),
+(6, 'Océanie'),
+(7, 'Antartique');
 
 -- --------------------------------------------------------
 
@@ -262,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_users` (
   `id_r3f3r0_roles` int(11) NOT NULL DEFAULT 3,
   PRIMARY KEY (`id`),
   KEY `r3f3r0_users_r3f3r0_roles_FK` (`id_r3f3r0_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `r3f3r0_users`
@@ -300,7 +334,9 @@ INSERT INTO `r3f3r0_users` (`id`, `username`, `password`, `mail`, `avatar`, `ins
 (30, 'Savannah', 'PNU63OEG0IU', 'eu.nulla@scelerisqueneque.net', NULL, '2021-08-07', 3),
 (31, 'Yolanda', 'ZXZ23MIK2JA', 'lacus@magnisdis.edu', NULL, '2020-05-01', 3),
 (32, 'Kendall', 'RXC13VHT9XT', 'ante.Vivamus@blandit.edu', NULL, '2019-10-31', 3),
-(33, 'Colorado', 'IZS14FYJ5HX', 'lacus.varius@magnanec.ca', NULL, '2020-06-21', 3);
+(33, 'Colorado', 'IZS14FYJ5HX', 'lacus.varius@magnanec.ca', NULL, '2020-06-21', 3),
+(34, 'Fabien', 'Nekrose12', 'heeeeeee@hotmail.fr', NULL, '2020-08-29', 3),
+(35, 'Fabien2', 'Nekrose12', 'heeeeeee@hotm1ail.fr', NULL, '2020-08-29', 3);
 
 --
 -- Contraintes pour les tables déchargées
@@ -317,10 +353,11 @@ ALTER TABLE `r3f3r0_comments`
 -- Contraintes pour la table `r3f3r0_creatures`
 --
 ALTER TABLE `r3f3r0_creatures`
-  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_categories_FK` FOREIGN KEY (`id_r3f3r0_categories`) REFERENCES `r3f3r0_categories` (`id`),
-  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_diet_FK` FOREIGN KEY (`id_r3f3r0_diet`) REFERENCES `r3f3r0_diet` (`id`),
-  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_discoverer_FK` FOREIGN KEY (`id_r3f3r0_discoverer`) REFERENCES `r3f3r0_discoverer` (`id`),
-  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_period_FK` FOREIGN KEY (`id_r3f3r0_period`) REFERENCES `r3f3r0_period` (`id`);
+  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_categories_FK` FOREIGN KEY (`id_r3f3r0_categories`) REFERENCES `r3f3r0_categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_diet_FK` FOREIGN KEY (`id_r3f3r0_diet`) REFERENCES `r3f3r0_diet` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_discoverer_FK` FOREIGN KEY (`id_r3f3r0_discoverer`) REFERENCES `r3f3r0_discoverer` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_environment_FK` FOREIGN KEY (`id_r3f3r0_environment`) REFERENCES `r3f3r0_environment` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `r3f3r0_creatures_r3f3r0_period_FK` FOREIGN KEY (`id_r3f3r0_period`) REFERENCES `r3f3r0_period` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `r3f3r0_sources`
