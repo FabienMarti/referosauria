@@ -87,7 +87,7 @@
                     </ul>
                     <form class="form-inline my-2 my-lg-0" action="<?= $linkModif ?>views/dinoList.php" method="GET">
                         <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search" />
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="sendSearch">Rechercher</button>
+                        <button class="btn my-2 my-sm-0" type="sendSearch">Rechercher</button>
                     </form>
                 </div>
             </nav>

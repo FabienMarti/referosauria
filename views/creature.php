@@ -8,10 +8,19 @@ include '../controllers/breadcrumb.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
 ?>
 <section class="container-fluid my-2">
-        <h1 class="text-center my-5 creaName"><u><?= $showCreatureInfo->name ?></u></h1>
+        <div class="row">
+            <h1 class="text-center creaName col"><u><?= $showCreatureInfo->name ?></u></h1>
+            <div class="dropdown dropleft float-left my-auto">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="editCreature.php?id=<?= $showCreatureInfo->id ?>"><i class="fas fa-wrench"></i> Modifier</a>
+                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i> Supprimer créature</a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-2 text-center border divBackColor">
-                <p class="h6 text-center">Où a-t-on trouvé Tyrannosaure ?</p>
+                <p class="h6 text-center">Où a-t-on trouvé <?= $showCreatureInfo->name ?> ?</p>
                 <img src="<?= '../assets/img/local/' . $areaMap . '.jpg' ?>" class="img-fluid" />
                 <p class="h5 mt-5">Derniers sujets en rapport :</p>
                 <ul class="border" id="recentPostList">
@@ -36,7 +45,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
                             <tbody>
                                 <tr>
                                     <th scope="row">Habitat</th>
-                                    <td><?= $showCreatureInfo->environment ?></td>
+                                    <td><?= $showCreatureInfo->envName ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Période</th>
@@ -44,15 +53,15 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
                                 </tr>
                                 <tr>
                                     <th scope="row">Longueur</th>
-                                    <td><?= $showCreatureInfo->width ?> mètres</td>
+                                    <td><?= $showCreatureInfo->minWidth ?>m<?= isset($showCreatureInfo->maxWidth) ? '  à  ' .$showCreatureInfo->maxWidth . 'm': '' ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Hauteur</th>
-                                    <td><?= $showCreatureInfo->height ?> mètres</td>
+                                    <td><?= $showCreatureInfo->minHeight ?>m<?= isset($showCreatureInfo->maxHeight) ? '  à  ' .$showCreatureInfo->maxHeight . 'm': '' ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Poids</th>
-                                    <td><?= $showCreatureInfo->weight ?> tonnes</td>
+                                    <td><?= $showCreatureInfo->minWeight ?>t<?= isset($showCreatureInfo->maxWeight) ? '  à  ' .$showCreatureInfo->maxWeight . 't': '' ?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Prédateurs</th>
@@ -81,10 +90,10 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
             </div>
         </div>
 </section>
-<section class="mx-1">
+<!-- <section class="mx-1">
     <h1 class="text-center my-5 creaName">Plus de détails</h1>
     <div class="row">
-        <!-- <div class="col-md-2">
+        <div class="col-md-2">
             <table class="table table-sm">
                 <thead>
                     <th colspan="2" class="text-center">Classification</th>
@@ -122,7 +131,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
                     <td>Tyrannosaurinae</td>
                 </tr>
             </table>
-        </div> -->
+        </div>
         <div class="col-md-4">
             <table class="table table-sm divBackColor">
                 <thead>
@@ -184,6 +193,27 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
             <p class="text-right">Source : WIKIPEDIA</p>
         </div>
     </div>
-</section>
+</section> -->
+<!-- commentaires -->
+
+<!-- Modal de suppression-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteModal">Supprimer <?= $showCreatureInfo->name ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <i class="far fa-times-circle fa-8x text-danger"></i>
+        <p class="h3">Êtes vous sûr ?</p>
+        <p>Voulez-vous vraiment supprimer cette créature ? </br> Ce processus est irréversible.</p>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button> 
+        <a href="#" type="button" class="btn bg-danger">Supprimer</a>
+    </div>
+  </div>
+</div>
 <img src='https://img.icons8.com/ios/500/circled-up-2.png' onclick="backToTop()" class="creaName" alt='flèche' width="50px" height="50px" />
 <?php include 'parts/footer.php' ?>

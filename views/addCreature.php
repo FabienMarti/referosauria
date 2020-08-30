@@ -80,8 +80,8 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <select name="habitat"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
-                        foreach ($environmentArray as $area) {
-                    ?><option value="<?= $area ?>" <?= isset($_POST['habitat']) ? ($_POST['habitat'] == $area ? 'selected' : '') : '' ?>><?= $area ?></option><?php } ?>
+                        foreach ($showEnvironments as $area) {
+                    ?><option value="<?= $area->id ?>" <?= isset($_POST['habitat']) ? ($_POST['habitat'] == $area->id ? 'selected' : '') : '' ?>><?= $area->name ?></option><?php } ?>
                 </select>
                 <?php if (isset($formErrors['habitat'])) { ?>
                         <p class="text-danger text-center"><?= $formErrors['habitat'] ?></p>

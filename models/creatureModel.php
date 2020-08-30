@@ -41,21 +41,28 @@ class creature
                 , `crea`.`discovery`
                 , `crea`.`etymology`
                 , `crea`.`paleobiology`
-                , `crea`.`environment`
-                , `crea`.`width`
-                , `crea`.`height`
-                , `crea`.`weight`
+                , `crea`.`minWidth`
+                , `crea`.`maxWidth`
+                , `crea`.`minHeight`
+                , `crea`.`maxHeight`
+                , `crea`.`minWeight`
+                , `crea`.`maxWeight`
                 , `crea`.`predatory`
                 , `crea`.`id_r3f3r0_categories`
                 , `crea`.`id_r3f3r0_period` AS `period`
                 , `crea`.`id_r3f3r0_discoverer`
                 , `crea`.`id_r3f3r0_diet` AS `diet`
+                ,`perTab`.`id` AS `perId`
                 ,`perTab`.`name` AS `perName`
+                ,`dietTab`.`id` AS `dietId`
                 ,`dietTab`.`name` AS `dietName`
+                ,`envTab`.`id` AS `envId`
+                ,`envTab`.`name` AS `envName`
             FROM
                 `r3f3r0_creatures` AS `crea`
             INNER JOIN `r3f3r0_period` AS `perTab` ON `crea`.`id_r3f3r0_period` = `perTab`.`id`
             INNER JOIN `r3f3r0_diet` AS `dietTab` ON `crea`.`id_r3f3r0_diet` = `dietTab`.`id`
+            INNER JOIN `r3f3r0_environment` AS `envTab` ON `crea`.`id_r3f3r0_environment` = `envTab`.`id`
             WHERE 
                 `crea`.`id` = :id 
             ');
@@ -156,6 +163,18 @@ class creature
         return $periodQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
+    //récupère le nom des habitats
+    public function getCreaEnvironments(){
+        $envQuery = $this->db->query(
+            'SELECT
+                `id`
+                ,`name`
+            FROM
+                `r3f3r0_environment`
+        ');
+        return $envQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
     //non fonctionnel
     public function getCreaDiscoverers(){
         $discovererQuery = $this->db->query(
@@ -233,4 +252,5 @@ class creature
         $data = $creatureExistsQuery->fetch(PDO::FETCH_OBJ);
         return $data->isCreatureExists;
     }
+
 }

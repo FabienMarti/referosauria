@@ -1,7 +1,7 @@
 <?php
     //je créé une nouvelle instance de la classe 'creature'
     $creature = new creature();
-    $environmentArray = array('1' => 'Amérique du Nord', '2' => 'Amérique du Sud', '3' => 'Europe', '4' => 'Asie', '5' => 'Afrique', '6' => 'Océanie', '7' => 'Antartique' );
+    $showEnvironments = $creature->getCreaEnvironments();
 
     if(!empty($_GET['id'])){
         //récupère l'id de la créature en question
@@ -13,14 +13,15 @@
         //va chercher les créatures de la même période
         $showCreaturesByPeriod = $creature->getCreaturesByPeriod();
     }else{
-       //coder quelquechose
+       header('Location: dinoList.php');
+       exit;
     }
+
     $areaMap = 0;
-    if(in_array($showCreatureInfo->environment, $environmentArray)){
-        foreach ($environmentArray as $area => $title) {
-            if($showCreatureInfo->environment == $title){
-                $areaMap =  $area;
-            }
+    foreach ($showEnvironments as $env) {
+        if($showCreatureInfo->envId == $env->id){
+            $areaMap =  $env->id;
         }
     }
+    
    

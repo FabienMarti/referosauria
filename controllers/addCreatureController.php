@@ -15,6 +15,7 @@ $showDiets = $creature->getCreaDiets();
 $showCategories = $creature->getCreaCategories();
 $showPeriods = $creature->getCreaPeriods();
 $showDiscoverers = $creature->getCreaDiscoverers();
+$showEnvironments = $creature->getCreaEnvironments();
 
 
 
@@ -119,11 +120,7 @@ if(isset($_POST['sendNewCrea'])){
 
     //Contrôle de l'habitat
     if(!empty($_POST['habitat'])) {
-        if(in_array($_POST['habitat'], $environmentArray)) {
-            $creature->environment = htmlspecialchars($_POST['habitat']);
-        }else{
-            $formErrors['habitat'] = 'Une erreur est survenue';
-        }
+        $creature->environment = htmlspecialchars($_POST['habitat']);  
     }else{
         $formErrors['habitat'] = 'Veuillez sélectionner un habitat';
     }
