@@ -67,7 +67,7 @@ if(isset($resultsNumber) &&  $resultsNumber == 0){ ?>
                 foreach ($showCreaturesInfo as $creature) {
                 ?><div class="col-3">
                         <a href="creature.php?id=<?= $creature->id ?>">
-                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
+                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
                             <p class="creaName"><?= $creature->name ?></p>
                         </a>
                 </div><?php

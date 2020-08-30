@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $_SESSION['isConnected'] = true;
+    $_SESSION['isConnected'] = false;
     //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
     $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
 ?>

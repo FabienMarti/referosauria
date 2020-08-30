@@ -109,7 +109,7 @@ class creature
         $addCreatureQuery = $this->db->prepare(
             'INSERT INTO 
                 `r3f3r0_creatures` 
-                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`)
+                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`)
             VALUES 
                 (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery)
             ');

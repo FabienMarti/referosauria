@@ -130,7 +130,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
                 <textarea class="form-control" rows="20"><?= $showCreatureInfo->description ?></textarea>
 <!-- Probleme BDD pour les sources -->
                 <p class="text-right">
-                    <input type="text" name="descSource" value="Source : WIKIPEDIA" />
+                    <i class="fas fa-wrench"></i><input type="text" name="descSource" value="Source : WIKIPEDIA" />
                 </p>
             </div>
             <div class="col-md-1 text-center divBackColor">
@@ -139,6 +139,9 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Li
                     <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" width="100px" height="100px"  class="m-3" /></a></div>
                 <?php } ?>
             </div>
+        </div>
+        <div class="form-group col-2">
+            <input type="submit" class="btn form-control" name="sendEditedCrea" value="Valider l'édition" />
         </div>
         </form>
 </section>

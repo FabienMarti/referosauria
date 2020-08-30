@@ -44,7 +44,6 @@ include 'controllers/homeController.php';
                         bien distincts, les Theropoda, qui comprennent la totalité des dinosaures carnivores, et les Sauropodomorpha, munis d'un long cou, d'une petite tête et d'une très longue
                         queue.
                     </p>
-
             </div>
        
             <div class="col-md-2 text-center border divBackColor p-3">
