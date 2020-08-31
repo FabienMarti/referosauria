@@ -75,7 +75,8 @@ if(isset($resultsNumber) &&  $resultsNumber == 0){ ?>
 <?php } ?>
 <!---------------------------------->
 <div class="text-center m-3">
-    <?php //affiche le numero des page
+    <!-- Affiche le numero des page -->
+    <?php 
         $beginPage = $page - 3;
 
         if($beginPage < 1){
@@ -90,16 +91,20 @@ if(isset($resultsNumber) &&  $resultsNumber == 0){ ?>
         if ($page > 4){ ?>
             <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a><?php 
         }
+
         $endPage = $page + 3;
         if($endPage > $pageNumber) {
             $endPage = $pageNumber;
         }
+
         for ($i = $beginPage; $i <= $endPage; $i++) {?>
             <a href="dinoList.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-danger' : '' ?>"><?= $i ?></a><?php 
         } 
+
         if ($page < $pageNumber - 3){ ?>
             <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a>
         <?php }
+
         if ($page != $pageNumber){ ?>
             <a href="dinoList.php?page=<?=($page + 1) ?>" class="btn"><i class="fas fa-angle-right"></i></a>
             <a href="dinoList.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>

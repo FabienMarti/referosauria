@@ -11,7 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
         <link href="<?= $linkModif ?>assets/css/style.css" rel="stylesheet" type="text/css" />
         <!-- On vérifie que la variable $pageTitle est définie sur la page en question, sinon on affiche 'Non-Défini' -->
         <title><?= isset($pageTitle) ? $pageTitle : 'Non-Défini' ?></title>
@@ -37,13 +38,7 @@
                             <a class="nav-link text-white" href="<?= $linkModif ?>views/discover.php">Découvrir</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Contribuer
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                <a class="dropdown-item" href="<?= $linkModif ?>views/addCreature.php">Déposer un article</a>
-                                <a class="dropdown-item" href="<?= $linkModif ?>views/contribute">Faire un don</a>
-                            </div>
+                        <a class="nav-link text-white" href="<?= $linkModif ?>views/addCreature.php">Ajouter une créature</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

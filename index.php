@@ -10,7 +10,7 @@ include 'controllers/homeController.php';
         <div class="row justify-content-around">
             <!--Les derniers posts-->
             <div id="recentPostList" class="col-md-2 border divBackColor p-3">
-                <p class="h4 text-center titleStyle">Les derniers posts</p>
+            <p class="h4 text-center titleStyle">Les derniers posts</p>
                 <ul>
                     <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
                     <li>12/05/2020</li>

@@ -83,7 +83,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
                 <p class="text-right">Source : WIKIPEDIA</p>
             </div>
             <div class="col-md-1 text-center divBackColor">
-                <p class="h5 text-center">Ils ont vécus dans la même période :</p>
+                <p class="h5 text-center">Ils ont vécu dans la même période :</p>
                 <?php foreach($showCreaturesByPeriod as $crea){ ?>
                     <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" width="100px" height="100px"  class="m-3" /></a></div>
                 <?php } ?>
