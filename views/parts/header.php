@@ -18,33 +18,6 @@
     </head>
 <body>
 <header class="container-fluid p-0 m-0">
-        <!-- BG + Titre -->
-        <div id="headerBG" class="row m-0">
-            <div class="col-md-4 offset-md-4 text-center my-auto text-white">
-                <h1 class="mainTitle titleStyle">REFEROSAURIA</h1>
-            </div>
-            <div class="col-md-2 offset-md-2 my-auto text-center border border-danger h-100 "><?php
-                if($_SESSION['isConnected'] == true){
-                    ?>
-                    <div class="row">
-                    <img class="img-fluid col-4" src="<?= $linkModif ?>assets/img/profilPictures/member.png" width="100px" height="100px" />
-                    <div class="col-8 text-white"><p>Bonjour NOMDUTILISATEUR</p></div>
-                    
-
-
-                    <a class="btn col-6" href="<?= $linkModif ?>views/profil.php">Profil</a>
-                    <a class="btn col-6" href="<?= $linkModif ?>views/logout.php">Déconnexion</a>
-                    </div>
-                    
-                    
-                    
-                    <?php
-                }else{
-                    ?><a class="btn" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
-                    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a><?php
-                }?>
-            </div>
-        </div>
 <!--NavBar-->
             <nav id="mainNav" class="navbar navbar-expand-md">
                 <a class="navbar-brand d-md-none" href="#">Menu</a>
@@ -58,7 +31,7 @@
                             <a class="nav-link text-white" href="<?= $linkModif ?>index.php"><i class="fas fa-home"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= $linkModif ?>views/dinoList.php">Liste des dinosaures</a>
+                            <a class="nav-link text-white" href="<?= $linkModif ?>views/dinoList.php?page=1">Liste des dinosaures</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white" href="<?= $linkModif ?>views/discover.php">Découvrir</a>
@@ -85,10 +58,22 @@
                             <a class="nav-link  text-white" href="<?= $linkModif ?>views/forum.php">Forum</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0" action="<?= $linkModif ?>views/dinoList.php" method="GET">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search" />
-                        <button class="btn my-2 my-sm-0" type="sendSearch">Rechercher</button>
-                    </form>
+                    <div class="text-center my-auto text-white">
+                <h1 class="mainTitle titleStyle">REFEROSAURIA</h1>
+            </div>
+            <div class="my-auto text-center border border-danger h-100 "><?php
+                if($_SESSION['isConnected'] == true){
+                    ?>
+                        <a class="btn" href="<?= $linkModif ?>views/profil.php">Profil</a>
+                        <a class="btn" href="<?= $linkModif ?>views/logout.php">Déconnexion</a>
+                   <?php
+                }else{
+                    ?>
+                    <a class="btn" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
+                    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a>
+                    <?php
+                }?>
+            </div>
                 </div>
             </nav>
         </header>

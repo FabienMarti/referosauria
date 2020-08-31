@@ -16,9 +16,9 @@ body{
 .cutPara{
 
     overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
 }
 /****** Couleurs élement pricipaux ******/
@@ -97,15 +97,6 @@ body{
 ol{
     list-style: none;
 }
-#triasGTS{
-background-color: #812B92;
-}
-#jurassicGTS{
-background-color: #34B2C9;
-}
-#cretaGTS{
-background-color: #7FC64E;
-}
 /****** PAGE CREATURE ******/
 
 #recentPostList li{
@@ -148,4 +139,3 @@ background-color: #7FC64E;
     background-image: url('../img/dinosaurBannerBGxs.png');
     }
 }
-

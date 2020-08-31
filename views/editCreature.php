@@ -5,7 +5,7 @@ include '../controllers/editCreatureController.php';
 $pageTitle =  'Edition de ' . $showCreatureInfo->name; 
 include 'parts/header.php';
 include '../controllers/breadcrumb.php';
-generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'creature.php?id=' . $showCreatureInfo->id => $showCreatureInfo->name, 'final' => 'Edition de ' . $showCreatureInfo->name));
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'creature.php?id=' . $showCreatureInfo->id => $showCreatureInfo->name, 'final' => 'Edition de ' . $showCreatureInfo->name));
 ?>
 <section class="container-fluid my-2">
     <form action="" method="POST">

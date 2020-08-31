@@ -10,10 +10,10 @@
 <section class="container-fluid p-0">
 <!-- Filtrage recherche -->
     <div class="collapse filter" id="collapseExample">
-        <form method="GET" action="" class="p-5">
+        <form method="POST" action="" class="py-1 px-5">
             <div class="row my-1">
                 <!-- Filtrage période -->
-                <select class="form-control col" name="period">
+                <select class="form-control form-control-sm col" name="period">
                     <option value="" disabled selected>Choisissez une période</option> 
                     <?php
                         foreach ($showCreaPeriods as $period) {
@@ -21,7 +21,7 @@
                         }
                 ?></select>
                 <!-- Alimentation -->
-                <select class="form-control offset-1 col" name="diet">
+                <select class="form-control form-control-sm offset-1 col" name="diet">
                     <option value="" disabled selected>Choisissez l'alimentation</option> 
                     <?php
                         foreach ($showCreaDiets as $diet) {
@@ -31,11 +31,11 @@
             </div>
                 <!-- Paleonthologue à l'origine de la découverte -->
             <div class="row">
-                <select class="form-control col" name="discoverer">
+                <select class="form-control form-control-sm col" name="discoverer">
                     <option value="" disabled selected>Paléonthologue</option> 
                     </select>
                 <!-- Catégorie -->
-                <select class="form-control offset-1 col" name="category">
+                <select class="form-control form-control-sm offset-1 col" name="category">
                     <option value="" disabled selected>Catégorie de créature</option> 
                     <?php
                         foreach ($showCreaCategories as $category) {
@@ -45,13 +45,11 @@
             </div>
             <div class="row my-1">
                 <!-- champ de recherche -->
-                <input class="form-control offset-8 col-2" id="search" name="search" type="text" placeholder="Rechercher une créature ..."  />
+                <input class="form-control offset-8 col-2" id="searchField" name="searchField" type="text" placeholder="Rechercher une créature ..."  />
                 <!-- envoi du formulaire -->
-                <button type="submit" class="btn col-2" name="sendSearch">Rechercher</button>
+                <button type="submit" class="btn col-1  form-control" name="searchCrea">Rechercher</button>
             </div>
         </form>
-        <form method="GET" action="">
-</form>
     </div>
     <div class="text-center h-25 filter">
         <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="returnArrow(JSarrow)"><i id="JSarrow" class="fas fa-arrow-down"></i></a>   
@@ -64,7 +62,7 @@ if(isset($resultsNumber) &&  $resultsNumber == 0){ ?>
 <div class="container mt-5">
     <div class="row text-center justify-content-around">
             <?php
-                foreach ($showCreaturesInfo as $creature) {
+                foreach ($showCreaList  as $creature) {
                 ?><div class="col-3">
                         <a href="creature.php?id=<?= $creature->id ?>">
                             <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
@@ -75,6 +73,38 @@ if(isset($resultsNumber) &&  $resultsNumber == 0){ ?>
     </div>
 </div> 
 <?php } ?>
+<!---------------------------------->
+<div class="text-center m-3">
+    <?php //affiche le numero des page
+        $beginPage = $page - 3;
+
+        if($beginPage < 1){
+            $beginPage = 1;
+        }
+
+        if ($page != 1){ ?>
+            <a href="dinoList.php?page=1" class="btn"><i class="fas fa-angle-double-left"></i></a>
+            <a href="dinoList.php?page=<?=($page - 1)?>" class="btn"><i class="fas fa-angle-left"></i></a><?php
+        }
+
+        if ($page > 4){ ?>
+            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a><?php 
+        }
+        $endPage = $page + 3;
+        if($endPage > $pageNumber) {
+            $endPage = $pageNumber;
+        }
+        for ($i = $beginPage; $i <= $endPage; $i++) {?>
+            <a href="dinoList.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-danger' : '' ?>"><?= $i ?></a><?php 
+        } 
+        if ($page < $pageNumber - 3){ ?>
+            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a>
+        <?php }
+        if ($page != $pageNumber){ ?>
+            <a href="dinoList.php?page=<?=($page + 1) ?>" class="btn"><i class="fas fa-angle-right"></i></a>
+            <a href="dinoList.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>
+        <?php } ?>
+</div>
 <!-- Fin affichage resultat recherche -->    
 </section>
 <script>

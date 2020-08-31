@@ -5,7 +5,7 @@ include '../controllers/creatureController.php';
 $pageTitle =  $showCreatureInfo->name; 
 include 'parts/header.php';
 include '../controllers/breadcrumb.php';
-generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
 ?>
 <section class="container-fluid my-2">
         <div class="row">

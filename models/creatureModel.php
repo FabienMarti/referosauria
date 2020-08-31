@@ -76,11 +76,11 @@ class creature
 
         $creaturesQuery = $this->db->query(
             'SELECT
-                `crea`.`id`
-                , `crea`.`miniImage`
-                , `crea`.`name`
+                `id`
+                , `miniImage`
+                , `name`
             FROM
-                `r3f3r0_creatures` AS `crea`
+                `r3f3r0_creatures`
             ORDER BY `name` ASC
             ');
             return $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
@@ -253,4 +253,48 @@ class creature
         return $data->isCreatureExists;
     }
 
+/******************************************************************************************/
+
+//Methode de filtrage (recherche)
+    function getCreaList($limitArray = array() ,$searchArray = array()) {
+        //Si nos champs de recherche contiennent des valeurs alors on stock notre clause WHERE dans une variable avec tous nos paramètres
+        if(count($searchArray) > 0){
+            $where = 'WHERE ';
+            foreach($searchArray as $fieldName => $search) {
+                //Vérifie si un JOKER existe dans nos champs de recherche
+                if (strrchr($search, '%')){
+                    //Ajoute LIKE si un JOKER est présent
+                    $whereArray[] = '`' . $fieldName . '` LIKE :' . $fieldName ;
+                }else {
+                    //Compare sans LIKE
+                    $whereArray[] = '`' . $fieldName . '` = :' . $fieldName ;
+                }
+            }
+            //Concatène le tableau whereArray avec un séparateur 'AND'
+            $where .= implode(' AND ', $whereArray);
+        }
+        /* Requete SQL : On concatène notre variable $where qui contient notre clause à l'aide
+        d'une ternaire pour ne l'ajouter qu'à condition quelle existe */
+        $creaListQuery = $this->db->prepare(
+            'SELECT
+                `id`
+                , `miniImage`
+                , `name`
+            FROM
+                `r3f3r0_creatures`
+            ' . (isset($where) ? $where : '') . '
+            ORDER BY `name` ASC '
+                . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
+        );
+        //Boucle pour créer nos bindValues qui dépendent de nos champs de recherche
+        foreach($searchArray as $fieldName => $search) {
+            $creaListQuery->bindvalue(':' . $fieldName, $search , PDO::PARAM_STR);
+        }
+        if (count($limitArray) == 2){
+            $creaListQuery->bindvalue(':limit', $limitArray['limit'], PDO::PARAM_INT);
+            $creaListQuery->bindvalue(':offset', $limitArray['offset'], PDO::PARAM_INT);
+        }
+        $creaListQuery->execute();
+        return $creaListQuery->fetchAll(PDO::FETCH_OBJ); 
+    }
 }

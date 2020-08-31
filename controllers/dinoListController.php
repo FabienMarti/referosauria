@@ -7,15 +7,32 @@ $showCreaPeriods = $creature->getCreaPeriods();
 $showCreaDiets = $creature->getCreaDiets();
 $showCreaCategories = $creature->getCreaCategories();
 
-//On rédéfinie la VAR des resultats en avec une methode associé qui affiche tout, ou le resultat de notre recherche
-if(isset($_GET['sendSearch'])){
-    $search = htmlspecialchars($_GET['search']);
-    $resultsNumber = $creature->countSearchResult($search);
-    if($resultsNumber == 0){
-        $searchMessage = 'Aucun resultat ne correspond à votre recherche';
-    }else{
-        $showCreaturesInfo = $creature->searchCreaByName($search);
-    }
-}else{
-    $showCreaturesInfo = $creature->getDinosInfo();
+/************************************ SECTION DE RECHERCHE et PAGINATION ***************************/
+$search = array();
+if (isset($_GET['page'])){
+    $page = $_GET['page'];
+}else {
+    $page = 1;
 }
+//Défini le nombre de resultats par page
+$limitArray = ['limit'=>5];
+//Calcule l'offset
+$limitArray['offset'] = ($page * $limitArray['limit']) - $limitArray['limit'];
+//Affiche le résultat de la recherche si le formulaire est validé, sinon affiche toute la liste avec la pagination
+if(isset($_POST['searchCrea'])) {
+    if (!empty($_POST['searchField'])){
+        $search['name'] = htmlspecialchars($_POST['searchField']) . '%';
+    }
+    /* if (!empty($_POST['searchbydate']) && preg_match($regexBirthDate, $_POST['searchbydate'])){
+        $search['birthdate'] = htmlspecialchars($_POST['searchbydate']);
+    } */
+    $showCreaList = $creature->getCreaList($limitArray, $search);
+    //Compte le nombre de pages en fonction du nombre de resultats
+    $pageNumber = ceil(count($creature->getCreaList(array(),$search)) / $limitArray['limit']);
+}else {
+    //Affiche la liste des creatures normalement
+    $showCreaList = $creature->getCreaList($limitArray);
+    //Compte le nombre de pages
+    $pageNumber = ceil(count($creature->getCreaList()) / $limitArray['limit']);
+}
+/*************************************************************************************************/
