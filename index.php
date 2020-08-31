@@ -28,7 +28,6 @@ include 'controllers/homeController.php';
             </div>
             <!--Presentation Dino-->
             <div class="col-md-6 border border-dark divBackColor p-3">
-            
                     <p class="text-justify my-auto">
                     <img class="img-fluid gertie" src="assets/img/gertie.png" alt="gertie le dinosaure" title="Gertie le Dinosaure" />
                         Les dinosaures (du grec deinos, « terrible, magnifique », et sauros, « lézard ») sont des diapsides archosaures qui ont dominé les
@@ -45,7 +44,6 @@ include 'controllers/homeController.php';
                         queue.
                     </p>
             </div>
-       
             <div class="col-md-2 text-center border divBackColor p-3">
                 <p class="h4 titleStyle">Les derniers Quizz</p>
                 <div class="border border-info my-1 py-3">

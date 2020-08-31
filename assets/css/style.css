@@ -23,7 +23,7 @@ body{
 }
 /****** Couleurs élement pricipaux ******/
 #headerBG{
-    background-color : #25283D;
+    background-color : transparent;;
     height: 150px;
 }
 .creaName{
@@ -83,6 +83,7 @@ body{
 .gertie {
     float: right;
     padding: 50px;
+    padding-right: 0px;
     /* défini les contours de l'image qui est en transparence*/
     shape-outside: polygon(60.65% 33px, 70.86% 22.66%, 73.45% 28.89%, 74.52% 51.97%, 82.27% 49.92%, 91.32% 55.56%, 77.05% 64.17%, 68.57% 72.11%, 70.52% 79.05%, 71.93% 84.03%, 60.94% 89.08%, 50% 88.22%, 50.41% 80.43%, 44.65% 79.55%, 44.36% 73.73%, 38.74% 70.34%, 35.04% 65.14%, 38.72% 58.44%, 36.06% 51.51%, 27.93% 52.55%, 20.26% 59.63%, 12.59% 63.63%, 31px 55.56%, 23.94% 40.04%, 39.65% 31.27%);   }
 
