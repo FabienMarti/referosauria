@@ -10,7 +10,7 @@
 <section class="container-fluid p-0">
 <!-- Filtrage recherche -->
     <div class="collapse filter" id="collapseExample">
-        <form method="POST" action="" class="py-1 px-5">
+        <form method="POST" action="dinoList.php?page=1" class="py-1 px-5">
             <div class="row my-1">
                 <!-- Filtrage période -->
                 <select class="form-control form-control-sm col" name="period">

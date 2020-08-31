@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 30 août 2020 à 19:03
+-- Généré le :  lun. 31 août 2020 à 19:58
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `r3f3r0_categories`
@@ -43,8 +43,10 @@ INSERT INTO `r3f3r0_categories` (`id`, `name`) VALUES
 (4, 'Dinosaure'),
 (5, 'Mammifère'),
 (6, 'Réptile marin'),
-(7, 'Réptile volant'),
-(8, 'Autres');
+(7, 'Réptile terrestre'),
+(8, 'Reptile volant'),
+(10, 'Insectes'),
+(11, 'Autres');
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_creatures` (
   KEY `	r3f3r0_creatures_r3f3r0_discoverer_FK` (`id_r3f3r0_discoverer`),
   KEY `	r3f3r0_creatures_r3f3r0_diet_FK` (`id_r3f3r0_diet`),
   KEY `r3f3r0_creatures_r3f3r0_environment_FK` (`id_r3f3r0_environment`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `r3f3r0_creatures`
@@ -115,7 +117,12 @@ INSERT INTO `r3f3r0_creatures` (`id`, `name`, `addDate`, `miniImage`, `mainImage
 (20, 'Kentrosaurus', '2020-08-29', '../assets/img/Kentrosaurus/KentrosaurusMiniImage_2020-08-29_13-34-48.png', '../assets/img/Kentrosaurus/KentrosaurusImagePrincipale_2020-08-29_13-34-48.png', NULL, 'Kentrosaurus est un genre éteint de dinosaures herbivores stégosauriens africains ayant vécu au Jurassique supérieur. Il est apparenté au Stegosaurus du continent américain, ce qui est un exemple d\'évolution séparée liée à la dérive des continents. Kentrosaurus était cependant plus petit et ne possédait pas le même type d\'armure osseuse.\r\n\r\nUne seule espèce est connue : Kentrosaurus aethiopicus, elle a été décrite en 1915 par le paléontologue allemand Hennig qui le place dans la famille des stégosauridés1.', 'Hennig', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 6, NULL, 2, 4),
 (21, 'Pteranodon', '2020-08-29', '../assets/img/Pteranodon/PteranodonMiniImage_2020-08-29_13-42-42.jpg', '../assets/img/Pteranodon/PteranodonImagePrincipale_2020-08-29_13-42-42.jpg', NULL, 'Pteranodon mesurait 6 mètres d\'envergure. Sa masse a été estimée entre 20 et 93 kilogrammes, deux extrêmes désormais considérées fausses par Mark Witton et Mike Habib. À la différence de plus anciens ptérosaures, comme Rhamphorhynchus ou Pterodactylus, le ptéranodon était dépourvu de dents, avait la queue atrophiée et des os creux, très légers et souples, mais renforcés par un réseau interne de longerons. Ces caractères le rapprochent des oiseaux. Toutefois, les ptéranodons n\'étaient pas des oiseaux, bien qu\'issus de la même branche d\'archosaures, avec les dinosaures: les ornithodiriens. Ils avaient la peau protégée de poils et étaient probablement capables de réguler au moins partiellement leur température interne.\r\n\r\nLe ptéranodon est facilement reconnaissable à la longue et fine crête au dessus de son crâne. On n\'en connait pas encore l\'utilité exacte, mais l\'on suppose qu\'elle pouvait servir de contre-poids au bec, ou d\'attribut de séduction pour l\'accouplement, ou encore de gouvernail de direction en vol. Il a également été avancé que les mâles étaient dotés de plus longues crêtes, mais cela reste à prouver car le sexe des animaux fossilisés est difficilement identifiable.\r\n\r\nPlusieurs espèces de ptéranodons ont été nommées, telles que Pteranodon ingens, P. longiceps, P. sternbergi (souvent classée dans son propre genre Geosternbergia), etc.', 'Marsh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 7, 8, NULL, 1, 1),
 (22, 'Tyrannosaure', '2020-08-29', '../assets/img/creatures/tyrannosaure/tyrannosaureMiniImage_2020-08-29_15-29-04.png', '../assets/img/creatures/tyrannosaure/tyrannosaureImagePrincipale_2020-08-29_15-29-04.png', NULL, 'Tyrannosaurus, communément appelé tyrannosaure, est un genre éteint de dinosaures théropodes appartenant à la famille des Tyrannosauridae et ayant vécu durant la partie supérieure du Maastrichtien, dernier étage du système Crétacé1, il y a environ 68 à 66 millions d\'années2, dans ce qui est actuellement l\'Amérique du Nord. Tyrannosaurus rex, dont l\'étymologie du nom signifie « roi des lézards tyrans », est l\'une des plus célèbres espèces de dinosaure et l\'unique espèce de Tyrannosaurus si le taxon Tarbosaurus bataar n\'est pas considéré comme faisant partie du même genre. Tyrannosaurus fut l\'un des derniers dinosaures non-aviens à avoir vécu jusqu\'à l\'extinction survenue à la limite Crétacé-Paléocène il y a 66 millions d\'années1.\r\n\r\nTout comme les autres membres du clade des Tyrannosauridae, Tyrannosaurus était un carnassier bipède doté d\'un crâne massif équilibré par une longue queue puissante. Comparés à ses larges membres postérieurs, les bras du Tyrannosaurus étaient petits et atrophiés et ne portaient que deux doigts griffus. Même si d\'autres théropodes rivalisaient voire dépassaient Tyrannosaurus en taille, il est le plus grand Tyrannosauridae connu et l\'un des plus grands carnivores terrestres ayant existé sur la planète, avec une longueur de plus de 13,2 mètres3,4, 4 mètres à hauteur de hanches5 et un poids pouvant atteindre 8 tonnes6(pour les spécimens les plus lourds). De loin le plus grand des carnivores de son temps, le T. rex a pu être un superprédateur au sommet de la chaîne alimentaire, chassant notamment des herbivores de grande taille tels que les Hadrosauridae et les Ceratopsidae, même si certains experts suggèrent qu\'il était avant tout charognard.', 'Osborn', NULL, NULL, 12, 13, 4, 4.3, 6, 7, 'Aucun', 4, 8, NULL, 1, 1),
-(24, 'Dilophosaure', '2020-08-30', '../assets/img/creatures/dilophosaure/DilophosaureMiniImage_2020-08-30_13-43-48.jpg', '../assets/img/creatures/dilophosaure/DilophosaureImagePrincipale_2020-08-30_13-43-48.jpg', NULL, 'Le dilophosaure ou Dilophosaurus (en grec : « lézard à deux crêtes ») est un genre éteint de grands dinosaures théropodes carnivores, découvert en Chine et en Arizona où il vivait au Jurassique inférieur, il y a environ entre 199 et 183 Ma (millions d\'années), au cours des étages Sinémurien et Pliensbachien.\r\n\r\nLes premiers spécimens furent décrits en 1954, mais ce n\'est que plus d\'une décennie plus tard que leur genre reçut leur nom actuel. Le dilophosaure est l\'un des plus anciens théropodes connus, mais également l\'un des moins bien compris. Le dilophosaure est apparu à plusieurs reprises dans la culture populaire, notamment dans le film Jurassic Park, de Steven Spielberg, en 1993.', 'Welles', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 4, NULL, 1, 1);
+(24, 'Dilophosaure', '2020-08-30', '../assets/img/creatures/dilophosaure/DilophosaureMiniImage_2020-08-30_13-43-48.jpg', '../assets/img/creatures/dilophosaure/DilophosaureImagePrincipale_2020-08-30_13-43-48.jpg', NULL, 'Le dilophosaure ou Dilophosaurus (en grec : « lézard à deux crêtes ») est un genre éteint de grands dinosaures théropodes carnivores, découvert en Chine et en Arizona où il vivait au Jurassique inférieur, il y a environ entre 199 et 183 Ma (millions d\'années), au cours des étages Sinémurien et Pliensbachien.\r\n\r\nLes premiers spécimens furent décrits en 1954, mais ce n\'est que plus d\'une décennie plus tard que leur genre reçut leur nom actuel. Le dilophosaure est l\'un des plus anciens théropodes connus, mais également l\'un des moins bien compris. Le dilophosaure est apparu à plusieurs reprises dans la culture populaire, notamment dans le film Jurassic Park, de Steven Spielberg, en 1993.', 'Welles', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 4, NULL, 1, 1),
+(25, 'Postosuchus', '2020-08-31', '../assets/img/creatures/postosuchus/PostosuchusMiniImage_2020-08-31_19-28-20.jpg', '../assets/img/creatures/postosuchus/PostosuchusImagePrincipale_2020-08-31_19-28-20.jpg', NULL, 'Postosuchus, qui signifie « crocodile de Post », est un genre éteint de reptiles rauisuchides comprenant deux espèces, P. kirkpatricki et P. alisonae, qui vivaient dans ce qui est maintenant l’Amérique du Nord au Trias supérieur. Postosuchus est un membre du clade Pseudosuchia, la lignée d\'archosauriens qui comprend des crocodiliens modernes (l\'autre groupe principal d\'archosauriens est Avemetatarsalia, la lignée comprenant des dinosaures non-aviens et leurs descendants, des oiseaux). Son nom fait référence à Post Quarry, un lieu du Texas où de nombreux fossiles de l\'espèce type, P. kirkpatricki, ont été découverts. C\'était l’un des principaux prédateurs dans sa région pendant le Trias, plus grand que les petits prédateurs de dinosaures de son époque (comme Coelophysis). C\'était un chasseur qui se nourrissait probablement de dicynodontes et de nombreuses autres créatures plus petites que lui.\r\n\r\nLe squelette de Postosuchus est grand et robuste, avec un crâne profond et une longue queue. La longueur totale du corps est d\'environ 4 à 5 m1. La petitesse des membres antérieurs par rapport aux membres postérieurs, les très petites pattes et la taille des vertèbres suggèrent que Postosuchus pourrait être bipède2.', 'Chartterjee', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 7, 2, NULL, 1, 1),
+(26, 'Coelophysis', '2020-08-31', '../assets/img/creatures/coelophysis/CoelophysisMiniImage_2020-08-31_19-30-15.jpg', '../assets/img/creatures/coelophysis/CoelophysisImagePrincipale_2020-08-31_19-30-15.jpg', NULL, 'Coelophysis est un genre éteint de dinosaures, de la famille des Coelophysidae. L\'espèce Coelophysis bauri figure parmi les premiers dinosaures découverts, en 1881. Le nom Coelophysis signifie « forme creuse ».\r\n\r\nCe sont des théropodes de taille moyenne, des bipèdes carnivores. Ils ont vécu à la fin du Trias supérieur et au début du Jurassique inférieur, il y a environ entre 216 et 196 Ma (millions d\'années). Leurs fossiles ont été découverts dans plusieurs États des États-Unis (Nouveau-Mexique, Arizona, Connecticut, etc.), et dans le sud de l’Afrique (Zimbabwe, Afrique du Sud).', 'Cope', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 3, NULL, 1, 1),
+(27, 'Staurikosaurus', '2020-08-31', '../assets/img/creatures/staurikosaurus/StaurikosaurusMiniImage_2020-08-31_19-35-04.bmp', '../assets/img/creatures/staurikosaurus/StaurikosaurusImagePrincipale_2020-08-31_19-35-04.bmp', NULL, 'Staurikosaurus est un genre éteint de dinosaures saurischiens de la famille des herrérasauridés datant du Trias supérieur et découvert dans la formation géologique de Santa Maria, dans le sud du Brésil.\r\n\r\nUne seule espèce est rattachée au genre : Staurikosaurus pricei, décrite par Edwin Harris Colbert en 1970.\r\n\r\nVivant lors du Trias supérieur, Staurikosaurus est l\'un des plus anciens dinosaures connus. Il fut décrit en 1970 par Edwin Colbert, paléontologue à l\'American Museum of Natural History, à partir des quelques os trouvés (la colonne vertébrale, l\'os maxillaire et le haut des pattes arrière). Il semble, vu la taille de la mâchoire, que sa tête devait être assez grosse. Les dents pointues suggèrent un régime carnivore. On suppose qu\'il devait mesurer 2 mètres de long3 et qu\'il pesait 30 kilogrammes.', 'Colbert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 3, NULL, 1, 2),
+(28, 'Masiakasaurus', '2020-08-31', '../assets/img/creatures/masiakasaurus/MasiakasaurusMiniImage_2020-08-31_19-40-21.jpg', '../assets/img/creatures/masiakasaurus/MasiakasaurusImagePrincipale_2020-08-31_19-40-21.jpg', NULL, 'Masiakasaurus (signifiant « lézard violent ») est un genre éteint de dinosaures théropodes de la famille des Noasauridae ayant vécu à Madagascar à la fin du Crétacé supérieur, au Maastrichtien, il y a environ entre 72 et 66 Ma (millions d\'années).\r\n\r\nUne seule espèce est connue, l\'espèce type : Masiakasaurus knopfleri, nommée d\'après le fondateur du groupe Dire Straits, Mark Knopfler, à qui Sampson et son équipe attribue l\'inspiration de leur expédition.\r\n\r\nMasiaksaurus mesurait 1,80 mètre de long, 60 centimètres de haut et pesait 35 kilogrammes. Sa principale caractéristique sont ses longues dents courbées vers le devant. On suppose que sa mâchoire incurvée vers le bas lui permettait de saisir de petites proies (insectes, lézards et peut-être même fruits, ou de capturer des poissons avec sa mâchoire antérieure et de les déchiqueter avec ses dents du fond). Masiakasaurus, contrairement aux autres Noasauridae, possède un crâne long et bas. Son trait le plus marquant est probablement sa mâchoire incurvée vers le bas, à un angle d\'environ 10°.', 'Sampson', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 4, 8, NULL, 1, 5),
+(29, 'Megaeurna', '2020-08-31', '../assets/img/creatures/megaeurna/MegaeurnaMiniImage_2020-08-31_19-48-41.jpg', '../assets/img/creatures/megaeurna/MegaeurnaImagePrincipale_2020-08-31_19-48-41.jpg', NULL, 'Meganeura est un genre éteint d\'insectes du Carbonifère au Permien, de l\'ordre des Meganisoptera (entre -360 et -300 millions d\'années) ayant l\'aspect d\'une libellule géante. Elle est l\'ancêtre de la plus grosse libellule encore vivante sur Terre. Meganeura monyi est la seule espèce reconnue de ce genre.', 'Brongniart', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Aucun', 10, 9, NULL, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -128,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_diet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(55) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `r3f3r0_diet`
@@ -137,7 +144,8 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_diet` (
 INSERT INTO `r3f3r0_diet` (`id`, `name`) VALUES
 (1, 'Carnivore'),
 (2, 'Herbivore'),
-(3, 'Piscivore');
+(3, 'Piscivore'),
+(4, 'Insectivores');
 
 -- --------------------------------------------------------
 
@@ -200,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `r3f3r0_period` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(55) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `r3f3r0_period`
@@ -214,7 +222,9 @@ INSERT INTO `r3f3r0_period` (`id`, `name`) VALUES
 (5, 'Jurassique moyen'),
 (6, 'Jurassique supérieur'),
 (7, 'Crétacé inférieur'),
-(8, 'Crétacé supérieur');
+(8, 'Crétacé supérieur'),
+(9, 'Carbonifère'),
+(10, 'Permien');
 
 -- --------------------------------------------------------
 

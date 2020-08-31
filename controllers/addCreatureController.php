@@ -3,7 +3,7 @@
 $regexName = '%^[A-ÿ_\-\ ]{2,30}$%';
 
 //Tableau des extensions de fichier autorisées
-$fileExtension = array('jpg', 'png');
+$fileExtension = array('jpg', 'png', 'bmp');
 
 //Tableau d'erreurs
 $formErrors = array();
@@ -162,7 +162,6 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     if(empty($formErrors)){
-        var_dump($creature);
         $creature->date = date('Y-m-d');
         if($creature->checkCreatureExists() == 0){
             $messageSuccess = 'La créature à été ajoutée avec succès';
