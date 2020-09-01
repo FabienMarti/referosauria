@@ -10,7 +10,8 @@ class database {
     //Instancie automatiquement PDO en public
     public function __construct() {
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'fmarti', 'nekrose12', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            //$this->db = new PDO('mysql:host=localhost;dbname=referosauria;charset=utf8', 'fmarti', 'nekrose12', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (Exception $error) {
             die($error->getMessage());
         }

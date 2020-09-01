@@ -53,19 +53,60 @@ class user
 
     ##### Méthodes admin #####
 
-    public function getUserInfosAsAdmin($id){
-        $userInfosQuery = $this->db->query(
-            'SELECT
-                `id`
-                ,`username`
-                ,`mail`
-                ,DATE_FORMAT(`inscriptionDate`, \'%d/%m/%Y\') AS `inscDate`
-            FROM
+    public function deleteUserById(){
+        $deleteUserByIdQuery = $this->db->prepare(
+            'DELETE FROM
                 `r3f3r0_users`
-            WHERE
-                `id`=' . $id . '
+            WHERE `id` = :id
         ');
-        return $userInfosQuery->fetch(PDO::FETCH_OBJ);
+        $deleteUserByIdQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $deleteUserByIdQuery->execute();
+    }
+
+    function getUserList($limitArray = array(), $searchArray = array()) {
+        //Si nos champs de recherche contiennent des valeurs alors on stock notre clause WHERE dans une variable avec tous nos paramètres
+        if(count($searchArray) > 0){
+            $where = 'WHERE ';
+            foreach($searchArray as $fieldName => $search) {
+                //Vérifie si un JOKER existe dans nos champs de recherche
+                if (strrchr($search, '%')){
+                    //Ajoute LIKE si un JOKER est présent
+                    $whereArray[] = '`' . $fieldName . '` LIKE :' . $fieldName ;
+                }else {
+                    //Compare sans LIKE
+                    $whereArray[] = '`' . $fieldName . '` = :' . $fieldName ;
+                }
+            }
+            //Concatène le tableau whereArray avec un séparateur 'AND'
+            $where .= implode(' AND ', $whereArray);
+        }
+        /* Requete SQL : On concatène notre variable $where qui contient notre clause à l'aide
+        d'une ternaire pour ne l'ajouter qu'à condition quelle existe */
+        $getUserListQuery = $this->db->prepare(
+            'SELECT
+            `usr`.`id` AS `usrId`
+            ,`username`
+            ,`mail`
+            ,DATE_FORMAT(`inscriptionDate`, \'%d/%m/%Y\') AS `inscDate`
+            ,`rol`.`name` AS `role`
+            , `rol`.`id` AS `rolId`
+            FROM
+            `r3f3r0_users` AS `usr`
+            INNER JOIN `r3f3r0_roles` AS `rol` ON `id_r3f3r0_roles` = `rol`.`id`
+            ' . (isset($where) ? $where : '') . '
+            ORDER BY `usr`.`id` ASC '
+                . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
+        );
+        //Boucle pour créer nos bindValues qui dépendent de nos champs de recherche
+        foreach($searchArray as $fieldName => $search) {
+            $getUserListQuery->bindvalue(':' . $fieldName, $search , PDO::PARAM_STR);
+        }
+        if (count($limitArray) == 2){
+            $getUserListQuery->bindvalue(':limit', $limitArray['limit'], PDO::PARAM_INT);
+            $getUserListQuery->bindvalue(':offset', $limitArray['offset'], PDO::PARAM_INT);
+        }
+        $getUserListQuery->execute();
+        return $getUserListQuery->fetchAll(PDO::FETCH_OBJ); 
     }
 
     ##########################
