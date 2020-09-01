@@ -3,7 +3,7 @@
 $regexName = '%^[A-ÿ_\-\ ]{2,30}$%';
 
 //Tableau des extensions de fichier autorisées
-$fileExtension = array('jpg', 'png', 'bmp');
+$fileExtension = array('jpg', 'png', 'bmp', 'jpeg');
 
 //Tableau d'erreurs
 $formErrors = array();
@@ -56,7 +56,7 @@ if(isset($_POST['sendNewCrea'])){
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
         $fileInfos = pathinfo($_FILES['mainImageUpload']['name']);
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
-        if (in_array($fileInfos['extension'], $fileExtension)) {
+        if (in_array(strtolower($fileInfos['extension']), $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
           $path = '../assets/img/creatures/' . strtolower(htmlspecialchars($_POST['creaName'])) . '/';
           //On crée une date pour différencier les fichiers
@@ -85,7 +85,7 @@ if(isset($_POST['sendNewCrea'])){
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
         $fileInfos = pathinfo($_FILES['miniImageUpload']['name']);
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
-        if (in_array($fileInfos['extension'], $fileExtension)) {
+        if (in_array(strtolower($fileInfos['extension']), $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
           $path = '../assets/img/creatures/' . strtolower(htmlspecialchars($_POST['creaName'] . '/'));
           //On crée une date pour différencier les fichiers

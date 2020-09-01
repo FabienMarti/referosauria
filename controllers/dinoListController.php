@@ -1,4 +1,5 @@
 <?php
+$formErrors = array();
 //je créé une nouvelle instance de l'objet 'creature'
 $creature = new creature();
 //je récupère le contenu ma methode getDinoInfos() dans une variable
@@ -15,7 +16,7 @@ if (isset($_GET['page'])){
     $page = 1;
 }
 //Défini le nombre de resultats par page
-$limitArray = ['limit'=>5];
+$limitArray = ['limit'=>2];
 //Calcule l'offset
 $limitArray['offset'] = ($page * $limitArray['limit']) - $limitArray['limit'];
 //Affiche le résultat de la recherche si le formulaire est validé, sinon affiche toute la liste avec la pagination
@@ -36,3 +37,23 @@ if(isset($_POST['searchCrea'])) {
     $pageNumber = ceil(count($creature->getCreaList()) / $limitArray['limit']);
 }
 /*************************************************************************************************/
+
+
+/******************************************* TRANSACTION **************************************************/
+
+//try catch permet d'isoler une erreur éventuelle ...
+if(count($formErrors) == 25500){
+    try{
+        $creature->beginTransaction();
+        //!methode d'ajout 1
+        //recupere le dernier ID utilisé pour l'inserer dans la seconde insertion
+        /* $objet2->id = */ $creature->lastInsertId();
+        //!methode d'ajout 2
+        //commit pour valider les lignes précedentes
+        $creature->commit();
+    }
+    //Exception : erreur systeme, demande d'avoir une action derrière
+    catch(Exception $e){
+        $creature->rollBack();
+    }
+}

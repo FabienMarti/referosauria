@@ -10,13 +10,14 @@ class user
 
     private $db = NULL;
     
-    //créé une fonction magique pour me connecter a ma BDD facilement entre chaque methodes
+    //Méthode magique pour me connecter a ma BDD facilement entre chaque methodes
     public function __construct() {
+        //récupère l'instance de PDO de la classe database avec la méthode statique getInstance()
         $this->db = database::getInstance();
         $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
 
-    //recupère les information des utilisateurs
+    //Recupère les information des utilisateurs
     public function getAllUsersInfos(){
         $userInfosQuery = $this->db->query(
             'SELECT
