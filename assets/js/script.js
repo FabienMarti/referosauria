@@ -58,3 +58,26 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     var modal = $(this)
     modal.find('.modal-body #getId').val(recipient)
   })
+
+function checkUnavailability(input){
+    //XMLHttpRequest est une classe de JS
+    var request = new XMLHttpRequest();
+    request.open('POST', 'controllers/registrationController.php', true);
+    request.onreadystatechange = function () {
+    //si on a bien reçu la réponse de la page et qu'elle est bien chargée
+        if (request.readyState == 4 && request.status == 200){
+            if(request.responseText == 1){
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+            }else if (request.responseText == 2){
+                input.classList.remove('is-invalid', 'is-valid');
+            }
+            else{
+                input.classList.add('is-valid');
+                input.classList.remove('is-invalid');
+            }
+        }
+    }
+    request.setRequestHeader('content-type', 'application/x-www-form-urlencoded', );
+    request.send('fieldValue=' + input.value + '&fieldName=' + input.name);
+}

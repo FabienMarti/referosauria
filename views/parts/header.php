@@ -3,6 +3,9 @@
     $_SESSION['isConnected'] = false;
     //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
     $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
+    include_once $linkModif . 'config.php';
+    include $linkModif . 'lang/FR_FR.php';
+    
 ?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">

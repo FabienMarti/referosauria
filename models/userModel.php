@@ -170,6 +170,30 @@ class user
         $addUser->bindvalue(':inscriptionDate', date('Y-m-d'), PDO::PARAM_STR);
         return $addUser->execute();
     }
+    //******* METHODE MICKAEL **********/
+    
+    public function checkUnavailabilityByFieldName($field){
+        $whereArray = array();
+        foreach ($field as $fieldName) {
+            $whereArray[] = '`' . $fieldName . '` = :' . $fieldName;
+        }
+        $where = ' WHERE ' . implode(' AND ', $whereArray);
+        $checkUnavailabilityByFieldName = $this->db->prepare(
+            'SELECT 
+                COUNT(`id`) AS `isUnavailable`
+            FROM
+                `r3f3r0_users`'
+            . $where 
+        );
+        foreach ($field as $fieldName) {
+            $checkUnavailabilityByFieldName->bindValue(':'.$fieldName, $this->$fieldName, PDO::PARAM_STR);
+        }
+        $checkUnavailabilityByFieldName->execute();
+        return $checkUnavailabilityByFieldName->fetch(PDO::FETCH_OBJ)->isUnavailable;
+
+
+    }
+    /*****************/
     public function checkUserExist()
     {
         $addUserSameQuery = $this->db->prepare(

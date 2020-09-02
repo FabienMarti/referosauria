@@ -136,7 +136,5 @@ ol{
 
 /** MEDIA QUERIES **/
 @media (max-width: 768px){
-    #headerBG{
-    background-image: url('../img/dinosaurBannerBGxs.png');
-    }
+    
 }
