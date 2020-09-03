@@ -66,7 +66,7 @@ include 'controllers/homeController.php';
                             <img class="img-fluid" style="width: 50%" src="<?= $crea->miniImage ?>" alt="tête de <?= $crea->name ?>" title="<?= $crea->name ?>" />
                         </div>
                         <div class="col-md-8 text-justify">
-                            <p class="h4 text-center creaName"><a href="index.php?content=creature&id=<?= $crea->id ?>"><?= $crea->name ?></a></p>
+                            <p class="h4 text-center creaName"><a href="views/creature.php?id=<?= $crea->id ?>"><?= $crea->name ?></a></p>
                             <p class="cutPara"><?= $crea->description ?></p>
                         </div>
                     </div>

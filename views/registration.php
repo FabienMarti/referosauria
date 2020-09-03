@@ -16,9 +16,9 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
     </div>
-    <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'has-danger' : 'has-success') : '' ?>">
+    <div class="form-group">
             <label for="username">Nom d'utilisateur<span class="text-danger">*</span> : </label>
-            <input oninput="usernameCheck()" type="text" name="username" id="username" placeholder="Ex : DinoLOVER" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['username']) ? 'value="' . $_POST['username'] . '"' : '' ?> />
+            <input oninput="checkRegex(this)" type="text" name="username" id="username" placeholder="Ex : DinoLOVER" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['username']) ? 'value="' . $_POST['username'] . '"' : '' ?> />
             <?php if (isset($formErrors['username'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['username'] ?></p>
             <?php } ?>
@@ -27,83 +27,41 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     <div class="row">
         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="password">Mot de passe<span class="text-danger">*</span> : </label>
-            <input oninput="passwordCheck(this)" type="text" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
+            <input onblur="checkRegex(this)" type="text" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
             <?php if (isset($formErrors['password'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
             <?php } ?>
         </div>
         <div class="form-group col">
             <label for="confirmPassword">Confirmez le mot de passe<span class="text-danger">*</span> : </label>
-            <input oninput="passwordCheck(this)" type="text" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
+            <input onblur="checkRegex(this)" type="text" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
             <p class="text-danger text-center"><?= (isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != $_POST['password']) ? 'Les mots de passe ne correspondent pas' : '' ?></p>
         </div>
     </div>
     <div class="row">
         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="mail">Adresse e-mail<span class="text-danger">*</span> : </label>
-            <input oninput="mailCheck(this)" type="mail" name="mail" id="mail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['mail']) ? 'value="' . $_POST['mail'] . '"' : '' ?> />
+            <input onblur="checkMail(this)" type="mail" id="mailInput" name="mail" id="mail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['mail']) ? 'value="' . $_POST['mail'] . '"' : '' ?> />
                 <?php if (isset($formErrors['mail'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['mail'] ?></p>
                 <?php } ?>
         </div>
         <div class="form-group col">
-            <label for="confirmMail">Confirmez l'adresse e-mail<span class="text-danger">*</span> : </label>
-            <input oninput="mailCheck(this)" type="mail" name="confirmMail" id="confirmMail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
-            <p class="text-danger text-center"><?= (isset($_POST['confirmMail']) && $_POST['confirmMail'] != $_POST['mail']) ? 'Les adresses e-mail ne correspondent pas' : '' ?></p>
+            <label for="mailVerify">Confirmez l'adresse e-mail<span class="text-danger">*</span> : </label>
+            <input onblur="checkVerifyMail(this, mailInput)" type="mail" name="mailVerify" id="mailVerify" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
+            <p class="text-danger text-center"><?= (isset($_POST['mailVerify']) && $_POST['mailVerify'] != $_POST['mail']) ? 'Les adresses e-mail ne correspondent pas' : '' ?></p>
 
         </div>
     </div>
     <div class="row">
-        <div class="col"><input type="checkbox" name="validate" id="validate" />
-            <label for="validate">J'accepte les <a href="#">CGU.</a></label>
-            <p class="text-danger"> <?= isset($formErrors['validate']) ? $formErrors['validate'] : '' ?> </p>
+        <div class="col"><input type="checkbox" name="validateCGU" id="validateCGU" />
+            <label for="validateCGU">J'accepte les <a href="#">CGU.</a></label>
+            <p class="text-danger"> <?= isset($formErrors['validateCGU']) ? $formErrors['validateCGU'] : '' ?> </p>
         </div>
         <div class="col text-right">
-            <button class="btn" type="submit" name="validateForm">Valider</button>
+            <button class="btn" type="submit" name="validateRegistration">Valider</button>
         </div>
     </div>
 </form>
 <?php } ?>
-<script>
-function usernameCheck(){
-    var usernameRegex = /^[A-ÿ0-9_\-]{2,30}$/;
-    var username = document.getElementById('username'); 
-    if (usernameRegex.test(username.value) == true) {
-        username.style.borderColor = 'green';
-    }
-    else if (usernameRegex.test(username.value) == false) {
-        username.style.borderColor = 'red';
-    }
-    else{
-        username.style.borderColor = 'black';
-    }
-   
-}
-function passwordCheck(password){
-   var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/;
-    if (passwordRegex.test(password.value) == true) {
-        password.style.borderColor = 'green';
-    }
-    else if (passwordRegex.test(password.value) == false) {
-        password.style.borderColor = 'red';
-    }
-    else{
-        password.style.borderColor = 'black';
-    }
-    
-}
-function mailCheck(mail){
-   var mailRegex = /^([a-z0-9-.]{1,255})@([a-z0-9-.]{1,255}).([a-z]{1,10})$/;
-    if (mailRegex.test(mail.value) == true) {
-        mail.style.borderColor = 'green';
-    }
-    else if (mailRegex.test(mail.value) == false) {
-        mail.style.borderColor = 'red';
-    }
-    else{
-        mail.style.borderColor = 'black';
-    }
-    
-}
-</script>
 <?php include 'parts/footer.php' ?>

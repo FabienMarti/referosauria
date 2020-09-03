@@ -1,11 +1,10 @@
-reature.php?id=24reature.php?id=24<?php
+<?php
 //gestion de l'affichage
 $user = new user();
 //roles = Membre, Administrateur, Modérateur
-$_SESSION['role'] = 'Membre';
 $roles = array('Administrateur', 'Membre', 'Modérateur');
-
-switch (htmlspecialchars($_SESSION['role'])) {
+$user->id = $_SESSION['profile']['id'];
+switch (htmlspecialchars($_SESSION['profile']['role'])) {
     case 'Membre':
         $profilOptions = array(
             'index.php?content=profil&profilContent=infos'=>'Mes informations',

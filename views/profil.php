@@ -7,12 +7,13 @@ include '../controllers/profilController.php' ?>
 <div class="container">
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
-        <nav id="profilNav" class="col-3 border border-dark">
+        <nav id="profilNav" class="col-3 border border-dark divBackColor">
             <p class="text-center h4">Bonjour <?= $showLightUserInfo->username ?></p>
             <p>Vous êtes inscrits depuis le : </br><?= $showLightUserInfo->inscDate ?></p>
-            <ul class="p-2">   
+            <p><?= $_SESSION['profile']['role'] ?></p>
+            <ul class="p-2">
                 <?php 
-                    if(in_array($_SESSION['role'],$roles)){
+                    if(in_array($_SESSION['profile']['role'], $roles)){
                         foreach ($profilOptions as $link => $title) {
                             switch ($title) {
                                 case 'Déconnexion':
@@ -31,7 +32,7 @@ include '../controllers/profilController.php' ?>
             </ul>
         </nav>
         <!-- Contenu changeant en fonction du menu selectionné -->
-        <section class="col-8 border border-dark p-5">
+        <section class="col-8 border border-dark p-5 divBackColor">
             <?php include $profilContent ?>
         </section>
     </div>

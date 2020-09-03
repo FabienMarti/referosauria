@@ -35,12 +35,12 @@ body{
     color : #DE541E;
     font-family: 'Pacifico', cursive;
 }
-#mainNav, footer{
+#mainNav, footer, .modal-header{
     background-color: #697A21 !important;
 }
 
 .divBackColor{
-    background-color: #EFF7CF;
+    background-color: #DECAB0;
 }
 
 .titleStyle{

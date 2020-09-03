@@ -9,6 +9,7 @@ class user
     public $inscriptionDate = '0000-00-00';
 
     private $db = NULL;
+    private $table = '`r3f3r0_users`';
     
     //Méthode magique pour me connecter a ma BDD facilement entre chaque methodes
     public function __construct() {
@@ -160,28 +161,27 @@ class user
             return $userToRemove->execute();
     }
 
-    public function addNewUser(){
+    public function addUser(){
         $addUser = $this->db->prepare(
             'INSERT INTO 
                 `r3f3r0_users` (`username`, `mail`, `password`, `inscriptionDate`)
-            VALUES (:username, :mail, :pass, :inscriptionDate)
+            VALUES (:username, :mail, :password, :inscriptionDate)
             ');
         $addUser->bindvalue(':username', $this->username, PDO::PARAM_STR);
         $addUser->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
-        $addUser->bindvalue(':pass', $this->pass, PDO::PARAM_STR);
+        $addUser->bindvalue(':password', $this->password, PDO::PARAM_STR);
         $addUser->bindvalue(':inscriptionDate', date('Y-m-d'), PDO::PARAM_STR);
         return $addUser->execute();
     }
-    /******* METHODE MICKAEL **********/
-    
+  
     public function checkUserUnavailabilityByFieldName($field){
-        $whereArray = [];
+        $whereArray = array();
         foreach($field as $fieldName ){
             $whereArray[] = '`' . $fieldName . '` = :' . $fieldName;
         }
         $where = ' WHERE ' . implode(' AND ', $whereArray);
-        $checkUserUnavailabilityByFieldName = $this->db->prepare('
-            SELECT COUNT(`id`) as `isUnavailable`
+        $checkUserUnavailabilityByFieldName = $this->db->prepare(
+            'SELECT COUNT(`id`) as `isUnavailable`
             FROM ' . $this->table 
             . $where
         ); 
@@ -220,6 +220,40 @@ class user
             WHERE `username` =' . $username
         );
         return $userDataQuery->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function getUserPasswordHash(){
+        $getUserPasswordHash = $this->db->prepare(
+            'SELECT 
+                `password` 
+            FROM 
+                `r3f3r0_users`
+            WHERE `username` = :username'
+        );
+        $getUserPasswordHash->bindValue(':username', $this->username, PDO::PARAM_STR);
+        $getUserPasswordHash->execute();
+        $response = $getUserPasswordHash->fetch(PDO::FETCH_OBJ);
+        if(is_object($response)){
+            return $response->password;
+        }else{
+            return '';
+        }
+    }
+
+    public function getUserProfile(){
+        $getUserProfile = $this->db->prepare(
+            'SELECT 
+                `usr`.`id`
+                , `usr`.`username`
+                , `rol`.`name` AS `rolName`
+            FROM 
+                `r3f3r0_users` AS `usr`
+            INNER JOIN `r3f3r0_roles` AS `rol` ON `id_r3f3r0_roles` = `rol`.`id`
+            WHERE `username` = :username'
+        );
+        $getUserProfile->bindValue(':username', $this->username, PDO::PARAM_STR);
+        $getUserProfile->execute();
+        return $getUserProfile->fetch(PDO::FETCH_OBJ);
     }
 }
 

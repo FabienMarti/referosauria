@@ -1,11 +1,19 @@
 <?php 
     session_start();
-    $_SESSION['isConnected'] = false;
     //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
     $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
     include_once $linkModif . 'config.php';
     include $linkModif . 'lang/FR_FR.php';
-    
+    //Gestion des actions
+if(isset($_GET['action'])){
+    if($_GET['action'] == 'disconnect'){
+        //Pour deconnecter l'utilisateur on détruit sa session
+        session_destroy();
+        //Et on le redirige vers l'accueil
+        header('location:index.php');
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
@@ -57,13 +65,14 @@
                         </li>
                     </ul>
                     <div class="text-center my-auto text-white">
-                <h1 class="mainTitle titleStyle">REFEROSAURIA</h1>
+                <h1 class="mainTitle titleStyle text-center">REFEROSAURIA</h1>
             </div>
             <div class="my-auto text-center border border-danger h-100 "><?php
-                if($_SESSION['isConnected'] == true){
+                if(isset($_SESSION['profile'])){
                     ?>
-                        <a class="btn" href="<?= $linkModif ?>views/profil.php">Profil</a>
-                        <a class="btn" href="<?= $linkModif ?>views/logout.php">Déconnexion</a>
+                        <p class="h5"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></p>
+                        <a class="btn" href="<?= $linkModif ?>views/profil.php?id=<?= $_SESSION['profile']['id'] ?>">Profil</a>
+                        <a class="btn" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
                    <?php
                 }else{
                     ?>
@@ -74,4 +83,5 @@
             </div>
                 </div>
             </nav>
+            <h1 class="divBackColor"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></h1>
         </header>
