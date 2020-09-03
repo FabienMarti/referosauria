@@ -1,4 +1,5 @@
 <?php
+include '../config.php';
 include '../models/database.php';
 include '../models/creatureModel.php';   
 include '../controllers/creatureController.php';
@@ -34,7 +35,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
             </div>
             <div class="col-3">
                 <div class="row">
-                    <div class="col-md-12 m-auto">
+                    <div class="col-md-12 text-center">
                         <img class="img-fluid" src="../<?= $showCreatureInfo->mainImage ?>" /> 
                     </div>
                     <div class="col-md-12">

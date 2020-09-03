@@ -1,4 +1,4 @@
-<?php
+reature.php?id=24reature.php?id=24<?php
 //gestion de l'affichage
 $user = new user();
 //roles = Membre, Administrateur, Modérateur

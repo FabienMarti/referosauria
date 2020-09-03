@@ -3,7 +3,7 @@ class creature
 {
     public $id = 0;
     public $name = '';
-    public $date = '0000-00-00';
+    public $addDate = '0000-00-00';
     public $miniImage = '';
     public $mainImage = '';
     public $detailImage = '';
@@ -135,7 +135,7 @@ class creature
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
-            $addCreatureQuery->bindValue(':addDate', $this->date, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':addDate', date('Y-m-d'), PDO::PARAM_STR); //date("Y-m-d H:i:s")
             $addCreatureQuery->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':description', $this->description, PDO::PARAM_STR);

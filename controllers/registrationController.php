@@ -69,7 +69,7 @@ if(isset($_POST['validateForm'])){
             $formErrors['password'] = $formErrors['confirmPassword'] = PASSWORD_ERROR_NOTEGAL;
         }
 
-        if(empty($formErrors)){
+        /* if(empty($formErrors)){
             $isOk = true;
             if($user->checkUnavailabilityByFieldName(['username'])){
                 $formErrors['username'] = 'Le nom d\'utilisateur est déjà utilisé.';
@@ -82,7 +82,7 @@ if(isset($_POST['validateForm'])){
             if($isOk){
                 $user->addNewUser();
             }
-        }
+        } */
 
 
         /****************************************************************/
@@ -105,14 +105,19 @@ if(isset($_POST['validateForm'])){
 }
 
 /*******AJAX ******/
-//traitement de la demande AJAX
-
+//Traitement de la demande AJAX
 if(isset($_POST['fieldValue'])){
-    if(!empty($_POST['fieldValue'] && !empty($_POST['fieldName']))){
+    //On vérifie que l'on a bien envoyé des données en POST
+    if(!empty($_POST['fieldValue']) && !empty($_POST['fieldName'])){
+        //On inclut les bons fichiers car dans ce contexte ils ne sont pas connu.
         include_once '../config.php';
-        include_once '../models/users.php';
-        $user = new user;
-        $user->username = htmlspecialchars($_POST['field']);
-        echo $user->checkUnavailabilityByFieldName([htmlspecialchars($_POST['fieldName'])]);
+        include_once '../models/userModel.php';
+        $user = new user();
+        $input = htmlspecialchars($_POST['fieldName']);
+        $user->$input = htmlspecialchars($_POST['fieldValue']);
+        //Le echo sert à envoyer la réponse au JS
+        echo $user->checkUserUnavailabilityByFieldName([htmlspecialchars($_POST['fieldName'])]);
+    }else{
+        echo 2;
     }
 }

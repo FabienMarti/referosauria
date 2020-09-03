@@ -37,7 +37,7 @@ class user
 
     //recupère les infos d'un utilisateur en particulier
     public function getUserInfos(){
-        $userInfosQuery = $this->db->query(
+        $userInfosQuery = $this->db->prepare(
             'SELECT
                 `id`
                 ,`username`
@@ -46,8 +46,10 @@ class user
             FROM
                 `r3f3r0_users`
             WHERE
-                `id`= 3
+                `id`= :id
         ');
+        $userInfosQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $userInfosQuery->execute();
         return $userInfosQuery->fetch(PDO::FETCH_OBJ);
     }
 
@@ -170,29 +172,26 @@ class user
         $addUser->bindvalue(':inscriptionDate', date('Y-m-d'), PDO::PARAM_STR);
         return $addUser->execute();
     }
-    //******* METHODE MICKAEL **********/
+    /******* METHODE MICKAEL **********/
     
-    public function checkUnavailabilityByFieldName($field){
-        $whereArray = array();
-        foreach ($field as $fieldName) {
+    public function checkUserUnavailabilityByFieldName($field){
+        $whereArray = [];
+        foreach($field as $fieldName ){
             $whereArray[] = '`' . $fieldName . '` = :' . $fieldName;
         }
         $where = ' WHERE ' . implode(' AND ', $whereArray);
-        $checkUnavailabilityByFieldName = $this->db->prepare(
-            'SELECT 
-                COUNT(`id`) AS `isUnavailable`
-            FROM
-                `r3f3r0_users`'
-            . $where 
-        );
-        foreach ($field as $fieldName) {
-            $checkUnavailabilityByFieldName->bindValue(':'.$fieldName, $this->$fieldName, PDO::PARAM_STR);
+        $checkUserUnavailabilityByFieldName = $this->db->prepare('
+            SELECT COUNT(`id`) as `isUnavailable`
+            FROM ' . $this->table 
+            . $where
+        ); 
+        foreach($field as $fieldName ){
+            $checkUserUnavailabilityByFieldName->bindValue(':'.$fieldName,$this->$fieldName,PDO::PARAM_STR);
         }
-        $checkUnavailabilityByFieldName->execute();
-        return $checkUnavailabilityByFieldName->fetch(PDO::FETCH_OBJ)->isUnavailable;
-
-
+        $checkUserUnavailabilityByFieldName->execute();
+        return $checkUserUnavailabilityByFieldName->fetch(PDO::FETCH_OBJ)->isUnavailable;
     }
+    
     /*****************/
     public function checkUserExist()
     {

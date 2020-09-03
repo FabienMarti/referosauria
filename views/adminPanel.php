@@ -45,10 +45,10 @@ include '../controllers/adminPanelController.php';
                         <th scope="row" ><?= $info->usrId ?></th>
                         <td><?= $info->username  ?></td>
                         <td><?= $info->mail ?></td>
-                        <td><button class="btn btn-success mailEnvelope"><a href="mailto:<?= $info->mail ?>"><i class="fas fa-envelope"></i></a></button></td>
+                        <td><a class="btn btn-success mailEnvelope"  href="adminMailTo.php?id=<?= $info->usrId ?>"><i class="fas fa-envelope"></i></a></td>
                         <td><?= $info->inscDate ?></td>
                         <td><?= $info->role ?></td>
-                        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
+                        <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
                   </form>
             <?php } ?>

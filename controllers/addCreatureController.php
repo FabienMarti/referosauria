@@ -162,7 +162,7 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     if(empty($formErrors)){
-        $creature->date = date('Y-m-d');
+        //$creature->date = date('Y-m-d');
         if($creature->checkCreatureExists() == 0){
             $messageSuccess = 'La créature à été ajoutée avec succès';
             $creature->addCreatureSimple();
