@@ -1,7 +1,6 @@
 <?php 
 $pageTitle = 'Accueil';
 include 'views/parts/header.php';
-include 'models/database.php';
 include 'models/creatureModel.php';
 include 'controllers/homeController.php';
 ?>
@@ -9,7 +8,7 @@ include 'controllers/homeController.php';
     <section class="container-fluid mt-4">
         <div class="row justify-content-around">
             <!--Les derniers posts-->
-            <div id="recentPostList" class="col-md-2 border divBackColor p-3">
+            <div id="recentPostList" class="col-md-2 border border-dark divBackColor p-3">
             <p class="h4 text-center titleStyle">Les derniers posts</p>
                 <ul>
                     <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
@@ -44,7 +43,7 @@ include 'controllers/homeController.php';
                         queue.
                     </p>
             </div>
-            <div class="col-md-2 text-center border divBackColor p-3">
+            <div class="col-md-2 text-center border border-dark divBackColor p-3">
                 <p class="h4 titleStyle">Les derniers Quizz</p>
                 <div class="border border-info my-1 py-3">
                     <p>Quel dinosaure êtes vous ?</p>

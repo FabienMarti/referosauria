@@ -1,7 +1,6 @@
 <?php 
     $pageTitle = 'Liste des créatures';
     include 'parts/header.php';
-    include '../models/database.php';
     include '../models/creatureModel.php';
     include '../controllers/dinoListController.php';
     include '../controllers/breadcrumb.php';

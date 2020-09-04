@@ -1,6 +1,5 @@
 <?php
 include '../config.php';
-include '../models/database.php';
 include '../models/creatureModel.php';   
 include '../controllers/creatureController.php';
 $pageTitle =  $showCreatureInfo->name; 

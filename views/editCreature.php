@@ -1,5 +1,4 @@
 <?php
-include '../models/database.php';
 include '../models/creatureModel.php';   
 include '../controllers/editCreatureController.php';
 $pageTitle =  'Edition de ' . $showCreatureInfo->name; 

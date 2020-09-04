@@ -30,6 +30,7 @@ if(isset($_POST['login'])){
             $_SESSION['profile']['username'] = $userProfil->username;
             $_SESSION['profile']['role'] = $userProfil->rolName;
             $_SESSION['profile']['roleId'] = $userProfil->rolName;
+            $_SESSION['profile']['password'] = $_POST['password'];
             header('location:index.php');
             exit();
        }else{

@@ -1,8 +1,6 @@
 <?php 
 $pageTitle = 'Enregistrement';
 include 'parts/header.php';
-include '../models/database.php';
-include '../models/userModel.php';
 include '../controllers/registrationController.php';
 include '../controllers/breadcrumb.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscription'));
@@ -27,14 +25,14 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     <div class="row">
         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="password">Mot de passe<span class="text-danger">*</span> : </label>
-            <input onblur="checkRegex(this)" type="text" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
+            <input onblur="checkRegex(this)" type="password" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
             <?php if (isset($formErrors['password'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
             <?php } ?>
         </div>
         <div class="form-group col">
             <label for="confirmPassword">Confirmez le mot de passe<span class="text-danger">*</span> : </label>
-            <input onblur="checkRegex(this)" type="text" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
+            <input onblur="checkRegex(this)" type="password" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
             <p class="text-danger text-center"><?= (isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != $_POST['password']) ? 'Les mots de passe ne correspondent pas' : '' ?></p>
         </div>
     </div>

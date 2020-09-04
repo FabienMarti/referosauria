@@ -120,10 +120,11 @@ class user
             'UPDATE
                 `r3f3r0_users`
             SET `username` = :username, `mail` = :mail
-            WHERE `id` = 3
+            WHERE `id` = :id
             ');
         $userEditInfos->bindvalue(':username', $this->username, PDO::PARAM_STR);
         $userEditInfos->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
+        $userEditInfos->bindvalue(':id', $this->id, PDO::PARAM_INT);
         return $userEditInfos->execute();
     }
 
@@ -133,21 +134,24 @@ class user
             'UPDATE
                 `r3f3r0_users`
             SET `password` = :pass
-            WHERE `id` = 3
+            WHERE `id` = :id
             ');
         $userEditPW->bindvalue(':pass', $this->password, PDO::PARAM_STR);
+        $userEditPW->bindvalue(':id', $this->id, PDO::PARAM_INT);
+
         return $userEditPW->execute();
     }
 
     //recupere le mdp utilisateur
     public function getCurrentPassword(){
-        $userPassword = $this->db->query(
+        $userPassword = $this->db->prepare(
             'SELECT
                 `password`
             FROM
                 `r3f3r0_users`
-            WHERE `id` = 3
+            WHERE `id` = :id
             ');
+        $userPassword->bindvalue(':id', $this->id, PDO::PARAM_INT);
         return $userPassword->fetch(PDO::FETCH_OBJ);
     }
 
@@ -156,8 +160,9 @@ class user
             'DELETE FROM 
                 `r3f3r0_users`
             WHERE
-                `id` = 3
+                `id` = :id
             ');
+            $userToRemove->bindvalue(':id', $this->id, PDO::PARAM_INT);
             return $userToRemove->execute();
     }
 

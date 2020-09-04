@@ -1,8 +1,6 @@
 <?php 
 $pageTitle = 'Envoyer un mail';
 include 'parts/header.php';
-include '../models/database.php';
-include '../models/userModel.php';
 include '../controllers/adminMailToController.php';
 ?>
 <div class="container divBackColor rounded my-5 p-5">

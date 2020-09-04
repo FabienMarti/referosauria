@@ -1,7 +1,3 @@
-<!-- Modale Connexion -->
-<?php 
-include  $linkModif . 'views/parts/connectionModal.php' 
-?>
 <!-- Modale footer -->
     <?php include $linkModif . 'views/parts/footerModal.php' ?>
 <!-- Footer -->

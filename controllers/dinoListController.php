@@ -16,7 +16,7 @@ if (isset($_GET['page'])){
     $page = 1;
 }
 //Défini le nombre de resultats par page
-$limitArray = ['limit'=>2];
+$limitArray = ['limit'=>8];
 //Calcule l'offset
 $limitArray['offset'] = ($page * $limitArray['limit']) - $limitArray['limit'];
 //Affiche le résultat de la recherche si le formulaire est validé, sinon affiche toute la liste avec la pagination

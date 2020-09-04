@@ -1,7 +1,6 @@
 <?php 
     $pageTitle = 'Découvrir';
     include 'parts/header.php';
-    include '../models/database.php';
     include '../controllers/breadcrumb.php';
     generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>

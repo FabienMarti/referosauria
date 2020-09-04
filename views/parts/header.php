@@ -1,19 +1,26 @@
 <?php 
     session_start();
+    //cookies pour garder en mémoire le mot de passe et le nom d'utilisateur
+    if(isset($_SESSION['profile'])){
+        setcookie('username', $_SESSION['profile']['username'], time() + (3600 * 24 * 365), '/');
+    }
     //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
     $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
     include_once $linkModif . 'config.php';
+    include_once $linkModif . 'models/database.php';
+    include_once $linkModif . 'models/userModel.php';
+    include $linkModif . 'controllers/connectionController.php';
     include $linkModif . 'lang/FR_FR.php';
     //Gestion des actions
-if(isset($_GET['action'])){
-    if($_GET['action'] == 'disconnect'){
-        //Pour deconnecter l'utilisateur on détruit sa session
-        session_destroy();
-        //Et on le redirige vers l'accueil
-        header('location:index.php');
-        exit();
+    if(isset($_GET['action'])){
+        if($_GET['action'] == 'disconnect'){
+            //Pour deconnecter l'utilisateur on détruit sa session
+            session_destroy();
+            //Et on le redirige vers l'accueil
+            header('location:index.php');
+            exit();
+        }
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
@@ -29,6 +36,42 @@ if(isset($_GET['action'])){
         <title><?= isset($pageTitle) ? $pageTitle : 'Non-Défini' ?></title>
     </head>
 <body>
+<?php 
+?>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title creaName" id="exampleModalLongTitle"><u>Se connecter</u></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body divBackColor">
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <label for="username">Nom d'utilisateur : </label>
+                                <input type="text" id="username" name="username" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
+                                    <?php if (isset($formErrors['username'])) { ?>
+                                        <p class="text-danger text-center"><?= $formErrors['username'] ?></p>
+                                    <?php } ?>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe : </label>
+                                <input type="password" id="password" name="password" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
+                                    <?php if (isset($formErrors['password'])) { ?>
+                                        <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
+                                    <?php } ?>
+                                <a href="<?= $linkModif ?>passwordRecovery.php">Mot de passe oublié ?</a>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" name="login" class="btn btn-primary" value="Connexion" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 <header class="container-fluid p-0 m-0">
 <!--NavBar-->
             <nav id="mainNav" class="navbar navbar-expand-md">
@@ -61,17 +104,17 @@ if(isset($_GET['action'])){
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="<?= $linkModif ?>views/forum.php">Forum</a>
+                            <a class="nav-link text-white" href="<?= $linkModif ?>views/forum.php">Forum</a>
                         </li>
                     </ul>
                     <div class="text-center my-auto text-white">
-                <h1 class="mainTitle titleStyle text-center">REFEROSAURIA</h1>
+                <h1 class="titleStyle mx-5">REFEROSAURIA</h1>
             </div>
-            <div class="my-auto text-center border border-danger h-100 "><?php
+            <div class="my-auto text-center h-100"><?php
                 if(isset($_SESSION['profile'])){
                     ?>
                         <p class="h5"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></p>
-                        <a class="btn" href="<?= $linkModif ?>views/profil.php?id=<?= $_SESSION['profile']['id'] ?>">Profil</a>
+                        <a class="btn" href="<?= $linkModif ?>views/profil.php?id=<?= $_SESSION['profile']['id'] ?>&page=infos">Profil</a>
                         <a class="btn" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
                    <?php
                 }else{
@@ -83,5 +126,4 @@ if(isset($_GET['action'])){
             </div>
                 </div>
             </nav>
-            <h1 class="divBackColor"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></h1>
         </header>

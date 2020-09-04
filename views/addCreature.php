@@ -1,7 +1,6 @@
 <?php 
 $pageTitle = 'Ajout créature';
 include 'parts/header.php';
-include '../models/database.php';
 include '../models/creatureModel.php';
 include '../controllers/addCreatureController.php';
 include '../controllers/breadcrumb.php';

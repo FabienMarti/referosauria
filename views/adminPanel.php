@@ -1,9 +1,9 @@
 <?php 
 $pageTitle = 'Panel D\'administration';
 include 'parts/header.php';
-include '../models/database.php';
-include '../models/userModel.php';
 include '../controllers/adminPanelController.php';
+include '../controllers/breadcrumb.php';
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_SESSION['profile']['id'] => 'Page de profil' , 'final' => $pageTitle));
 ?>
 <div class="container mt-5">
     <!-- barre de recherche -->
