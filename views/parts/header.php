@@ -1,34 +1,10 @@
-<?php 
-    session_start();
-    //cookies pour garder en mémoire le mot de passe et le nom d'utilisateur
-    if(isset($_SESSION['profile'])){
-        setcookie('username', $_SESSION['profile']['username'], time() + (3600 * 24 * 365), '/');
-    }
-    //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
-    $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
-    include_once $linkModif . 'config.php';
-    include_once $linkModif . 'models/database.php';
-    include_once $linkModif . 'models/userModel.php';
-    include $linkModif . 'controllers/connectionController.php';
-    include $linkModif . 'lang/FR_FR.php';
-    //Gestion des actions
-    if(isset($_GET['action'])){
-        if($_GET['action'] == 'disconnect'){
-            //Pour deconnecter l'utilisateur on détruit sa session
-            session_destroy();
-            //Et on le redirige vers l'accueil
-            header('location:index.php');
-            exit();
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
         <link href="<?= $linkModif ?>assets/css/style.css" rel="stylesheet" type="text/css" />
@@ -36,42 +12,41 @@
         <title><?= isset($pageTitle) ? $pageTitle : 'Non-Défini' ?></title>
     </head>
 <body>
-<?php 
-?>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title creaName" id="exampleModalLongTitle"><u>Se connecter</u></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body divBackColor">
-                        <form action="" method="POST">
-                            <div class="form-group">
-                                <label for="username">Nom d'utilisateur : </label>
-                                <input type="text" id="username" name="username" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
-                                    <?php if (isset($formErrors['username'])) { ?>
-                                        <p class="text-danger text-center"><?= $formErrors['username'] ?></p>
-                                    <?php } ?>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Mot de passe : </label>
-                                <input type="password" id="password" name="password" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
-                                    <?php if (isset($formErrors['password'])) { ?>
-                                        <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
-                                    <?php } ?>
-                                <a href="<?= $linkModif ?>passwordRecovery.php">Mot de passe oublié ?</a>
-                            </div>
-                            <div class="text-center">
-                                <input type="submit" name="login" class="btn btn-primary" value="Connexion" />
-                            </div>
-                        </form>
-                    </div>
+<!-- Modale de connexion -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title creaName" id="exampleModalLongTitle"><u>Se connecter</u></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body divBackColor">
+                    <form id="connectionForm" action="" method="POST">
+                        <div class="form-group">
+                            <label for="usernameConnect">Nom d'utilisateur : </label>
+                            <input type="text" id="usernameConnect" name="username" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
+                                <?php if (isset($formErrors['username'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['username'] ?></p>
+                                <?php } ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordConnect">Mot de passe : </label>
+                            <input type="password" id="passwordConnect" name="password" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
+                                <?php if (isset($formErrors['password'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
+                                <?php } ?>
+                            <a href="<?= $linkModif ?>passwordRecovery.php">Mot de passe oublié ?</a>
+                        </div>
+                        <div class="text-center">
+                            <input onclick="checkPasswordWithMail([usernameConnect, passwordConnect], passwordConnect, usernameConnect)" type="" name="login" class="btn btn-primary" value="Connexion" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 <header class="container-fluid p-0 m-0">
 <!--NavBar-->
             <nav id="mainNav" class="navbar navbar-expand-md">

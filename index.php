@@ -1,8 +1,18 @@
 <?php 
 $pageTitle = 'Accueil';
+session_start();
+//Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
+$_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
+include_once 'config.php';
+include_once 'models/database.php';
+include_once 'models/userModel.php';
+include_once 'models/creatureModel.php';
+include_once 'controllers/homeController.php';
+include_once 'controllers/connectionController.php';
+include_once 'lang/FR_FR.php';
 include 'views/parts/header.php';
-include 'models/creatureModel.php';
-include 'controllers/homeController.php';
+
+
 ?>
 <main>
     <section class="container-fluid mt-4">

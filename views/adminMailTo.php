@@ -1,7 +1,15 @@
 <?php 
 $pageTitle = 'Envoyer un mail';
-include 'parts/header.php';
+session_start();
+//Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
+$_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
+include_once '../config.php';
+include_once '../models/database.php';
+include_once '../models/userModel.php';
+include '../controllers/connectionController.php';
+include_once '../lang/FR_FR.php';
 include '../controllers/adminMailToController.php';
+include 'parts/header.php';
 ?>
 <div class="container divBackColor rounded my-5 p-5">
     <h1 class="text-center">Envoyer un email à <?= $showUser->username ?></h1>

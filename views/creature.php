@@ -1,10 +1,17 @@
 <?php
-include '../config.php';
-include '../models/creatureModel.php';   
+
+session_start();
+//Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
+$_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
+include_once '../config.php';
+include_once '../models/database.php';
+include_once '../models/userModel.php';
+include '../models/creatureModel.php';
 include '../controllers/creatureController.php';
 $pageTitle =  $showCreatureInfo->name; 
-include 'parts/header.php';
+include '../controllers/connectionController.php';
 include '../controllers/breadcrumb.php';
+include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
 ?>
 <section class="container-fluid my-2">
