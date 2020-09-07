@@ -15,9 +15,9 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
 ?>
 <section class="container-fluid my-2">
         <div class="row">
-            <h1 class="text-center creaName col"><u><?= $showCreatureInfo->name ?></u></h1>
+            <h1 class="text-center titleStyleShadow col"><?= $showCreatureInfo->name ?></h1>
             <div class="dropdown dropleft float-left my-auto">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="editCreature.php?id=<?= $showCreatureInfo->id ?>"><i class="fas fa-wrench"></i> Modifier</a>
                     <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i> Supprimer créature</a>
@@ -25,7 +25,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 text-center border divBackColor">
+            <div class="col-md-2 text-center border divBackColor p-3">
                 <p class="h6 text-center">Où a-t-on trouvé <?= $showCreatureInfo->name ?> ?</p>
                 <img src="<?= '../assets/img/local/' . $areaMap . '.jpg' ?>" class="img-fluid" />
                 <p class="h5 mt-5">Derniers sujets en rapport :</p>
@@ -38,12 +38,12 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
                     <li>28/01/2020</li>
                 </ul>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-md-12 text-center">
+            <div class="col-md-3">
+                <div class="row mx-md-3">
+                    <div class="col-md-12 text-center p-0 mb-1 mt-3">
                         <img class="img-fluid" src="../<?= $showCreatureInfo->mainImage ?>" /> 
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 p-0">
                         <table class="table table-sm divBackColor">
                             <thead>
                                 <th colspan="2" class="text-center">Fiche signalétique</th>
@@ -82,14 +82,14 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 m-auto divBackColor rounded">
-                <p class="h5 text-center">Description</p>
-                <p><?= $showCreatureInfo->description ?></p>
+            <div class="col-md-5 m-auto divBackColor rounded p-3">
+                <p class="h3 text-center titleStyleShadow">Description</p>
+                <p class="text-justify"><?= $showCreatureInfo->description ?></p>
 <!-- Probleme BDD pour les sources -->
                 <p class="text-right">Source : WIKIPEDIA</p>
             </div>
             <div class="col-md-1 text-center divBackColor">
-                <p class="h5 text-center">Ils ont vécu dans la même période :</p>
+                <p class="text-center p-3"><?= $showCreatureInfo->perName ?> :</p>
                 <?php foreach($showCreaturesByPeriod as $crea){ ?>
                     <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" width="100px" height="100px"  class="m-3" /></a></div>
                 <?php } ?>

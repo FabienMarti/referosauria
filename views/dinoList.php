@@ -20,7 +20,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
         <form method="POST" action="dinoList.php?page=1" class="py-1 px-5">
             <div class="row my-1">
                 <!-- Filtrage période -->
-                <select class="form-control form-control-sm col" name="period">
+                <select class="form-control form-control-sm col-12 col-md mt-1" name="period">
                     <option value="" disabled selected>Choisissez une période</option> 
                     <?php
                         foreach ($showCreaPeriods as $period) {
@@ -28,7 +28,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                         }
                 ?></select>
                 <!-- Alimentation -->
-                <select class="form-control form-control-sm offset-1 col" name="diet">
+                <select class="form-control form-control-sm offset-md-1 col-12 col-md mt-1" name="diet">
                     <option value="" disabled selected>Choisissez l'alimentation</option> 
                     <?php
                         foreach ($showCreaDiets as $diet) {
@@ -38,11 +38,11 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             </div>
                 <!-- Paleonthologue à l'origine de la découverte -->
             <div class="row">
-                <select class="form-control form-control-sm col" name="discoverer">
+                <select class="form-control form-control-sm col-12 col-md mt-1" name="discoverer">
                     <option value="" disabled selected>Paléonthologue</option> 
                     </select>
                 <!-- Catégorie -->
-                <select class="form-control form-control-sm offset-1 col" name="category">
+                <select class="form-control form-control-sm offset-md-1 col-12 col-md mt-1" name="category">
                     <option value="" disabled selected>Catégorie de créature</option> 
                     <?php
                         foreach ($showCreaCategories as $category) {
@@ -52,9 +52,9 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             </div>
             <div class="row my-1">
                 <!-- champ de recherche -->
-                <input class="form-control offset-8 col-2" id="searchField" name="searchField" type="text" placeholder="Rechercher une créature ..."  />
+                <input class="form-control offset-md-8 col-12 col-md-2" id="searchField" name="searchField" type="text" placeholder="Rechercher une créature ..."  />
                 <!-- envoi du formulaire -->
-                <button type="submit" class="btn col-1  form-control" name="searchCrea">Rechercher</button>
+                <button type="submit" class="btn btn-primary col-md-1  form-control" name="searchCrea">Rechercher</button>
             </div>
         </form>
     </div>
@@ -70,11 +70,11 @@ if(isset($resultsNumber) && $resultsNumber == 0){ ?>
     <div class="row text-center justify-content-around align-items-end">
             <?php
                 foreach ($showCreaList  as $creature) {
-                ?><div class="col-3">
+                ?><div class="col-12 col-md-3">
                         <a href="creature.php?id=<?= $creature->id ?>">
                             <figure>
                                 <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
-                                <figcaption class="creaName"><?= $creature->name ?></figcaption>
+                                <figcaption class="titleStyleShadow h4"><?= $creature->name ?></figcaption>
                             </figure>
                         </a>
                 </div><?php
@@ -93,12 +93,12 @@ if(isset($resultsNumber) && $resultsNumber == 0){ ?>
         }
 
         if ($page != 1){ ?>
-            <a href="dinoList.php?page=1" class="btn"><i class="fas fa-angle-double-left"></i></a>
-            <a href="dinoList.php?page=<?=($page - 1)?>" class="btn"><i class="fas fa-angle-left"></i></a><?php
+            <a href="dinoList.php?page=1" class="btn btn-primary"><i class="fas fa-angle-double-left"></i></a>
+            <a href="dinoList.php?page=<?=($page - 1)?>" class="btn btn-primary"><i class="fas fa-angle-left"></i></a><?php
         }
 
         if ($page > 4){ ?>
-            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a><?php 
+            <a href="#" class="btn btn-primary"><i class="fas fa-ellipsis-h"></i></a><?php 
         }
 
         $endPage = $page + 3;
@@ -107,16 +107,16 @@ if(isset($resultsNumber) && $resultsNumber == 0){ ?>
         }
 
         for ($i = $beginPage; $i <= $endPage; $i++) {?>
-            <a href="dinoList.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-danger' : '' ?>"><?= $i ?></a><?php 
+            <a href="dinoList.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-orange' : 'btn-primary' ?>"><?= $i ?></a><?php 
         } 
 
         if ($page < $pageNumber - 3){ ?>
-            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a>
+            <a href="#" class="btn btn-primary"><i class="fas fa-ellipsis-h"></i></a>
         <?php }
 
         if ($page != $pageNumber){ ?>
-            <a href="dinoList.php?page=<?=($page + 1) ?>" class="btn"><i class="fas fa-angle-right"></i></a>
-            <a href="dinoList.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>
+            <a href="dinoList.php?page=<?=($page + 1) ?>" class="btn btn-primary"><i class="fas fa-angle-right"></i></a>
+            <a href="dinoList.php?page=<?= $pageNumber ?>" class="btn btn-primary"><i class="fas fa-angle-double-right"></i></a>
         <?php } ?>
 </div>
 <!-- Fin affichage resultat recherche -->    

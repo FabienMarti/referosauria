@@ -25,20 +25,21 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
           <?= $messageFail ?>
         </div>
     <?php } ?>
-<div class="container border border-dark rounded pt-2 px-5 my-5 divBackColor">
+<div class="container-fluid border border-dark rounded pt-2 px-md-5 my-5 divBackColor">
     <h2 class="titleStyle text-center">Ajouter une créature</h2>
     <form action="" method="POST" enctype="multipart/form-data">
 <!-- Selection catégorie -->
             <p>Sélectionnez un type de créature : </p>
-            <div class="form-group d-flex justify-content-between">
+            <div class="form-group row justify-content-between">
                 <?php 
                     foreach ($showCategories as $category) { ?>
-                        <label class="my-auto" for="<? $category->name ?>"><?= $category->name ?> : </label>
-                        <input type="radio" name="category" id="<?= $category->id ?>" value="<?= $category->id ?>" <?= isset($_POST['category']) && $_POST['category'] == $category->id ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['category']) ? 'is-invalid' : (isset($category) ? 'is-valid' : '') ?>" />
-                   <?php } 
-                   if (isset($formErrors['category'])) { ?>
-                        <div class="text-danger d-block"><?= $formErrors['category'] ?></div>
-                    <?php } ?>
+                        <div class="col-12 col-md">
+                            <label class="my-auto" for="<? $category->name ?>"><?= $category->name ?> : </label>
+                            <input type="radio" name="category" id="<?= $category->id ?>" value="<?= $category->id ?>" <?= isset($_POST['category']) && $_POST['category'] == $category->id ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['category']) ? 'is-invalid' : (isset($category) ? 'is-valid' : '') ?>" />
+                        </div><?php } 
+                    if (isset($formErrors['category'])) { ?>
+                            <div class="text-danger d-block"><?= $formErrors['category'] ?></div>
+                        <?php } ?>
             </div>
 <!-- Nom de la créature -->
         <div class="row">
@@ -69,7 +70,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 <!-- Menus déroulants #### Période #### Habitat #### Alimentation #### Découverte -->
         <div class="row justify-content-between">
 <!-- Menu Période -->
-            <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="period">Choisissez une période :</label>
                 <select name="period" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
@@ -82,7 +83,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <?php } ?>
             </div>
 <!-- Menu Habitat -->
-            <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="habitat">Habitat principal :</label>
                 <select name="habitat"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
@@ -95,7 +96,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <?php } ?>
             </div>
 <!-- Menu Alimentation #diet -->
-            <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="diet">Choisissez l'alimentation : </label>
                 <select name="diet"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
@@ -108,7 +109,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <?php } ?>
             </div>
 <!-- Découvert -->
-            <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="discoverer">Paléonthologue  : </label>
                 <input type="text" placeholder="Ex: Allan Grant" name="discoverer" id="discoverer" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['discoverer']) ? 'value="' . $_POST['discoverer'] . '"' : '' ?> />
                 <?php if (isset($formErrors['discoverer'])) { ?>
@@ -145,7 +146,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 
             <div class="row">
             <div class="col-md-4 border border-dark m-auto">
-                    <img class="img-fluid" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
+                    <img class="img-fluid border border-dark" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
                 </div>
                 <div class="col-md-5 m-auto">
                     <p class="h5 text-center">Description</p>

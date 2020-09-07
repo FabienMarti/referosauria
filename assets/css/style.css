@@ -2,7 +2,11 @@
     margin: 0;
     padding: 0;
 }
-
+@font-face {
+    font-family: "dinosaur_font";
+    
+	src: url('../fonts/dinojp.ttf');
+}
 body{
     font-family: 'Nunito', sans-serif;
     background-image: url('../img/bg.jpg');
@@ -10,12 +14,12 @@ body{
     background-attachment:scroll;
     background-size: cover;
 }
-.btn{
-    background-color : #0086BE !important; 
-    color : white !important;
-}
 .btn-delete{
     background-color : red!important; 
+    color : white !important;
+}
+.btn-orange{
+    background-color: #CC5803 !important;
     color : white !important;
 }
 .cutPara{
@@ -26,17 +30,27 @@ body{
     -webkit-box-orient: vertical;
 
 }
+
+
+/******************************** COULEURS LIENS ***************************************/
+
+/* a:link, a:hover, a:focus, a:visited{
+    color: #CC5803;
+}
+a:active {
+    color: #CC5803;
+    font-weight: bold;
+} */
+
+
 /****** Couleurs élement pricipaux ******/
 #headerBG{
     background-color : transparent;;
     height: 150px;
 }
-.creaName{
-    color : #DE541E;
-    font-family: 'Pacifico', cursive;
-}
+
 #mainNav, footer, .modal-header{
-    background-color: #41521F !important;
+    background-color: #556F44 !important;
 }
 .divBackColor{
     background-color: #DECAB0;
@@ -48,9 +62,15 @@ body{
     position: relative;
     z-index: 2;
   }
+
+.titleStyleShadow{
+    color : #CC5803 !important;
+    text-shadow: black 5px 0 5px;
+    font-family: 'dinosaur_font';
+}
 .titleStyle{
-    color : #DE541E;
-    font-family: 'Pacifico', cursive;
+    color : #CC5803;
+    font-family: 'dinosaur_font';
 }
 
 .mainTitle{
@@ -102,7 +122,7 @@ body{
 
 .breadcrumb {
     margin-bottom: 0px !important;
-    background-color: #547AA5;
+    background-color: #007BFF;
 }
 .buttonBG{
     background-color: rgba(0, 255, 0, 0.1);;

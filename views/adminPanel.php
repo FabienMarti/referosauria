@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = 'Panel D\'administration';
+$pageTitle = 'Panel d\'administration';
 session_start();
 //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
 $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';

@@ -11,17 +11,15 @@ include_once 'controllers/homeController.php';
 include_once 'controllers/connectionController.php';
 include_once 'lang/FR_FR.php';
 include 'views/parts/header.php';
-
-
 ?>
 <main>
     <section class="container-fluid mt-4">
         <div class="row justify-content-around">
             <!--Les derniers posts-->
             <div id="recentPostList" class="col-md-2 border border-dark divBackColor p-3">
-            <p class="h4 text-center titleStyle">Les derniers posts</p>
+            <p class="h3 text-center titleStyle">Les derniers posts</p>
                 <ul>
-                    <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
+                    <li><a class="link" href="#">Le tyrannosaure pouvait-il voler ?</a></li>
                     <li>12/05/2020</li>
                     <li><a href="#">Le para pouvait-il voler ?</a></li>
                     <li>12/05/2020</li>
@@ -54,7 +52,7 @@ include 'views/parts/header.php';
                     </p>
             </div>
             <div class="col-md-2 text-center border border-dark divBackColor p-3">
-                <p class="h4 titleStyle">Les derniers Quizz</p>
+                <p class="h3 titleStyle">Les derniers Quizz</p>
                 <div class="border border-info my-1 py-3">
                     <p>Quel dinosaure êtes vous ?</p>
                     <button class="btn btn-primary">Jouer</button>
@@ -67,15 +65,15 @@ include 'views/parts/header.php';
         </div>
     </section>
     <section class="container my-5">
-        <h2 class="text-center titleStyle">Dernières créatures ajoutées</h2>
+        <h2 class="text-center titleStyleShadow mb-3">Dernières créatures ajoutées</h2>
             <?php 
                 foreach ($showLatestCreatureInfos as $crea) { ?>
-                    <div class="mt-1 p-3 row border <?= $crea->id_r3f3r0_diet == 1 ? 'border-danger' : ($crea->id_r3f3r0_diet == 3 ? 'border-primary' : 'border-success') ?> divBackColor">
+                    <div class="mt-1 p-3 row border border-dark divBackColor">
                         <div class="col-md-4 text-center my-auto">
-                            <img class="img-fluid" style="width: 50%" src="<?= $crea->miniImage ?>" alt="tête de <?= $crea->name ?>" title="<?= $crea->name ?>" />
+                            <img class="img-fluid titleStyle" style="width: 50%" src="<?= $crea->miniImage ?>" alt="tête de <?= $crea->name ?>" title="<?= $crea->name ?>" />
                         </div>
                         <div class="col-md-8 text-justify">
-                            <p class="h4 text-center creaName"><a href="views/creature.php?id=<?= $crea->id ?>"><?= $crea->name ?></a></p>
+                            <p class="h4 text-center titleStyle"><a href="views/creature.php?id=<?= $crea->id ?>"><?= $crea->name ?></a></p>
                             <p class="cutPara"><?= $crea->description ?></p>
                         </div>
                     </div>

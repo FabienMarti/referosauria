@@ -49,56 +49,55 @@
     </div>
 <header class="container-fluid p-0 m-0">
 <!--NavBar-->
-            <nav id="mainNav" class="navbar navbar-expand-md">
-                <a class="navbar-brand d-md-none" href="#">Menu</a>
+            <nav id="mainNav" class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand d-md-none titleStyleShadow">REFEROSAURIA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= $linkModif ?>index.php"><i class="fas fa-home"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= $linkModif ?>views/dinoList.php?page=1">Liste des dinosaures</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white" href="<?= $linkModif ?>views/discover.php">Découvrir</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                        <a class="nav-link text-white" href="<?= $linkModif ?>views/addCreature.php">Ajouter une créature</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Jeux
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                <a class="dropdown-item" href="<?= $linkModif ?>views/quiz.php">Quiz</a>
-                                <a class="dropdown-item" href="#">Générateur de Dinom</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="<?= $linkModif ?>views/forum.php">Forum</a>
-                        </li>
-                    </ul>
-                    <div class="text-center my-auto text-white">
-                <h1 class="titleStyle mx-5">REFEROSAURIA</h1>
-            </div>
-            <div class="my-auto text-center h-100"><?php
-                if(isset($_SESSION['profile'])){
-                    ?>
-                        <p class="h5"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></p>
-                        <a class="btn" href="<?= $linkModif ?>views/profil.php?id=<?= $_SESSION['profile']['id'] ?>&page=infos">Profil</a>
-                        <a class="btn" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
-                   <?php
-                }else{
-                    ?>
-                    <a class="btn" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
-                    <a class="btn" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a>
+                        <ul class="navbar-nav mr-auto text-center">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="<?= $linkModif ?>index.php"><i class="fas fa-home"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="<?= $linkModif ?>views/dinoList.php?page=1">Liste des dinosaures</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white" href="<?= $linkModif ?>views/discover.php">Découvrir</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                            <a class="nav-link text-white" href="<?= $linkModif ?>views/addCreature.php">Ajouter une créature</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Jeux
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                    <a class="dropdown-item" href="<?= $linkModif ?>views/quiz.php">Quiz</a>
+                                    <a class="dropdown-item" href="#">Générateur de Dinom</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="<?= $linkModif ?>views/forum.php">Forum</a>
+                            </li>
+                        </ul>
+                        <div class="text-center my-auto text-white">
+                    <h1 class="titleStyleShadow mx-5 text-center d-none d-md-block">REFEROSAURIA</h1>
+                </div>
+                <div class="my-auto text-center h-100"><?php
+                    if(isset($_SESSION['profile'])){ ?>
+                            <p class="h5"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></p>
+                            <a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php?id=<?= $_SESSION['profile']['id'] ?>&page=infos">Profil</a>
+                            <a class="btn btn-primary" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
                     <?php
-                }?>
-            </div>
+                    }else{
+                        ?>
+                        <a class="btn btn-primary" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a>
+                        <?php
+                    }?>
+                </div>
                 </div>
             </nav>
         </header>
