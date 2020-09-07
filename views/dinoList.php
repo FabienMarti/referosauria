@@ -1,19 +1,18 @@
 <?php 
-    $pageTitle = 'Liste des créatures';
-    session_start();
-    //Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
-    $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
-    include_once '../config.php';
-    include_once '../models/database.php';
-    include_once '../models/userModel.php';
-    include '../models/creatureModel.php';
-    include '../controllers/connectionController.php';
-    include '../controllers/dinoListController.php';
-    include '../controllers/breadcrumb.php';
-    include_once '../lang/FR_FR.php';
-    include 'parts/header.php';    
-    generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
-  
+$pageTitle = 'Liste des créatures';
+session_start();
+//Défini la variable linkModif qui contiendra le préfix du lien en fonction de la position de l'utilisateur
+$_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
+include_once '../config.php';
+include_once '../models/database.php';
+include_once '../models/userModel.php';
+include '../models/creatureModel.php';
+include '../controllers/connectionController.php';
+include '../controllers/dinoListController.php';
+include '../controllers/breadcrumb.php';
+include_once '../lang/FR_FR.php';
+include 'parts/header.php';    
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <section class="container-fluid p-0">
 <!-- Filtrage recherche -->
@@ -64,24 +63,26 @@
     </div>
 <!-- Affichage resultat recherche -->
 <?php
-if(isset($resultsNumber) &&  $resultsNumber == 0){ ?>
+if(isset($resultsNumber) && $resultsNumber == 0){ ?>
         <p class="text-center h1 m-5 titleStyle"><?= $searchMessage ?></p><?php
 }else { ?>
 <div class="container mt-5">
-    <div class="row text-center justify-content-around">
+    <div class="row text-center justify-content-around align-items-end">
             <?php
                 foreach ($showCreaList  as $creature) {
                 ?><div class="col-3">
                         <a href="creature.php?id=<?= $creature->id ?>">
-                            <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
-                            <p class="creaName"><?= $creature->name ?></p>
+                            <figure>
+                                <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
+                                <figcaption class="creaName"><?= $creature->name ?></figcaption>
+                            </figure>
                         </a>
                 </div><?php
-            }?>
+            } ?>
     </div>
 </div> 
 <?php } ?>
-<!---------------------------------->
+<!-------------- PAGINATION -------------------->
 <div class="text-center m-3">
     <!-- Affiche le numero des page -->
     <?php 

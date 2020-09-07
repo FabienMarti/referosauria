@@ -9,7 +9,7 @@ switch (htmlspecialchars($_SESSION['profile']['role'])) {
             'editPW'=>'Changer le mot de passe',
             '#'=>'Mes derniers posts',
             'deleteProfil'=>'Supprimer le compte',
-            '#'=>'Déconnexion'
+            '../index.php?action=disconnect'=>'Déconnexion'
         );
         $showLightUserInfo = $user->getUserInfos();
     break;
@@ -19,7 +19,7 @@ switch (htmlspecialchars($_SESSION['profile']['role'])) {
             'editPW'=>'Changer le mot de passe',
             '#'=>'Mes derniers posts',
             'deleteProfil'=>'Supprimer le compte',
-            '#'=>'Déconnexion'
+            '../index.php?action=disconnect'=>'Déconnexion'
         );
         $showLightUserInfo = $user->getUserInfos();
     break;
@@ -30,11 +30,11 @@ switch (htmlspecialchars($_SESSION['profile']['role'])) {
             '#'=>'Mes derniers posts',
             'adminPanel' => 'Panel d\'administration',
             'deleteProfil'=>'Supprimer le compte',
-            '#'=>'Déconnexion'
+            '../index.php?action=disconnect'=>'Déconnexion'
         );
         $showLightUserInfo = $user->getUserInfos();
     break;
-    default:
+    default: break;
 }
 
 

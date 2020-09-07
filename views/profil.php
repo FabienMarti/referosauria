@@ -21,21 +21,20 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             <p>Vous êtes inscrits depuis le : </br><?= $showLightUserInfo->inscDate ?></p>
             <p><?= $_SESSION['profile']['role'] ?></p>
             <ul class="p-2">
-                <?php 
-                    foreach ($profilOptions as $link => $title) {
-                        switch ($title) {
-                            case 'Panel d\'administration':
-                                ?><li><a href="<?= $link ?>.php?page=1"><?= $title ?></a></li><?php
-                            break;
-                            case 'Déconnexion':
-                                ?><li><a href="<?= $link ?>" class="btn btn-delete"><?= $title ?></a></li><?php
-                            break;
-                            case 'Supprimer le compte':
-                                ?><li><a href="<?= $link ?>" class="text-danger"><?= $title ?></a></li><?php
-                            break;
-                            default:
-                            ?><li><a href="profil.php?id=<?= $_SESSION['profile']['id'] ?>&page=<?= $link ?>"><?= $title ?></a></li><?php 
-                        }   
+                <?php
+                    foreach ($profilOptions as $link => $title){
+                        if($title == 'Panel d\'administration'){
+                        ?><li><a href="<?= $link ?>.php?page=1"><?= $title ?></a></li><?php
+                        }
+                        else if($title == 'Supprimer le compte'){
+                        ?><li><a href="<?= $link ?>" class="btn btn-delete"><?= $title ?></a></li><?php
+                        }
+                        else if($title == 'Déconnexion'){
+                        ?><li><a href="<?= $link ?>" class="text-danger"><?= $title ?></a></li><?php
+                        }
+                        else{
+                        ?><li><a href="profil.php?id=<?= $_SESSION['profile']['id'] ?>&page=<?= $link ?>"><?= $title ?></a></li><?php 
+                        }
                     }
                 ?>
             </ul>

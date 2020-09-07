@@ -38,11 +38,16 @@ body{
 #mainNav, footer, .modal-header{
     background-color: #41521F !important;
 }
-
 .divBackColor{
     background-color: #DECAB0;
 }
-
+.fieldIcon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+  }
 .titleStyle{
     color : #DE541E;
     font-family: 'Pacifico', cursive;

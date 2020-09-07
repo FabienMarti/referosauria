@@ -6,19 +6,19 @@ $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
 include_once '../config.php';
 include_once '../models/database.php';
 include_once '../models/userModel.php';
+include_once '../lang/FR_FR.php';
 include '../controllers/registrationController.php';
 include '../controllers/breadcrumb.php';
 include '../controllers/connectionController.php';
-include_once '../lang/FR_FR.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
-<h2 class="text-center titleStyle"><u>Inscription</u></h2>
 <p><?= isset($addUserMessage) ? $addUserMessage : '' ?></p>
 <?php if(isset($messageSuccess)){ ?>
     <h1 class="text-center titleStyle"><?= $messageSuccess ?></h1>
 <?php }else{ ?>
 <form class="container border border-dark p-3 rounded divBackColor mb-5" action="" method="POST">
+<h2 class="text-center titleStyle"><u>Inscription</u></h2>
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
     </div>
@@ -31,28 +31,29 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     </div>
     <!-- Mot de passe -->
     <div class="row">
-        <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'has-danger' : 'has-success') : '' ?>">
+        <div class="form-group col-12 col-md-6 <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="password">Mot de passe<span class="text-danger">*</span> : </label>
-            <input onblur="checkRegex(this)" onkeyup="checkPassword(this.value, charLength, upperCase, lowerCase, charNumber)" type="password" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
-            <meter class="m-0 col-12" max="4" id="password-strength-meter"></meter>
+            <div>
+                <input onblur="checkRegex(this)" onkeyup="checkPassword(this.value, charLength, upperCase, lowerCase, charNumber)" type="password" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
+                <i onclick="showPassword(this, document.getElementById('password'))" class="fieldIcon fas fa-eye-slash"></i>
+            </div>
+            <meter class="m-0 w-100" max="4" id="password-strength-meter"></meter>
             <?php if (isset($formErrors['password'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
             <?php } ?>
         </div>
-        <div class="form-group col">
+        <div class="form-group col-12 col-md-6">
             <label for="confirmPassword">Confirmez le mot de passe<span class="text-danger">*</span> : </label>
             <input onblur="checkRegex(this)" type="password" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
             <p class="text-danger text-center"><?= (isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != $_POST['password']) ? 'Les mots de passe ne correspondent pas' : '' ?></p>
         </div>
     </div>
-    <div class="row">
-        <ul class="noListStyle offset-4 col-lg-4">
+        <ul class="noListStyle list-inline">
             <li><i id="charLength" class="fas fa-minus"></i> Au moins 8 caractères.</li>
             <li><i id="upperCase" class="fas fa-minus"></i> Au moins une lettre en majuscule.</li>
             <li><i id="lowerCase" class="fas fa-minus"></i> Au moins une lettre en minuscule.</li>
             <li><i id="charNumber" class="fas fa-minus"></i> Au moins un chiffre.</li>
         </ul>
-    </div>
     <div class="row">
         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="mail">Adresse e-mail<span class="text-danger">*</span> : </label>

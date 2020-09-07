@@ -58,3 +58,16 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     var modal = $(this);
     modal.find('.modal-body #getId').val(recipient);
 })
+
+function showPassword(icon, field){
+
+    if(field.type == 'password'){
+        field.type = 'text';
+        icon.classList.add('fa-eye');
+        icon.classList.remove('fa-eye-slash');
+    }else{
+        field.type = 'password';
+        icon.classList.add('fa-eye-slash');
+        icon.classList.remove('fa-eye');
+    }
+}
