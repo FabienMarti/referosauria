@@ -13,7 +13,7 @@ include_once '../lang/FR_FR.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
-<div class="container">
+<div class="container mb-5">
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
         <nav id="profilNav" class="col-3 border border-dark divBackColor">

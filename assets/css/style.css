@@ -14,12 +14,16 @@ body{
     background-attachment:scroll;
     background-size: cover;
 }
+.btn{
+    background-color : #729EA1 !important;
+    color : white !important;
+}
 .btn-delete{
     background-color : red!important; 
     color : white !important;
 }
 .btn-orange{
-    background-color: #CC5803 !important;
+    background-color: #FF8811 !important;
     color : white !important;
 }
 .cutPara{
@@ -35,10 +39,10 @@ body{
 /******************************** COULEURS LIENS ***************************************/
 
 /* a:link, a:hover, a:focus, a:visited{
-    color: #CC5803;
+    color: #FF8811;
 }
 a:active {
-    color: #CC5803;
+    color: #FF8811;
     font-weight: bold;
 } */
 
@@ -49,11 +53,17 @@ a:active {
     height: 150px;
 }
 
-#mainNav, footer, .modal-header{
-    background-color: #556F44 !important;
+#mainNav,.modal-header{
+    background-color: transparent !important;
+}
+.nav-link, .biggerFont{
+    font-size: 25px !important;
+}
+footer{
+    background-color: #283618 !important;
 }
 .divBackColor{
-    background-color: #DECAB0;
+    background-color: #F4D06F   ;
 }
 .fieldIcon {
     float: right;
@@ -64,17 +74,17 @@ a:active {
   }
 
 .titleStyleShadow{
-    color : #CC5803 !important;
+    color : #FF8811 !important;
     text-shadow: black 5px 0 5px;
     font-family: 'dinosaur_font';
 }
 .titleStyle{
-    color : #CC5803;
+    color : #FF8811;
     font-family: 'dinosaur_font';
 }
 
 .mainTitle{
-    color : #0086BE;
+    color : #92BDA3;
 }
 
 #changeText{
@@ -122,7 +132,7 @@ a:active {
 
 .breadcrumb {
     margin-bottom: 0px !important;
-    background-color: #007BFF;
+    background-color: #8D99AE   ;
 }
 .buttonBG{
     background-color: rgba(0, 255, 0, 0.1);;

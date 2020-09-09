@@ -5,6 +5,8 @@ $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
 include_once '../config.php';
 include_once '../models/database.php';
 include_once '../models/userModel.php';
+include_once '../models/userModel.php';
+include_once '../models/commentModel.php';
 include '../models/creatureModel.php';
 include '../controllers/creatureController.php';
 $pageTitle =  $showCreatureInfo->name; 
@@ -89,119 +91,43 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
                 <p class="text-right">Source : WIKIPEDIA</p>
             </div>
             <div class="col-md-1 text-center divBackColor">
-                <p class="text-center p-3"><?= $showCreatureInfo->perName ?> :</p>
+                <p class="text-center p-3"><?= $showCreatureInfo->perName ?></p>
                 <?php foreach($showCreaturesByPeriod as $crea){ ?>
                     <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" width="100px" height="100px"  class="m-3" /></a></div>
                 <?php } ?>
             </div>
         </div>
 </section>
-<!-- <section class="mx-1">
-    <h1 class="text-center my-5 creaName">Plus de détails</h1>
-    <div class="row">
-        <div class="col-md-2">
-            <table class="table table-sm">
-                <thead>
-                    <th colspan="2" class="text-center">Classification</th>
-                </thead>
-                <tr>
-                    <th>Super-ordre</th>
-                    <td>Dinosauria</td>
-                </tr>
-                <tr>
-                    <th>Ordre</th>
-                    <td>Saurischia</td>
-                </tr>
-                <tr>
-                    <th>Sous-ordre</th>
-                    <td>Theropoda</td>
-                </tr>
-                <tr>
-                    <th>Infra-Ordre</th>
-                    <td>Tetunurae</td>
-                </tr>
-                <tr>
-                    <th>Micro-ordre</th>
-                    <td>Coelurosauria</td>
-                </tr>
-                <tr>
-                    <th>Super-famille</th>
-                    <td>Tyrannosauroidea</td>
-                </tr>
-                <tr>
-                    <th>Famille</th>
-                    <td>Tyrannosauridae</td>
-                </tr>
-                <tr>
-                    <th>Sous-ordre</th>
-                    <td>Tyrannosaurinae</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-4">
-            <table class="table table-sm divBackColor">
-                <thead>
-                    <th colspan="2" class="text-center">Fiche signalétique</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">Habitat</th>
-                        <td><?= isset($showCreatureInfo->environment) ? $showCreatureInfo->environment : '' ?></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Période</th>
-                        <td><?= isset($showCreatureInfo->period) ? $showCreatureInfo->period : '' ?></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Longueur</th>
-                        <td><?= isset($showCreatureInfo->width) ? $showCreatureInfo->width : '' ?> mètres</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Hauteur</th>
-                        <td><?= isset($showCreatureInfo->height) ? $showCreatureInfo->height : '' ?> mètres</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Poids</th>
-                        <td><?= isset($showCreatureInfo->weight) ? $showCreatureInfo->weight : '' ?> tonnes</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Prédateurs</th>
-                        <td><?= isset($showCreatureInfo->predatory) ? $showCreatureInfo->predatory : '' ?></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Alimentation</th>
-                        <td><?= isset($showCreatureInfo->diet) ? $showCreatureInfo->diet : '' ?></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-4">
-            <figure>
-                <img class="img-fluid" alt="squelette de Tyrannosaure" src="<?= $linkModif ?><?= isset($showCreatureInfo->detailImage) ? $showCreatureInfo->detailImage : '' ?>" />
-                <figcaption class="text-center">Tyrannosaure "Sue" au Field Museum, Chicago, USA, 2010</figcaption>
-            </figure>
-        </div>
-        <div class="col-md-4 divBackColor">
-            <h2 class="text-center">Découverte</h2>
-            <p class="text-justify"><?= isset($showCreatureInfo->discovery) ? $showCreatureInfo->discovery : '' ?></p>
-            <p class="text-right">Source : WIKIPEDIA</p>
-        </div>
-    </div>
-    <div class="row justify-content-around my-2">
-        <div class="col-md-5 divBackColor">
-            <h2 class="text-center">Etymologie</h2>
-            <p class="text-justify"><?= isset($showCreatureInfo->etymology) ? $showCreatureInfo->etymology : '' ?></p>
-            <p class="text-right">Source : WIKIPEDIA</p>
-        </div>
-        <div class="col-md-5 divBackColor">
-            <h2 class="text-center">Paléo-biologie</h2>
-            <p><?= isset($showCreatureInfo->paleobiology) ? $showCreatureInfo->paleobiology : '' ?></p>
-            <p class="text-right">Source : WIKIPEDIA</p>
-        </div>
-    </div>
-</section> -->
-<!-- commentaires -->
 
+<!-- commentaires -->
+<section class="container">
+<div class="divBackColor rounded border mt-5 p-3">
+<h2>Laisser un commentaire</h2>
+<form action="" method="POST">
+    <div class="form-group">
+        <label for="comment">Message :</label>
+        <div class="row">
+            <input type="text" name="comment" id="comment" placeholder="Votre message ..." class="form-control col" />
+            <input type="submit" name="sendComment" id="sendComment" value="Commenter" class="btn btn-primary col-2" />
+        </div>
+    </div>
+</form>
+<!-- Affichage des commentaires en fonction de la date d'ajout et de l'id creature -->
+<table class="table table-striped">
+  <tbody>
+      <?php 
+      foreach ($showCreaComments as $com) { ?>
+        <tr class="row">
+            <th scope="row" class="col-2"><?= $com->username ?></th>
+            <td class="bg-white col"><?= $com->content ?></td>
+        </tr>
+     <?php  } ?>
+    
+  </tbody>
+</table>
+<!-- Ajout de commentaire -->
+</div>
+</section>
 <!-- Modal de suppression-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -220,6 +146,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
         <a href="#" type="button" class="btn bg-danger">Supprimer</a>
     </div>
   </div>
+</div>
 </div>
 <img src='https://img.icons8.com/ios/500/circled-up-2.png' onclick="backToTop()" class="creaName" alt='flèche' width="50px" height="50px" />
 <?php include 'parts/footer.php' ?>

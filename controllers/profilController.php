@@ -38,7 +38,6 @@ switch (htmlspecialchars($_SESSION['profile']['role'])) {
 }
 
 
-$user = new user();
 $deleteProfilErrors = array();
 $currentPassword = $user->getCurrentPassword();
 
@@ -69,7 +68,7 @@ if(isset($_POST['validateDelete'])){
 $passwordRegex =  '%^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$%';
 $profilErrors = array();
 
-$user = new user();
+
 $currentPassword = $user->getCurrentPassword();
 
 if(isset($_POST['validateEdit'])){
@@ -105,7 +104,7 @@ if(isset($_POST['validateEdit'])){
 $regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$%');
 $profilErrors = array();
 
-$user = new user();
+
 $showUserInfo = $user->getUserInfos();
 
 if(isset($_POST['validateInfoEdit'])){

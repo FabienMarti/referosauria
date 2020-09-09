@@ -9,6 +9,17 @@ include_once '../models/userModel.php';
 include_once '../controllers/mailSentController.php';
 include_once 'parts/header.php';
 ?>
+<?php if(isset($messageSuccess)){ ?>
+        <div class="alert alert-success" role="alert">
+          <?= $messageSuccess ?>
+        </div>
+    <?php }
+
+    if(isset($messageFail)){ ?>
+        <div class="alert alert-danger" role="alert">
+          <?= $messageFail ?>
+        </div>
+    <?php } ?>
 <div class="container my-5 p-3 divBackColor">
 <h2 class="creaName text-center">Envoi mail :</h2>
     <form action="" method="POST">
@@ -27,7 +38,7 @@ include_once 'parts/header.php';
             <textarea type="text" name="message" id="message" class="form-control" rows="10" ></textarea>
         </div>
         <div class="form-group">
-            <input type="submit" name="sendMail" value="Envoyer" class="btn" />
+            <input type="submit" name="sendMail" value="Envoyer" class="btn btn-primary" />
         </div>
     </form>
 </div>

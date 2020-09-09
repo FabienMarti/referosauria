@@ -157,9 +157,7 @@ class creature
         ');
         return $dietQuery->fetchAll(PDO::FETCH_OBJ);
     }
-    public function checkDietExistsById(){
 
-    }
     //récupère le nom des catégories
     public function getCreaCategories(){
         $catQuery = $this->db->query(
@@ -272,6 +270,20 @@ class creature
         $data = $creatureExistsQuery->fetch(PDO::FETCH_OBJ);
         return $data->isCreatureExists;
     }
+    public function checkCreatureExistsById(){
+        $creatureExistsQuery = $this->db->prepare(
+            'SELECT 
+                COUNT(`id`) AS isCreatureExists
+            FROM
+                `r3f3r0_creatures`
+            WHERE
+                `id` = :id
+        ');
+        $creatureExistsQuery->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $creatureExistsQuery->execute();
+        $data = $creatureExistsQuery->fetch(PDO::FETCH_OBJ);
+        return $data->isCreatureExists;
+    }
 
 /******************************************************************************************/
 
@@ -316,5 +328,21 @@ class creature
         }
         $creaListQuery->execute();
         return $creaListQuery->fetchAll(PDO::FETCH_OBJ); 
+    }
+
+
+    //Méthode pour récuperer tous les commentaires d'une créature
+    public function getAllCommentsByCreaId(){
+        $allCommentsByCreaId = $this->db->prepare(
+            'SELECT
+                `comment`
+            FROM
+                `r3f3r0_comments`
+            WHERE
+                `id_r3f3r0_creatures` = :creaId
+        ');
+        $allCommentsByCreaId->bindValue('creaId', $this->creaId, PDO::PARAM_INT);
+        $allCommentsByCreaId->execute();
+        return $allCommentsByCreaId->fetchAll(PDO::FETCH_OBJ);
     }
 }

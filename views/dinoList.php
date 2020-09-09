@@ -70,10 +70,10 @@ if(isset($resultsNumber) && $resultsNumber == 0){ ?>
     <div class="row text-center justify-content-around align-items-end">
             <?php
                 foreach ($showCreaList  as $creature) {
-                ?><div class="col-12 col-md-3">
+                ?><div class="col-12 col-md-4">
                         <a href="creature.php?id=<?= $creature->id ?>">
                             <figure>
-                                <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark" width="150px" height="150px" src="<?= $linkModif . $creature->miniImage ?>" />
+                                <img alt="une illustration de <?= $creature->name ?>" title="<?= $creature->name ?>" class="img-fluid border border-dark rounded-circle" style="width : 150px; height: 150px;" src="<?= $linkModif . $creature->miniImage ?>" />
                                 <figcaption class="titleStyleShadow h4"><?= $creature->name ?></figcaption>
                             </figure>
                         </a>
