@@ -15,8 +15,6 @@
         <div class="text-center">
             <img src="../assets/img/Posture_des_archosaures.jpg" alt="Image sur les postures des archosaures" title="Posture des archosaures" />
         </div>
-        
-        
         <p class="text-right">Source : <a href="https://www.lesdinosaures.net/quest-ce-quun-dinosaure/">LesDinosaures.net</a></p>
     </div>
 </div>

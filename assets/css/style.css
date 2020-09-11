@@ -58,7 +58,9 @@ a:active {
 #mainNav,.modal-header{
     background-color: transparent !important;
 }
+    
 .nav-link, .biggerFont{
+    
     font-size: 25px !important;
 }
 footer{
@@ -73,7 +75,7 @@ footer{
     margin-top: -25px;
     position: relative;
     z-index: 2;
-  }
+}
 
 .titleStyleShadow{
     color : #FF8811 !important;

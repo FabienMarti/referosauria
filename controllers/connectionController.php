@@ -27,7 +27,7 @@ if(isset($_POST['login'])){
             $_SESSION['profile']['id'] = $userProfil->id;
             $_SESSION['profile']['username'] = $userProfil->username;
             $_SESSION['profile']['role'] = $userProfil->rolName;
-            $_SESSION['profile']['roleId'] = $userProfil->rolName;
+            $_SESSION['profile']['roleId'] = $userProfil->rolId;
             //cookies pour garder en mémoire le mot de passe et le nom d'utilisateur
             setcookie('username', $_SESSION['profile']['username'], time() + (3600 * 24 * 365), '/');
           

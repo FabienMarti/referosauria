@@ -105,16 +105,18 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
 <!-- commentaires -->
 <section class="container">
 <div class="divBackColor rounded border mt-5 p-3">
-<h2>Laisser un commentaire</h2>
-<form action="" method="POST">
-    <div class="form-group">
-        <label for="comment">Message :</label>
-        <div class="row">
-            <input type="text" name="comment" id="comment" placeholder="Votre message ..." class="form-control col" />
-            <input type="submit" name="sendComment" id="sendComment" value="Commenter" class="btn btn-primary col-2" />
+<?php if(isset($_SESSION['profile'])){ ?>
+    <h2>Laisser un commentaire</h2>
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="comment">Message :</label>
+            <div class="row">
+                <input type="text" name="comment" id="comment" placeholder="Votre message ..." class="form-control col" />
+                <input type="submit" name="sendComment" id="sendComment" value="Commenter" class="btn btn-primary col-2" />
+            </div>
         </div>
-    </div>
-</form>
+    </form> 
+<?php } ?>
 <!-- Affichage des commentaires en fonction de la date d'ajout et de l'id creature -->
 <table class="table table-striped">
   <tbody>
@@ -125,7 +127,6 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
             <td class="bg-white col"><?= $com->content ?></td>
         </tr>
      <?php  } ?>
-    
   </tbody>
 </table>
 <!-- Ajout de commentaire -->
