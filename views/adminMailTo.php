@@ -11,7 +11,7 @@ include_once '../lang/FR_FR.php';
 include '../controllers/adminMailToController.php';
 include 'parts/header.php';
 ?>
-<?php 
+<?php
     if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
 <div class="container divBackColor rounded my-5 p-5">
     <h1 class="text-center">Envoyer un email à <?= $showUser->username ?></h1>

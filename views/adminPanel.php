@@ -46,7 +46,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                 <th scope="col">Supprimer</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody><i class="fas fa-envelope-open"></i>
             <?php
                 foreach ($showUserInfo as $info) { ?>
                   <form action="" method="POST">
@@ -54,7 +54,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                         <th scope="row" ><?= $info->usrId ?></th>
                         <td><?= $info->username  ?></td>
                         <td><?= $info->mail ?></td>
-                        <td><a class="btn btn-success mailEnvelope"  href="adminMailTo.php?id=<?= $info->usrId ?>"><i class="fas fa-envelope"></i></a></td>
+                        <td><a  onmouseover="enveloppeSwitch(enveloppe)" class="btn btn-success mailEnvelope" href="adminMailTo.php?id=<?= $info->usrId ?>"><i class="fas fa-envelope"></i></a></td>
                         <td><?= $info->inscDate ?></td>
                         <td><?= $info->role ?></td>
                         <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
@@ -89,7 +89,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
         }
 
         for ($i = $beginPage; $i <= $endPage; $i++) {?>
-            <a href="adminPanel.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-danger' : '' ?>"><?= $i ?></a><?php 
+            <a href="adminPanel.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-orange' : '' ?>"><?= $i ?></a><?php 
         } 
 
         if ($page < $pageNumber - 3){ ?>

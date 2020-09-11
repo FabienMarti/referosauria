@@ -99,3 +99,21 @@ function readURL2(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function enveloppeSwitch(enveloppe){
+
+    if(field.type == 'password'){
+        field.type = 'text';
+        icon.classList.add('fa-eye');
+        icon.classList.remove('fa-eye-slash');
+    }else{
+        field.type = 'password';
+        icon.classList.add('fa-eye-slash');
+        icon.classList.remove('fa-eye');
+    }
+
+    if(enveloppe){
+        
+    }
+
+}

@@ -93,7 +93,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                             <input type="submit" class="btn btn-primary" value="Modifier" name="validateEdit" />
                         </div>
                     </form>
-                <a href="index.php?content=passwordRecovery">Mot de passe oublié ?</a>
+                <a href="../passwordRecovery.php">Mot de passe oublié ?</a>
             </div>
             <div class="<?= isset($_GET['page']) ? ($_GET['page'] == 'infos' ? 'd-block' : 'd-none') : '' ?>">
                 <p class="text-center text-success"><?= isset($succesEdit) ? $succesEdit : '' ?></p>
