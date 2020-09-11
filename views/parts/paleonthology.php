@@ -1,4 +1,4 @@
-<h1 class="text-center"><u>La Paléonthologie</u></h1>
+<h1 class="text-center titleStyleShadow"><u>La Paléonthologie</u></h1>
 <div class="row justify-content-around">
     <div class="col-md-5 border border-dark rounded divBackColor">
         <h2 class="m-2 text-center">Étymologie</h2>

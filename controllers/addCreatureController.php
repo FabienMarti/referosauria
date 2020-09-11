@@ -54,7 +54,7 @@ if(isset($_POST['sendNewCrea'])){
     //Contrôle de l'ajout de fichier Image principale
     if (!empty($_FILES['mainImageUpload']) && $_FILES['mainImageUpload']['error'] == 0) {
         // On stock dans $fileInfos les informations concernant le chemin du fichier.
-        $fileInfos = pathinfo($_FILES['mainImageUpload']['name']);
+        $fileInfos = pathinfo($_FILES['mainImageUpload']['name']);        
         // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
         if (in_array(strtolower($fileInfos['extension']), $fileExtension)) {
           //On définit le chemin vers lequel uploader le fichier
@@ -79,7 +79,6 @@ if(isset($_POST['sendNewCrea'])){
       } else {
         $formErrors['file'] = 'Veuillez selectionner un fichier';
       }
-
     //Contrôle de l'ajout de fichier la mini image
     if (!empty($_FILES['miniImageUpload']) && $_FILES['miniImageUpload']['error'] == 0) {
         // On stock dans $fileInfos les informations concernant le chemin du fichier.

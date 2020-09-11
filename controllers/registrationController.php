@@ -3,12 +3,12 @@
 $regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$%');
 
 //tableau d'erreurs
-$formErrors = array();
 
 
 
 if(isset($_POST['validateRegistration'])){
     $user = new user();
+$formErrors = array();
 
     //! USERNAME 
 

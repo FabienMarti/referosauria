@@ -72,6 +72,8 @@ function showPassword(icon, field){
     }
 }
 
+//! Previsualisation des images dans Ajout Creature
+
 function readURL1(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -85,7 +87,6 @@ function readURL1(input) {
     }
 }
 
-
 function readURL2(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -98,3 +99,4 @@ function readURL2(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+

@@ -24,7 +24,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     </div>
     <div class="form-group">
             <label for="username">Nom d'utilisateur<span class="text-danger">*</span> : </label>
-            <input oninput="checkRegex(this)" type="text" name="username" id="username" placeholder="Ex : DinoLOVER" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['username']) ? 'value="' . $_POST['username'] . '"' : '' ?> />
+            <input oninput="checkRegex(this)" type="text" name="username" id="username" placeholder="Ex : DinoLOVER" class="form-control <?= isset($_POST['validateRegistration']) && count($formErrors) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['username']) ? 'value="' . $_POST['username'] . '"' : '' ?> />
             <?php if (isset($formErrors['username'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['username'] ?></p>
             <?php } ?>
@@ -34,7 +34,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
         <div class="form-group col-12 col-md-6 <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="password">Mot de passe<span class="text-danger">*</span> : </label>
             <div>
-                <input onblur="checkRegex(this)" onkeyup="checkPassword(this.value, charLength, upperCase, lowerCase, charNumber)" type="password" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
+                <input onblur="checkRegex(this)" onkeyup="checkPassword(this.value, charLength, upperCase, lowerCase, charNumber)" type="password" name="password" id="password" placeholder="Ex : Aabb1234" class="form-control <?= isset($_POST['validateRegistration']) && count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
                 <i onclick="showPassword(this, document.getElementById('password'))" class="fieldIcon fas fa-eye-slash"></i>
             </div>
             <meter class="m-0 w-100" max="4" id="password-strength-meter"></meter>
@@ -57,7 +57,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     <div class="row">
         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="mail">Adresse e-mail<span class="text-danger">*</span> : </label>
-            <input onblur="checkMail(this)" type="mail" id="mailInput" name="mail" id="mail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['mail']) ? 'value="' . $_POST['mail'] . '"' : '' ?> />
+            <input onblur="checkMail(this)" type="mail" id="mailInput" name="mail" id="mail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= isset($_POST['validateRegistration']) && count($_POST) > 0 ? (isset($formErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['mail']) ? 'value="' . $_POST['mail'] . '"' : '' ?> />
                 <?php if (isset($formErrors['mail'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['mail'] ?></p>
                 <?php } ?>

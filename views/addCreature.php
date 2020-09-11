@@ -46,7 +46,7 @@ if(isset($messageFail)){ ?>
         <div class="row">
             <div class="form-group col-md-12 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="creaName">Nom : </label>
-                    <input type="text" id="creaName" name="creaName" placeholder="Nom de la Créature" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['creaName']) ? 'value="' . $_POST['creaName'] . '"' : '' ?> />
+                    <input type="text" id="creaName" name="creaName" placeholder="Nom de la Créature" class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['creaName']) ? 'value="' . $_POST['creaName'] . '"' : '' ?> />
             <?php if (isset($formErrors['creaName'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['creaName'] ?></p>
             <?php } ?>
@@ -57,7 +57,7 @@ if(isset($messageFail)){ ?>
             </div>
             <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                         <label for="mainImageUpload">Image principale de la créature : </label>
-                        <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                        <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
                 <?php if (isset($formErrors['mainImageUpload'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
                 <?php } ?>
@@ -68,7 +68,7 @@ if(isset($messageFail)){ ?>
             </div>
             <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="miniImageUpload">Image de tête de la créature : </label>
-                    <input onchange="readURL2(this)" type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                    <input onchange="readURL2(this)" type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
             <?php if (isset($formErrors['miniImageUpload'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
             <?php } ?>            
@@ -79,7 +79,7 @@ if(isset($messageFail)){ ?>
 <!-- Menu Période -->
             <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="period">Choisissez une période :</label>
-                <select name="period" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
+                <select name="period" class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
                         foreach ($showPeriods as $period) {
@@ -92,7 +92,7 @@ if(isset($messageFail)){ ?>
 <!-- Menu Habitat -->
             <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="habitat">Habitat principal :</label>
-                <select name="habitat"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
+                <select name="habitat"  class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
                         foreach ($showEnvironments as $area) {
@@ -103,9 +103,9 @@ if(isset($messageFail)){ ?>
                 <?php } ?>
             </div>
 <!-- Menu Alimentation #diet -->
-            <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-12 col-md <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="diet">Choisissez l'alimentation : </label>
-                <select name="diet"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
+                <select name="diet"  class="form-control <?=  isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
                         foreach ($showDiets as $diet) {
@@ -118,7 +118,7 @@ if(isset($messageFail)){ ?>
 <!-- Découvert -->
             <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="discoverer">Paléonthologue  : </label>
-                <input type="text" placeholder="Ex: Allan Grant" name="discoverer" id="discoverer" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['discoverer']) ? 'value="' . $_POST['discoverer'] . '"' : '' ?> />
+                <input type="text" placeholder="Ex: Allan Grant" name="discoverer" id="discoverer" class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['discoverer']) ? 'value="' . $_POST['discoverer'] . '"' : '' ?> />
                 <?php if (isset($formErrors['discoverer'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['discoverer'] ?></p>
                 <?php } ?>
@@ -126,7 +126,7 @@ if(isset($messageFail)){ ?>
             </div>
             <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="description">Description : </label>
-                <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
+                <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
                 <?php if (isset($formErrors['description'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['description'] ?></p>
                 <?php } ?>
