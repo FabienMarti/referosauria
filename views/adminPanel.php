@@ -12,7 +12,8 @@ include '../controllers/breadcrumb.php';
 include_once '../lang/FR_FR.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_SESSION['profile']['id'] => 'Page de profil' , 'final' => $pageTitle));
-?>
+
+if(isset($_SESSION['profile']) && $_SESSION['profile']['roldId'] == 1){ ?>
 <div class="container mt-5">
     <!-- barre de recherche -->
     <div class="row">
@@ -124,4 +125,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_
     </div>
   </div>
 </div>
+<?php } else { ?>
+        <?php include 'parts/redirect.php' ?> 
+   <?php } ?>
 <?php include 'parts/footer.php' ?>

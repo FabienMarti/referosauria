@@ -18,13 +18,16 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
 <section class="container-fluid my-2">
         <div class="row">
             <h1 class="text-center titleStyleShadow col"><?= $showCreatureInfo->name ?></h1>
-            <div class="dropdown dropleft float-left my-auto">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="editCreature.php?id=<?= $showCreatureInfo->id ?>"><i class="fas fa-wrench"></i> Modifier</a>
-                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i> Supprimer créature</a>
-                </div>
-            </div>
+            <?php 
+                if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) { ?>
+                    <div class="dropdown dropleft float-left my-auto">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="editCreature.php?id=<?= $showCreatureInfo->id ?>"><i class="fas fa-wrench"></i> Modifier</a>
+                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i> Supprimer créature</a>
+                        </div>
+                    </div>
+                <?php } ?>
         </div>
         <div class="row">
             <div class="col-md-2 text-center border divBackColor p-3">

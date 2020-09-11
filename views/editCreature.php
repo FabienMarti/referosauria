@@ -13,7 +13,8 @@ include_once '../lang/FR_FR.php';
 $pageTitle =  'Edition de ' . $showCreatureInfo->name; 
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'creature.php?id=' . $showCreatureInfo->id => $showCreatureInfo->name, 'final' => 'Edition de ' . $showCreatureInfo->name));
-?>
+
+if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {?>
 <section class="container-fluid my-2">
     <form action="" method="POST">
         <div class="row">
@@ -152,26 +153,8 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
         </div>
         </form>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php } else { 
+    include 'parts/redirect.php';
+ } ?>   
 <img src='https://img.icons8.com/ios/500/circled-up-2.png' onclick="backToTop()" class="creaName" alt='flèche' width="50px" height="50px" />
 <?php include 'parts/footer.php' ?>

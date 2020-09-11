@@ -23,7 +23,7 @@ $showEnvironments = $creature->getCreaEnvironments();
 $environmentArray = array('Amérique du Nord', 'Amérique du Sud', 'Europe', 'Asie', 'Afrique', 'Océanie', 'Antartique' );
 
 if(isset($_POST['sendNewCrea'])){
- 
+
 #########################################################################################
 
     //Contrôle de la radio category
@@ -162,7 +162,7 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     if(empty($formErrors)){
-        //$creature->date = date('Y-m-d');
+        
         if($creature->checkCreatureExists() == 0){
             $messageSuccess = 'La créature à été ajoutée avec succès';
             $creature->addCreatureSimple();

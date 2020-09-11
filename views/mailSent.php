@@ -8,8 +8,9 @@ include_once '../models/database.php';
 include_once '../models/userModel.php';
 include_once '../controllers/mailSentController.php';
 include_once 'parts/header.php';
-?>
-<?php if(isset($messageSuccess)){ ?>
+
+if(isset($_SESSION['profile'])){
+ if(isset($messageSuccess)){ ?>
         <div class="alert alert-success" role="alert">
           <?= $messageSuccess ?>
         </div>
@@ -42,4 +43,7 @@ include_once 'parts/header.php';
         </div>
     </form>
 </div>
+<?php } else { 
+    include 'parts/redirect.php';
+ } ?> 
 <?php include 'parts/footer.php' ?>

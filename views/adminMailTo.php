@@ -11,6 +11,8 @@ include_once '../lang/FR_FR.php';
 include '../controllers/adminMailToController.php';
 include 'parts/header.php';
 ?>
+<?php 
+    if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
 <div class="container divBackColor rounded my-5 p-5">
     <h1 class="text-center">Envoyer un email à <?= $showUser->username ?></h1>
     <form action="" method="POST">
@@ -31,4 +33,7 @@ include 'parts/header.php';
         </div>
     </form>
 </div>
+    <?php } else { ?>
+        <?php include 'parts/redirect.php' ?> 
+   <?php } ?>
 <?php include 'parts/footer.php' ?>

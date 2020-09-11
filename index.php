@@ -8,8 +8,8 @@ include_once 'models/database.php';
 include_once 'models/userModel.php';
 include_once 'models/creatureModel.php';
 include_once 'controllers/homeController.php';
-include_once 'controllers/connectionController.php';
 include_once 'lang/FR_FR.php';
+include_once 'controllers/connectionController.php';
 include 'views/parts/header.php';
 ?>
 <main>

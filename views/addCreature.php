@@ -13,18 +13,19 @@ include '../controllers/connectionController.php';
 include_once '../lang/FR_FR.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
-?>
- <?php if(isset($messageSuccess)){ ?>
-        <div class="alert alert-success" role="alert">
-          <?= $messageSuccess ?>
-        </div>
-    <?php }
 
-    if(isset($messageFail)){ ?>
-        <div class="alert alert-danger" role="alert">
-          <?= $messageFail ?>
+if(isset($_SESSION['profile'])){ 
+        if(isset($messageSuccess)){ ?>
+        <div class="alert alert-success" role="alert">
+        <?= $messageSuccess ?>
         </div>
-    <?php } ?>
+<?php }
+
+if(isset($messageFail)){ ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $messageFail ?>
+    </div>
+<?php } ?>
 <div class="container-fluid border border-dark rounded pt-2 px-md-5 my-5 divBackColor">
     <h2 class="titleStyle text-center">Ajouter une créature</h2>
     <form action="" method="POST" enctype="multipart/form-data">
@@ -43,7 +44,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             </div>
 <!-- Nom de la créature -->
         <div class="row">
-            <div class="form-group col-md-6 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-md-12 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="creaName">Nom : </label>
                     <input type="text" id="creaName" name="creaName" placeholder="Nom de la Créature" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['creaName']) ? 'value="' . $_POST['creaName'] . '"' : '' ?> />
             <?php if (isset($formErrors['creaName'])) { ?>
@@ -51,20 +52,26 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             <?php } ?>
             </div>
 <!-- Image principale de la créature FILE -->
+            <div class="col-3 text-center">
+                <img id="img1" class="imgPreview" src="http://placehold.it/180" alt="Image" />
+            </div>
             <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
-                    <label for="mainImageUpload">Image principale de la créature : </label>
-                    <input type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-            <?php if (isset($formErrors['mainImageUpload'])) { ?>
-                <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
-            <?php } ?>
+                        <label for="mainImageUpload">Image principale de la créature : </label>
+                        <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                <?php if (isset($formErrors['mainImageUpload'])) { ?>
+                    <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
+                <?php } ?>
             </div>
 <!-- Mini image de la créature FILE -->
+            <div class="col-3 text-center">
+                <img id="img2" class="imgPreview" src="http://placehold.it/180" alt="Image" />
+            </div>
             <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="miniImageUpload">Image de tête de la créature : </label>
-                    <input type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                    <input onchange="readURL2(this)" type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
             <?php if (isset($formErrors['miniImageUpload'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
-            <?php } ?>
+            <?php } ?>            
             </div> 
         </div>
 <!-- Menus déroulants #### Période #### Habitat #### Alimentation #### Découverte -->
@@ -144,16 +151,19 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     <div class="container-fluid d-none">
         <h1 class="text-center my-5"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>
 
-            <div class="row">
+        <div class="row">
             <div class="col-md-4 border border-dark m-auto">
-                    <img class="img-fluid border border-dark" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
-                </div>
-                <div class="col-md-5 m-auto">
-                    <p class="h5 text-center">Description</p>
-                    <p><?= $showCreatureInfo->description ?></p>
-        <!-- Probleme BDD pour les sources -->
-                    <p class="text-right">Source : WIKIPEDIA</p>
-                </div>  
+                <img class="img-fluid border border-dark" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
             </div>
+            <div class="col-md-5 m-auto">
+                <p class="h5 text-center">Description</p>
+                <p><?= $showCreatureInfo->description ?></p>
+    <!-- Probleme BDD pour les sources -->
+                <p class="text-right">Source : WIKIPEDIA</p>
+            </div>  
+        </div>
     </div>
+<?php } else { ?> 
+    <?php include 'parts/redirect.php' ?> 
+<?php } ?>
 <?php include 'parts/footer.php' ?>
