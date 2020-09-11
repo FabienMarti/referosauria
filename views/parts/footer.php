@@ -20,7 +20,6 @@
     <script src="<?= $linkModif ?>assets/js/script.js"></script>
     <script src="<?= $linkModif ?>assets/js/registration.js"></script>
     <script src="<?= $linkModif ?>assets/js/ajax.js"></script>
-    <script src="<?= $linkModif ?>assets/js/zoom.js"></script>
     <script><?= isset($script) ? $script : '' ?></script>
 </body>
 </html>

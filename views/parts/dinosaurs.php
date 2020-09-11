@@ -12,11 +12,11 @@
             <li>ils ont une cavité au milieu de la hanche</li>
             <li>ils ont les pattes arrière dressées sous le corps (contrairement aux lézards ou crocodiles, qui ont les pattes de part et d’autre du corps)</li>    
         </ul>
-        <div class="">
+        <div class="text-center">
             <img src="../assets/img/Posture_des_archosaures.jpg" alt="Image sur les postures des archosaures" title="Posture des archosaures" />
         </div>
         
         
-        <p class="text-right">Source : <a href="https://fr.wikipedia.org/wiki/Pal%C3%A9ontologie">Wikipédia</a></p>
+        <p class="text-right">Source : <a href="https://www.lesdinosaures.net/quest-ce-quun-dinosaure/">LesDinosaures.net</a></p>
     </div>
 </div>
