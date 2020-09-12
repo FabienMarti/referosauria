@@ -4,7 +4,6 @@
 }
 @font-face {
     font-family: "dinosaur_font";
-    
 	src: url('../fonts/dinojp.ttf');
 }
 body{
@@ -35,7 +34,10 @@ body{
 
 }
 
-
+.imgPreview{
+    max-width:180px;
+    max-height: 180px;
+}
 /******************************** COULEURS LIENS ***************************************/
 
 /* a:link, a:hover, a:focus, a:visited{
@@ -56,7 +58,9 @@ a:active {
 #mainNav,.modal-header{
     background-color: transparent !important;
 }
+    
 .nav-link, .biggerFont{
+    
     font-size: 25px !important;
 }
 footer{
@@ -71,7 +75,7 @@ footer{
     margin-top: -25px;
     position: relative;
     z-index: 2;
-  }
+}
 
 .titleStyleShadow{
     color : #FF8811 !important;
@@ -195,3 +199,4 @@ meter[value="4"]::-moz-meter-bar { background: green; }
 @media (max-width: 768px){
     
 }
+

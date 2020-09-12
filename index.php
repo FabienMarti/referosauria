@@ -8,8 +8,8 @@ include_once 'models/database.php';
 include_once 'models/userModel.php';
 include_once 'models/creatureModel.php';
 include_once 'controllers/homeController.php';
-include_once 'controllers/connectionController.php';
 include_once 'lang/FR_FR.php';
+include_once 'controllers/connectionController.php';
 include 'views/parts/header.php';
 ?>
 <main>
@@ -36,7 +36,7 @@ include 'views/parts/header.php';
             <!--Presentation Dino-->
             <div class="col-md-6 border border-dark divBackColor p-3">
                     <p class="text-justify my-auto">
-                    <img class="img-fluid gertie" src="assets/img/gertie.png" alt="gertie le dinosaure" title="Gertie le Dinosaure" />
+                    <img class="img-fluid gertie" src="assets/img/gertie.png" alt="Gertie le dinosaure" title="Gertie le Dinosaure" />
                         Les dinosaures (du grec deinos, « terrible, magnifique », et sauros, « lézard ») sont des diapsides archosaures qui ont dominé les
                         écosystèmes
                         terrestres du

@@ -49,8 +49,8 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     <?php include 'parts/paleonthology.php' ?>
   </section>
 <!-- Les Dinosaures -->
-  <section id="dinosaurs">
-  <div style="height: 100vh" class="bg bg-success"></div>
+  <section id="dinosaurs" class="container-fluid mx-2 mb-5">
+    <?php include 'parts/dinosaurs.php'; ?>
   </section>
 <!-- Créatures Océaniques -->
   <section id="oceanCreatures">

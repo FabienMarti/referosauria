@@ -71,3 +71,49 @@ function showPassword(icon, field){
         icon.classList.remove('fa-eye');
     }
 }
+
+//! Previsualisation des images dans Ajout Creature
+
+function readURL1(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#img1')
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURL2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#img2')
+                .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function enveloppeSwitch(enveloppe){
+
+    if(field.type == 'password'){
+        field.type = 'text';
+        icon.classList.add('fa-eye');
+        icon.classList.remove('fa-eye-slash');
+    }else{
+        field.type = 'password';
+        icon.classList.add('fa-eye-slash');
+        icon.classList.remove('fa-eye');
+    }
+
+    if(enveloppe){
+        
+    }
+
+}

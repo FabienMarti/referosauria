@@ -13,18 +13,19 @@ include '../controllers/connectionController.php';
 include_once '../lang/FR_FR.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
-?>
- <?php if(isset($messageSuccess)){ ?>
-        <div class="alert alert-success" role="alert">
-          <?= $messageSuccess ?>
-        </div>
-    <?php }
 
-    if(isset($messageFail)){ ?>
-        <div class="alert alert-danger" role="alert">
-          <?= $messageFail ?>
+if(isset($_SESSION['profile'])){ 
+        if(isset($messageSuccess)){ ?>
+        <div class="alert alert-success" role="alert">
+        <?= $messageSuccess ?>
         </div>
-    <?php } ?>
+<?php }
+
+if(isset($messageFail)){ ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $messageFail ?>
+    </div>
+<?php } ?>
 <div class="container-fluid border border-dark rounded pt-2 px-md-5 my-5 divBackColor">
     <h2 class="titleStyle text-center">Ajouter une créature</h2>
     <form action="" method="POST" enctype="multipart/form-data">
@@ -43,28 +44,34 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             </div>
 <!-- Nom de la créature -->
         <div class="row">
-            <div class="form-group col-md-6 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-md-12 <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="creaName">Nom : </label>
-                    <input type="text" id="creaName" name="creaName" placeholder="Nom de la Créature" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['creaName']) ? 'value="' . $_POST['creaName'] . '"' : '' ?> />
+                    <input type="text" id="creaName" name="creaName" placeholder="Nom de la Créature" class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['creaName']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['creaName']) ? 'value="' . $_POST['creaName'] . '"' : '' ?> />
             <?php if (isset($formErrors['creaName'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['creaName'] ?></p>
             <?php } ?>
             </div>
 <!-- Image principale de la créature FILE -->
+            <div class="col-3 text-center">
+                <img id="img1" class="imgPreview" src="http://placehold.it/180" alt="Image" />
+            </div>
             <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
-                    <label for="mainImageUpload">Image principale de la créature : </label>
-                    <input type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-            <?php if (isset($formErrors['mainImageUpload'])) { ?>
-                <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
-            <?php } ?>
+                        <label for="mainImageUpload">Image principale de la créature : </label>
+                        <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                <?php if (isset($formErrors['mainImageUpload'])) { ?>
+                    <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
+                <?php } ?>
             </div>
 <!-- Mini image de la créature FILE -->
+            <div class="col-3 text-center">
+                <img id="img2" class="imgPreview" src="http://placehold.it/180" alt="Image" />
+            </div>
             <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="miniImageUpload">Image de tête de la créature : </label>
-                    <input type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                    <input onchange="readURL2(this)" type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
             <?php if (isset($formErrors['miniImageUpload'])) { ?>
                 <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
-            <?php } ?>
+            <?php } ?>            
             </div> 
         </div>
 <!-- Menus déroulants #### Période #### Habitat #### Alimentation #### Découverte -->
@@ -72,7 +79,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 <!-- Menu Période -->
             <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="period">Choisissez une période :</label>
-                <select name="period" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
+                <select name="period" class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
                         foreach ($showPeriods as $period) {
@@ -85,7 +92,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 <!-- Menu Habitat -->
             <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="habitat">Habitat principal :</label>
-                <select name="habitat"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
+                <select name="habitat"  class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
                         foreach ($showEnvironments as $area) {
@@ -96,9 +103,9 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <?php } ?>
             </div>
 <!-- Menu Alimentation #diet -->
-            <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
+            <div class="form-group col-12 col-md <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="diet">Choisissez l'alimentation : </label>
-                <select name="diet"  class="form-control <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
+                <select name="diet"  class="form-control <?=  isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
                     <option value="" disabled selected>Sélectionnez</option>
                     <?php
                         foreach ($showDiets as $diet) {
@@ -111,7 +118,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 <!-- Découvert -->
             <div class="form-group col-12 col-md <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="discoverer">Paléonthologue  : </label>
-                <input type="text" placeholder="Ex: Allan Grant" name="discoverer" id="discoverer" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['discoverer']) ? 'value="' . $_POST['discoverer'] . '"' : '' ?> />
+                <input type="text" placeholder="Ex: Allan Grant" name="discoverer" id="discoverer" class="form-control <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['discoverer']) ? 'value="' . $_POST['discoverer'] . '"' : '' ?> />
                 <?php if (isset($formErrors['discoverer'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['discoverer'] ?></p>
                 <?php } ?>
@@ -119,7 +126,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             </div>
             <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="description">Description : </label>
-                <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
+                <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>
                 <?php if (isset($formErrors['description'])) { ?>
                     <p class="text-danger text-center"><?= $formErrors['description'] ?></p>
                 <?php } ?>
@@ -144,16 +151,19 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     <div class="container-fluid d-none">
         <h1 class="text-center my-5"><u><?= isset($showCreatureInfo->name) ? $showCreatureInfo->name : '' ?></u></h1>
 
-            <div class="row">
+        <div class="row">
             <div class="col-md-4 border border-dark m-auto">
-                    <img class="img-fluid border border-dark" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
-                </div>
-                <div class="col-md-5 m-auto">
-                    <p class="h5 text-center">Description</p>
-                    <p><?= $showCreatureInfo->description ?></p>
-        <!-- Probleme BDD pour les sources -->
-                    <p class="text-right">Source : WIKIPEDIA</p>
-                </div>  
+                <img class="img-fluid border border-dark" src="../<?= isset($showCreatureInfo->mainImage) ? $showCreatureInfo->mainImage : '' ?>" />
             </div>
+            <div class="col-md-5 m-auto">
+                <p class="h5 text-center">Description</p>
+                <p><?= $showCreatureInfo->description ?></p>
+    <!-- Probleme BDD pour les sources -->
+                <p class="text-right">Source : WIKIPEDIA</p>
+            </div>  
+        </div>
     </div>
+<?php } else { ?> 
+    <?php include 'parts/redirect.php' ?> 
+<?php } ?>
 <?php include 'parts/footer.php' ?>

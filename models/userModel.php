@@ -250,6 +250,7 @@ class user
             'SELECT 
                 `usr`.`id`
                 , `usr`.`username`
+                , `usr`.`id_r3f3r0_roles` AS `rolId`
                 , `rol`.`name` AS `rolName`
             FROM 
                 `r3f3r0_users` AS `usr`

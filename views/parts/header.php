@@ -13,7 +13,7 @@
     </head>
 <body>
 <!-- Modale de connexion -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modalConnection" tabindex="-1" role="dialog" aria-labelledby="modalConnectionTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -26,21 +26,21 @@
                     <form id="connectionForm" action="" method="POST">
                         <div class="form-group">
                             <label for="usernameConnect">Nom d'utilisateur : </label>
-                            <input type="text" id="usernameConnect" name="username" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
-                                <?php if (isset($formErrors['username'])) { ?>
-                                    <p class="text-danger text-center"><?= $formErrors['username'] ?></p>
+                            <input type="text" id="usernameConnect" name="usernameConnect" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['usernameConnect']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
+                                <?php if (isset($formErrors['usernameConnect'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['usernameConnect'] ?></p>
                                 <?php } ?>
                         </div>
                         <div class="form-group">
                             <label for="passwordConnect">Mot de passe : </label>
-                            <input type="password" id="passwordConnect" name="password" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['password']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['password']) ? 'value="' . $_POST['password'] . '"' : '' ?> />
-                                <?php if (isset($formErrors['password'])) { ?>
-                                    <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
+                            <input type="password" id="passwordConnect" name="passwordConnect" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['passwordConnect']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['passwordConnect'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['passwordConnect'] ?></p>
                                 <?php } ?>
                             <a href="<?= $linkModif ?>passwordRecovery.php">Mot de passe oublié ?</a>
                         </div>
                         <div class="text-center">
-                            <input onclick="checkPasswordWithMail([usernameConnect, passwordConnect], passwordConnect, usernameConnect)" type="" name="login" class="btn btn-primary" value="Connexion" />
+                            <input type="submit" name="login" class="btn btn-primary" value="Connexion" />
                         </div>
                     </form>
                 </div>
@@ -94,7 +94,7 @@
                     }else{
                         ?>
                         <a class="btn btn-primary" href="<?= $linkModif ?>views/registration.php">S'inscrire</a>
-                        <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModalCenter">Connexion</a>
+                        <a class="btn btn-primary text-white" data-toggle="modal" data-target="#modalConnection">Connexion</a>
                         <?php
                     }?>
                 </div>
