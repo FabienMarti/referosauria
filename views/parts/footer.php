@@ -20,6 +20,5 @@
     <script src="<?= $linkModif ?>assets/js/script.js"></script>
     <script src="<?= $linkModif ?>assets/js/registration.js"></script>
     <script src="<?= $linkModif ?>assets/js/ajax.js"></script>
-
 </body>
 </html>

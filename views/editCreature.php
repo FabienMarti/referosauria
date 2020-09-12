@@ -44,7 +44,6 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
                             <?php } ?>
                         </div>
                     </div>
-                    
                     <div class="col-md-12">
                         <table class="table table-sm divBackColor">
                             <thead>

@@ -11,7 +11,7 @@ include '../controllers/adminPanelController.php';
 include '../controllers/breadcrumb.php';
 include_once '../lang/FR_FR.php';
 include 'parts/header.php';
-generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_SESSION['profile']['id'] => 'Page de profil' , 'final' => $pageTitle));
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_SESSION['profile']['id'] . '&page=infos'=> 'Page de profil' , 'final' => $pageTitle));
 ?>
 <div class="container mt-5">
     <!-- barre de recherche -->

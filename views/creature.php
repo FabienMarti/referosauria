@@ -122,7 +122,6 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
             <td class="bg-white col"><?= $com->content ?></td>
         </tr>
      <?php  } ?>
-    
   </tbody>
 </table>
 <!-- Ajout de commentaire -->

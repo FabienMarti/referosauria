@@ -88,7 +88,7 @@
                 <div class="my-auto text-center h-100"><?php
                     if(isset($_SESSION['profile'])){ ?>
                             <p class="h5 titleStyleShadow"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></p>
-                            <a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php?id=<?= $_SESSION['profile']['id'] ?>&page=infos">Profil</a>
+                            <a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php?page=infos">Profil</a>
                             <a class="btn btn-primary" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
                     <?php
                     }else{
