@@ -114,7 +114,7 @@ class user
 
     ##########################
 
-    //permet d'editer le nom d'utilisateur et le mail
+    //Permet d'éditer le nom d'utilisateur et le mail par l'ID.
     public function editUserInfo(){
         $userEditInfos = $this->db->prepare(
             'UPDATE
@@ -128,7 +128,7 @@ class user
         return $userEditInfos->execute();
     }
 
-    //permet d'éditer le mot de passe
+    //Permet d'éditer le mot de passe par l'ID.
     public function editUserPW(){
         $userEditPW = $this->db->prepare(
             'UPDATE
@@ -138,12 +138,11 @@ class user
             ');
         $userEditPW->bindvalue(':pass', $this->password, PDO::PARAM_STR);
         $userEditPW->bindvalue(':id', $this->id, PDO::PARAM_INT);
-
         return $userEditPW->execute();
     }
 
-    //recupere le mdp utilisateur
-    public function getCurrentPassword(){
+    //Récupère le mot de passe de l'utilisateur par son ID.
+    public function getCurrentPasswordById(){
         $userPassword = $this->db->prepare(
             'SELECT
                 `password`
@@ -152,7 +151,9 @@ class user
             WHERE `id` = :id
             ');
         $userPassword->bindvalue(':id', $this->id, PDO::PARAM_INT);
-        return $userPassword->fetch(PDO::FETCH_OBJ);
+        $userPassword->execute();
+        $data = $userPassword->fetch(PDO::FETCH_OBJ);
+        return $data->password;
     }
 
     public function deleteSelectedUser(){
@@ -186,18 +187,46 @@ class user
         }
         $where = ' WHERE ' . implode(' AND ', $whereArray);
         $checkUserUnavailabilityByFieldName = $this->db->prepare(
-            'SELECT COUNT(`id`) as `isUnavailable`
-            FROM ' . $this->table 
+            'SELECT COUNT(`id`) AS `isUnavailable`
+            FROM `r3f3r0_users`'
             . $where
         ); 
         foreach($field as $fieldName ){
-            $checkUserUnavailabilityByFieldName->bindValue(':'.$fieldName,$this->$fieldName,PDO::PARAM_STR);
+            $checkUserUnavailabilityByFieldName->bindValue(':'.$fieldName, $this->$fieldName, PDO::PARAM_STR);
         }
         $checkUserUnavailabilityByFieldName->execute();
         return $checkUserUnavailabilityByFieldName->fetch(PDO::FETCH_OBJ)->isUnavailable;
     }
     
-    /*****************/
+    /********* VERIFICATION D'EXISTENCE ********/
+
+
+    public function checkMailExists()
+    {
+        $addUserSameQuery = $this->db->prepare(
+            'SELECT COUNT(`id`) AS `isMailExist`
+            FROM `r3f3r0_users` 
+            WHERE `mail` = :mail'
+        );
+        $addUserSameQuery->bindvalue(':mail', $this->mail, PDO::PARAM_STR);
+        $addUserSameQuery->execute();
+        $data = $addUserSameQuery->fetch(PDO::FETCH_OBJ);
+        return $data->isMailExist; 
+    } 
+
+    public function checkUsernameExists()
+    {
+        $addUserSameQuery = $this->db->prepare(
+            'SELECT COUNT(`id`) AS `isUsernameExist`
+            FROM `r3f3r0_users` 
+            WHERE `username` = :username'
+        );
+        $addUserSameQuery->bindvalue(':username', $this->username, PDO::PARAM_STR);
+        $addUserSameQuery->execute();
+        $data = $addUserSameQuery->fetch(PDO::FETCH_OBJ);
+        return $data->isUsernameExist; 
+    } 
+
     public function checkUserExist()
     {
         $addUserSameQuery = $this->db->prepare(

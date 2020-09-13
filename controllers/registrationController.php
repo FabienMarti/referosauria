@@ -2,26 +2,22 @@
 //tableau de regex
 $regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$%');
 
-//tableau d'erreurs
-
-
 
 if(isset($_POST['validateRegistration'])){
     $user = new user();
-$formErrors = array();
+    $formErrors = array();
 
     //! USERNAME 
 
     if(!empty($_POST['username'])){
             if(preg_match($regexList['username'], $_POST['username'])){
-                //Hydratation
                 $user->username = htmlspecialchars($_POST['username']);
             }else{
                 $formErrors['username'] = USERNAME_ERROR_WRONG;
             }
-        }else{
-            $formErrors['username'] = USERNAME_ERROR_EMPTY; 
-        }
+    }else{
+        $formErrors['username'] = USERNAME_ERROR_EMPTY; 
+    }
 
     //! ADRESSE MAIL
 
