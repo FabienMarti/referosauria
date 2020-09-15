@@ -72,7 +72,7 @@ function checkPassword(input, str1, str2, str3, str4) {
     }
 }
 
-/***************************************** JAUGE LEVEL PASSWORD ***************************************************/
+/***************************************** STRENGHT LEVEL PASSWORD ***************************************************/
 
 //Récupere les élements dans des variables.
 var password = document.getElementById('password');
@@ -88,3 +88,18 @@ password.addEventListener('input', function () {
     //Met à jour la valeur de l'élement <meter> en fonction du résultat.
     meter.value = result.score;
 });
+
+/******************************************** FONCTION VERIF CONCORDANCES *****************************************/
+
+function verifFields(input, checkedInput){
+
+    if (checkedInput.value == input.value) { 
+        checkedInput.classList.remove('is-invalid');
+        checkedInput.classList.add('is-valid');
+    } else { 
+        checkedInput.classList.remove('is-valid');
+        checkedInput.classList.add('is-invalid');
+    }
+
+    console.log(checkedInput.value + ' ' + input.value);
+}

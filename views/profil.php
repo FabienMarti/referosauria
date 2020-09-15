@@ -30,10 +30,10 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
-        <nav id="profilNav" class="col-3 border border-dark divBackColor">
+        <nav id="profilNav" class="col-3 border border-dark divBackColor p-3">
             <p class="text-center h4">Bonjour <?= $showLightUserInfo->username ?></p>
             <p>Vous êtes inscrits depuis le : </br><?= $showLightUserInfo->inscDate ?></p>
-            <p><?= $_SESSION['profile']['role'] ?></p>
+            <p>Vous êtes <?= $_SESSION['profile']['role'] ?>.</p>
             <ul class="p-2">
                 <?php
                     foreach ($profilOptions as $link => $title){

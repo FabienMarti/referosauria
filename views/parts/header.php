@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-       <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
         <link href="<?= $linkModif ?>assets/css/style.css" rel="stylesheet" type="text/css" />
@@ -17,38 +17,54 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title creaName" id="exampleModalLongTitle"><u>Se connecter</u></h5>
+                    <h5 class="modal-title text-white" id="exampleModalLongTitle"><u>Se connecter</u></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body divBackColor">
-                    <form id="connectionForm" action="" method="POST">
-                        <div class="form-group">
-                            <label for="usernameConnect">Nom d'utilisateur : </label>
-                            <input type="text" id="usernameConnect" name="usernameConnect" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['usernameConnect']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
-                                <?php if (isset($formErrors['usernameConnect'])) { ?>
-                                    <p class="text-danger text-center"><?= $formErrors['usernameConnect'] ?></p>
-                                <?php } ?>
-                        </div>
-                        <div class="form-group">
-                            <label for="passwordConnect">Mot de passe : </label>
-                            <input type="password" id="passwordConnect" name="passwordConnect" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['passwordConnect']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-                                <?php if (isset($formErrors['passwordConnect'])) { ?>
-                                    <p class="text-danger text-center"><?= $formErrors['passwordConnect'] ?></p>
-                                <?php } ?>
-                            <a href="<?= $linkModif ?>passwordRecovery.php">Mot de passe oublié ?</a>
-                        </div>
-                        <div class="text-center">
-                            <input type="submit" name="login" class="btn btn-primary" value="Connexion" />
-                        </div>
-                    </form>
+                    <div class="" id="connectionForm">
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <label for="usernameConnect">Nom d'utilisateur : </label>
+                                <input type="text" id="usernameConnect" name="usernameConnect" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['usernameConnect']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_COOKIE['username']) ? 'value="' . $_COOKIE['username'] . '"' : '' ?> />
+                                    <?php if (isset($formErrors['usernameConnect'])) { ?>
+                                        <p class="text-danger text-center"><?= $formErrors['usernameConnect'] ?></p>
+                                    <?php } ?>
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordConnect">Mot de passe : </label>
+                                <input type="password" id="passwordConnect" name="passwordConnect" class="form-control <?= count($_POST) > 0 ? (isset($formErrors['passwordConnect']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                    <?php if (isset($formErrors['passwordConnect'])) { ?>
+                                        <p class="text-danger text-center"><?= $formErrors['passwordConnect'] ?></p>
+                                    <?php } ?>
+                                <a href="#" onclick="switchToForgottenPassword(connectionForm, forgottenPassword)">Mot de passe oublié ?</a>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" name="login" class="btn btn-primary" value="Connexion" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="" id="forgottenPassword">
+                        <form action="" method="POST">
+                            <p>Veuillez saisir votre adresse e-mail ci-dessous. Nous vous enverrons les instructions pour créer un nouveau mot de passe.    </p>
+                            <div class="form-group">
+                                <label for="mailForgotten">Adresse mail :</label>
+                                <input type="email" name="mailForgotten" id="mailForgotten" placeholder="Ex : Monmail@mail.com" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                 <input type="submit" name="sendForgottenMail" value="Envoyer" class="form-control btn btn-primary" />
+                            </div>
+
+                        </form>
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 <header class="container-fluid p-0 m-0">
-<!--NavBar-->
+<!-- Barre de Navigation -->
             <nav id="mainNav" class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand d-md-none titleStyleShadow">REFEROSAURIA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -75,7 +91,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
                                     <a class="dropdown-item" href="<?= $linkModif ?>views/quiz.php">Quiz</a>
-                                    <a class="dropdown-item" href="#">Générateur de Dinom</a>
+                                    <a class="dropdown-item" href="<?= $linkModif ?>views/dinom.php">Générateur de Dinom</a>
                                 </div>
                             </li>
                             <li class="nav-item">

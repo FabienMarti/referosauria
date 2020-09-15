@@ -14,7 +14,12 @@ include '../controllers/connectionController.php';
 include '../controllers/breadcrumb.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
-?>
+
+if(isset($formErrors['comment'])){ ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $formErrors['comment'] ?>
+    </div>
+<?php } ?>
 <section class="container-fluid my-2">
         <div class="row">
             <h1 class="text-center titleStyleShadow col"><?= $showCreatureInfo->name ?></h1>
@@ -101,37 +106,41 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
             </div>
         </div>
 </section>
-
 <!-- commentaires -->
 <section class="container">
-<div class="divBackColor rounded border mt-5 p-3">
-<?php if(isset($_SESSION['profile'])){ ?>
-    <h2>Laisser un commentaire</h2>
-    <form action="" method="POST">
-        <div class="form-group">
-            <label for="comment">Message :</label>
-            <div class="row">
-                <input type="text" name="comment" id="comment" placeholder="Votre message ..." class="form-control col" />
-                <input type="submit" name="sendComment" id="sendComment" value="Commenter" class="btn btn-primary col-2" />
-            </div>
-        </div>
-    </form> 
-<?php } ?>
-<!-- Affichage des commentaires en fonction de la date d'ajout et de l'id creature -->
-<table class="table table-striped">
-  <tbody>
-      <?php 
-      foreach ($showCreaComments as $com) { ?>
-        <tr class="row">
-            <th scope="row" class="col-2"><?= $com->username ?></th>
-            <td class="bg-white col"><?= $com->content ?></td>
-        </tr>
-     <?php  } ?>
-  </tbody>
-</table>
-<!-- Ajout de commentaire -->
-</div>
+    <div class="divBackColor rounded border mt-5 p-3">
+        <?php if(isset($_SESSION['profile'])){ ?>
+            <h2>Laisser un commentaire</h2>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="comment">Message :</label>
+                    <div class="row justify-content-around">
+                        <input type="text" name="comment" id="comment" placeholder="Votre message ..." class="form-control col-9" />
+                        <input type="submit" name="sendComment" id="sendComment" value="Commenter" class="btn btn-primary col-2" />
+                    </div>
+                </div>
+            </form> 
+        <?php } ?>
+        <!-- Affichage des commentaires en fonction de la date d'ajout et de l'id creature -->
+        <table class="table table-striped" id="commTable">
+            <tbody>
+                <?php 
+                foreach ($showCreaComments as $com) { ?>
+                    <tr class="row justify-content-around">
+                        <th scope="row" class="col-3 p-1">
+                            <ul>
+                                <li class="text-left"><?= $com->username ?></li>
+                                <li class="text-right">Le <?= $com->comDate ?> à <?= $com->comHour ?></li>
+                            </ul>
+                        </th>
+                        <td class="bg-white col-7 my-auto"><?= $com->content ?></td>
+                    </tr>
+                <?php  } ?>
+            </tbody>
+        </table>
+    </div>
 </section>
+<!-- FIN Ajout de commentaire -->
 <!-- Modal de suppression-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

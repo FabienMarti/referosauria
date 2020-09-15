@@ -133,7 +133,7 @@ if(isset($messageFail)){ ?>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="source">Source : </label>
-                        <input type="text" class="form-control col" maxlength="50" placeholder="Ex: wikipedia "name="source" id="source" />
+                        <input type="text" class="form-control col" maxlength="50" placeholder="Ex: wikipedia" name="source" id="source" />
                     </div>
                     <div class="col-md-8">
                         <label for="sourceLink">Lien de la source : </label>
@@ -141,8 +141,7 @@ if(isset($messageFail)){ ?>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="button" class="btn btn-primary" value="Prévisualiser" name="preview" />
+            <div class="form-group text-center text-md-right">
                 <input type="submit" class="btn btn-primary" value="Envoyer" name="sendNewCrea" />
             </div>
         </form>

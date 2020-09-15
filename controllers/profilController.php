@@ -4,7 +4,9 @@ $regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.
 //Nouvelle instance de l'objet user.
 $user = new user();
 //Récupère l'id de l'user sotckée dans la superglobale SESSION lors de la connexion.
-$user->id = $_SESSION['profile']['id'];
+if(isset($_SESSION['profile'])){
+    $user->id = $_SESSION['profile']['id'];
+}
 //Tableau d'erreurs dédié au profil.
 $profilErrors = array();
 //Tableau d'erreurs dédié à la suppression du profil.
@@ -12,8 +14,8 @@ $deleteProfilErrors = array();
 //Récupère le mot de passe de l'utilisateur.
 $passwordHash = $user->getCurrentPasswordById();
 
-
 //! LISTE DU MENU PROFIL
+if(isset($_SESSION['profile'])){
     //Switch pour déterminer en fonction du role le menu que l'utilisateur pourra avoir
     switch (htmlspecialchars($_SESSION['profile']['role'])) {
         case 'Membre':
@@ -49,7 +51,7 @@ $passwordHash = $user->getCurrentPasswordById();
         break;
         default: break;
     }
-
+}
 //! SUPRESSION DU PROFIL
 
     if(isset($_POST['validateDelete'])){
@@ -151,9 +153,9 @@ $passwordHash = $user->getCurrentPasswordById();
                 //Déclaration d'une variable booléenne en true.
                 $isOk = true;
 
-                //Vérifie que si la saisie diffère des données de la base de données.
                 if($_POST['mail'] != $userInfo->mail){
                     //Vérifie si l'email est déjà utilisé.
+                    //Vérifie que si la saisie diffère des données de la base de données.
                     if($user->checkMailExists() == 1){
                         $profilErrors['mail'] = 'L\'adresse mail est déjà utilisée.';
                         $isOk = false;

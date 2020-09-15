@@ -33,7 +33,9 @@ body{
     -webkit-box-orient: vertical;
 
 }
-
+#commTable li{
+    list-style: none;
+}
 .imgPreview{
     max-width:180px;
     max-height: 180px;
@@ -63,7 +65,7 @@ a:active {
     
     font-size: 25px !important;
 }
-footer{
+footer, .modal-header{
     background-color: #283618 !important;
 }
 .divBackColor{
@@ -138,9 +140,7 @@ footer{
     margin-bottom: 0px !important;
     background-color: #8D99AE   ;
 }
-.buttonBG{
-    background-color: rgba(0, 255, 0, 0.1);;
-}
+
 ol{
     list-style: none;
 }

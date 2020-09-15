@@ -13,6 +13,7 @@ include '../controllers/connectionController.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscription'));
 ?>
+<!-- Message de succes -->
 <p><?= isset($addUserMessage) ? $addUserMessage : '' ?></p>
 <?php if(isset($messageSuccess)){ ?>
     <h1 class="text-center titleStyle"><?= $messageSuccess ?></h1>
@@ -22,6 +23,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
     </div>
+    <!-- Nom d'utilisateur -->
     <div class="form-group">
         <label for="username">Nom d'utilisateur<span class="text-danger">*</span> : </label>
         <input oninput="checkRegex(this)" type="text" name="username" id="username" placeholder="Ex : DinoLOVER" class="form-control <?= isset($_POST['validateRegistration']) && count($formErrors) > 0 ? (isset($formErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['username']) ? 'value="' . $_POST['username'] . '"' : '' ?> />
@@ -42,9 +44,10 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
                 <p class="text-danger text-center"><?= $formErrors['password'] ?></p>
             <?php } ?>
         </div>
+        <!-- Vérification du mot de passe -->
         <div class="form-group col-12 col-md-6">
             <label for="confirmPassword">Confirmez le mot de passe<span class="text-danger">*</span> : </label>
-            <input onblur="checkRegex(this)" type="password" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
+            <input onblur="verifFields(document.getElementById('password'), this)" type="password" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
             <p class="text-danger text-center"><?= (isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != $_POST['password']) ? 'Les mots de passe ne correspondent pas' : '' ?></p>
         </div>
     </div>
@@ -55,6 +58,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
             <li><i id="charNumber" class="fas fa-minus"></i> Au moins un chiffre.</li>
         </ul>
     <div class="row">
+        <!-- Adresse mail -->
         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['mail']) ? 'has-danger' : 'has-success') : '' ?>">
             <label for="mail">Adresse e-mail<span class="text-danger">*</span> : </label>
             <input onblur="checkMail(this)" type="mail" id="mail" name="mail" id="mail" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= isset($_POST['validateRegistration']) && count($_POST) > 0 ? (isset($formErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['mail']) ? 'value="' . $_POST['mail'] . '"' : '' ?> />
@@ -62,18 +66,21 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
                     <p class="text-danger text-center"><?= $formErrors['mail'] ?></p>
                 <?php } ?>
         </div>
+        <!-- Vérification de l'adresse mail -->
         <div class="form-group col">
             <label for="mailVerify">Confirmez l'adresse e-mail<span class="text-danger">*</span> : </label>
-            <input onblur="checkVerifyMail(this, mailInput)" type="mail" name="mailVerify" id="mailVerify" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
+            <input onblur="verifFields(document.getElementById('mail'), this)" type="mail" name="mailVerify" id="mailVerify" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
             <p class="text-danger text-center"><?= (isset($_POST['mailVerify']) && $_POST['mailVerify'] != $_POST['mail']) ? 'Les adresses e-mail ne correspondent pas' : '' ?></p>
         </div>
     </div>
     <div class="row">
+        <!-- Validation des CGU -->
         <div class="col">
             <input type="checkbox" name="validateCGU" id="validateCGU" />
             <label for="validateCGU">J'accepte les <a href="#">CGU.</a></label>
             <p class="text-danger"><?= isset($formErrors['validateCGU']) ? $formErrors['validateCGU'] : '' ?></p>
         </div>
+        <!-- Bouton pour valider le formulaire -->
         <div class="col text-right">
             <button class="btn" type="submit" name="validateRegistration">Valider</button>
         </div>
