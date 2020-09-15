@@ -5,6 +5,9 @@
     $comment = new comment();
     $showEnvironments = $creature->getCreaEnvironments();
 
+    if(isset($_SESSION['profile'])){
+        $comment->userId = $_SESSION['profile']['id'];
+    }
     if(!empty($_GET['id'])){
         $creature->id = htmlspecialchars($_GET['id']);
 
@@ -28,26 +31,54 @@
     }
 
     $areaMap = 0;
+    //Boucle pour définir la carte à afficher en fonction de l'id de l'environnement
     foreach ($showEnvironments as $env) {
+        
         if($showCreatureInfo->envId == $env->id){
             $areaMap =  $env->id;
         }
     }
 
     if(isset($_POST['sendComment'])){
-        
-        if(empty($_POST['comment'])){
+
+        //Récupère le datetime du dernier commentaire ajouté par l'utilisateur en question et sur la creature en question.
+        $lastComDateHour = new DateTime($comment->lastCommentDateInsertById());  
+        //Récupère le datetime actuel. 
+        $date = new DateTime();
+        //Calcul la différence entre la date d'ajout et la l'heure actuelle.
+        $interval = $lastComDateHour->diff($date);
+        //Affiche le resultat sous forme de minutes.
+        $intervalResult = $interval->format('%i');
+        //Affiche le resultat sous forme de secondes.
+        $intervalResultSeconds = $interval->format('%s');
+        //Calcul le temps restant en secondes.
+        $timeLeft = 60 - $intervalResultSeconds;
+
+        if(!empty($_POST['comment'])){
+            //Vérifie si l'utilisateur à bien attendu 1 minute pour renvoyer une commentaire.
+            if($comment->checkCommentExistsById() > 0){
+                if($intervalResult > 1){
+                    $comment->content = htmlspecialchars($_POST['comment']);
+                }else{
+                    $formErrors['comment'] = 'Vous devez attendre ' . $timeLeft . ' secondes avant de pouvoir poster un nouveau commentaire.';
+                }
+            }else{
+                $formErrors['comment'] = 'Si vous voulez envoyer un commentaire, veuillez en renseigner un.';
+            }
+        }else{
             $formErrors['comment'] = 'Si vous voulez envoyer un commentaire, veuillez en renseigner un.';
         }
 
         if(empty($formErrors)){
+
             if(isset($_SESSION['profile'])){
-            $comment->content = htmlspecialchars($_POST['comment']);
-            $comment->userId = $_SESSION['profile']['id'];
-            $comment->addCommentOnCreature();
+                $comment->addCommentOnCreature();
             }
         }
     }
-    $showCreaComments = $comment->getAllCommentsByCreaId();
+
+    if($comment->checkCommentExistsById() >= 1){
+        $showCreaComments = $comment->getAllCommentsByCreaId();
+    }
 /*cas des INT dans recherche : on doit envoyer un tableau de tableaux ou tableau d'objet a la place d'un simple tableau
 $tableau['champSQL'][type de données]   exemple ['type']ex: STR   || ['logical']ex: OR   ||  ['value']ex: 'toto' on utilise plus d'implode() */

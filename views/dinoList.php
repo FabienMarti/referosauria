@@ -64,7 +64,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 <!-- Affichage resultat recherche -->
 <?php
 if(isset($resultsNumber) && $resultsNumber == 0){ ?>
-        <p class="text-center h1 m-5 titleStyle"><?= $searchMessage ?></p><?php
+<p class="text-center h1 m-5 titleStyle"><?= $searchMessage ?></p><?php
 }else { ?>
 <div class="container mt-5">
     <div class="row text-center justify-content-around align-items-end">
@@ -115,13 +115,14 @@ if(isset($resultsNumber) && $resultsNumber == 0){ ?>
         <?php }
 
         if ($page != $pageNumber){ ?>
-            <a href="dinoList.php?page=<?=($page + 1) ?>" class="btn btn-primary"><i class="fas fa-angle-right"></i></a>
+            <a href="dinoList.php?page=<?= ($page + 1) ?>" class="btn btn-primary"><i class="fas fa-angle-right"></i></a>
             <a href="dinoList.php?page=<?= $pageNumber ?>" class="btn btn-primary"><i class="fas fa-angle-double-right"></i></a>
         <?php } ?>
 </div>
 <!-- Fin affichage resultat recherche -->    
 </section>
 <script>
+    //Fonction pour retourner l'icone de flèche de la barre de filtres au clique
     function returnArrow(i){
         if(i.classList.contains('fa-arrow-down')){
         i.setAttribute('class', 'fa-arrow-up');

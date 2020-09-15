@@ -1,4 +1,5 @@
 <?php
+//On verifie que le formulaire ayant pour bouton 'login' est bien envoyé.
 if(isset($_POST['login'])){
 
     $formErrors = array();
@@ -8,6 +9,7 @@ if(isset($_POST['login'])){
         $user->username = htmlspecialchars($_POST['usernameConnect']);
     }else{
         $formErrors['usernameConnect'] = USERNAME_ERROR_EMPTY;
+        //Stock un script jQuery dans une varifiable qui ne sera utilisé que si la condition précédente est respectée.
         $script = '$(\'#modalConnection\').modal({show:true})';
     }
 

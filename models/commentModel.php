@@ -18,6 +18,8 @@ class comment{
         $allCommentsByCreaId = $this->db->prepare(
             'SELECT
                 `com`.`content`
+                ,DATE_FORMAT(`postDate`, \'%d/%m/%Y\') AS `comDate`
+                ,DATE_FORMAT(`postDate`, \'%H:%i\') AS `comHour`
                 ,`usr`.`username`
             FROM
                 `r3f3r0_comments` AS `com`
@@ -45,7 +47,33 @@ class comment{
         return $commentCreatureQuery->execute();
     }
 
+    public function lastCommentDateInsertById(){
+        $lastCommentDateInsertById = $this->db->prepare(
+            'SELECT 
+                MAX(`postDate`) AS `lastDate`
+            FROM
+                `r3f3r0_comments`
+            WHERE `id_r3f3r0_users` = :userId AND `id_r3f3r0_creatures` = :creaId
+           ');
+        $lastCommentDateInsertById->bindValue(':userId', $this->userId, PDO::PARAM_INT);
+        $lastCommentDateInsertById->bindValue(':creaId', $this->creaId, PDO::PARAM_INT);
+        $lastCommentDateInsertById->execute();
+        $data = $lastCommentDateInsertById->fetch(PDO::FETCH_OBJ);
+        return $data->lastDate;
 
+    }
 
-
+    public function checkCommentExistsById(){
+        $checkCommentExists = $this->db->prepare(
+            'SELECT
+                COUNT(`id`) AS isCommentExists
+            FROM
+                `r3f3r0_comments`
+            WHERE `id_r3f3r0_creatures` = :creaId
+            ');
+        $checkCommentExists->bindValue(':creaId', $this->creaId, PDO::PARAM_INT);
+        $checkCommentExists->execute();
+        $data = $checkCommentExists->fetch(PDO::FETCH_OBJ);
+        return $data->isCommentExists;
+    }
 }
