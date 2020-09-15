@@ -1,11 +1,15 @@
-*{
-    margin: 0;
-    padding: 0;
-}
 @font-face {
     font-family: "dinosaur_font";
 	src: url('../fonts/dinojp.ttf');
 }
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     font-family: 'Nunito', sans-serif;
     background-image: url('../img/bg.jpg');
@@ -40,16 +44,6 @@ body{
     max-width:180px;
     max-height: 180px;
 }
-/******************************** COULEURS LIENS ***************************************/
-
-/* a:link, a:hover, a:focus, a:visited{
-    color: #FF8811;
-}
-a:active {
-    color: #FF8811;
-    font-weight: bold;
-} */
-
 
 /****** Couleurs élement pricipaux ******/
 #headerBG{
@@ -81,7 +75,7 @@ footer, .modal-header{
 
 .titleStyleShadow{
     color : #FF8811 !important;
-    text-shadow: black 5px 0 5px;
+    /*text-shadow: black 5px 0 5px;*/
     font-family: 'dinosaur_font';
 }
 .titleStyle{
@@ -157,18 +151,6 @@ ol{
 
 /****** FIN PAGE PROFIL ******/
 
-/****** PAGE ADMINISTRATION ******/
-
-/* fait que les modales prennent la taille du contenu en largeur */
-/* body .modal-dialog {
-    max-width: 100%;
-    width: auto !important;
-    display: inline-block;
-} */
-/* place la modale au centre de la vue */
-/* .modal {
-    text-align: center;
-} */
 
 /***************************************** JAUGE PASSWORD STRENGTH ****************************************************/
 meter {
@@ -194,8 +176,8 @@ meter[value="2"]::-moz-meter-bar { background: yellow; }
 meter[value="3"]::-moz-meter-bar { background: orange; }
 meter[value="4"]::-moz-meter-bar { background: green; }
 
-
 /** MEDIA QUERIES **/
+
 @media (max-width: 768px){
     
 }

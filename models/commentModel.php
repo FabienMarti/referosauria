@@ -63,5 +63,17 @@ class comment{
 
     }
 
-
+    public function checkCommentExistsById(){
+        $checkCommentExists = $this->db->prepare(
+            'SELECT
+                COUNT(`id`) AS isCommentExists
+            FROM
+                `r3f3r0_comments`
+            WHERE `id_r3f3r0_creatures` = :creaId
+            ');
+        $checkCommentExists->bindValue(':creaId', $this->creaId, PDO::PARAM_INT);
+        $checkCommentExists->execute();
+        $data = $checkCommentExists->fetch(PDO::FETCH_OBJ);
+        return $data->isCommentExists;
+    }
 }

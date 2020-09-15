@@ -54,13 +54,16 @@
         //Calcul le temps restant en secondes.
         $timeLeft = 60 - $intervalResultSeconds;
 
-
         if(!empty($_POST['comment'])){
             //Vérifie si l'utilisateur à bien attendu 1 minute pour renvoyer une commentaire.
-            if($intervalResult > 1){
-                $comment->content = htmlspecialchars($_POST['comment']);
+            if($comment->checkCommentExistsById() > 0){
+                if($intervalResult > 1){
+                    $comment->content = htmlspecialchars($_POST['comment']);
+                }else{
+                    $formErrors['comment'] = 'Vous devez attendre ' . $timeLeft . ' secondes avant de pouvoir poster un nouveau commentaire.';
+                }
             }else{
-                $formErrors['comment'] = 'Vous devez attendre ' . $timeLeft . ' secondes avant de pouvoir poster un nouveau commentaire.';
+                $formErrors['comment'] = 'Si vous voulez envoyer un commentaire, veuillez en renseigner un.';
             }
         }else{
             $formErrors['comment'] = 'Si vous voulez envoyer un commentaire, veuillez en renseigner un.';
@@ -73,7 +76,9 @@
             }
         }
     }
-    
-    $showCreaComments = $comment->getAllCommentsByCreaId();
+
+    if($comment->checkCommentExistsById() >= 1){
+        $showCreaComments = $comment->getAllCommentsByCreaId();
+    }
 /*cas des INT dans recherche : on doit envoyer un tableau de tableaux ou tableau d'objet a la place d'un simple tableau
 $tableau['champSQL'][type de données]   exemple ['type']ex: STR   || ['logical']ex: OR   ||  ['value']ex: 'toto' on utilise plus d'implode() */
