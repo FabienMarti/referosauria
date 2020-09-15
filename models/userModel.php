@@ -256,6 +256,7 @@ class user
         return $userDataQuery->fetch(PDO::FETCH_OBJ);
     }
 
+
     public function getUserPasswordHash(){
         $getUserPasswordHash = $this->db->prepare(
             'SELECT 

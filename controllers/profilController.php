@@ -24,7 +24,6 @@ $passwordHash = $user->getCurrentPasswordById();
                 'deleteProfil'=>'Supprimer le compte',
                 '../index.php?action=disconnect'=>'Déconnexion'
             );
-            $showLightUserInfo = $user->getUserInfos();
         break;
         case 'Modérateur':
             $profilOptions = array(
@@ -34,7 +33,6 @@ $passwordHash = $user->getCurrentPasswordById();
                 'deleteProfil'=>'Supprimer le compte',
                 '../index.php?action=disconnect'=>'Déconnexion'
             );
-            $showLightUserInfo = $user->getUserInfos();
         break;
         case 'Administrateur':
             $profilOptions = array(
@@ -45,9 +43,9 @@ $passwordHash = $user->getCurrentPasswordById();
                 'deleteProfil'=>'Supprimer le compte',
                 '../index.php?action=disconnect'=>'Déconnexion'
             );
-            $showLightUserInfo = $user->getUserInfos();
         break;
-        default: break;
+        default: 
+        break;
     }
 
 //! SUPRESSION DU PROFIL

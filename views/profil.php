@@ -31,8 +31,8 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
         <nav id="profilNav" class="col-3 border border-dark divBackColor">
-            <p class="text-center h4">Bonjour <?= $showLightUserInfo->username ?></p>
-            <p>Vous êtes inscrits depuis le : </br><?= $showLightUserInfo->inscDate ?></p>
+            <p class="text-center h4">Bonjour <?= $showUserInfo->username ?></p>
+            <p>Vous êtes inscrits depuis le : </br><?= $showUserInfo->inscDate ?></p>
             <p><?= $_SESSION['profile']['role'] ?></p>
             <ul class="p-2">
                 <?php
@@ -115,14 +115,15 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <p class="text-center text-success"><?= isset($succesEdit) ? $succesEdit : '' ?></p>
                 <form action="" method="POST">
                     <div class="form-group <?= count($_POST) > 0 ? (isset($profilErrors['username']) ? 'has-danger' : 'has-success') : '' ?>">
-                        <label for="username">Pseudonyme : </label>
-                        <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? $_POST['username'] : $showLightUserInfo->username ?>" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                        <label for="username">Nom d'utilisateur : </label>
+                        <input type="text" name="username" id="username" value="<?= isset($_POST['username']) ? $_POST['username'] : $showUserInfo->username ?>" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['username']) ? 'is-invalid' : 'is-valid') : '' ?>" />
                         <?php if (isset($profilErrors['username'])) { ?>
                             <p class="text-danger text-center"><?= $profilErrors['username'] ?></p>
                         <?php } ?>
+                    </div>
                     <div class="form-group <?= count($_POST) > 0 ? (isset($profilErrors['mail']) ? 'has-danger' : 'has-success') : '' ?>">
                         <label for="mail">Adresse mail : </label>
-                        <input type="email" name="mail" id="mail" value="<?= isset($_POST['mail']) ? $_POST['mail'] : $showLightUserInfo->mail ?>" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                        <input type="email" name="mail" id="mail" value="<?= isset($_POST['mail']) ? $_POST['mail'] : $showUserInfo->mail ?>" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['mail']) ? 'is-invalid' : 'is-valid') : '' ?>" />
                         <?php if (isset($profilErrors['mail'])) { ?>
                             <p class="text-danger text-center"><?= $profilErrors['mail'] ?></p>
                         <?php } ?>
