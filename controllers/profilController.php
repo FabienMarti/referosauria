@@ -9,8 +9,6 @@ if(isset($_SESSION['profile'])){
 }
 //Tableau d'erreurs dédié au profil.
 $profilErrors = array();
-//Tableau d'erreurs dédié à la suppression du profil.
-$deleteProfilErrors = array();
 //Récupère le mot de passe de l'utilisateur.
 $passwordHash = $user->getCurrentPasswordById();
 
@@ -52,28 +50,14 @@ if(isset($_SESSION['profile'])){
 }
 //! SUPRESSION DU PROFIL
 
-    if(isset($_POST['validateDelete'])){
-
-        if(count($_POST) > 0){
-
-            if(htmlspecialchars($_POST['pass']) != $currentPassword->password){
-                $deleteProfilErrors['pass'] = 'Mot de passe incorrect';
-            }
-
-            if(htmlspecialchars($_POST['deleteTXT']) != 'Supprimer'){
-                $deleteProfilErrors['deleteTXT'] = 'Orthographe incorrecte'; //changer
-            }
-
-            if(!isset($_POST['check'])){
-                $deleteProfilErrors['check'] = 'Veuillez accepter les conditions de suppression de compte';
-            }
-
-            if(empty($deleteProfilErrors)){
-                $user->deleteSelectedUser();
-                $isAccountDeleted = true;
-            }
-        }
+if(isset($_POST['deleteProfil'])){
+    
+    if($user->deleteUserById()){
+        session_destroy();
+        header ('Location: ../index.php');
+        exit;
     }
+}
 
 //! EDITION DU MOT DE PASSE
     //Vérifie que le formulaire qui a pour bouton 'validateEdit' à bien été envoyé.

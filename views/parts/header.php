@@ -23,7 +23,7 @@
                     </button>
                 </div>
                 <div class="modal-body divBackColor">
-                    <div class="" id="connectionForm">
+                    <div id="connectionForm">
                         <form action="" method="POST">
                             <div class="form-group">
                                 <label for="usernameConnect">Nom d'utilisateur : </label>
@@ -45,7 +45,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="" id="forgottenPassword">
+                    <div id="forgottenPassword">
                         <form action="" method="POST">
                             <p>Veuillez saisir votre adresse e-mail ci-dessous. Nous vous enverrons les instructions pour créer un nouveau mot de passe.    </p>
                             <div class="form-group">
@@ -103,7 +103,7 @@
                 </div>
                 <div class="my-auto text-center h-100"><?php
                     if(isset($_SESSION['profile'])){ ?>
-                            <p class="h5 titleStyleShadow"><?= isset($_SESSION['profile']['username']) ? 'Bienvenue ' . $_SESSION['profile']['username'] : ''?></p>
+                            <p class="h5 titleStyleShadow"><?= isset($_SESSION['profile']['username']) ? 'Bienvenu ' . $_SESSION['profile']['username'] : ''?></p>
                             <a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php?page=infos">Profil</a>
                             <a class="btn btn-primary" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
                     <?php

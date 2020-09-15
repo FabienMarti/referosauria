@@ -93,7 +93,11 @@ if(isset($_POST['validateRegistration'])){
         }
         //Si $isOk est true
         if($isOk){
-            $user->addUser();
+            if($user->addUser()){
+                $messageSuccess = 'L\'utilisateur ' . $user->username . ' à bien été enregistré.';
+            }else{
+                $messageFail = 'Un problème technique est survenu, veuillez contacter le service technique.';
+            }
         }
     }
 }

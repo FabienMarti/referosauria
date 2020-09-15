@@ -27,7 +27,6 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
 <?php } 
 }?>
 <div class="container mb-5">
-
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
         <nav id="profilNav" class="col-3 border border-dark divBackColor">
@@ -41,7 +40,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                         ?><li><a href="<?= $link ?>.php?page=1"><?= $title ?></a></li><?php
                         }
                         else if($title == 'Supprimer le compte'){
-                        ?><li><a href="<?= $link ?>" class="btn btn-delete"><?= $title ?></a></li><?php
+                        ?><li><button data-toggle="modal" data-target="#deleteModal" class="btn btn-delete"><?= $title ?></button></li><?php
                         }
                         else if($title == 'Déconnexion'){
                         ?><li><a href="<?= $link ?>" class="text-danger"><?= $title ?></a></li><?php
@@ -135,5 +134,30 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
             </div>
         </section>
     </div>
+</div>
+<!-- Modale de suppression -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Supprimer cet utilisateur ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+                <input id="getId" type="hidden" class="form-control" name="recipient-name" id="recipient-name" />
+            <div class="form-group">
+                <p class="text-center">Voulez-vous vraiment supprimer cet utilisateur ?<br>Cette action est irréversible !</p>
+            </div>
+            <div class="text-center">
+                <input type="submit" name="deleteProfil" value="Supprimer" class="btn btn-danger" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <?php include 'parts/footer.php' ?>

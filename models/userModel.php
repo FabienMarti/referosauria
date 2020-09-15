@@ -66,6 +66,17 @@ class user
         return $deleteUserByIdQuery->execute();
     }
 
+    public function deleteSelectedUser(){
+        $userToRemove = $this->db->query(
+            'DELETE FROM 
+                `r3f3r0_users`
+            WHERE
+                `id` = :id
+            ');
+            $userToRemove->bindvalue(':id', $this->id, PDO::PARAM_INT);
+            return $userToRemove->execute();
+    }
+
     function getUserList($limitArray = array(), $searchArray = array()) {
         //Si nos champs de recherche contiennent des valeurs alors on stock notre clause WHERE dans une variable avec tous nos paramètres
         if(count($searchArray) > 0){
@@ -156,16 +167,7 @@ class user
         return $data->password;
     }
 
-    public function deleteSelectedUser(){
-        $userToRemove = $this->db->query(
-            'DELETE FROM 
-                `r3f3r0_users`
-            WHERE
-                `id` = :id
-            ');
-            $userToRemove->bindvalue(':id', $this->id, PDO::PARAM_INT);
-            return $userToRemove->execute();
-    }
+
 
     public function addUser(){
         $addUser = $this->db->prepare(

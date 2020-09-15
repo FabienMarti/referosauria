@@ -12,13 +12,20 @@ include '../controllers/breadcrumb.php';
 include '../controllers/connectionController.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscription'));
-?>
-<!-- Message de succes -->
-<p><?= isset($addUserMessage) ? $addUserMessage : '' ?></p>
-<?php if(isset($messageSuccess)){ ?>
-    <h1 class="text-center titleStyle"><?= $messageSuccess ?></h1>
-<?php }else{ ?>
-<form class="container border border-dark p-3 rounded divBackColor mb-5" action="registration.php" method="POST">
+
+// Message de succes
+if(isset($messageSuccess)){ ?>
+    <div class="alert alert-success" role="alert">
+        <?= $messageSuccess ?>
+    </div>
+<?php } 
+if(isset($messageFail)){ ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $messageFail ?>
+    </div>
+<?php } ?>
+<!-- Formulaire d'inscription -->
+<form class="container border border-dark p-3 rounded divBackColor my-5" action="registration.php" method="POST">
 <h2 class="text-center titleStyle"><u>Inscription</u></h2>
     <div class="row">
         <p class="col text-right"><i class="fas fa-exclamation-triangle"></i> <span class="text-danger">*</span> = Champs obligatoire <i class="fas fa-exclamation-triangle"></i></p>
@@ -86,5 +93,4 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => 'Inscripti
         </div>
     </div>
 </form>
-<?php } ?>
 <?php include 'parts/footer.php' ?>

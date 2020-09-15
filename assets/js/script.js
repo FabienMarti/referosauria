@@ -119,6 +119,7 @@ function enveloppeSwitch(enveloppe){
 }
 
 document.getElementById('forgottenPassword').style.display = 'none';
+
 function switchToForgottenPassword(connection, fPassword){
     connection.style.display = 'none';
     fPassword.style.display = 'block';
