@@ -37,7 +37,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                 <?php
                     foreach ($profilOptions as $link => $title){
                         if($title == 'Panel d\'administration'){
-                        ?><li><a href="<?= $link ?>.php?page=1"><?= $title ?></a></li><?php
+                        ?><li><a href="<?= $link ?>.php?content=members&page=1"><?= $title ?></a></li><?php
                         }
                         else if($title == 'Supprimer le compte'){
                         ?><li><button data-toggle="modal" data-target="#deleteModal" class="btn btn-delete"><?= $title ?></button></li><?php

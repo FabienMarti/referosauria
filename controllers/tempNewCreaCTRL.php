@@ -7,7 +7,7 @@
     $showPeriods = $creature->getCreaPeriods();
     $showDiscoverers = $creature->getCreaDiscoverers();
     $showEnvironments = $creature->getCreaEnvironments();
-
+/* 
     if(!empty($_GET['id'])){
         $creature->id = htmlspecialchars($_GET['id']);
         $showCreatureInfo = $creature->getSingleDinoInfo();
@@ -16,14 +16,14 @@
     }else{
         header('Location: dinoList.php');
         exit;
-    }
+    } */
     
-    $areaMap = 0;
+    /* $areaMap = 0;
     foreach ($showEnvironments as $env) {
         if($showCreatureInfo->envId == $env->id){
             $areaMap =  $env->id;
         }
-    }
+    } */
 
     if(isset($_POST['sendEditedCrea'])){
 

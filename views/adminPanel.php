@@ -6,6 +6,7 @@ $_SERVER['PHP_SELF'] != '/index.php' ? $linkModif = '../' : $linkModif = '';
 include_once '../config.php';
 include_once '../models/database.php';
 include_once '../models/userModel.php';
+include_once '../models/creatureModel.php';
 include '../controllers/connectionController.php';
 include '../controllers/adminPanelController.php';
 include '../controllers/breadcrumb.php';
@@ -14,7 +15,48 @@ include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_SESSION['profile']['id'] => 'Page de profil' , 'final' => $pageTitle));
 
 if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
+
 <div class="container mt-5">
+    <div class="row text-center divBackColor p-2">
+        <div class="col-6">
+            <a href="adminPanel.php?content=members&page=1" class="h3">Membres</a>
+        </div>
+        <div class="col-6">
+            <a href="adminPanel.php?content=creatures&page=1" class="h3">Créatures</a>
+        </div>
+    </div>
+
+    <!-- affichage des creatures -->
+    <div class="table-responsive <?= isset($_GET['content']) ? ($_GET['content'] == 'creatures' ? 'd-block' : 'd-none') : '' ?>">
+      <table class="table table-striped table-bordered text-center divBackColor">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Validation</th>
+                <th scope="col">Voir/Modifier</th>
+                <th scope="col">Date d'ajout</th>
+                <th scope="col">Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach ($showCreaturesInfos as $info) { ?>
+                  <form action="" method="POST">
+                    <tr id="creaNB<?= $info->id ?>">
+                        <th scope="row" ><?= $info->id ?></th>
+                        <td><?= $info->name  ?></td>
+                        <td><?= $info->available ?></td>
+                        <td><a href="editCreature.php?id=<?= $info->id ?>" class="btn btn-success"><i class="fas fa-wrench"></i></a></td>
+                        <td><?= $info->addDate ?></td>
+                        <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+                  </form>
+            <?php } ?>
+        </tbody>
+      </table>
+    </div>
+    <!-- affichage des utilisateurs -->
     <!-- barre de recherche -->
     <div class="row">
         <form method="POST" action="adminPanel.php?page=1" class="form-inline my-2 col-6">
@@ -32,12 +74,11 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
             </form>
         </div>
     </div>
-    <!-- affichage des utilisateurs -->
-    <div class="table-responsive">
+    <div class="table-responsive <?= isset($_GET['content']) ? ($_GET['content'] == 'members' ? 'd-block' : 'd-none') : '' ?>">
       <table class="table table-striped table-bordered text-center divBackColor">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Id</th>
+            <th scope="col">Id</th>
                 <th scope="col">Pseudo</th>
                 <th scope="col">Email</th>
                 <th scope="col">Envoyer un mail</th>
@@ -46,7 +87,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                 <th scope="col">Supprimer</th>
             </tr>
         </thead>
-        <tbody><i class="fas fa-envelope-open"></i>
+        <tbody>
             <?php
                 foreach ($showUserInfo as $info) { ?>
                   <form action="" method="POST">
@@ -63,10 +104,8 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
             <?php } ?>
         </tbody>
       </table>
-    </div>
-</div>
+      <!-- PAGINATION -->
 <div class="text-center m-3">
-    <!-- Affiche le numero des page -->
     <?php 
         $beginPage = $page - 3;
 
@@ -101,6 +140,10 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
             <a href="adminPanel.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>
         <?php } ?>
 </div>
+    </div>
+</div>
+
+<!-- Modale de suppression -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

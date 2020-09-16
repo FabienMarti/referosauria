@@ -41,29 +41,28 @@
 
     if(isset($_POST['sendComment'])){
 
-        //Récupère le datetime du dernier commentaire ajouté par l'utilisateur en question et sur la creature en question.
-        $lastComDateHour = new DateTime($comment->lastCommentDateInsertById());  
-        //Récupère le datetime actuel. 
-        $date = new DateTime();
-        //Calcul la différence entre la date d'ajout et la l'heure actuelle.
-        $interval = $lastComDateHour->diff($date);
-        //Affiche le resultat sous forme de minutes.
-        $intervalResult = $interval->format('%i');
-        //Affiche le resultat sous forme de secondes.
-        $intervalResultSeconds = $interval->format('%s');
-        //Calcul le temps restant en secondes.
-        $timeLeft = 60 - $intervalResultSeconds;
-
         if(!empty($_POST['comment'])){
             //Vérifie si l'utilisateur à bien attendu 1 minute pour renvoyer une commentaire.
             if($comment->checkCommentExistsById() > 0){
+                //Récupère le datetime du dernier commentaire ajouté par l'utilisateur en question et sur la creature en question.
+                $lastComDateHour = new DateTime($comment->lastCommentDateInsertById());  
+                //Récupère le datetime actuel. 
+                $date = new DateTime();
+                //Calcul la différence entre la date d'ajout et la l'heure actuelle.
+                $interval = $lastComDateHour->diff($date);
+                //Affiche le resultat sous forme de minutes.
+                $intervalResult = $interval->format('%i');
+                //Affiche le resultat sous forme de secondes.
+                $intervalResultSeconds = $interval->format('%s');
+                //Calcul le temps restant en secondes.
+                $timeLeft = 60 - $intervalResultSeconds;
                 if($intervalResult > 1){
                     $comment->content = htmlspecialchars($_POST['comment']);
                 }else{
                     $formErrors['comment'] = 'Vous devez attendre ' . $timeLeft . ' secondes avant de pouvoir poster un nouveau commentaire.';
                 }
             }else{
-                $formErrors['comment'] = 'Si vous voulez envoyer un commentaire, veuillez en renseigner un.';
+                $comment->content = htmlspecialchars($_POST['comment']);
             }
         }else{
             $formErrors['comment'] = 'Si vous voulez envoyer un commentaire, veuillez en renseigner un.';

@@ -68,6 +68,7 @@ class creature
                 , `crea`.`minWeight`
                 , `crea`.`maxWeight`
                 , `crea`.`predatory`
+                , `crea`.`available`
                 , `crea`.`id_r3f3r0_categories`
                 , `crea`.`id_r3f3r0_period` AS `period`
                 , `crea`.`id_r3f3r0_discoverer`
@@ -99,9 +100,26 @@ class creature
                 `id`
                 , `miniImage`
                 , `name`
+                , `available`
+                , `addDate`
             FROM
                 `r3f3r0_creatures`
             ORDER BY `name` ASC
+            ');
+            return $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+    //! ADMIN PANEL récupère les infos de toutes les creatures pour afficher la liste
+    public function getDinosInfoAsAdmin(){
+
+        $creaturesQuery = $this->db->query(
+            'SELECT
+                `id`   
+                , `name`
+                , `available`
+                , `addDate`
+            FROM
+                `r3f3r0_creatures`
+            ORDER BY `available` ASC
             ');
             return $creaturesQuery->fetchAll(PDO::FETCH_OBJ);
     }
@@ -118,6 +136,7 @@ class creature
                 ,`description`
             FROM 
                 `r3f3r0_creatures` AS `crea`
+            WHERE `available` = \'Validé\'
             ORDER BY `addDate` DESC
             LIMIT 3
             ');
@@ -135,7 +154,7 @@ class creature
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
-            $addCreatureQuery->bindValue(':addDate', date('Y-m-d'), PDO::PARAM_STR); //date("Y-m-d H:i:s")
+            $addCreatureQuery->bindValue(':addDate', date('Y-m-d H:i:s'), PDO::PARAM_STR); //date("Y-m-d H:i:s")
             $addCreatureQuery->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':description', $this->description, PDO::PARAM_STR);
@@ -214,7 +233,7 @@ class creature
             FROM
                 `r3f3r0_creatures`
             WHERE
-                `id_r3f3r0_period` = :period
+                `id_r3f3r0_period` = :period AND `available` = \'Validé\'
             ORDER BY RAND ()  
             LIMIT 3
             
@@ -222,23 +241,6 @@ class creature
         $creaturesByPeriodQuery->bindValue(':period', $this->period, PDO::PARAM_STR);
         $creaturesByPeriodQuery->execute();
         return $creaturesByPeriodQuery->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    //method pour recherche dans un champ de recherche avec le NOM
-    public function searchCreaByName($search) {
-        $searchCreaByNameQuery = $this->db->prepare(
-            'SELECT 
-                `crea`.`id`
-                , `crea`.`miniImage`
-                , `crea`.`name`
-            FROM 
-                `r3f3r0_creatures` AS `crea`
-            WHERE `name` LIKE :search
-            ORDER BY `name` 
-        ');
-        $searchCreaByNameQuery->bindValue(':search', $search . '%', PDO::PARAM_STR);
-        $searchCreaByNameQuery->execute();
-        return $searchCreaByNameQuery->fetchAll(PDO::FETCH_OBJ);  
     }
 
     //compte le nombre de resultats de notre recherche
@@ -291,7 +293,7 @@ class creature
     function getCreaList($limitArray = array() ,$searchArray = array()) {
         //Si nos champs de recherche contiennent des valeurs alors on stock notre clause WHERE dans une variable avec tous nos paramètres
         if(count($searchArray) > 0){
-            $where = 'WHERE ';
+            $where = ' ';
             foreach($searchArray as $fieldName => $search) {
                 //Vérifie si un JOKER existe dans nos champs de recherche
                 if (strrchr($search, '%')){
@@ -303,7 +305,7 @@ class creature
                 }
             }
             //Concatène le tableau whereArray avec un séparateur 'AND'
-            $where .= implode(' AND ', $whereArray);
+            $where .= implode(' AND ', $whereArray) . ' AND ';
         }
         /* Requete SQL : On concatène notre variable $where qui contient notre clause à l'aide
         d'une ternaire pour ne l'ajouter qu'à condition quelle existe */
@@ -312,9 +314,10 @@ class creature
                 `id`
                 , `miniImage`
                 , `name`
+                , `available`
             FROM
                 `r3f3r0_creatures`
-            ' . (isset($where) ? $where : '') . '
+            WHERE ' . (isset($where) ? $where : '') . ' `available` = \'Validé\'
             ORDER BY `name` ASC '
                 . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
         );

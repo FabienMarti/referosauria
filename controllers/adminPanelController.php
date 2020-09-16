@@ -1,5 +1,6 @@
 <?php
 $user = new user();
+$creature = new creature();
 $formErrors = array();
 $itemsPerPage = array(5, 10, 15, 20);
 //Controlleur suppression
@@ -12,6 +13,7 @@ if(isset($_POST['deleteProfil'])){
 }
 
 /******************* PAGINATION ET FILTRAGE ***********************/
+
 $search = array();
 if (isset($_GET['page'])){
     $page = $_GET['page'];
@@ -49,3 +51,5 @@ if(isset($_POST['searchUser'])) {
     //Compte le nombre de pages
     $pageNumber = ceil(count($user->getUserList()) / $limitArray['limit']);
 }
+
+$showCreaturesInfos = $creature->getDinosInfoAsAdmin();

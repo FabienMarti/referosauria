@@ -111,4 +111,5 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     }
   }
 </script>
+
 <?php include 'parts/footer.php' ?>
