@@ -90,12 +90,12 @@
                                     Jeux
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <a class="dropdown-item" href="<?= $linkModif ?>views/parts/construction.php">Quiz</a>
-                                    <a class="dropdown-item" href="<?= $linkModif ?>views/parts/construction.php">Générateur de Dinom</a>
+                                    <a class="dropdown-item" href="<?= $linkModif ?>views/construction.php">Quiz</a>
+                                    <a class="dropdown-item" href="<?= $linkModif ?>views/construction.php">Générateur de Dinom</a>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="<?= $linkModif ?>views/parts/Nonconstruction.php">Forum</a>
+                                <a class="nav-link text-white" href="<?= $linkModif ?>views/construction.php">Forum</a>
                             </li>
                         </ul>
                         <div class="text-center my-auto text-white">

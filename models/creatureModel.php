@@ -299,7 +299,11 @@ class creature
                 if (strrchr($search, '%')){
                     //Ajoute LIKE si un JOKER est présent
                     $whereArray[] = '`' . $fieldName . '` LIKE :' . $fieldName ;
-                }else {
+                }
+                else if(is_int($search)){
+                    $whereArray[] = '`id_r3f3r0_' . $fieldName . '` = :' . $fieldName ;
+                }
+                else {
                     //Compare sans LIKE
                     $whereArray[] = '`' . $fieldName . '` = :' . $fieldName ;
                 }
@@ -319,6 +323,54 @@ class creature
                 `r3f3r0_creatures`
             WHERE ' . (isset($where) ? $where : '') . ' `available` = \'Validé\'
             ORDER BY `name` ASC '
+                . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
+        );
+        //Boucle pour créer nos bindValues qui dépendent de nos champs de recherche
+        foreach($searchArray as $fieldName => $search) {
+            if(is_int($search)){
+                $creaListQuery->bindvalue(':' . $fieldName, $search , PDO::PARAM_INT);
+            }else{
+                $creaListQuery->bindvalue(':' . $fieldName, $search , PDO::PARAM_STR);
+            }
+        }
+        if (count($limitArray) == 2){
+            $creaListQuery->bindvalue(':limit', $limitArray['limit'], PDO::PARAM_INT);
+            $creaListQuery->bindvalue(':offset', $limitArray['offset'], PDO::PARAM_INT);
+        }
+        $creaListQuery->execute();
+        return $creaListQuery->fetchAll(PDO::FETCH_OBJ); 
+    }
+
+    function getCreaListAsAdmin($limitArray = array() ,$searchArray = array()) {
+        //Si nos champs de recherche contiennent des valeurs alors on stock notre clause WHERE dans une variable avec tous nos paramètres
+        if(count($searchArray) > 0){
+            $where = 'WHERE ';
+            foreach($searchArray as $fieldName => $search) {
+                //Vérifie si un JOKER existe dans nos champs de recherche
+                if (strrchr($search, '%')){
+                    //Ajoute LIKE si un JOKER est présent
+                    $whereArray[] = '`' . $fieldName . '` LIKE :' . $fieldName ;
+                }else {
+                    //Compare sans LIKE
+                    $whereArray[] = '`' . $fieldName . '` = :' . $fieldName ;
+                }
+            }
+            //Concatène le tableau whereArray avec un séparateur 'AND'
+            $where .= implode(' AND ', $whereArray);
+        }
+        /* Requete SQL : On concatène notre variable $where qui contient notre clause à l'aide
+        d'une ternaire pour ne l'ajouter qu'à condition quelle existe */
+        $creaListQuery = $this->db->prepare(
+            'SELECT
+                `id`
+                , `miniImage`
+                , `name`
+                , `available`
+                , `addDate`
+            FROM
+                `r3f3r0_creatures`
+            ' . (isset($where) ? $where : '') . '
+            ORDER BY `available` ASC '
                 . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
         );
         //Boucle pour créer nos bindValues qui dépendent de nos champs de recherche

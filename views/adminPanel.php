@@ -16,133 +16,97 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'profil.php?id=' . $_
 
 if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
 
-<div class="container mt-5">
-    <div class="row text-center divBackColor p-2">
-        <div class="col-6">
-            <a href="adminPanel.php?content=members&page=1" class="h3">Membres</a>
-        </div>
-        <div class="col-6">
-            <a href="adminPanel.php?content=creatures&page=1" class="h3">Créatures</a>
-        </div>
-    </div>
+<div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-2 m-auto border divBackColor">
+                <?php include 'parts/adminNav.php' ?>
+            </div>
+            <div class="table-responsive col">
+                <!-- barre de recherche -->
+                <div class="row">
+                    <form method="POST" action="adminPanel.php?page=1" class="form-inline my-2 col-6">
+                        <input class="form-control" type="search" placeholder="Rechercher" name="searchField" />
+                        <button class="btn btn-outline-success" type="submit" name="searchUser">Rechercher</button>
+                    </form>
+                    <div class="offset-5 col-1 form-group my-auto">
+                        <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
+                            <select name="nbItems" id="nbItems" class="form-control" onchange="this.form.submit()">
+                                <?php
+                                    foreach ($itemsPerPage as $nb) { ?>
+                                        <option value="<?= $nb ?>" <?= isset($_POST['nbItems']) ? ($_POST['nbItems'] == $nb ? 'selected' : '') : '' ?>><?= $nb ?></option>
+                                    <?php } ?>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                    <table class="table table-striped table-bordered text-center divBackColor">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Pseudo</th>
+                                <th scope="col">Courriel</th>
+                                <th scope="col">Envoyer un mail</th>
+                                <th scope="col">Date d'inscription</th>
+                                <th scope="col">Rôle</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                foreach ($showUserInfo as $info) { ?>
+                                <form action="" method="POST">
+                                    <tr id="userNB<?= $info->usrId ?>">
+                                        <th scope="row" ><?= $info->usrId ?></th>
+                                        <td><?= $info->username  ?></td>
+                                        <td><?= $info->mail ?></td>
+                                        <td><a  onmouseover="enveloppeSwitch(enveloppe)" class="btn btn-success mailEnvelope" href="adminMailTo.php?id=<?= $info->usrId ?>"><i class="fas fa-envelope"></i></a></td>
+                                        <td><?= $info->inscDate ?></td>
+                                        <td><?= $info->role ?></td>
+                                        <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>
+                                </form>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <!-- PAGINATION -->
+                <div class="text-center m-3">
+                    <?php 
+                        $beginPage = $page - 3;
 
-    <!-- affichage des creatures -->
-    <div class="table-responsive <?= isset($_GET['content']) ? ($_GET['content'] == 'creatures' ? 'd-block' : 'd-none') : '' ?>">
-      <table class="table table-striped table-bordered text-center divBackColor">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Validation</th>
-                <th scope="col">Voir/Modifier</th>
-                <th scope="col">Date d'ajout</th>
-                <th scope="col">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                foreach ($showCreaturesInfos as $info) { ?>
-                  <form action="" method="POST">
-                    <tr id="creaNB<?= $info->id ?>">
-                        <th scope="row" ><?= $info->id ?></th>
-                        <td><?= $info->name  ?></td>
-                        <td><?= $info->available ?></td>
-                        <td><a href="editCreature.php?id=<?= $info->id ?>" class="btn btn-success"><i class="fas fa-wrench"></i></a></td>
-                        <td><?= $info->addDate ?></td>
-                        <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
-                    </tr>
-                  </form>
-            <?php } ?>
-        </tbody>
-      </table>
-    </div>
-    <!-- affichage des utilisateurs -->
-    <!-- barre de recherche -->
-    <div class="row">
-        <form method="POST" action="adminPanel.php?page=1" class="form-inline my-2 col-6">
-            <input class="form-control" type="search" placeholder="Rechercher" name="searchField" />
-            <button class="btn btn-outline-success" type="submit" name="searchUser">Rechercher</button>
-        </form>
-        <div class="offset-5 col-1 form-group my-auto">
-             <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
-                <select name="nbItems" id="nbItems" class="form-control" onchange="this.form.submit()">
-                    <?php
-                        foreach ($itemsPerPage as $nb) { ?>
-                            <option value="<?= $nb ?>" <?= isset($_POST['nbItems']) ? ($_POST['nbItems'] == $nb ? 'selected' : '') : '' ?>><?= $nb ?></option>
+                        if($beginPage < 1){
+                            $beginPage = 1;
+                        }
+
+                        if ($page != 1){ ?>
+                            <a href="adminPanel.php?page=1" class="btn"><i class="fas fa-angle-double-left"></i></a>
+                            <a href="adminPanel.php?page=<?=($page - 1)?>" class="btn"><i class="fas fa-angle-left"></i></a><?php
+                        }
+
+                        if ($page > 4){ ?>
+                            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a><?php 
+                        }
+
+                        $endPage = $page + 3;
+                        if($endPage > $pageNumber) {
+                            $endPage = $pageNumber;
+                        }
+
+                        for ($i = $beginPage; $i <= $endPage; $i++) {?>
+                            <a href="adminPanel.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-orange' : '' ?>"><?= $i ?></a><?php 
+                        } 
+
+                        if ($page < $pageNumber - 3){ ?>
+                            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a>
+                        <?php }
+
+                        if ($page != $pageNumber){ ?>
+                            <a href="adminPanel.php?page=<?=($page + 1) ?>" class="btn"><i class="fas fa-angle-right"></i></a>
+                            <a href="adminPanel.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>
                         <?php } ?>
-                </select>
-            </form>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="table-responsive <?= isset($_GET['content']) ? ($_GET['content'] == 'members' ? 'd-block' : 'd-none') : '' ?>">
-      <table class="table table-striped table-bordered text-center divBackColor">
-        <thead class="thead-dark">
-            <tr>
-            <th scope="col">Id</th>
-                <th scope="col">Pseudo</th>
-                <th scope="col">Email</th>
-                <th scope="col">Envoyer un mail</th>
-                <th scope="col">Date d'inscription</th>
-                <th scope="col">Rôle</th>
-                <th scope="col">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                foreach ($showUserInfo as $info) { ?>
-                  <form action="" method="POST">
-                    <tr id="userNB<?= $info->usrId ?>">
-                        <th scope="row" ><?= $info->usrId ?></th>
-                        <td><?= $info->username  ?></td>
-                        <td><?= $info->mail ?></td>
-                        <td><a  onmouseover="enveloppeSwitch(enveloppe)" class="btn btn-success mailEnvelope" href="adminMailTo.php?id=<?= $info->usrId ?>"><i class="fas fa-envelope"></i></a></td>
-                        <td><?= $info->inscDate ?></td>
-                        <td><?= $info->role ?></td>
-                        <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->usrId ?>"><i class="fas fa-trash-alt"></i></button></td>
-                    </tr>
-                  </form>
-            <?php } ?>
-        </tbody>
-      </table>
-      <!-- PAGINATION -->
-<div class="text-center m-3">
-    <?php 
-        $beginPage = $page - 3;
-
-        if($beginPage < 1){
-            $beginPage = 1;
-        }
-
-        if ($page != 1){ ?>
-            <a href="adminPanel.php?page=1" class="btn"><i class="fas fa-angle-double-left"></i></a>
-            <a href="adminPanel.php?page=<?=($page - 1)?>" class="btn"><i class="fas fa-angle-left"></i></a><?php
-        }
-
-        if ($page > 4){ ?>
-            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a><?php 
-        }
-
-        $endPage = $page + 3;
-        if($endPage > $pageNumber) {
-            $endPage = $pageNumber;
-        }
-
-        for ($i = $beginPage; $i <= $endPage; $i++) {?>
-            <a href="adminPanel.php?page=<?= $i ?>" class="btn <?= $i == $_GET['page'] ? 'btn-orange' : '' ?>"><?= $i ?></a><?php 
-        } 
-
-        if ($page < $pageNumber - 3){ ?>
-            <a href="#" class="btn"><i class="fas fa-ellipsis-h"></i></a>
-        <?php }
-
-        if ($page != $pageNumber){ ?>
-            <a href="adminPanel.php?page=<?=($page + 1) ?>" class="btn"><i class="fas fa-angle-right"></i></a>
-            <a href="adminPanel.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>
-        <?php } ?>
 </div>
-    </div>
-</div>
-
 <!-- Modale de suppression -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

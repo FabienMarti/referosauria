@@ -42,7 +42,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                     <option value="" disabled selected>Paléonthologue</option> 
                     </select>
                 <!-- Catégorie -->
-                <select class="form-control form-control-sm offset-md-1 col-12 col-md mt-1" name="category">
+                <select class="form-control form-control-sm offset-md-1 col-12 col-md mt-1" name="categories">
                     <option value="" disabled selected>Catégorie de créature</option> 
                     <?php
                         foreach ($showCreaCategories as $category) {

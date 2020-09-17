@@ -39,6 +39,7 @@ if(isset($_POST['searchUser'])) {
     if (!empty($_POST['searchField'])){
         $search['username'] = htmlspecialchars($_POST['searchField']) . '%';
     }
+
     /* if (!empty($_POST['searchbydate']) && preg_match($regexBirthDate, $_POST['searchbydate'])){
         $search['birthdate'] = htmlspecialchars($_POST['searchbydate']);
     } */
@@ -46,7 +47,7 @@ if(isset($_POST['searchUser'])) {
     //Compte le nombre de pages en fonction du nombre de resultats
     $pageNumber = ceil(count($user->getUserList(array(),$search)) / $limitArray['limit']);
 }else {
-    //Affiche la liste des creatures normalement
+    //Affiche la liste des utilisateurs normalement
     $showUserInfo = $user->getUserList($limitArray);
     //Compte le nombre de pages
     $pageNumber = ceil(count($user->getUserList()) / $limitArray['limit']);
