@@ -180,6 +180,7 @@ if(isset($messageFail)){ ?>
                 <?php } ?>
                 </div>
             </div>
+<!-- Description -->
             <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['discoverer']) ? 'has-danger' : 'has-success') : '' ?>">
                 <label for="description">Description : </label>
                 <textarea type="text"  rows="10" name="description" id="description" placeholder="Description de la créature" class="form-control col <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['description']) ? 'is-invalid' : 'is-valid') : '' ?>"><?= isset($_POST['description']) ? $_POST['description'] : '' ?></textarea>

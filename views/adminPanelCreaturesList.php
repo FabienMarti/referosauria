@@ -46,7 +46,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                         <th scope="row" ><?= $info->id ?></th>
                         <td><?= $info->name  ?></td>
                         <td><?= $info->available ?></td>
-                        <td><a href="editCreature.php?id=<?= $info->id ?>" class="btn btn-success"><i class="fas fa-wrench"></i></a></td>
+                        <td><a href="editCreature.php?id=<?= $info->id ?>" class="btn btn-success"><i class="fas fa-wrench"></i></a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#validationModal" data-whatever="<?= $info->id ?>"><i class="far fa-clock"></i></button></td>
                         <td><?= $info->addDate ?></td>
                         <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->id ?>"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>
@@ -113,6 +113,29 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
             </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Validation Modale -->
+ <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-white" id="exampleModalLabel">Valider</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          <input type="hidden" class="form-control" name="recipient-name2" id="recipient-name2" value="">
+          <h1>Voulez-vous valider cette créature ?</h1>
+          <input type="submit" class="btn btn-primary" name="validateCrea" value="Valider la créature" />
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        </form>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>

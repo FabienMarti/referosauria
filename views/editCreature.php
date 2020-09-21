@@ -16,37 +16,54 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1'
 
 if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
     include 'parts/redirect.php'; 
-} else { 
-    ?>
+} else { ?>
     <section class="container-fluid my-2">
     <form action="" method="POST">
         <div class="row">
-            <h1 class="col text-center"><u><i class="fas fa-wrench"></i><input class="text-center creaName" type="text" value="<?= $showCreatureInfo->name ?>" /></u></h1>
+            <h1 class="col text-center"><u><i class="fas fa-wrench"></i><input class="text-center creaName" type="text" name="creaName" value="<?= $showCreatureInfo->name ?>" /></u></h1>
         </div>
         <div class="row">
             <div class="col-md-2 text-center border divBackColor">
                 <p class="h6 text-center">Où a-t-on trouvé <?= $showCreatureInfo->name ?>  ?</p>
                 <img src="<?= '../assets/img/local/' . $areaMap . '.jpg' ?>" class="img-fluid" />
-                <p class="h5 mt-5">Derniers sujets en rapport :</p>
-                <ul class="border" id="recentPostList">
-                    <li><a href="#">Le tyrannosaure pouvait-il voler ?</a></li>
-                    <li>12/05/2020</li>
-                    <li><a href="#">Les films avec un ou des tyrannosaures</a></li>
-                    <li>05/02/2020</li>
-                    <li><a href="#">Sa mangé quoi un tyronasaure ??</a></li>
-                    <li>28/01/2020</li>
-                </ul>
+                <label for="categories">Catégorie</label>
+                <select name="categories" id="categories" class="form-control">
+                    <option selected disabled value="<?= $showCreatureInfo->catId ?> "><?= $showCreatureInfo->catName ?></option>
+                <?php
+                    foreach ($showCategories as $category) { ?>
+                        <option value="<?= $category->id ?> "><?= $category->name ?></option>
+                    <?php } ?>
+                </select>
+                <div class="form-group">
+                    <label for="discovery">Paléonthologue à l'origine de la découverte</label>
+                    <input type="text" name="discovery" id="discovery" value="<?= $showCreatureInfo->discovery ?>" class="form-control" />
+                </div>
+                <!-- Mini image de la créature FILE -->
+                <div class="text-center">
+                    <img id="img2" class="imgPreview" src="../<?= $showCreatureInfo->miniImage ?>" alt="Image" />
+                    <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
+                        <label for="miniImageUpload">Image de tête de la créature : </label>
+                        <input onchange="readURL2(this)" type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                        <?php if (isset($formErrors['miniImageUpload'])) { ?>
+                            <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
+                        <?php } ?>            
+                    </div> 
+                </div>
             </div>
             <div class="col-3">
                 <div class="row">
                     <div class="col-md-12 m-auto">
-                        <img class="img-fluid" src="../<?= $showCreatureInfo->mainImage ?>" /> 
-                        <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
-                            <input type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-                            <?php if (isset($formErrors['mainImageUpload'])) { ?>
-                                <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
-                            <?php } ?>
-                        </div>
+                        <!-- Image principale de la créature FILE -->
+                <div class="text-center">
+                    <img id="img1" class="img-fluid" src="../<?= $showCreatureInfo->mainImage ?>" alt="Image" />
+                    <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
+                        <label for="mainImageUpload">Image principale de la créature : </label>
+                        <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                        <?php if (isset($formErrors['mainImageUpload'])) { ?>
+                            <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
+                        <?php } ?>
+                    </div>
+                </div>
                     </div>
                     <div class="col-md-12">
                         <table class="table table-sm divBackColor">
@@ -164,17 +181,13 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
             </div>
             <div class="col-md-5 m-auto divBackColor rounded">
                 <p class="h5 text-center"><i class="fas fa-wrench"></i> Description</p>
-                <textarea class="form-control" rows="20"><?= $showCreatureInfo->description ?></textarea>
-<!-- Probleme BDD pour les sources -->
+                <textarea class="form-control" rows="20" name="description"><?= $showCreatureInfo->description ?></textarea>
                 <p class="text-right">
                     <i class="fas fa-wrench"></i><input disabled type="text" name="descSource" value="Source : WIKIPEDIA" />
                 </p>
             </div>
             <div class="col-md-1 text-center divBackColor">
                 <p class="h5 text-center">Ils ont vécus dans la même période :</p>
-                <?php foreach($showCreaturesByPeriod as $crea){ ?>
-                    <div><a href="creature.php?id=<?= $crea->id ?>"><img src="<?= $crea->miniImage ?>" width="100px" height="100px"  class="m-3" /></a></div>
-                <?php } ?>
             </div>
         </div>
         <div class="text-center">

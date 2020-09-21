@@ -11,8 +11,6 @@
     if(!empty($_GET['id'])){
         $creature->id = htmlspecialchars($_GET['id']);
         $showCreatureInfo = $creature->getSingleDinoInfo();
-        $creature->period = $showCreatureInfo->period;
-        $showCreaturesByPeriod = $creature->getCreaturesByPeriod();
     }else{
         header('Location: dinoList.php');
         exit;
@@ -52,9 +50,9 @@
 
         //Contrôle alimentation
         if(!empty($_POST['diet'])) {
-            $creature->diet = (htmlspecialchars($_POST['diet']));
+            $creature->diet = htmlspecialchars($_POST['diet']);
         }else{
-            $creature->diet = $showCreatureInfo->diet;
+            $creature->diet = $showCreatureInfo->dietId;
         }
 
         //Longueur Mini
@@ -96,10 +94,45 @@
             $formErrors['maxWeight'] = 'Veuillez sélectionner une alimentation';
         }
 
-        if(empty($formErrors)){
-           // $creature->updateCreaAsAdmin();
+        //Categories
+        if(!empty($_POST['categories'])){
+            $creature->categories = htmlspecialchars($_POST['categories']);
+        }else{
+            $creature->categories = $showCreatureInfo->catId;
         }
 
-        /********************************* FIN FICHE SIGNALETIQUE **************************************/
+        //Description
+        if(!empty($_POST['description'])) {
+            $creature->description = htmlspecialchars($_POST['description']);            
+        }else{
+            $formErrors['description'] = 'Veuillez renseigner un';
+        }
 
+        //Nom
+        if(!empty($_POST['creaName'])) {
+            $creature->name = htmlspecialchars($_POST['creaName']);            
+        }else{
+            $formErrors['creaName'] = 'Veuillez renseigner un';
+        }
+
+        //Main Image
+
+        //Mini Image
+
+        //Paleonthologue découvreur
+        if(!empty($_POST['discovery'])) {
+            $creature->discovery = htmlspecialchars($_POST['discovery']);            
+        }else{
+            $formErrors['discovery'] = 'Veuillez renseigner un';
+        }
+
+        if(empty($formErrors)){
+            $creature->mainImage = $showCreatureInfo->mainImage;
+            $creature->miniImage = $showCreatureInfo->miniImage;
+            $creature->updateCreaAsAdmin();
+            if(!empty($_GET['id'])){
+                $creature->id = htmlspecialchars($_GET['id']);
+                $showCreatureInfo = $creature->getSingleDinoInfo();
+            }
+        }
     }

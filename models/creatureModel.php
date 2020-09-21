@@ -56,6 +56,7 @@ class creature
                 `crea`.`id`
                 , `crea`.`name`
                 , `crea`.`mainImage`
+                , `crea`.`miniImage`
                 , `crea`.`detailImage`
                 , `crea`.`description`
                 , `crea`.`discovery`
@@ -79,11 +80,14 @@ class creature
                 ,`dietTab`.`name` AS `dietName`
                 ,`envTab`.`id` AS `envId`
                 ,`envTab`.`name` AS `envName`
+                ,`catTab`.`id` AS `catId`
+                ,`catTab`.`name` AS `catName`
             FROM
                 `r3f3r0_creatures` AS `crea`
             INNER JOIN `r3f3r0_period` AS `perTab` ON `crea`.`id_r3f3r0_period` = `perTab`.`id`
             INNER JOIN `r3f3r0_diet` AS `dietTab` ON `crea`.`id_r3f3r0_diet` = `dietTab`.`id`
             INNER JOIN `r3f3r0_environment` AS `envTab` ON `crea`.`id_r3f3r0_environment` = `envTab`.`id`
+            INNER JOIN `r3f3r0_categories` AS `catTab` ON `crea`.`id_r3f3r0_categories` = `catTab`.`id`
             WHERE 
                 `crea`.`id` = :id 
             ');
@@ -174,29 +178,44 @@ class creature
     //! UPDATE CREATURE ADMIN
     public function updateCreaAsAdmin(){
         $updateCreaAsAdmin = $this->db->prepare(
-            'INSERT INTO 
-                `r3f3r0_creatures` 
-                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, `minWeight`, `maxWeight`)
-            VALUES 
-                (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery, :minWidth, :maxWidth, :minHeight, :maxHeight, :minWeight, :maxWeight)
-            ');
-            $updateCreaAsAdmin->bindValue(':name', $this->name, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':environment', $this->environment, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':addDate', date('Y-m-d H:i:s'), PDO::PARAM_STR); //date("Y-m-d H:i:s")
-            $updateCreaAsAdmin->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':description', $this->description, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':diet', $this->diet, PDO::PARAM_INT);
-            $updateCreaAsAdmin->bindValue(':categories', $this->type, PDO::PARAM_INT);
-            $updateCreaAsAdmin->bindValue(':period', $this->period, PDO::PARAM_INT);
-            $updateCreaAsAdmin->bindValue(':discovery', $this->discovery, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':minWidth', $this->minWidth, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':minHeight', $this->minHeight, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':minWeight', $this->minWeight, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':maxWidth', $this->maxWidth, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':maxHeight', $this->maxHeight, PDO::PARAM_STR);
-            $updateCreaAsAdmin->bindValue(':maxWeight', $this->maxWeight, PDO::PARAM_STR);
-            return $updateCreaAsAdmin->execute();
+            'UPDATE 
+                `r3f3r0_creatures`
+            SET
+                `name` = :name
+                , `mainImage` = :mainImage
+                , `miniImage` = :miniImage
+                , `description` = :description
+                , `id_r3f3r0_environment` = :environment
+                , `id_r3f3r0_diet` = :diet
+                , `id_r3f3r0_categories` = :categories
+                , `id_r3f3r0_period` = :period
+                , `discovery` = :discovery
+                , `minWidth` = :minWidth
+                , `maxWidth` = :maxWidth
+                , `minHeight` = :minHeight
+                , `maxHeight` = :maxHeight
+                , `minWeight` = :minWeight
+                , `maxWeight` = :maxWeight
+            WHERE
+                `id` = :id
+        ');
+        $updateCreaAsAdmin->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $updateCreaAsAdmin->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':environment', $this->environment, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':description', $this->description, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':diet', $this->diet, PDO::PARAM_INT);
+        $updateCreaAsAdmin->bindValue(':categories', $this->categories, PDO::PARAM_INT);
+        $updateCreaAsAdmin->bindValue(':period', $this->period, PDO::PARAM_INT);
+        $updateCreaAsAdmin->bindValue(':discovery', $this->discovery, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':minWidth', $this->minWidth, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':minHeight', $this->minHeight, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':minWeight', $this->minWeight, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':maxWidth', $this->maxWidth, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':maxHeight', $this->maxHeight, PDO::PARAM_STR);
+        $updateCreaAsAdmin->bindValue(':maxWeight', $this->maxWeight, PDO::PARAM_STR);
+        return $updateCreaAsAdmin->execute();
     }
 
     //récupère le nom des alimentations
@@ -444,5 +463,18 @@ class creature
             ');
         $deleteCreaById->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $deleteCreaById->execute();
+    }
+
+    public function validateCrea(){
+        $validateCreaQuery = $this->db->prepare(
+            'UPDATE
+                `r3f3r0_creatures`
+            SET
+                `available` = \'Validé\'
+            WHERE
+                `id` = :id
+            ');
+        $validateCreaQuery->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $validateCreaQuery->execute();
     }
 }

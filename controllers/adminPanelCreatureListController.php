@@ -11,6 +11,14 @@ if(isset($_POST['deleteCrea'])){
     }
 }
 
+if(isset($_POST['validateCrea'])){
+
+    if(!empty($_POST['recipient-name2'])){
+        $creature->id = htmlspecialchars($_POST['recipient-name2']);
+        $creature->validateCrea();
+    }
+}
+
 /************************************ PAGINATION ET FILTRAGE *************************************/
 
 $search = array();
