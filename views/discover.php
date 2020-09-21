@@ -73,43 +73,21 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
   <div style="height: 100vh" class="bg bg-danger"></div>
   </section>
 <script>
-  //stockage de toutes les sections dans un array
-  var allSections = document.getElementsByTagName("section");
-  //appel de la fonction au chargement de la page, par défaut la 1ere catégorie est affichée
-  changeCategory();
-  //fonction pour switcher de categories au clique
-  function changeCategory(category){
-    //boucle pour cacher les catégories à l'appel de la fonction
+//stockage de toutes les sections dans un array
+var allSections = document.getElementsByTagName("section");
+  changeCategory(0);
+//fonction pour switcher de categories au clique
+function changeCategory(category){
+//boucle pour cacher les catégories à l'appel de la fonction , i commence à 1 pour afficher 0 au chargement de la page
     for (let i = 0; i < allSections.length; i++) {
-          allSections[i].style.display = 'none';
+
+        if(category == i){
+            allSections[i].style.display = 'block';
+        }else{
+            allSections[i].style.display = 'none';
+        }
     }
-    switch (category) {
-      case 0:
-        allSections[0].style.display = 'block';
-      break;
-      case 1:
-        allSections[1].style.display = 'block';
-      break;
-      case 2:
-        allSections[2].style.display = 'block';
-      break;
-      case 3:
-        allSections[3].style.display = 'block';
-      break;
-      case 4:
-        allSections[4].style.display = 'block';
-      break;
-      case 5:
-        allSections[5].style.display = 'block';
-      break;
-      case 6:
-        allSections[6].style.display = 'block';
-      break;
-      default:
-        allSections[0].style.display = 'block';
-      break;
-    }
-  }
+}
 </script>
 
 <?php include 'parts/footer.php' ?>

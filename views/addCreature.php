@@ -52,27 +52,83 @@ if(isset($messageFail)){ ?>
             <?php } ?>
             </div>
 <!-- Image principale de la créature FILE -->
-            <div class="col-3 text-center">
+            <div class="col-4 text-center">
                 <img id="img1" class="imgPreview" src="http://placehold.it/180" alt="Image" />
-            </div>
-            <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
-                        <label for="mainImageUpload">Image principale de la créature : </label>
-                        <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-                <?php if (isset($formErrors['mainImageUpload'])) { ?>
-                    <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
-                <?php } ?>
+                <div class="form-group  <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
+                    <label for="mainImageUpload">Image principale de la créature : </label>
+                    <input onchange="readURL1(this)" type="file" name="mainImageUpload" id="mainImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                    <?php if (isset($formErrors['mainImageUpload'])) { ?>
+                        <p class="text-danger text-center"><?= $formErrors['mainImageUpload'] ?></p>
+                    <?php } ?>
+                </div>
             </div>
 <!-- Mini image de la créature FILE -->
-            <div class="col-3 text-center">
+            <div class="col-4 text-center">
                 <img id="img2" class="imgPreview" src="http://placehold.it/180" alt="Image" />
-            </div>
-            <div class="form-group col-md-3 <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
+                <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="miniImageUpload">Image de tête de la créature : </label>
                     <input onchange="readURL2(this)" type="file" name="miniImageUpload" id="miniImageUpload" class="form-control-file <?= isset($_POST['sendNewCrea']) && count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'is-invalid' : 'is-valid') : '' ?>" />
-            <?php if (isset($formErrors['miniImageUpload'])) { ?>
-                <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
-            <?php } ?>            
-            </div> 
+                    <?php if (isset($formErrors['miniImageUpload'])) { ?>
+                        <p class="text-danger text-center"><?= $formErrors['miniImageUpload'] ?></p>
+                    <?php } ?>            
+                </div> 
+            </div>
+            <div class="col-4">
+                <table class="table">
+                    <thead>
+                        <th scope="col"></th>
+                        <th scope="col">Minimum</th>
+                        <th scope="col">Maximum</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Longueur (mètres)</th>
+                            <td>
+                                <input type="text" name="minWidth" id="minWidth" placeholder="Ex: 1" class="form-control <?= isset($_POST['minWidth']) && count($_POST) > 0 ? (isset($formErrors['minWidth']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['minWidth'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['minWidth'] ?></p>
+                                <?php } ?>  
+                            </td>
+                            <td>
+                                <input type="text" name="maxWidth" id="maxWidth" placeholder="Ex: 5" class="form-control <?= isset($_POST['maxWidth']) && count($_POST) > 0 ? (isset($formErrors['maxWidth']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['maxWidth'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['maxWidth'] ?></p>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Hauteur (mètres)</th>
+                            <td>
+                                <input type="text" name="minHeight" id="minHeight" placeholder="Ex: 1" class="form-control <?= isset($_POST['minHeight']) && count($_POST) > 0 ? (isset($formErrors['minHeight']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['minHeight'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['minHeight'] ?></p>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <input type="text" name="maxHeight" id="maxHeight" placeholder="Ex: 5" class="form-control <?= isset($_POST['maxHeight']) && count($_POST) > 0 ? (isset($formErrors['maxHeight']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['maxHeight'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['maxHeight'] ?></p>
+                                <?php } ?>
+                            </td>
+                         </tr>
+                        <tr>
+                            <th scope="row">Poids (tonnes)</th>
+                            <td>
+                                <input type="text" name="minWeight" id="minWeight" placeholder="Ex: 1" class="form-control <?= isset($_POST['minWeight']) && count($_POST) > 0 ? (isset($formErrors['minWeight']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['minWeight'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['minWeight'] ?></p>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <input type="text" name="maxWeight" id="maxWeight" placeholder="Ex: 5" class="form-control <?= isset($_POST['maxWeight']) && count($_POST) > 0 ? (isset($formErrors['maxWeight']) ? 'is-invalid' : 'is-valid') : '' ?>" />
+                                <?php if (isset($formErrors['maxWeight'])) { ?>
+                                    <p class="text-danger text-center"><?= $formErrors['maxWeight'] ?></p>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 <!-- Menus déroulants #### Période #### Habitat #### Alimentation #### Découverte -->
         <div class="row justify-content-between">

@@ -144,13 +144,13 @@ class creature
     }
 
     // ATTENTION : pas de `magic quotes` dans dans VALUES
-    public function addCreatureSimple(){
+    public function addCreature(){
         $addCreatureQuery = $this->db->prepare(
             'INSERT INTO 
                 `r3f3r0_creatures` 
-                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`)
+                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, `minWeight`, `maxWeight`)
             VALUES 
-                (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery)
+                (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery, :minWidth, :maxWidth, :minHeight, :maxHeight, :minWeight, :maxWeight)
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
@@ -162,7 +162,41 @@ class creature
             $addCreatureQuery->bindValue(':categories', $this->type, PDO::PARAM_INT);
             $addCreatureQuery->bindValue(':period', $this->period, PDO::PARAM_INT);
             $addCreatureQuery->bindValue(':discovery', $this->discovery, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':minWidth', $this->minWidth, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':minHeight', $this->minHeight, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':minWeight', $this->minWeight, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':maxWidth', $this->maxWidth, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':maxHeight', $this->maxHeight, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':maxWeight', $this->maxWeight, PDO::PARAM_STR);
             return $addCreatureQuery->execute();
+    }
+
+    //! UPDATE CREATURE ADMIN
+    public function updateCreaAsAdmin(){
+        $updateCreaAsAdmin = $this->db->prepare(
+            'INSERT INTO 
+                `r3f3r0_creatures` 
+                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, `minWeight`, `maxWeight`)
+            VALUES 
+                (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery, :minWidth, :maxWidth, :minHeight, :maxHeight, :minWeight, :maxWeight)
+            ');
+            $updateCreaAsAdmin->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':environment', $this->environment, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':addDate', date('Y-m-d H:i:s'), PDO::PARAM_STR); //date("Y-m-d H:i:s")
+            $updateCreaAsAdmin->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':description', $this->description, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':diet', $this->diet, PDO::PARAM_INT);
+            $updateCreaAsAdmin->bindValue(':categories', $this->type, PDO::PARAM_INT);
+            $updateCreaAsAdmin->bindValue(':period', $this->period, PDO::PARAM_INT);
+            $updateCreaAsAdmin->bindValue(':discovery', $this->discovery, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':minWidth', $this->minWidth, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':minHeight', $this->minHeight, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':minWeight', $this->minWeight, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':maxWidth', $this->maxWidth, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':maxHeight', $this->maxHeight, PDO::PARAM_STR);
+            $updateCreaAsAdmin->bindValue(':maxWeight', $this->maxWeight, PDO::PARAM_STR);
+            return $updateCreaAsAdmin->execute();
     }
 
     //récupère le nom des alimentations
@@ -399,5 +433,16 @@ class creature
         $allCommentsByCreaId->bindValue('creaId', $this->creaId, PDO::PARAM_INT);
         $allCommentsByCreaId->execute();
         return $allCommentsByCreaId->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+    public function deleteCreaById(){
+        $deleteCreaById = $this->db->prepare(
+            'DELETE FROM
+                `r3f3r0_creatures`
+            WHERE
+                `id` = :id
+            ');
+        $deleteCreaById->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $deleteCreaById->execute();
     }
 }

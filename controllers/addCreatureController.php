@@ -108,7 +108,47 @@ if(isset($_POST['sendNewCrea'])){
         $formErrors['file'] = 'Veuillez selectionner un fichier';
       }
 
-    ##### Contrôle des menus déroulants #####
+      //? ##### Spécifications #####
+      //Longueur
+      if(!empty($_POST['minWidth'])){
+        $creature->minWidth = htmlspecialchars($_POST['minWidth']);
+      }else{
+          $formErrors['minWidth'] = 'Veuillez renseigner une longueur minimum';
+      }
+      if(!empty($_POST['maxWidth'])){
+        $creature->maxWidth = htmlspecialchars($_POST['maxWidth']);
+      }else{
+          $formErrors['maxWidth'] = 'Veuillez renseigner une longueur maximum';
+      }
+
+      //Hauteur
+      if(!empty($_POST['minHeight'])){
+        $creature->minHeight = htmlspecialchars($_POST['minHeight']);
+      }else{
+          $formErrors['minHeight'] = 'Veuillez renseigner une hauteur minimum';
+      }
+
+      if(!empty($_POST['maxHeight'])){
+        $creature->maxHeight = htmlspecialchars($_POST['maxHeight']);
+      }else{
+          $formErrors['maxHeight'] = 'Veuillez renseigner une hauteur maximum';
+      }
+
+      //Poids
+      if(!empty($_POST['minWeight'])){
+        $creature->minWeight = htmlspecialchars($_POST['minWeight']);
+      }else{
+          $formErrors['minWeight'] = 'Veuillez renseigner un poids minimum';
+      }
+
+      if(!empty($_POST['maxWeight'])){
+        $creature->maxWeight = htmlspecialchars($_POST['maxWeight']);
+      }else{
+          $formErrors['maxWeight'] = 'Veuillez renseigner un poids maximum';
+      }
+
+
+    //? ##### Contrôle des menus déroulants #####
 
     //Contrôle de la période
     if(!empty($_POST['period'])) {
@@ -124,9 +164,7 @@ if(isset($_POST['sendNewCrea'])){
         $formErrors['habitat'] = 'Veuillez sélectionner un habitat';
     }
 
-    //rechercher à l'index #######################################
     //Contrôle alimentation
-    #########################################################################################
     if(!empty($_POST['diet'])) {
         $creature->diet = intval(htmlspecialchars($_POST['diet']));
     }else{
@@ -149,7 +187,7 @@ if(isset($_POST['sendNewCrea'])){
         $formErrors['discoverer'] = 'Veuillez renseigner un nom pour la créature';
     }
 
-    //Contrôle de la description #####BUGGEE SUR LA VERIF DE LONGUEUR#######
+    //Contrôle de la description
     if(isset($_POST['description'])){
         if(strlen($_POST['description']) <= 5){
             $formErrors['description'] = 'Description trop courte, 500 caractères minimum (espaces inclus)';
@@ -164,12 +202,10 @@ if(isset($_POST['sendNewCrea'])){
         
         if($creature->checkCreatureExists() == 0){
             $messageSuccess = 'La créature à été ajoutée avec succès';
-            $creature->addCreatureSimple();
+            $creature->addCreature();
         }else{
             $messageFail = 'La créature existe déjà !';
         }
-    }else{
-        $messageFail = 'Une erreur est survenue, contactez le service technique';
     }
 }
 

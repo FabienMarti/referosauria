@@ -51,29 +51,30 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
                     <div class="col-md-12">
                         <table class="table table-sm divBackColor">
                             <thead>
-                                <th colspan="2" class="text-center"><i class="fas fa-wrench"></i> Fiche signalétique</th>
+                                <th colspan="3" class="text-center"><i class="fas fa-wrench"></i> Fiche signalétique</th>
                             </thead>
                             <tbody>
                                 <tr>
                                     <!-- Environement -->
                                     <th scope="row">Habitat</th>
-                                    <td>
+                                    <td colspan="2">
                                         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'has-danger' : 'has-success') : '' ?>">
-                                        <select name="habitat"  class="form-control form-control-sm <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
-                                            <option value="<?= $showCreatureInfo->envId ?>" disabled selected><?= $showCreatureInfo->envName ?></option>
-                                            <?php
-                                                foreach ($showEnvironments as $env) {
-                                            ?><option value="<?= $env->id ?>" <?= isset($_POST['habitat']) ? ($_POST['habitat'] == $env->id ? 'selected' : '') : '' ?>><?= $env->name ?></option><?php } ?>
-                                        </select>
-                                        <?php if (isset($formErrors['habitat'])) { ?>
-                                                <p class="text-danger text-center"><?= $formErrors['habitat'] ?></p>
-                                        <?php } ?>
+                                            <select name="habitat"  class="form-control form-control-sm <?= count($_POST) > 0 ? (isset($formErrors['habitat']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['habitat']) ? 'value="' . $_POST['habitat'] . '"' : '' ?>>
+                                                <option value="<?= $showCreatureInfo->envId ?>" disabled selected><?= $showCreatureInfo->envName ?></option>
+                                                <?php
+                                                    foreach ($showEnvironments as $env) {
+                                                ?><option value="<?= $env->id ?>" <?= isset($_POST['habitat']) ? ($_POST['habitat'] == $env->id ? 'selected' : '') : '' ?>><?= $env->name ?></option><?php } ?>
+                                            </select>
+                                            <?php if (isset($formErrors['habitat'])) { ?>
+                                                    <p class="text-danger text-center"><?= $formErrors['habitat'] ?></p>
+                                            <?php } ?>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <!-- Période -->
                                     <th scope="row">Période</th>
-                                    <td>
+                                    <td colspan="2">
                                         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'has-danger' : 'has-success') : '' ?>">
                                             <select name="period" class="form-control form-control-sm <?= count($_POST) > 0 ? (isset($formErrors['period']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['period']) ? 'value="' . $_POST['period'] . '"' : '' ?>>
                                                 <option value="<?= $showCreatureInfo->perId ?>" disabled selected><?= $showCreatureInfo->perName ?></option>
@@ -88,29 +89,53 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Longueur</th>
+                                    <th scope="row">Longueur (mètres)</th>
                                     <td>
-                                        <input type="text" name="minWidth" id="minWidth" size="1" value="<?= $showCreatureInfo->minWidth ?>" />m à
-                                        <input type="text" name="maxWidth" id="maxWidth" size="1" value="<?= $showCreatureInfo->maxWidth ?>" />m
+                                        <input type="text" name="minWidth" id="minWidth" placeholder="Ex: 1" class="form-control <?= isset($_POST['minWidth']) && count($_POST) > 0 ? (isset($formErrors['minWidth']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= $showCreatureInfo->minWidth ?>"/>
+                                        <?php if (isset($formErrors['minWidth'])) { ?>
+                                            <p class="text-danger text-center"><?= $formErrors['minWidth'] ?></p>
+                                        <?php } ?>  
+                                    </td>
+                                    <td>
+                                        <input type="text" name="maxWidth" id="maxWidth" placeholder="Ex: 5" class="form-control <?= isset($_POST['maxWidth']) && count($_POST) > 0 ? (isset($formErrors['maxWidth']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= $showCreatureInfo->maxWidth ?>" />
+                                        <?php if (isset($formErrors['maxWidth'])) { ?>
+                                            <p class="text-danger text-center"><?= $formErrors['maxWidth'] ?></p>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Hauteur</th>
+                                    <th scope="row">Hauteur (mètres)</th>
                                     <td>
-                                        <input type="text" name="minHeight" id="minHeight" size="1" value="<?= $showCreatureInfo->minHeight ?>" />m à
-                                        <input type="text" name="maxHeight" id="maxHeight" size="1" value="<?= $showCreatureInfo->maxHeight ?>" />m
+                                        <input type="text" name="minHeight" id="minHeight" placeholder="Ex: 1" class="form-control <?= isset($_POST['minHeight']) && count($_POST) > 0 ? (isset($formErrors['minHeight']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= $showCreatureInfo->minHeight ?>" />
+                                        <?php if (isset($formErrors['minHeight'])) { ?>
+                                            <p class="text-danger text-center"><?= $formErrors['minHeight'] ?></p>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="maxHeight" id="maxHeight" placeholder="Ex: 5" class="form-control <?= isset($_POST['maxHeight']) && count($_POST) > 0 ? (isset($formErrors['maxHeight']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= $showCreatureInfo->maxHeight ?>" />
+                                        <?php if (isset($formErrors['maxHeight'])) { ?>
+                                            <p class="text-danger text-center"><?= $formErrors['maxHeight'] ?></p>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Poids</th>
+                                    <th scope="row">Poids (tonnes)</th>
                                     <td>
-                                        <input type="text" name="minWeight" id="minWeight" size="1" value="<?= $showCreatureInfo->minWeight ?>" />T à
-                                        <input type="text" name="maxWeight" id="maxWeight" size="1" value="<?= $showCreatureInfo->maxWeight ?>" />T
+                                        <input type="text" name="minWeight" id="minWeight" placeholder="Ex: 1" class="form-control <?= isset($_POST['minWeight']) && count($_POST) > 0 ? (isset($formErrors['minWeight']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= $showCreatureInfo->minWeight ?>" />
+                                        <?php if (isset($formErrors['minWeight'])) { ?>
+                                            <p class="text-danger text-center"><?= $formErrors['minWeight'] ?></p>
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="maxWeight" id="maxWeight" placeholder="Ex: 5" class="form-control <?= isset($_POST['maxWeight']) && count($_POST) > 0 ? (isset($formErrors['maxWeight']) ? 'is-invalid' : 'is-valid') : '' ?>" value="<?= $showCreatureInfo->minWeight ?>" />
+                                        <?php if (isset($formErrors['maxWeight'])) { ?>
+                                            <p class="text-danger text-center"><?= $formErrors['maxWeight'] ?></p>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Prédateurs</th>
-                                    <td>
+                                    <td colspan="2">
                                         <div class="form-group">
                                         <input type="text" name="predatory" id="predatory" value="<?= $showCreatureInfo->predatory ?>" class="form-control" />
                                         </div>
@@ -118,7 +143,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
                                 </tr>
                                 <tr>
                                     <th scope="row">Alimentation</th>
-                                    <td>
+                                    <td colspan="2">
                                         <div class="form-group col <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'has-danger' : 'has-success') : '' ?>">
                                             <select name="diet"  class="form-control form-control-sm <?= count($_POST) > 0 ? (isset($formErrors['diet']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['diet']) ? 'value="' . $_POST['diet'] . '"' : '' ?>>
                                                 <option value="<?= $showCreatureInfo->dietId ?>" disabled selected><?= $showCreatureInfo->dietName ?></option>

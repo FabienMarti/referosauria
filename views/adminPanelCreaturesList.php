@@ -23,6 +23,10 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
             </div>
     <!-- affichage des creatures -->
     <div class="table-responsive col">
+        <form method="POST" action="adminPanelCreaturesList.php?page=1" class="form-inline my-2 col-6">
+            <input class="form-control" type="search" placeholder="Rechercher" name="searchField" />
+            <button class="btn btn-outline-success" type="submit" name="searchCrea">Rechercher</button>
+        </form>
       <table class="table table-striped table-bordered text-center divBackColor">
         <thead class="thead-dark">
             <tr>

@@ -22,8 +22,8 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                 <?php include 'parts/adminNav.php' ?>
             </div>
             <div class="table-responsive col">
-                <!-- barre de recherche -->
                 <div class="row">
+                    <!-- barre de recherche -->
                     <form method="POST" action="adminPanel.php?page=1" class="form-inline my-2 col-6">
                         <input class="form-control" type="search" placeholder="Rechercher" name="searchField" />
                         <button class="btn btn-outline-success" type="submit" name="searchUser">Rechercher</button>
