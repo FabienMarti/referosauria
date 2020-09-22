@@ -63,7 +63,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     </div>
 <!-- Affichage resultat recherche -->
 <?php
-if(isset($resultsNumber) && $resultsNumber == 0){ ?>
+if(isset($searchMessage)){ ?>
 <p class="text-center h1 m-5 titleStyle"><?= $searchMessage ?></p><?php
 }else { ?>
 <div class="container mt-5">

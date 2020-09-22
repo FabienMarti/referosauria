@@ -47,6 +47,9 @@ if(isset($_POST['searchCrea'])) {
     $showCreaList = $creature->getCreaList($limitArray, $search);
     //Compte le nombre de pages en fonction du nombre de resultats
     $pageNumber = ceil(count($creature->getCreaList(array(),$search)) / $limitArray['limit']);
+    if(count($creature->getCreaList(array(),$search)) == 0){
+        $searchMessage = 'Aucun résultat';
+    }
 }else {
     //Affiche la liste des creatures normalement
     $showCreaList = $creature->getCreaList($limitArray);
