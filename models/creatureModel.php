@@ -353,7 +353,7 @@ class creature
                     //Ajoute LIKE si un JOKER est présent
                     $whereArray[] = '`' . $fieldName . '` LIKE :' . $fieldName ;
                 }
-                else if(is_int($search)){
+                else if(is_numeric($search)){
                     $whereArray[] = '`id_r3f3r0_' . $fieldName . '` = :' . $fieldName ;
                 }
                 else {
@@ -378,10 +378,9 @@ class creature
             ORDER BY `name` ASC '
                 . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
         );
-        var_dump($creaListQuery);
         //Boucle pour créer nos bindValues qui dépendent de nos champs de recherche
         foreach($searchArray as $fieldName => $search) {
-            if(is_int($search)){
+            if(is_numeric($search)){
                 $creaListQuery->bindvalue(':' . $fieldName, $search , PDO::PARAM_INT);
             }else{
                 $creaListQuery->bindvalue(':' . $fieldName, $search , PDO::PARAM_STR);
