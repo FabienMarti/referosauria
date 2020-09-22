@@ -52,7 +52,7 @@ if(isset($messageFail)){ ?>
             <?php } ?>
             </div>
 <!-- Image principale de la créature FILE -->
-            <div class="col-4 text-center">
+            <div class="col-md-4 text-center">
                 <img id="img1" class="imgPreview" src="http://placehold.it/180" alt="Image" />
                 <div class="form-group  <?= count($_POST) > 0 ? (isset($formErrors['mainImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="mainImageUpload">Image principale de la créature : </label>
@@ -63,7 +63,7 @@ if(isset($messageFail)){ ?>
                 </div>
             </div>
 <!-- Mini image de la créature FILE -->
-            <div class="col-4 text-center">
+            <div class="col-md-4 text-center">
                 <img id="img2" class="imgPreview" src="http://placehold.it/180" alt="Image" />
                 <div class="form-group <?= count($_POST) > 0 ? (isset($formErrors['miniImageUpload']) ? 'has-danger' : 'has-success') : '' ?>">
                     <label for="miniImageUpload">Image de tête de la créature : </label>
@@ -73,7 +73,7 @@ if(isset($messageFail)){ ?>
                     <?php } ?>            
                 </div> 
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <table class="table">
                     <thead>
                         <th scope="col"></th>

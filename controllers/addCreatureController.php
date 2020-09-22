@@ -41,7 +41,7 @@ if(isset($_POST['sendNewCrea'])){
                 //passe le nouveau nom de dossier en minuscules pour éviter les doublons
                 $minusCreaName = strtolower(htmlspecialchars($_POST['creaName']));
                 //créé un nouveau dossier
-                mkdir('../assets/img/creatures/' . $minusCreaName);
+                mkdir('../assets/img/creatures/' . $minusCreaName, 755);
             }
             $creature->name = ucwords(htmlspecialchars($_POST['creaName']));
         }else{

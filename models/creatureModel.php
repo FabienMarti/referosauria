@@ -343,7 +343,7 @@ class creature
 /******************************************************************************************/
 
 //Methode de filtrage (recherche)
-    function getCreaList($limitArray = array() ,$searchArray = array()) {
+    function getCreaList($limitArray = array(), $searchArray = array()) {
         //Si nos champs de recherche contiennent des valeurs alors on stock notre clause WHERE dans une variable avec tous nos paramètres
         if(count($searchArray) > 0){
             $where = ' ';
@@ -378,6 +378,7 @@ class creature
             ORDER BY `name` ASC '
                 . (count($limitArray) == 2 ? 'LIMIT :limit OFFSET :offset' : '')
         );
+        var_dump($creaListQuery);
         //Boucle pour créer nos bindValues qui dépendent de nos champs de recherche
         foreach($searchArray as $fieldName => $search) {
             if(is_int($search)){

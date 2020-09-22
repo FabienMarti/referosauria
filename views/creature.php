@@ -15,12 +15,7 @@ include '../controllers/breadcrumb.php';
 include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'final' => $showCreatureInfo->name));
 
-if($showCreatureInfo->available == 'Validé'){
-    if(isset($formErrors['comment'])){ ?>
-        <div class="alert alert-danger" role="alert">
-            <?= $formErrors['comment'] ?>
-        </div>
-    <?php } ?>
+if($showCreatureInfo->available == 'Validé'){ ?>
     <section class="container-fluid my-2 divBackColor py-2">
             <div class="row">
                 <h1 class="text-center titleStyleShadow col"><?= $showCreatureInfo->name ?></h1>
@@ -107,12 +102,17 @@ if($showCreatureInfo->available == 'Validé'){
                 </div>
             </div>
     </section>
+    <?php if(isset($formErrors['comment'])){ ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $formErrors['comment'] ?>
+        </div>
+    <?php } ?>
     <!-- commentaires -->
-    <section class="container">
+    <section class="container" id="comments">
         <div class="divBackColor rounded border mt-5 p-3">
             <?php if(isset($_SESSION['profile'])){ ?>
                 <h2>Laisser un commentaire</h2>
-                <form action="" method="POST">
+                <form action="<?= $_SERVER['REQUEST_URI'] . '#comments' ?>" method="POST">
                     <div class="form-group">
                         <label for="comment">Message :</label>
                         <div class="row justify-content-around">
@@ -166,8 +166,8 @@ if($showCreatureInfo->available == 'Validé'){
     </div>
     <img src='https://img.icons8.com/ios/500/circled-up-2.png' onclick="backToTop()" class="creaName" alt='flèche' width="50px" height="50px" />
      
- <?php } else{ ?>
-    <?php include 'parts/construction.php' ?> 
-<?php } ?>
+ <?php } else{ 
+     include 'creaNoValidated.php';
+ } ?>
 
 <?php include 'parts/footer.php' ?>

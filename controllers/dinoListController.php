@@ -19,7 +19,7 @@ if (isset($_GET['page'])){
 }
 
 //Défini le nombre de resultats par page
-$limitArray = ['limit'=>6];
+$limitArray = ['limit' => 6];
 //Calcule l'offset
 $limitArray['offset'] = ($page * $limitArray['limit']) - $limitArray['limit'];
 

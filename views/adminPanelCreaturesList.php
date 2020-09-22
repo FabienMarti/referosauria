@@ -18,7 +18,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
 
 <div class="container-fluid mt-5">
   <div class="row">
-            <div class="col-2 m-auto border divBackColor">
+            <div class="col-md-2 m-auto border divBackColor">
                <?php include 'parts/adminNav.php' ?>
             </div>
     <!-- affichage des creatures -->
@@ -88,8 +88,8 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
             if ($page != $pageNumber){ ?>
                 <a href="adminPanelCreaturesList.php?page=<?=($page + 1) ?>" class="btn"><i class="fas fa-angle-right"></i></a>
                 <a href="adminPanelCreaturesList.php?page=<?= $pageNumber ?>" class="btn"><i class="fas fa-angle-double-right"></i></a>
-            <?php } ?>
-    </div>
+          <?php } ?>
+      </div>
     </div>
         </div>
         <!-- Modale de suppression -->
@@ -119,23 +119,24 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
 </div>
 <!-- Validation Modale -->
  <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-white" id="exampleModalLabel">Valider</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST">
-          <input type="hidden" class="form-control" name="recipient-name2" id="recipient-name2" value="">
-          <h1>Voulez-vous valider cette créature ?</h1>
-          <input type="submit" class="btn btn-primary" name="validateCrea" value="Valider la créature" />
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-        </form>
-      </div>
-      <div class="modal-footer">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Valider</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+            <input type="hidden" class="form-control" name="recipient-name2" id="recipient-name2" value="">
+            <h1>Voulez-vous valider cette créature ?</h1>
+            <input type="submit" class="btn btn-primary" name="validateCrea" value="Valider la créature" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
       </div>
     </div>
   </div>

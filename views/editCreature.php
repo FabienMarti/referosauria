@@ -19,8 +19,12 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
 } else { ?>
     <section class="container-fluid my-2">
     <form action="" method="POST">
-        <div class="row">
-            <h1 class="col text-center"><u><i class="fas fa-wrench"></i><input class="text-center creaName" type="text" name="creaName" value="<?= $showCreatureInfo->name ?>" /></u></h1>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <h1 class="text-center">
+                    <input class="text-center creaName form-control" type="text" name="creaName" value="<?= $showCreatureInfo->name ?>" />
+                </h1>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-2 text-center border divBackColor">
@@ -50,7 +54,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
                     </div> 
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
                 <div class="row">
                     <div class="col-md-12 m-auto">
                         <!-- Image principale de la créature FILE -->
