@@ -14,7 +14,6 @@ include 'parts/header.php';
 generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle));
 ?>
 <?php 
-    if(isset($_SESSION['profile'])){ 
         if(isset($successEdit)){ ?>
         <div class="alert alert-success" role="alert">
             <?= $successEdit ?>
@@ -24,8 +23,10 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     <div class="alert alert-danger" role="alert">
         <?= $failEdit ?>
     </div>
-<?php } 
-}?>
+<?php }
+if(!isset($_SESSION['profile'])) {
+    include 'parts/redirect.php'; 
+} else { ?>
 <div class="container mb-5">
     <div class="row mt-5 justify-content-around">
         <!-- Sommaire de gauche -->
@@ -91,14 +92,14 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
                     <p class="text-center text-success"><?= isset($pwEditSuccess) ? $pwEditSuccess : '' ?></p>
                         <div class="form-group <?= count($_POST) > 0 ? (isset($profilErrors['oldPW']) ? 'has-danger' : 'has-success') : '' ?>">
                             <label for="oldPW">Ancien mot de passe : </label>
-                            <input type="text" name="oldPW" id="oldPW" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['oldPW']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['oldPW']) ? 'value="' . $_POST['oldPW'] . '"' : '' ?> />
+                            <input type="password" name="oldPW" id="oldPW" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['oldPW']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['oldPW']) ? 'value="' . $_POST['oldPW'] . '"' : '' ?> />
                             <?php if (isset($profilErrors['oldPW'])) { ?>
                                 <p class="text-danger text-center"><?= $profilErrors['oldPW'] ?></p>
                             <?php } ?>
                         </div>
                         <div class="form-group <?= count($_POST) > 0 ? (isset($profilErrors['newPW']) ? 'has-danger' : 'has-success') : '' ?>">
                             <label for="newPW">Nouveau mot de passe : </label>
-                            <input type="text" name="newPW" id="newPW" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['newPW']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['newPW']) ? 'value="' . $_POST['newPW'] . '"' : '' ?> />
+                            <input type="password" name="newPW" id="newPW" class="form-control <?= count($_POST) > 0 ? (isset($profilErrors['newPW']) ? 'is-invalid' : 'is-valid') : '' ?>" <?= isset($_POST['newPW']) ? 'value="' . $_POST['newPW'] . '"' : '' ?> />
                             <?php if (isset($profilErrors['newPW'])) { ?>
                                 <p class="text-danger text-center"><?= $profilErrors['newPW'] ?></p>
                             <?php } ?>
@@ -135,6 +136,7 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
         </section>
     </div>
 </div>
+                        <?php } ?>
 <!-- Modale de suppression -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

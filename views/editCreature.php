@@ -12,7 +12,7 @@ include '../controllers/breadcrumb.php';
 include_once '../lang/FR_FR.php';
 $pageTitle =  'Edition de ' . $showCreatureInfo->name; 
 include 'parts/header.php';
-generateBreadcrumb(array('../index.php' => 'Referosauria', 'dinoList.php?page=1' => 'Liste des dinosaures', 'creature.php?id=' . $showCreatureInfo->id => $showCreatureInfo->name, 'final' => 'Edition de ' . $showCreatureInfo->name));
+generateBreadcrumb(array('../index.php' => 'Referosauria', 'adminPanelCreaturesList.php' => 'Panel Créatures', 'final' => 'Edition de ' . $showCreatureInfo->name));
 
 if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] != 1) {
     include 'parts/redirect.php'; 

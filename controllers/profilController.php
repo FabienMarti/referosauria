@@ -6,11 +6,12 @@ $user = new user();
 //Récupère l'id de l'user sotckée dans la superglobale SESSION lors de la connexion.
 if(isset($_SESSION['profile'])){
     $user->id = $_SESSION['profile']['id'];
+    $passwordHash = $user->getCurrentPasswordById();
 }
 //Tableau d'erreurs dédié au profil.
 $profilErrors = array();
 //Récupère le mot de passe de l'utilisateur.
-$passwordHash = $user->getCurrentPasswordById();
+
 
 //! LISTE DU MENU PROFIL
 if(isset($_SESSION['profile'])){
@@ -87,7 +88,7 @@ if(isset($_POST['deleteProfil'])){
                 //Si la methode editUserPW s'execute sans erreur.
                 if($user->editUserPW()){
                     //Alors on stock dans une variable un message de succes.
-                    $succesEdit = 'Le mot de passe à bien été modifié.';
+                    $successEdit = 'Le mot de passe à bien été modifié.';
                 }else{
                     //Sinon un message d'échec.
                     $failEdit = 'Une erreur est survenue, veuillez contacter un résponsable technique.';
@@ -154,6 +155,7 @@ if(isset($_POST['deleteProfil'])){
                 if($isOk == true){
                     $user->editUserInfo();
                     $successEdit = 'Les informations ont bien été modifées.';
+                    $_SESSION['profile']['username'] = $_POST['username'];
                 }else{
                     $failEdit = 'La modification des informations n\'a pu aboutir.';
                 }

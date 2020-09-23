@@ -1,3 +1,8 @@
+<?php
+    ini_set('display_errors',1);
+    ini_set('display_startup_errors',1);
+    error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="FR" dir="ltr">
     <head>
@@ -82,9 +87,10 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-white" href="<?= $linkModif ?>views/discover.php">Découvrir</a>
                             </li>
+                            <?php if(isset($_SESSION['profile'])){ ?>
                             <li class="nav-item dropdown">
                             <a class="nav-link text-white" href="<?= $linkModif ?>views/addCreature.php">Ajouter une créature</a>
-                            </li>
+                            </li><?php } ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Jeux
@@ -103,7 +109,7 @@
                 </div>
                 <div class="my-auto text-center h-100"><?php
                     if(isset($_SESSION['profile'])){ ?>
-                            <p class="h5 titleStyleShadow"><?= isset($_SESSION['profile']['username']) ? 'Bienvenu ' . $_SESSION['profile']['username'] : ''?></p>
+                            <p class="h5 titleStyleShadow"><?= isset($_SESSION['profile']) ? 'Bienvenu ' . $_SESSION['profile']['username'] : ''?></p>
                             <a class="btn btn-primary" href="<?= $linkModif ?>views/profil.php?page=infos">Profil</a>
                             <a class="btn btn-primary" href="<?= $linkModif ?>index.php?action=disconnect">Déconnexion</a>
                     <?php
