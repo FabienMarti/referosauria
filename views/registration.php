@@ -54,8 +54,11 @@ if(isset($messageFail)){ ?>
         <!-- Vérification du mot de passe -->
         <div class="form-group col-12 col-md-6">
             <label for="confirmPassword">Confirmez le mot de passe<span class="text-danger">*</span> : </label>
-            <input onblur="verifFields(document.getElementById('password'), this)" type="password" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control" />
+            <input onblur="verifFields(document.getElementById('password'), this)" type="password" name="confirmPassword" id="confirmPassword" placeholder="Ex : Aabb1234" class="form-control  <?= isset($_POST['validateRegistration']) && count($_POST) > 0 ? (isset($formErrors['confirmPassword']) ? 'is-invalid' : 'is-valid') : '' ?>"" />
             <p class="text-danger text-center"><?= (isset($_POST['confirmPassword']) && $_POST['confirmPassword'] != $_POST['password']) ? 'Les mots de passe ne correspondent pas' : '' ?></p>
+            <?php if (isset($formErrors['confirmPassword'])) { ?>
+                <p class="text-danger text-center"><?= $formErrors['confirmPassword'] ?></p>
+            <?php } ?>
         </div>
     </div>
         <ul class="noListStyle list-inline">
@@ -76,8 +79,11 @@ if(isset($messageFail)){ ?>
         <!-- Vérification de l'adresse mail -->
         <div class="form-group col">
             <label for="mailVerify">Confirmez l'adresse e-mail<span class="text-danger">*</span> : </label>
-            <input onblur="verifFields(document.getElementById('mail'), this)" type="mail" name="mailVerify" id="mailVerify" placeholder="Ex : stephane.dupont@gmail.com" class="form-control" />
+            <input onblur="verifFields(document.getElementById('mail'), this)" type="mail" name="mailVerify" id="mailVerify" placeholder="Ex : stephane.dupont@gmail.com" class="form-control <?= isset($_POST['validateRegistration']) && count($_POST) > 0 ? (isset($formErrors['mailVerify']) ? 'is-invalid' : 'is-valid') : '' ?>"" />
             <p class="text-danger text-center"><?= (isset($_POST['mailVerify']) && $_POST['mailVerify'] != $_POST['mail']) ? 'Les adresses e-mail ne correspondent pas' : '' ?></p>
+            <?php if (isset($formErrors['mailVerify'])) { ?>
+                <p class="text-danger text-center"><?= $formErrors['mailVerify'] ?></p>
+            <?php } ?>
         </div>
     </div>
     <div class="row">

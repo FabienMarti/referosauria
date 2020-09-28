@@ -20,26 +20,26 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     </button>
     <div class="collapse navbar-collapse d-flex justify-content-around" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(0)">La Paléonthologie</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" id="first" onclick="changeCategory(0, this)">La Paléonthologie</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(1)">Les Dinosaures</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" onclick="changeCategory(1, this)">Les Dinosaures</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(2)">Créatures Océaniques</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" onclick="changeCategory(2, this)">Créatures Océaniques</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(3)">Réptiles Volants</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" onclick="changeCategory(3, this)">Réptiles Volants</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(4)">Les Insectes</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" onclick="changeCategory(4, this)">Les Insectes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(5)">Les Grandes Extinctions</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" onclick="changeCategory(5, this)">Les Grandes Extinctions</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="changeCategory(6)">La Terre d'une autre époque</a>
+        <li class="nav-item navButton">
+          <a class="nav-link" onclick="changeCategory(6, this)">La Terre d'une autre époque</a>
         </li>
       </ul>
     </div>
@@ -53,35 +53,43 @@ generateBreadcrumb(array('../index.php' => 'Referosauria', 'final' => $pageTitle
     <?php include 'parts/dinosaurs.php'; ?>
   </section>
 <!-- Créatures Océaniques -->
-  <section id="oceanCreatures">
-  <div style="height: 100vh" class="bg bg-primary"></div>
+  <section id="oceanCreatures" class="container-fluid mx-2 mb-5">
+    <?php include 'parts/oceanicCreatures.php'; ?>
   </section>
 <!-- Réptiles Volants -->
-  <section id="flyingReptiles">
-  <div style="height: 100vh" class="bg bg-secondary"></div>
+  <section id="flyingReptiles" class="container-fluid mx-2 mb-5">
+    <?php include 'parts/flyingReptiles.php'; ?>
   </section>
 <!-- Les Insectes -->
-  <section id="bugs">
-  <div style="height: 100vh" class="bg bg-warning"></div>
+  <section id="bugs" class="container-fluid mx-2 mb-5">
+    <?php include 'parts/bugs.php'; ?>
   </section>
 <!-- Les Grandes Extinctions -->
-  <section id="extinctions">
-  <div style="height: 100vh" class="bg bg-info"></div>
+  <section id="extinctions" class="container-fluid mx-2 mb-5">
+    <?php include 'parts/extinctions.php'; ?>
   </section>
 <!-- La Terre d'une autre époque -->
-  <section id="anotherWorld">
-  <div style="height: 100vh" class="bg bg-danger"></div>
+  <section id="anotherWorld" class="container-fluid mx-2 mb-5">
+    <?php include 'parts/anotherWorld.php'; ?>
   </section>
 <script>
-//stockage de toutes les sections dans un array
-var allSections = document.getElementsByTagName("section");
-  changeCategory(0);
+
+//stocka toutes les sections dans un array
+var allSections = document.getElementsByTagName('section');
+var allButtons = document.getElementsByClassName('navButton');
+
+changeCategory(0, first);
+
 //fonction pour switcher de categories au clique
-function changeCategory(category){
+function changeCategory(category, input){
+    for (let index = 0; index < allButtons.length; index++) {
+        allButtons[index].style.border = 'none';
+    }
 //boucle pour cacher les catégories à l'appel de la fonction , i commence à 1 pour afficher 0 au chargement de la page
     for (let i = 0; i < allSections.length; i++) {
-
+      
         if(category == i){
+            input.parentNode.style.border = '3px solid black';
             allSections[i].style.display = 'block';
         }else{
             allSections[i].style.display = 'none';

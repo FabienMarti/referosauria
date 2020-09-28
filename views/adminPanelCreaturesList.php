@@ -34,6 +34,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                 <th scope="col">Nom</th>
                 <th scope="col">Validation</th>
                 <th scope="col">Voir/Modifier</th>
+                <th scope="col">Contributeur</th>
                 <th scope="col">Date d'ajout</th>
                 <th scope="col">Supprimer</th>
             </tr>
@@ -47,6 +48,7 @@ if(isset($_SESSION['profile']) && $_SESSION['profile']['roleId'] == 1){ ?>
                         <td><?= $info->name  ?></td>
                         <td><?= $info->available ?></td>
                         <td><a href="editCreature.php?id=<?= $info->id ?>" class="btn btn-success"><i class="fas fa-wrench"></i></a><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#validationModal" data-whatever="<?= $info->id ?>"><i class="far fa-clock"></i></button></td>
+                        <td><?= $info->contributor ?></td>
                         <td><?= $info->addDate ?></td>
                         <td><button type="button" class="btn btn-delete btn-danger" data-toggle="modal" data-target="#deleteModal" data-whatever="<?= $info->id ?>"><i class="fas fa-trash-alt"></i></button></td>
                     </tr>

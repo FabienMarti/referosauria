@@ -3,7 +3,7 @@
 define('REGISTER_TITLE', 'Création d\'un compte');
 //! MAIL
 define('MAIL_ERROR_EMPTY', 'Veuillez renseigner votre e-mail.');
-define('MAILVERIFY_ERROR_EMPTY', 'Veuillez renseigner votre e-mail.');
+define('MAILVERIFY_ERROR_EMPTY', 'Veuillez renseigner votre e-mail(confirmation).');
 define('MAIL_ERROR_WRONG', 'Merci de respecter le format d\'e-mail valide.');
 define('MAILVERIFY_ERROR_WRONG', 'Merci de respecter le format d\'e-mail valide.');
 define('MAIL_ERROR_NOTEQUAL', 'Les adresses mail ne sont pas identiques.');

@@ -180,7 +180,9 @@ meter[value="3"]::-moz-meter-bar { background: orange; }
 meter[value="4"]::-moz-meter-bar { background: green; }
 
 /** MEDIA QUERIES **/
-
+a:hover{
+    cursor: pointer;
+}
 @media (max-width: 768px){
     
 }

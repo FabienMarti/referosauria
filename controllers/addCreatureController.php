@@ -71,13 +71,13 @@ if(isset($_POST['sendNewCrea'])){
             chmod($fileFullPath, 0644);
             $creature->mainImage = $fileFullPath;
           } else {
-            $formErrors['file'] = 'Votre fichier ne s\'est pas téléversé correctement';
+            $formErrors['mainImageUpload'] = 'Votre fichier ne s\'est pas téléversé correctement';
           }
         } else {
-          $formErrors['file'] = 'Votre fichier n\'est pas du format attendu';
+          $formErrors['mainImageUpload'] = 'Votre fichier n\'est pas du format attendu';
         }
       } else {
-        $formErrors['file'] = 'Veuillez selectionner un fichier';
+        $formErrors['mainImageUpload'] = 'Veuillez selectionner un fichier';
       }
     //Contrôle de l'ajout de fichier la mini image
     if (!empty($_FILES['miniImageUpload']) && $_FILES['miniImageUpload']['error'] == 0) {
@@ -99,13 +99,13 @@ if(isset($_POST['sendNewCrea'])){
             chmod($fileFullPath, 0644);
             $creature->miniImage = $fileFullPath;
           } else {
-            $formErrors['file'] = 'Votre fichier ne s\'est pas téléversé correctement';
+            $formErrors['miniImageUpload'] = 'Votre fichier ne s\'est pas téléversé correctement';
           }
         } else {
-          $formErrors['file'] = 'Votre fichier n\'est pas du format attendu';
+          $formErrors['miniImageUpload'] = 'Votre fichier n\'est pas du format attendu';
         }
       } else {
-        $formErrors['file'] = 'Veuillez selectionner un fichier';
+        $formErrors['miniImageUpload'] = 'Veuillez selectionner un fichier';
       }
 
       //? ##### Spécifications #####
@@ -199,7 +199,7 @@ if(isset($_POST['sendNewCrea'])){
     }
 
     if(empty($formErrors)){
-        
+        $creature->contributor = $_SESSION['profile']['username'];
         if($creature->checkCreatureExists() == 0){
             $messageSuccess = 'La créature à été ajoutée avec succès';
             $creature->addCreature();

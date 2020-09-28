@@ -152,15 +152,16 @@ class creature
         $addCreatureQuery = $this->db->prepare(
             'INSERT INTO 
                 `r3f3r0_creatures` 
-                (`name`, `addDate`, `mainImage`, `miniImage`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, `minWeight`, `maxWeight`)
+                (`name`, `addDate`, `mainImage`, `miniImage`, `contributor`, `description`, `id_r3f3r0_environment`, `id_r3f3r0_diet`, `id_r3f3r0_categories`, `id_r3f3r0_period`, `discovery`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, `minWeight`, `maxWeight`)
             VALUES 
-                (:name, :addDate, :mainImage, :miniImage, :description, :environment, :diet, :categories, :period, :discovery, :minWidth, :maxWidth, :minHeight, :maxHeight, :minWeight, :maxWeight)
+                (:name, :addDate, :mainImage, :miniImage, :contributor, :description, :environment, :diet, :categories, :period, :discovery, :minWidth, :maxWidth, :minHeight, :maxHeight, :minWeight, :maxWeight)
             ');
             $addCreatureQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':environment', $this->environment, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':addDate', date('Y-m-d H:i:s'), PDO::PARAM_STR); //date("Y-m-d H:i:s")
             $addCreatureQuery->bindValue(':mainImage', $this->mainImage, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':miniImage', $this->miniImage, PDO::PARAM_STR);
+            $addCreatureQuery->bindValue(':contributor', $this->contributor, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':description', $this->description, PDO::PARAM_STR);
             $addCreatureQuery->bindValue(':diet', $this->diet, PDO::PARAM_INT);
             $addCreatureQuery->bindValue(':categories', $this->type, PDO::PARAM_INT);
@@ -420,6 +421,7 @@ class creature
                 , `name`
                 , `available`
                 , `addDate`
+                , `contributor`
             FROM
                 `r3f3r0_creatures`
             ' . (isset($where) ? $where : '') . '
